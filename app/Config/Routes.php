@@ -37,7 +37,7 @@ $routes->setAutoRoute(false);
 $dir = scandir(ROOTPATH.'modules');
 
 foreach($dir as $module) {
-    if ($module == '.' || $module == '..')
+    if ($module == '.' || $module == '..' || $module == '.gitkeep')
         continue;
     
     $module_contents = scandir(ROOTPATH.'modules/'.$module);

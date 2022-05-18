@@ -128,3 +128,5 @@ nb-configuration.xml
 /envs/*.env
 
 /public/adminlte3/
+/public/adminlte2/
+/app/Database/old-migrations

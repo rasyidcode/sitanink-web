@@ -100,7 +100,7 @@ class Autoload extends AutoloadConfig
         // load all namespace to psr4 on modules path
         $scannedDir = scandir(MODULESPATH);
         foreach($scannedDir as $module) {
-            if ($module == '.' || $module == '..') {
+            if ($module == '.' || $module == '..' || $module == '.gitkeep') {
                 continue;
             }
 
