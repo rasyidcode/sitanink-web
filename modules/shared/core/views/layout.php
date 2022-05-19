@@ -11,17 +11,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>AdminLTE 2 | Starter</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=site_url('adminlte2/bower_components/bootstrap/dist/css/bootstrap.min.css')?>">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?=site_url('adminlte2/bower_components/font-awesome/css/font-awesome.min.css')?>">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="<?=site_url('adminlte2/bower_components/Ionicons/css/ionicons.min.css')?>">
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="<?=site_url('adminlte2/dist/css/AdminLTE.min.css')?>">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="<?=site_url('adminlte2/dist/css/skins/skin-yellow.min.css')?>">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,7 +54,7 @@ desired effect
 |---------------------------------------------------------|
 -->
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini">
     <div class="wrapper">
 
         <!-- Main Header -->
@@ -79,15 +79,16 @@ desired effect
             </section>
 
             <!-- Main content -->
-            <section class="content container-fluid">
+            <?= $renderer->renderSection('content') ?>
+
+            <!-- <section class="content container-fluid"> -->
 
                 <!--------------------------
                 | Your Page Content Here |
                 -------------------------->
-                <!-- {content} -->
-                <?= $renderer->renderSection('content') ?>
+                
 
-            </section>
+            <!-- </section> -->
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -177,19 +178,24 @@ desired effect
     <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 3 -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="<?=site_url('adminlte2/bower_components/jquery/dist/jquery.min.js')?>"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?=site_url('adminlte2/bower_components/bootstrap/dist/js/bootstrap.min.js')?>"></script>
     <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.min.js"></script>
+    <script src="<?=site_url('adminlte2/dist/js/adminlte.min.js')?>"></script>
 
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
      <!-- jQuery Slimscroll 1.3.8 -->
-    <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="<?=site_url('adminlte2/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')?>"></script>
      <!-- fastclick -->
-    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="<?=site_url('adminlte2/bower_components/fastclick/lib/fastclick.js')?>"></script>
+    <script>
+    $(function() {
+        $('.footer-year').text(new Date().getFullYear());
+    });
+    </script>
 </body>
 
 </html>

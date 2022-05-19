@@ -18,21 +18,17 @@ class AllTable extends Migration
             ],
             'password'  => [
                 'type'          => 'varchar',
-                'constraint'    => 100,
+                'constraint'    => 255,
                 'null'          => true
             ],
             'email'  => [
                 'type'          => 'varchar',
-                'constraint'    => 100,
+                'constraint'    => 255,
                 'null'          => true
             ],
             'level'  => [
-                'type'          => 'enum("admin", "normal")',
+                'type'          => 'enum("admin", "reguler")',
                 'null'          => true
-            ],
-            'token' => [
-                'type'          => 'text',
-                'null'          => true,
             ],
             'last_login'    => [
                 'type'          => 'datetime',
@@ -90,7 +86,7 @@ class AllTable extends Migration
             ],
             'jenis_pekerja'  => [
                 'type'          => 'varchar',
-                'constraint'    => 100,
+                'constraint'    => 255,
                 'null'          => true
             ],
             'foto'  => [
