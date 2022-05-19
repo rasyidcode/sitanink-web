@@ -882,6 +882,7 @@ if (! function_exists('route_to')) {
      */
     function route_to(string $method, ...$params)
     {
+        // print_r($method);die();
         return Services::routes()->reverseRoute($method, ...$params);
     }
 }

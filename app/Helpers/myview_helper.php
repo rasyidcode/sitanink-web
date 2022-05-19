@@ -15,10 +15,6 @@ function isMenuOpen(string $module, int $segment = 0) {
 
 function isLinkActive(string $module, int $segment = 0) {
     $segments = service('uri')->getSegments();
-    if (count($segments) == 1) {
-        return '';
-    }
-
     try {
         return $segments[$segment - 1] == $module ? 'active' : '';
     } catch (Exception $e) {

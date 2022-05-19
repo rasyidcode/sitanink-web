@@ -16,6 +16,7 @@ use CodeIgniter\Autoloader\FileLocator;
 use CodeIgniter\Router\Exceptions\RouterException;
 use Config\Modules;
 use Config\Services;
+use ErrorException;
 use InvalidArgumentException;
 
 /**
@@ -966,9 +967,48 @@ class RouteCollection implements RouteCollectionInterface
     public function reverseRoute(string $search, ...$params)
     {
         // Named routes get higher priority.
+        // echo "<pre>";
+        // print_r(array_key_exists($search, $this->routes));
+        // print_r(key($this->routes['get']['user.reset-pass']['route']));die();
+        // if ($search == 'user.reset-pass') {
+        //     print_r($params);die();
+        // }
+        // echo "<pre>";
+        // print_r($search);
+        // print_r($this->routes['get']);
+        // echo "</pre>";
+        // die();
+        // $route = $this->fillRouteParams(key($this->routes['get']['user.reset-pass']['route']), $params);
+        // print_r($route);
+        // die();
+        // echo "</pre>";
+        // if ($search == 'user.reset-pass') {
+        //     print_r($search);
+        //     echo "<br>";
+        //     print_r($params);
+        //     // $this->fillRouteParams(key())
+        //     $route = $this->fillRouteParams(key($this->routes['get']['user.reset-pass']['route']), $params);
+        //     print_r($route);
+        //     die();
+        // }
         foreach ($this->routes as $collection) {
             if (array_key_exists($search, $collection)) {
                 $route = $this->fillRouteParams(key($collection[$search]['route']), $params);
+                // try {
+                //     $route = $this->fillRouteParams(key($collection[$search]['route']), $params);
+                // } catch(ErrorException $e) {
+                //     // print_r('test');
+                //     // print_r($e->getMessage());
+                //     // print_r($search);
+                //     // print_r($collection);
+                //     // echo 'test';
+                //     // exit;
+                //     $route = $search;
+                // }
+
+                // if ($route == $search) {
+                //     var_dump($search);die();
+                // }
 
                 return $this->localizeRoute($route);
             }
@@ -1061,6 +1101,17 @@ class RouteCollection implements RouteCollectionInterface
         if (empty($matches[0])) {
             return '/' . ltrim($from, '/');
         }
+        
+        // print_r($matches[0][0]);die();
+        // print_r(preg_match('#^([^/]+)$#u', 1) ? 'true' : 'false');die();
+        // if ($from == 'user/([^/]+)/reset-pass') {
+        //     preg_match_all('/\(([^)]+)\)/', 'user/([^/]+)/reset-pass', $mines);
+        //     print_r($params);
+        //     print_r($mines[0]);
+        //     print_r(preg_match('#^' . $mines[0][0] . '$#u', $params[0]) ? 'true' : 'false');
+        //     // print_r('hehe');
+        //     die();
+        // }
 
         // Build our resulting string, inserting the $params in
         // the appropriate places.

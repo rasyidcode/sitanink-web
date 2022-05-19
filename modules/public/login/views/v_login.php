@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Log in</title>
+  <title>Sitanink Admin Login</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -40,11 +40,11 @@
 
       <form action="#" method="post">
         <div class="form-group has-feedback">
-          <input type="text" class="form-control" placeholder="Username" required>
+          <input type="text" name="username" class="form-control" placeholder="Username" required>
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
-          <input type="password" class="form-control" placeholder="Password" required>
+          <input type="password" name="password" class="form-control" placeholder="Password" required>
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div class="row">
@@ -72,9 +72,20 @@
       </div> -->
       <!-- /.social-auth-links -->
 
-      <a href="#">Lupa Password</a><br>
+      <!-- <a href="#">Lupa Password</a><br> -->
       <!-- <a href="register.html" class="text-center">Register a new membership</a> -->
-
+      <?php if (!empty(session()->getFlashdata('error'))) : ?>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <?php if (is_array(session()->getFlashdata('error'))) : ?>
+            <?php foreach (session()->getFlashdata('error') as $error) : ?>
+              <?= $error ?>
+            <?php endforeach; ?>
+          <?php else : ?>
+            <?= session()->getFlashdata('error') ?>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
     </div>
     <!-- /.login-box-body -->
   </div>

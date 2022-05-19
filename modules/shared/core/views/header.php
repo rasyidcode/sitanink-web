@@ -1,14 +1,14 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="<?=route_to('admin')?>" class="logo">
+    <a href="<?= route_to('admin') ?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
-            <img src="<?=site_url('assets/logo-small2.png')?>" alt="">
+            <img src="<?= site_url('assets/logo-small2.png') ?>" alt="">
         </span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
-            <img src="<?=site_url('assets/logo2.png')?>" alt="">
+            <img src="<?= site_url('assets/logo2.png') ?>" alt="">
             Sitanink Admin
         </span>
     </a>
@@ -47,8 +47,8 @@
                     </ul>
                 </li>
                 <li>
-            <a href="#"><i class="fa fa-sign-out"></i>&nbsp;Keluar</a>
-          </li>
+                    <a id="logout-btn" href="javascript:void(0)"><i class="fa fa-sign-out"></i>&nbsp;Keluar</a>
+                </li>
             </ul>
         </div>
     </nav>

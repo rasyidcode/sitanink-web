@@ -2,13 +2,7 @@
 
 namespace Config;
 
-use App\Filters\ApiAdminNotAllowed;
-use App\Filters\ApiAuthFilter;
-use App\Filters\ApiLogoutFilter;
-use App\Filters\LevelFilter;
-use App\Filters\MhsOnly;
 use App\Filters\WebAuthFilter;
-use App\Filters\WebLogoutFilter;
 use App\Filters\WebRedirectIfAuth;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
@@ -27,14 +21,8 @@ class Filters extends BaseConfig
         'csrf'                          => CSRF::class,
         'toolbar'                       => DebugToolbar::class,
         'honeypot'                      => Honeypot::class,
-
-        'api-auth-filter'               => ApiAuthFilter::class,
-
-        'web_auth_filter'               => WebAuthFilter::class,
-        'web_logout_filter'             => WebLogoutFilter::class,
-        'web_redirect_if_auth_filter'   => WebRedirectIfAuth::class,
-
-        'level-filter'                  => LevelFilter::class,
+        'web-auth-filter'               => WebAuthFilter::class,
+        'web-redirect-if-auth'          => WebRedirectIfAuth::class,
     ];
 
     /**
@@ -47,9 +35,9 @@ class Filters extends BaseConfig
         'before' => [
             'csrf' => [
                 'except'    => [
-                    'api/v1/*',
-                    'admin/*/get-data',
-                    'admin/*/*/get-data',
+                    // 'api/v1/*',
+                    // 'admin/*/get-data',
+                    // 'admin/*/*/get-data',
                 ]
             ],
             // 'honeypot',
