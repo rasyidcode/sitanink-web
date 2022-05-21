@@ -1,23 +1,21 @@
 <?php
 
 $routes->group('', ['namespace' => $routes_namespace, 'filter' => 'web-auth-filter'], function ($routes) use ($routes_namespace) {
-    $routes->get('/',  'Dashboard\Controllers\DashboardController::index', ['as' => 'admin']);
-    $routes->post('/',  'Dashboard\Controllers\DashboardController::logout', ['as' => 'admin.logout']);
+    $routes->get('/',   'Dashboard\Controllers\DashboardController::index',     ['as' => 'admin']);
+    $routes->post('/',  'Dashboard\Controllers\DashboardController::logout',    ['as' => 'admin.logout']);
     // user
-    $routes->get('user', 'User\Controllers\UserController::index', ['as' => 'user']);
-    $routes->post('user/get-data', 'User\Controllers\UserController::getData', ['as' => 'user.get-data']);
+    $routes->group('user', ['namespace' => $routes_namespace . 'User\Controllers\\'], function ($routes) {
+        $routes->get('/',                       'UserController::index',            ['as' => 'user']);
+        $routes->post('get-data',               'UserController::getData',          ['as' => 'user.get-data']);
+        $routes->get('add',                     'UserController::add',              ['as' => 'user.add']);
+        $routes->get('(:segment)/edit',         'UserController::edit/$1',          ['as' => 'user.edit']);
+        $routes->post('(:segment)/update',      'UserController::update/$1',        ['as' => 'user.update']);
+        $routes->post('create',                 'UserController::create',           ['as' => 'user.create']);
+        $routes->get('(:segment)/change-pass',  'UserController::changePass/$1',    ['as' => 'user.change-pass']);
+        $routes->post('(:segment)/change-pass', 'UserController::doChangePass/$1',  ['as' => 'user.do-change-pass']);
+        $routes->post('(:segment)/delete',      'UserController::delete/$1',        ['as' => 'user.delete']);
+    });
     // $routes->get('user/(segment)', 'User\Controllers\UserController::get/$1', ['as' => 'user.get']);
-    $routes->get('user/add', 'User\Controllers\UserController::add', ['as' => 'user.add']);
-    $routes->post('user/create', 'User\Controllers\UserController::create', ['as' => 'user.create']);
-    // $routes->get('user/(:segment)/edit', 'User\Controllers\UserController::edit/$1', ['as' => 'user.edit']);
-    // $routes->post('user/(:segment)/update', 'User\Controllers\UserController::update/$1', ['as' => 'user.update']);
-    // $routes->post('user/(:segment)/delete', 'User\Controllers\UserController::delete/$1', ['as' => 'user.delete']);
-    $routes->get('user/(:segment)/reset-pass', 'User\Controllers\UserController::resetPass/$1', ['as' => 'user.reset-pass']);
-    // $routes->post('user/(:segment)/reset-pass', 'User\Controllers\UserController::doResetPass/$1', ['as' => 'user.do-reset-pass']);
-
-    // $routes->group('user', ['namespace' => $routes_namespace . 'User\Controllers\\'], function ($routes) {
-    //     $routes->get('(:segment)/reset-pass', 'UserController::resetPass/$1', ['as' => 'user.reset-pass']);
-    // });
 
     // pekerja
     // $routes->get('pekerja', 'Pekerja\Controllers\PekerjaController::index', ['as' => 'pekerja']);

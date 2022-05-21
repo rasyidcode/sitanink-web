@@ -101,5 +101,72 @@ class UserModel extends Model
             ->insert($data);
     }
 
+    /**
+     * Update user password
+     * 
+     * @param int $userId
+     * @param string $newPass
+     * 
+     * @return void
+     */
+    public function updatePassword(int $userId, string $newPass)
+    {
+        $this->builder('users')
+            ->where('id', $userId)
+            ->update([
+                'password'  => $newPass
+            ]);
+    }
+
+    /**
+     * Get by id
+     * 
+     * @param int $userId
+     * 
+     * @return object|null
+     */
+    public function get($userId) : ?object
+    {
+        return $this->builder('users')
+            ->select('
+                id,
+                username,
+                email,
+                level
+            ')
+            ->where('id', $userId)
+            ->get(limit:1)
+            ->getRowObject();
+    }
+
+    /**
+     * Update user data
+     * 
+     * @param array $data
+     * 
+     * @return void
+     */
+    public function updateUser(array $data)
+    {
+        $id = array_shift($data);
+        $this->builder('users')
+            ->where('id', $id)
+            ->update($data);
+    }
+
+    /**
+     * Delete user
+     * 
+     * @param int $userId
+     * 
+     * @return void
+     */
+    public function deleteUser(int $userId)
+    {
+        $this->builder('users')
+            ->where('id', $userId)
+            ->delete();
+    }
+
 
 }

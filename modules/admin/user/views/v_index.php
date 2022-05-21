@@ -7,6 +7,10 @@
             <div class="box box-warning">
                 <div class="box-header">
                     <a href="<?= route_to('user.add') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah User</a>
+                    <?php $successMsg = session()->getFlashdata('success'); ?>
+                    <?php if (isset($successMsg)): ?>
+                    <span data-message="<?=$successMsg?>"></span>
+                    <?php endif; ?>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -107,6 +111,38 @@
                 },
             ],
             drawCallback: function(settings) {}
+        });
+
+        var spanData = $('.box-header').find('span').data();
+        if (spanData !== undefined) {
+            alert(spanData.message);
+        }
+        
+        // delete user
+        $('#data-user tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
+            var userId = $(this).data().userId;
+            var baseUrl = window.location.href;
+            
+            if (confirm('Anda yakin mau dihapus?')) {
+                $.ajax({
+                    url: baseUrl+'/'+userId+'/delete',
+                    type: 'post',
+                    data: {
+                        ['<?= csrf_token() ?>']: '<?= csrf_hash() ?>'
+                    },
+                    success: function(res, textStatus, xhr) {
+                        console.log(res);
+                        
+                        alert(res.message);
+                        location.reload();
+                    },
+                    error: function(err) {
+                        console.log(err);
+
+                        alert('Something went wrong!');
+                    }
+                });
+            }
         });
     });
 </script>

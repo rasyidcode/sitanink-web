@@ -83,7 +83,7 @@ desired effect
                         <?php if ($pageVal['active']) : ?>
                             <li class="active"><?= ucwords($pageKey) ?></li>
                         <?php else : ?>
-                            <li><a href="#"><?= ucwords($pageKey) ?></a></li>
+                            <li><a href="<?= $pageVal['url'] ?>"><?= ucwords($pageKey) ?></a></li>
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <!-- <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li> -->
