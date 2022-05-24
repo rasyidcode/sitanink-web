@@ -325,6 +325,12 @@ class Validation implements ValidationInterface
             $this->data = $request->getVar() ?? [];
         }
 
+        // echo 'imhere';
+        // echo "<pre>";
+        // print_r($this->data);
+        // echo "</pre>";
+        // die();
+
         return $this;
     }
 
