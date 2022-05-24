@@ -1,6 +1,6 @@
 <?php
 
-$routes->group('', ['namespace' => $routes_namespace, 'filter' => 'web-auth-filter'], function ($routes) use ($routes_namespace) {
+$routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($routes_namespace) {
     $routes->get('/',   'Dashboard\Controllers\DashboardController::index',     ['as' => 'admin']);
     $routes->post('/',  'Dashboard\Controllers\DashboardController::logout',    ['as' => 'admin.logout']);
     // user
@@ -14,6 +14,13 @@ $routes->group('', ['namespace' => $routes_namespace, 'filter' => 'web-auth-filt
         $routes->get('(:segment)/change-pass',  'UserController::changePass/$1',    ['as' => 'user.change-pass']);
         $routes->post('(:segment)/change-pass', 'UserController::doChangePass/$1',  ['as' => 'user.do-change-pass']);
         $routes->post('(:segment)/delete',      'UserController::delete/$1',        ['as' => 'user.delete']);
+    });
+    // pekerja
+    $routes->group('pekerja', ['namespace' => $routes_namespace . 'Pekerja\Controllers\\'], function($routes) {
+        $routes->get('/',           'PekerjaController::index',     ['as' => 'pekerja']);
+        $routes->post('get-data',   'PekerjaController::getData',   ['as' => 'pekerja.get-data']);
+        $routes->get('add',         'PekerjaController::add',       ['as' => 'pekerja.add']);
+        $routes->post('create',     'PekerjaController::create',    ['as' => 'pekerja.create']);
     });
     // $routes->get('user/(segment)', 'User\Controllers\UserController::get/$1', ['as' => 'user.get']);
 

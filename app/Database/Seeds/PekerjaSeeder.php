@@ -12,7 +12,7 @@ class PekerjaSeeder extends Seeder
             [
                 'nik'           => '7202190801012009',
                 'nama'          => 'Joko Widodo',
-                'tempat_lahir'  => 'jokowidodo@sitanink.com',
+                'tempat_lahir'  => 'Solo',
                 'tgl_lahir'     => '1978-09-09',
                 'alamat'        => 'Jl. Slamet Riyadi No.261, Sriwedari, Kec. Laweyan, Kota Surakarta, Jawa Tengah 57141',
                 'domisili'      => 'Jakarta',
@@ -24,7 +24,7 @@ class PekerjaSeeder extends Seeder
             [
                 'nik'           => '7202190801012002',
                 'nama'          => 'Ghozali Everyday',
-                'tempat_lahir'  => 'ghozali-everyday@sitanink.com',
+                'tempat_lahir'  => 'Kalimantan',
                 'tgl_lahir'     => '1998-09-09',
                 'alamat'        => 'Jl. Lodan Timur No.7, RW.10, Ancol, Kec. Pademangan, Kota Jkt Utara, Daerah Khusus Ibukota Jakarta 14430',
                 'domisili'      => 'Kalimantan',

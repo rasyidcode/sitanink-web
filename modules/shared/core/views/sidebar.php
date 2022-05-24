@@ -24,9 +24,8 @@
                 <a href="<?=route_to('user')?>"><i class="fa fa-user"></i> <span>Data User</span></a>
             </li>
             <li class="header">Data</li>
-            <!-- <li class="header">Master Data</li> -->
-            <li>
-                <a href="#"><i class="fa fa-users"></i> <span>Data Pekerja</span></a>
+            <li class="<?=isLinkActive('pekerja', 1)?>">
+                <a href="<?=route_to('pekerja')?>"><i class="fa fa-users"></i> <span>Data Pekerja</span></a>
             </li>
             <li><a href="#">
                 <i class="fa fa-map-marker"></i> <span>Data Per Wilayah</span>
@@ -38,6 +37,9 @@
             <li class="header">Lainnya</li>
             <li>
                 <a href="#"><i class="ion ion-android-notifications-none"></i> <span>Notifikasi</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>
             </li>
         </ul>
         <!-- /.sidebar-menu -->
