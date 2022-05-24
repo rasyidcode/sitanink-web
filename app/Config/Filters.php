@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Filters\AddPekerjaFilter;
 use App\Filters\WebAuthFilter;
 use App\Filters\WebRedirectIfAuth;
 use CodeIgniter\Config\BaseConfig;
@@ -23,6 +24,7 @@ class Filters extends BaseConfig
         'honeypot'                      => Honeypot::class,
         'web-auth-filter'               => WebAuthFilter::class,
         'web-redirect-if-auth'          => WebRedirectIfAuth::class,
+        'add-pekerja-filter'            => AddPekerjaFilter::class,
     ];
 
     /**
@@ -42,6 +44,11 @@ class Filters extends BaseConfig
             ],
             // 'honeypot',
             // 'authfilter'
+            'web-auth-filter'   => [
+                'except'    => [
+                    'login'
+                ]
+            ]
         ],
         'after' => [
             'toolbar',
@@ -74,6 +81,11 @@ class Filters extends BaseConfig
         //     'before'    => [
         //         'api/v1/auth/*',
         //         'api/v1/auth'
+        //     ]
+        // ]
+        // 'web-auth-filter'   => [
+        //     'before'    => [
+        //         '/*'
         //     ]
         // ]
     ];
