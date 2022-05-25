@@ -169,4 +169,61 @@ class PekerjaModel extends Model
             ->getResultObject();
     }
 
+    /**
+     * Create new pekerja to review
+     * 
+     * @param array $data
+     * 
+     * @return int|string
+     * 
+     */
+    public function insertToReview(array $data)
+    {
+        $this->builder('pekerja_temp')
+            ->insert($data);
+        
+        return $this->db->insertID();
+    }
+
+    /**
+     * Create new pekerja to review
+     * 
+     * @param array $data
+     * 
+     * @return int|string
+     * 
+     */
+    public function insertBerkas(array $data)
+    {
+        $this->builder('berkas')
+            ->insert($data);
+        
+        return $this->db->insertID();
+    }
+
+    /**
+     * Insert new pekerja review berkas
+     * 
+     * @param array $data
+     * 
+     * @return void
+     */
+    public function insertReviewBerkas(array $data)
+    {
+        $this->builder('pekerja_temp_berkas')
+            ->insertBatch($data);
+    }
+
+    /**
+     * Get total data to review
+     * 
+     * @return int|null
+     */
+    public function getTotalDataToReview()
+    {
+        return $this->builder('pekerja_temp')
+            ->where('deleted_at', null)
+            ->countAllResults();
+    }
+
 }

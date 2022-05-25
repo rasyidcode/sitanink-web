@@ -5,6 +5,7 @@ namespace Modules\Shared\Core\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\View\View;
 use Config\View as ConfigView;
+use Modules\Admin\Pekerja\Models\PekerjaModel;
 
 class BaseWebController extends BaseController
 {
@@ -12,12 +13,17 @@ class BaseWebController extends BaseController
 
     protected $viewPath;
 
+    private $totalDataToReview;
+
     public function __construct()
     {
         /**
          * @var CodeIgniter\View\View $renderer
          */
         $this->renderer = new View(new ConfigView(), ROOTPATH);
+        
+        $pekerjaModel = new PekerjaModel();
+        $this->totalDataToReview = $pekerjaModel->getTotalDataToReview();
     }
 
     protected function renderView(string $name, array $data = [], array $options = [])
@@ -33,6 +39,7 @@ class BaseWebController extends BaseController
         $modulepath = str_replace('controllers', 'views', $modulepath);
 
         $data['renderer'] = $this->renderer;
+        $data['totalDataToReview'] = $this->totalDataToReview;
 
         return $this->renderer
             ->setData($data, 'raw')

@@ -21,6 +21,8 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->post('get-data',   'PekerjaController::getData',   ['as' => 'pekerja.get-data']);
         $routes->get('add',         'PekerjaController::add',       ['as' => 'pekerja.add']);
         $routes->post('create',     'PekerjaController::create',    ['as' => 'pekerja.create']);
+        $routes->get('review',      'ReviewController::index',      ['as' => 'pekerja.review']);
+        $routes->get('review/(:segment)/confirm',   'ReviewController::confirm/$1',    ['as' => 'pekerja.review-confirm']);
     });
     // $routes->get('user/(segment)', 'User\Controllers\UserController::get/$1', ['as' => 'user.get']);
 

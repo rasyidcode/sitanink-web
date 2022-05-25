@@ -3,13 +3,21 @@
 <?= $renderer->section('content') ?>
 <section class="content">
     <div class="row">
+        <?php if ($totalDataToReview > 0): ?>
+        <div class="col-xs-6">
+            <div class="callout callout-danger">
+                <h4><i class="fa fa-bell"></i>&nbsp;&nbsp;Review Data Pekerja</h4>
+                <p>Ada total <strong><?=$totalDataToReview?> data pekerja</strong> yang harus segera direview, silahkan klik <a href="<?=route_to('pekerja.review')?>">disini</a> untuk melakukan pengecekan.</p>
+            </div>
+        </div>
+        <?php endif; ?>
         <div class="col-xs-12">
             <div class="box box-warning">
                 <div class="box-header">
                     <a href="<?= route_to('pekerja.add') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Pekerja</a>
                     <?php $successMsg = session()->getFlashdata('success'); ?>
-                    <?php if (isset($successMsg)): ?>
-                    <span data-message="<?=$successMsg?>"></span>
+                    <?php if (isset($successMsg)) : ?>
+                        <span data-message="<?= $successMsg ?>"></span>
                     <?php endif; ?>
                 </div>
                 <!-- /.box-header -->
@@ -17,7 +25,7 @@
                     <div class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="data-pekerja" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                <table id="data-pekerja" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr role="row">
                                             <th>#</th>
