@@ -13,10 +13,22 @@ function isMenuOpen(string $module, int $segment = 0) {
     }
 }
 
-function isLinkActive(string $module, int $segment = 0) {
+function isLinkActive(string $module, int $segment = 0, string $parent = null) {
     $segments = service('uri')->getSegments();
     try {
-        return $segments[$segment - 1] == $module ? 'active' : '';
+        if (!is_null($parent)) {
+            $isEqualParent = false;
+            $isEqualChild = false;
+            if ($segments[1] == $parent) {
+                $isEqualParent = true;
+            }
+            if ($segment[2] == $module) {
+                $isEqualChild = true;
+            }
+            return ($isEqualParent && $isEqualChild) ? 'active' : '';
+        } else {
+            return $segments[$segment - 1] == $module ? 'active' : '';
+        }
     } catch (Exception $e) {
         return '';
     }

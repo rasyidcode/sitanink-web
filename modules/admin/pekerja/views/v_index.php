@@ -3,13 +3,13 @@
 <?= $renderer->section('content') ?>
 <section class="content">
     <div class="row">
-        <?php if ($totalDataToReview > 0): ?>
-        <div class="col-xs-6">
-            <div class="callout callout-danger">
-                <h4><i class="fa fa-bell"></i>&nbsp;&nbsp;Review Data Pekerja</h4>
-                <p>Ada total <strong><?=$totalDataToReview?> data pekerja</strong> yang harus segera direview, silahkan klik <a href="<?=route_to('pekerja.review')?>">disini</a> untuk melakukan pengecekan.</p>
+        <?php if ($totalDataToReview > 0) : ?>
+            <div class="col-xs-6">
+                <div class="callout callout-danger">
+                    <h4><i class="fa fa-bell"></i>&nbsp;&nbsp;Review Data Pekerja</h4>
+                    <p>Ada total <strong><?= $totalDataToReview ?> data pekerja</strong> yang harus segera direview, silahkan klik <a href="<?= route_to('pekerja.review') ?>">disini</a> untuk melakukan pengecekan.</p>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
         <div class="col-xs-12">
             <div class="box box-warning">
@@ -131,6 +131,38 @@
                 },
             ],
             drawCallback: function(settings) {}
+        });
+
+        var spanData = $('.box-header').find('span').data();
+        if (spanData !== undefined) {
+            alert(spanData.message);
+        }
+
+        // delete pekerja
+        $('#data-pekerja tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
+            var pekerjaId = $(this).data().pekerjaId;
+            var baseUrl = window.location.href;
+
+            if (confirm('Anda yakin mau dihapus?')) {
+                $.ajax({
+                    url: baseUrl + '/' + pekerjaId + '/delete',
+                    type: 'post',
+                    data: {
+                        ['<?= csrf_token() ?>']: '<?= csrf_hash() ?>'
+                    },
+                    success: function(res, textStatus, xhr) {
+                        console.log(res);
+
+                        alert(res.message);
+                        location.reload();
+                    },
+                    error: function(err) {
+                        console.log(err);
+
+                        alert('Something went wrong!');
+                    }
+                });
+            }
         });
     });
 </script>

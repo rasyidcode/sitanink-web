@@ -21,7 +21,7 @@ class PekerjaModel extends Model
      * 
      * @return array|null
      */
-    public function getData(array $dtParams) : ?array
+    public function getData(array $dtParams): ?array
     {
         $pekerja = $this->builder('pekerja');
 
@@ -61,7 +61,7 @@ class PekerjaModel extends Model
      * 
      * @return int|null
      */
-    public function countFilteredData(array $dtParams) : int
+    public function countFilteredData(array $dtParams): int
     {
         $pekerja = $this->builder('pekerja');
 
@@ -95,10 +95,10 @@ class PekerjaModel extends Model
      * 
      * @return int
      */
-    public function countData() : int
+    public function countData(): int
     {
         return $this->builder('pekerja')
-                    ->countAllResults();
+            ->countAllResults();
     }
 
     /**
@@ -106,7 +106,7 @@ class PekerjaModel extends Model
      * 
      * @return array
      */
-    public function getListDomisili() : array
+    public function getListDomisili(): array
     {
         return $this->builder('pekerja')
             ->select('
@@ -123,7 +123,7 @@ class PekerjaModel extends Model
      * 
      * @return array
      */
-    public function getListLokasiKerja() : array
+    public function getListLokasiKerja(): array
     {
         return $this->builder('pekerja')
             ->select('
@@ -140,7 +140,7 @@ class PekerjaModel extends Model
      * 
      * @return array
      */
-    public function getListPekerjaan() : array
+    public function getListPekerjaan(): array
     {
         return $this->builder('pekerja')
             ->select('
@@ -157,7 +157,7 @@ class PekerjaModel extends Model
      * 
      * @return array
      */
-    public function getListJenisPekerja() : array
+    public function getListJenisPekerja(): array
     {
         return $this->builder('pekerja')
             ->select('
@@ -181,7 +181,7 @@ class PekerjaModel extends Model
     {
         $this->builder('pekerja_temp')
             ->insert($data);
-        
+
         return $this->db->insertID();
     }
 
@@ -197,7 +197,7 @@ class PekerjaModel extends Model
     {
         $this->builder('berkas')
             ->insert($data);
-        
+
         return $this->db->insertID();
     }
 
@@ -226,4 +226,72 @@ class PekerjaModel extends Model
             ->countAllResults();
     }
 
+    /**
+     * Get pekerja by id
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function getPekerja(int $id): ?object
+    {
+        return $this->builder('pekerja')
+            ->where('id', $id)
+            ->get()
+            ->getRowObject();
+    }
+
+    /**
+     * Get pekerja
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function getPekerjaFull(int $id): ?object
+    {
+        return $this->builder('pekerja')
+            ->select('
+                *,
+                CONCAT(tempat_lahir, ", ", tgl_lahir) as ttl
+            ')
+            ->where('id', $id)
+            ->get()
+            ->getRowObject();
+    }
+
+    /**
+     * Get pekerja with berkas
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function getBerkasPekerja(int $id): array
+    {
+        return $this->builder('berkas')
+            ->select('
+                berkas.*
+            ')
+            ->join('pekerja_berkas', 'pekerja_berkas.id_berkas = berkas.id', 'left')
+            ->where('pekerja_berkas.id_pekerja', $id)
+            ->get()
+            ->getResultObject();
+    }
+
+    /**
+     * Delete pekerja by id
+     * 
+     * @param int $id
+     * 
+     * @return void
+     */
+    public function deletePekerja($id)
+    {
+        $this->db->disableForeignKeyChecks();
+        $this->builder('pekerja')
+            ->where('id', $id)
+            ->delete();
+        $this->db->enableForeignKeyChecks();
+    }
 }

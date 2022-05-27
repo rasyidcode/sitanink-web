@@ -11,7 +11,9 @@
                             <h4 class="no-margin-top badge">Biodata</h4>
                         </div>
                         <div class="col-xs-3">
-                            <img class="img-responsive foto-css center-block" src="<?= site_url('uploads/'.$berkasData['foto']->filename) ?>" alt="Photo">
+                            <?php if (!is_null($berkasData['foto'])) : ?>
+                                <img class="foto-css center-block" src="<?= site_url('uploads/' . $berkasData['foto']->filename) ?>" alt="Photo">
+                            <?php endif; ?>
                         </div>
                         <div class="col-xs-5">
                             <div class="table-responsive">
@@ -58,21 +60,28 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <h4 class="no-margin-top badge">Foto KTP</h4>
-                            <img class="img-responsive ktp-css" src="<?= site_url('uploads/'.$berkasData['ktp']->filename) ?>" alt="KTP">
+                            <?php if (!is_null($berkasData['ktp'])) : ?>
+                                <img class="ktp-css" src="<?= site_url('uploads/' . $berkasData['ktp']->filename) ?>" alt="KTP">
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="with-divider"></div>
                     <div class="row">
                         <div class="col-xs-12">
                             <h4 class="no-margin-top badge">Surat Pernyataan</h4>
-                            <img class="img-responsive sp-css" src="<?= site_url('uploads/'.$berkasData['sp']->filename) ?>" alt="SP">
+                            <?php if (!is_null($berkasData['sp'])) : ?>
+                                <img class="sp-css" src="<?= site_url('uploads/' . $berkasData['sp']->filename) ?>" alt="SP">
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="with-divider"></div>
                     <div class="row">
                         <div class="col-xs-12 pull-right">
-                            <button class="btn btn-primary btn-sm pull-right" style="margin-left: 8px;"><i class="fa fa-check"></i>&nbsp;Konfirmasi</button>
-                            <button class="btn btn-danger btn-sm pull-right"><i class="fa fa-times"></i>&nbsp;Batalkan</button>
+                            <form action="<?= route_to('review.do-confirm', $reviewData->id) ?>" method="POST">
+                                <button <?= !is_null($reviewData->deleted_at) ? 'disabled' : '' ?> class="btn btn-primary btn-sm pull-right" style="margin-left: 8px;"><i class="fa fa-check"></i>&nbsp;Konfirmasi</button>
+                            </form>
+                            <button id="btn-cancel" class="btn btn-danger btn-sm pull-right"><i class="fa fa-times"></i>&nbsp;Batalkan</button>
+                            <span style="display:none; margin-right: 12px;" class="pull-right">Loading...</span>
                         </div>
                     </div>
                 </div>
@@ -81,6 +90,14 @@
     </div>
 </section>
 
+<?= $renderer->endSection() ?>
+
+<?= $renderer->section('custom-js') ?>
+<script>
+    $(function() {
+
+    });
+</script>
 <?= $renderer->endSection() ?>
 
 <?= $renderer->section('custom-css') ?>
@@ -102,7 +119,7 @@
         border-bottom: 1px solid #d2d6de;
         color: #666;
     }
-    
+
     .no-margin-top {
         margin-top: 0px;
     }

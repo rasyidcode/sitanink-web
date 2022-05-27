@@ -16,15 +16,27 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->post('(:segment)/delete',      'UserController::delete/$1',        ['as' => 'user.delete']);
     });
     // pekerja
-    $routes->group('pekerja', ['namespace' => $routes_namespace . 'Pekerja\Controllers\\'], function($routes) {
+    $routes->group('pekerja', ['namespace' => $routes_namespace . 'Pekerja\Controllers\\'], function ($routes) {
         $routes->get('/',           'PekerjaController::index',     ['as' => 'pekerja']);
+        $routes->get('(:segment)',           'PekerjaController::get/$1',     ['as' => 'pekerja.get']);
         $routes->post('get-data',   'PekerjaController::getData',   ['as' => 'pekerja.get-data']);
         $routes->get('add',         'PekerjaController::add',       ['as' => 'pekerja.add']);
         $routes->post('create',     'PekerjaController::create',    ['as' => 'pekerja.create']);
-        $routes->get('review',      'ReviewController::index',      ['as' => 'pekerja.review']);
-        $routes->get('review/(:segment)/confirm',   'ReviewController::confirm/$1',    ['as' => 'pekerja.review-confirm']);
+        $routes->post('(:segment)/delete', 'PekerjaController::delete/$1', ['as' => 'pekerja.delete']);
     });
-    // $routes->get('user/(segment)', 'User\Controllers\UserController::get/$1', ['as' => 'user.get']);
+    // review
+    $routes->group('review', ['namespace' => $routes_namespace . 'Review\Controllers\\'], function ($routes) {
+        $routes->get('/',      'ReviewController::index',      ['as' => 'review']);
+        $routes->get('(:segment)/confirm',   'ReviewController::confirm/$1',    ['as' => 'review.confirm']);
+        $routes->post('(:segment)/confirm', 'ReviewController::doConfirm/$1', ['as' => 'review.do-confirm']);
+        $routes->post('(:segment)/cancel', 'ReviewController::cancel/$1', ['as' => 'review.cancel']);
+    });
+    // input data
+    $routes->group('input-data', ['namespace' => $routes_namespace . 'Inputdata\Controllers\\'], function ($routes) {
+        $routes->get('/', 'InputDataController::index', ['as' => 'input-data']);
+    });
+    // notifikasi
+    // pengaturan
 
     // pekerja
     // $routes->get('pekerja', 'Pekerja\Controllers\PekerjaController::index', ['as' => 'pekerja']);

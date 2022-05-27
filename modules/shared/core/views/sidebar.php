@@ -31,11 +31,11 @@
                     <i class="fa fa-map-marker"></i> <span>Data Per Wilayah</span>
                 </a></li>
             <li class="header">Pekerja</li>
-            <li>
-                <a href="<?= route_to('pekerja.add') ?>"><i class="fa fa-pencil"></i> <span>Input Data</span></a>
+            <li class="<?= isLinkActive('input-data', 1) ?>">
+                <a href="<?= route_to('input-data') ?>"><i class="fa fa-pencil"></i> <span>Input Data</span></a>
             </li>
-            <li>
-                <a href="<?= route_to('pekerja.review') ?>"><i class="fa fa-check"></i>
+            <li class="<?= isLinkActive('review', 1) ?>">
+                <a href="<?= route_to('review') ?>"><i class="fa fa-check"></i>
                     <span>Review Data</span>
                     <?php if (isset($totalDataToReview) && $totalDataToReview > 0) : ?>
                         <span class="pull-right-container">

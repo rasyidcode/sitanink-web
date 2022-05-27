@@ -21,7 +21,7 @@ class PekerjaController extends BaseWebController
     }
 
     public function index()
-    {   
+    {
         return $this->renderView('v_index', [
             'pageTitle' => 'Data Pekerja',
             'pageDesc'  => 'Halaman List Data Pekerja',
@@ -58,7 +58,7 @@ class PekerjaController extends BaseWebController
             $row[]  = $item->lokasi_kerja ?? '-';
             $row[]  = $item->created_at ?? '-';
             $row[]  = "<div class=\"text-center\">
-                            <a style=\"margin-bottom: 2px;\" href=\"" . base_url() . "\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail</a>
+                            <a style=\"margin-bottom: 2px;\" href=\"" . route_to('pekerja.get', $item->id) . "\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail</a>
                             <a style=\"margin-bottom: 2px;\" href=\"" . base_url() . "\" class=\"btn btn-info btn-xs\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
                             <button style=\"margin-bottom: 2px;\" data-pekerja-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
                         </div>";
@@ -177,7 +177,8 @@ class PekerjaController extends BaseWebController
             ]
         ];
 
-        $_REQUEST['nik']   = str_replace('_', '', join(explode('-', $_REQUEST['nik'])));
+        $nikFormatted = str_replace('_', '', join(explode('-', $_REQUEST['nik'])));
+        $_REQUEST['nik']   = $nikFormatted;
         if (isset($_REQUEST['domisili2']) && !empty($_REQUEST['domisili2'])) {
             $_REQUEST['domisili'] = $_REQUEST['domisili2'];
         }
@@ -198,6 +199,21 @@ class PekerjaController extends BaseWebController
         }
 
         $dataPost = $this->request->getPost();
+        $dataPost['nik'] = $nikFormatted;
+
+        if (isset($dataPost['domisili2']) && !empty($dataPost['domisili2'])) {
+            $dataPost['domisili'] = ucwords($dataPost['domisili2']);
+        }
+        if (isset($dataPost['lokasi_kerja2'])  && !empty($dataPost['lokasi_kerja2'])) {
+            $dataPost['lokasi_kerja'] = ucwords($dataPost['lokasi_kerja2']);
+        }
+        if (isset($_REQUEST['jenis_pekerja2'])  && !empty($dataPost['jenis_pekerja2'])) {
+            $dataPost['jenis_pekerja'] = ucwords($dataPost['jenis_pekerja2']);
+        }
+        if (isset($_REQUEST['pekerjaan2']) && !empty($dataPost['pekerjaan2'])) {
+            $dataPost['pekerjaan'] = ucwords($dataPost['pekerjaan2']);
+        }
+
         unset($dataPost['csrf_token_sitanink']);
         unset($dataPost['domisili2']);
         unset($dataPost['lokasi_kerja2']);
@@ -277,6 +293,67 @@ class PekerjaController extends BaseWebController
 
         session()->setFlashdata('success', 'Pekerja telah ditambahkan untuk direview terlebih dahulu!');
         return redirect()->back()
-            ->route('pekerja.review-confirm', [$reviewId]);
+            ->route('review.confirm', [$reviewId]);
+    }
+
+    public function delete($id)
+    {
+        $pekerja = $this->pekerjaModel->getPekerja($id);
+        if (is_null($pekerja)) {
+            throw new ApiAccessErrorException(message: 'Pekerja tidak ditemukan!', statusCode: ResponseInterface::HTTP_NOT_FOUND);
+        }
+
+        $this->pekerjaModel->deletePekerja($id);
+
+        return $this->response
+            ->setJSON([
+                'message' => 'Pekerja terhapus!'
+            ])
+            ->setStatusCode(ResponseInterface::HTTP_OK);
+    }
+
+    public function get($id)
+    {
+        $dataPekerja = $this->pekerjaModel->getPekerjaFull($id);
+        $dataBerkas = $this->pekerjaModel->getBerkasPekerja($id);
+
+        $foto = null;
+        $ktp = null;
+        $sp = null;
+
+        foreach ($dataBerkas as $berkasDataItem) {
+            if ($berkasDataItem->type === 'foto') {
+                $foto = $berkasDataItem;
+            } else if ($berkasDataItem->type === 'ktp') {
+                $ktp = $berkasDataItem;
+            } else if ($berkasDataItem->type === 'sp') {
+                $sp = $berkasDataItem;
+            }
+        }
+
+        return $this->renderView('v_detail', [
+            'pageTitle' => 'Detail Pekerja',
+            'pageDesc'  => 'Halaman untuk melihat detail daripada pekerja',
+            'pageLinks' => [
+                'dashboard' => [
+                    'url'       => route_to('admin'),
+                    'active'    => false,
+                ],
+                'data-pekerja' => [
+                    'url'       => route_to('pekerja'),
+                    'active'    => false,
+                ],
+                'detail-pekerja' => [
+                    'url'       => route_to('pekerja.get', $id),
+                    'active'    => true,
+                ],
+            ],
+            'dataPekerja'   => $dataPekerja,
+            'dataBerkas'   => [
+                'foto'  => $foto,
+                'ktp'   => $ktp,
+                'sp'    => $sp
+            ],
+        ]);
     }
 }
