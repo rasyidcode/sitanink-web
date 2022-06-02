@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Public\Login\Models;
+namespace Modules\Pub\Login\Models;
 
 use CodeIgniter\Model;
 

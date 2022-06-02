@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Public\Login\Controllers;
+namespace Modules\Pub\Login\Controllers;
 
-use Modules\Public\Login\Models\LoginModel;
+use Modules\Pub\Login\Models\LoginModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
 
 class LoginController extends BaseWebController
