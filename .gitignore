@@ -48,19 +48,19 @@ Vagrantfile
 #-------------------------
 # Temporary Files
 #-------------------------
-writable/cache/*
-!writable/cache/index.html
+sitanink-webfiles/writable/cache/*
+sitanink-webfiles/!writable/cache/index.html
 
-writable/logs/*
-!writable/logs/index.html
+sitanink-webfiles/writable/logs/*
+sitanink-webfiles/!writable/logs/index.html
 
-writable/session/*
-!writable/session/index.html
+sitanink-webfiles/writable/session/*
+sitanink-webfiles/!writable/session/index.html
 
-writable/uploads/*
-!writable/uploads/index.html
+sitanink-webfiles/writable/uploads/*
+sitanink-webfiles/!writable/uploads/index.html
 
-writable/debugbar/*
+sitanink-webfiles/writable/debugbar/*
 
 php_errors.log
 
