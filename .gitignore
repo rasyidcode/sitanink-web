@@ -130,4 +130,4 @@ nb-configuration.xml
 /public/adminlte3/
 /public/adminlte2/
 /app/Database/old-migrations
-/public/uploads/
+/public_html/uploads/*
