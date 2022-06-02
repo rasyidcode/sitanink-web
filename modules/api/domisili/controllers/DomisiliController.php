@@ -4,24 +4,25 @@ namespace Modules\Api\Lokasikerja\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use Modules\Api\Domisili\Models\DomisiliModel;
 use Modules\Api\Lokasikerja\Models\LokasikerjaModel;
 
 class LokasikerjaController extends BaseController
 {
 
-    private $lokasiKerjaModel;
+    private $domisiliModel;
 
     public function __construct()
     {
         $db = \Config\Database::connect();
 
-        $this->lokasiKerjaModel = new LokasikerjaModel($db);
+        $this->domisiliModel = new DomisiliModel($db);
     }
 
     public function getData()
     {
         $postData   = $this->request->getPost();
-        $data       = $this->lokasiKerjaModel->getData($postData);
+        $data       = $this->domisiliModel->getData($postData);
         $num        = $postData['start'];
 
         $resData = [];
@@ -35,7 +36,7 @@ class LokasikerjaController extends BaseController
             $row[]  = "<span class=\"label label-warning\">" . $item->lon . "</span>";
             $row[]  = $item->created_at ?? '-';
             $row[]  = "<div class=\"text-center\">
-                            <!--<a onclick=\"javascript:void(0)\" class=\"btn btn-success btn-xs mr-2\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail</a>-->
+                            <a onclick=\"javascript:void(0)\" class=\"btn btn-success btn-xs mr-2\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail</a>
                             <a href=\"" . route_to('lokasi-kerja.edit', $item->id) . "\" class=\"btn btn-info btn-xs mr-2\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
                             <button data-lokasi-kerja-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
                         </div>";
@@ -45,8 +46,8 @@ class LokasikerjaController extends BaseController
         return $this->response
             ->setJSON([
                 'draw'              => $postData['draw'],
-                'recordsTotal'      => $this->lokasiKerjaModel->countData(),
-                'recordsFiltered'   => $this->lokasiKerjaModel->countFilteredData($postData),
+                'recordsTotal'      => $this->domisiliModel->countData(),
+                'recordsFiltered'   => $this->domisiliModel->countFilteredData($postData),
                 'data'              => $resData
             ])
             ->setStatusCode(ResponseInterface::HTTP_OK);

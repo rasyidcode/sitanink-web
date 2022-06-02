@@ -3,7 +3,7 @@
 ## To Do [2022-06-02]
 ### Section 1
 - [ ] Master Data Domisili CRUD
-- [ ] Master Data Lokasi Kerja CRUD
+- [x] Master Data Lokasi Kerja CRUD
 - [ ] Master Data Jenis Pekerja CRUD
 - [ ] Master Data Pekerjaan CRUD
 - [ ] Update Data Pekerja CRUD

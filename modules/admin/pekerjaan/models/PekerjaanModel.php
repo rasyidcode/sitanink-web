@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Admin\Lokasikerja\Models;
+namespace Modules\Admin\Jenispekerja\Models;
 
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Database\ConnectionInterface;
 
-class LokasiKerjaModel
+class JenispekerjaModel
 {
 
     protected $db;
@@ -18,7 +18,7 @@ class LokasiKerjaModel
     public function __construct(ConnectionInterface &$db)
     {
         $this->db = &$db;
-        $this->builder = $this->db->table('lokasi_kerja');
+        $this->builder = $this->db->table('jenis_pekerja');
     }
 
     /**

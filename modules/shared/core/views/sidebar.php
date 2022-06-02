@@ -32,9 +32,9 @@
                 </a>
                 <ul class="treeview-menu" style="display: <?= isMenuOpen('master', 1) ?>;">
                     <li class="<?= isLinkActive('lokasi-kerja', 2) ?>"><a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> Lokasi</a></li>
-                    <li><a href="#"><i class="fa fa-square-o"></i> Jenis</a></li>
-                    <li><a href="#"><i class="fa fa-gavel"></i> Pekerjaan</a></li>
-                    <li><a href="#"><i class="fa fa-map"></i> Domisili</a></li>
+                    <li class="<?= isLinkActive('jenis-pekerja', 2) ?>"><a href="<?= route_to('jenis-pekerja') ?>"><i class="fa fa-square-o"></i> Jenis</a></li>
+                    <li class="<?= isLinkActive('pekerjaan', 2) ?>"><a href="<?= route_to('pekerjaan') ?>"><i class="fa fa-gavel"></i> Pekerjaan</a></li>
+                    <li class="<?= isLinkActive('domisili', 2) ?>"><a href="<?= route_to('domisili') ?>"><i class="fa fa-map"></i> Domisili</a></li>
                 </ul>
             </li>
             <li class="header">Data</li>

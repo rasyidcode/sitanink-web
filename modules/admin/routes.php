@@ -16,30 +16,30 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         });
         // pekerjaan
         $routes->group('pekerjaan', ['namespace' => $routes_namespace . 'Pekerjaan\Controllers\\'], function ($routes) {
-            // $routes->get('/', 'PekerjaanController::index', ['as' => 'pekerjaan']);
-            // $routes->get('add', 'PekerjaanController::add', ['as' => 'pekerjaan.add']);
-            // $routes->post('create', 'PekerjaanController::create', ['as' => 'pekerjaan.create']);
-            // $routes->get('(:segment)/edit', 'PekerjaanController::edit/$1', ['as' => 'pekerjaan.edit']);
-            // $routes->post('(:segment)/update', 'PekerjaanController::update/$1', ['as' => 'pekerjaan.update']);
-            // $routes->post('(:segment)/delete', 'PekerjaanController::delete/$1', ['as' => 'pekerjaan.delete']);
+            $routes->get('/', 'PekerjaanController::index', ['as' => 'pekerjaan']);
+            $routes->get('add', 'PekerjaanController::add', ['as' => 'pekerjaan.add']);
+            $routes->post('create', 'PekerjaanController::create', ['as' => 'pekerjaan.create']);
+            $routes->get('(:segment)/edit', 'PekerjaanController::edit/$1', ['as' => 'pekerjaan.edit']);
+            $routes->post('(:segment)/update', 'PekerjaanController::update/$1', ['as' => 'pekerjaan.update']);
+            $routes->post('(:segment)/delete', 'PekerjaanController::delete/$1', ['as' => 'pekerjaan.delete']);
         });
         // domisili
         $routes->group('domisili', ['namespace' => $routes_namespace . 'Domisili\Controllers\\'], function ($routes) {
-            // $routes->get('/', 'DomisiliController::index', ['as' => 'domisili']);
-            // $routes->get('add', 'DomisiliController::add', ['as' => 'domisili.add']);
-            // $routes->post('create', 'DomisiliController::create', ['as' => 'domisili.create']);
-            // $routes->get('(:segment)/edit', 'DomisiliController::edit/$1', ['as' => 'domisili.edit']);
-            // $routes->post('(:segment)/update', 'DomisiliController::update/$1', ['as' => 'domisili.update']);
-            // $routes->post('(:segment)/delete', 'DomisiliController::delete/$1', ['as' => 'domisili.delete']);
+            $routes->get('/', 'DomisiliController::index', ['as' => 'domisili']);
+            $routes->get('add', 'DomisiliController::add', ['as' => 'domisili.add']);
+            $routes->post('create', 'DomisiliController::create', ['as' => 'domisili.create']);
+            $routes->get('(:segment)/edit', 'DomisiliController::edit/$1', ['as' => 'domisili.edit']);
+            $routes->post('(:segment)/update', 'DomisiliController::update/$1', ['as' => 'domisili.update']);
+            $routes->post('(:segment)/delete', 'DomisiliController::delete/$1', ['as' => 'domisili.delete']);
         });
         // jenis pekerja
         $routes->group('jenis-pekerja', ['namespace' => $routes_namespace . 'Jenispekerja\Controllers\\'], function ($routes) {
-            // $routes->get('/', 'JenispekerjaController::index', ['as' => 'jenis-pekerja']);
-            // $routes->get('add', 'JenispekerjaController::add', ['as' => 'jenis-pekerja.add']);
-            // $routes->post('create', 'JenispekerjaController::create', ['as' => 'jenis-pekerja.create']);
-            // $routes->get('(:segment)/edit', 'JenispekerjaController::edit/$1', ['as' => 'jenis-pekerja.edit']);
-            // $routes->post('(:segment)/update', 'JenispekerjaController::update/$1', ['as' => 'jenis-pekerja.update']);
-            // $routes->post('(:segment)/delete', 'JenispekerjaController::delete/$1', ['as' => 'jenis-pekerja.delete']);
+            $routes->get('/', 'JenispekerjaController::index', ['as' => 'jenis-pekerja']);
+            $routes->get('add', 'JenispekerjaController::add', ['as' => 'jenis-pekerja.add']);
+            $routes->post('create', 'JenispekerjaController::create', ['as' => 'jenis-pekerja.create']);
+            $routes->get('(:segment)/edit', 'JenispekerjaController::edit/$1', ['as' => 'jenis-pekerja.edit']);
+            $routes->post('(:segment)/update', 'JenispekerjaController::update/$1', ['as' => 'jenis-pekerja.update']);
+            $routes->post('(:segment)/delete', 'JenispekerjaController::delete/$1', ['as' => 'jenis-pekerja.delete']);
         });
     });
     // user
