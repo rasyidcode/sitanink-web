@@ -7,98 +7,9 @@ use CodeIgniter\Model;
 class PekerjaModel extends Model
 {
 
-    private $columnOrder = [];
-
     public function __construct()
     {
         parent::__construct();
-    }
-
-    /**
-     * Get pekerja list with datatable params
-     * 
-     * @param array $dtParams
-     * 
-     * @return array|null
-     */
-    public function getData(array $dtParams): ?array
-    {
-        $pekerja = $this->builder('pekerja');
-
-        $pekerja->select('
-            *,
-            CONCAT(tempat_lahir, ", ", tgl_lahir) as ttl
-        ');
-
-        $pekerja->groupStart();
-        $pekerja->like('nik', $dtParams['search']['value']);
-        $pekerja->orLike('nama', $dtParams['search']['value']);
-        $pekerja->orLike('tempat_lahir', $dtParams['search']['value']);
-        $pekerja->orLike('tgl_lahir', $dtParams['search']['value']);
-        $pekerja->orLike('alamat', $dtParams['search']['value']);
-        $pekerja->orLike('jenis_pekerja', $dtParams['search']['value']);
-        $pekerja->orLike('lokasi_kerja', $dtParams['search']['value']);
-        $pekerja->groupEnd();
-
-        if (isset($dtParams['order'])) {
-            $pekerja->orderBy($this->columnOrder[$dtParams['order']['0']['column']], $dtParams['order']['0']['dir']);
-        }
-
-        if (isset($dtParams['length']) && isset($dtParams['start'])) {
-            if ($dtParams['length'] !== -1) {
-                $pekerja->limit($dtParams['length'], $dtParams['start']);
-            }
-        }
-
-        return $pekerja->get()
-            ->getResultObject();
-    }
-
-    /**
-     * count filtered data
-     * 
-     * @param array $dtParams
-     * 
-     * @return int|null
-     */
-    public function countFilteredData(array $dtParams): int
-    {
-        $pekerja = $this->builder('pekerja');
-
-        $pekerja->groupStart();
-        $pekerja->like('nik', $dtParams['search']['value']);
-        $pekerja->orLike('nama', $dtParams['search']['value']);
-        $pekerja->orLike('tempat_lahir', $dtParams['search']['value']);
-        $pekerja->orLike('tgl_lahir', $dtParams['search']['value']);
-        $pekerja->orLike('alamat', $dtParams['search']['value']);
-        $pekerja->orLike('jenis_pekerja', $dtParams['search']['value']);
-        $pekerja->orLike('lokasi_kerja', $dtParams['search']['value']);
-        $pekerja->groupEnd();
-
-        if (isset($dtParams['order'])) {
-            $pekerja->orderBy($this->columnOrder[$dtParams['order']['0']['column']], $dtParams['order']['0']['dir']);
-        }
-
-        if (isset($dtParams['length']) && isset($dtParams['start'])) {
-            if ($dtParams['length'] !== -1) {
-                $pekerja->limit($dtParams['length'], $dtParams['start']);
-            }
-        }
-
-        return $pekerja->countAllResults();
-    }
-
-    /**
-     * count total data
-     * 
-     * @param array $dt_params
-     * 
-     * @return int
-     */
-    public function countData(): int
-    {
-        return $this->builder('pekerja')
-            ->countAllResults();
     }
 
     /**
@@ -252,10 +163,25 @@ class PekerjaModel extends Model
     {
         return $this->builder('pekerja')
             ->select('
-                *,
-                CONCAT(tempat_lahir, ", ", tgl_lahir) as ttl
+            pekerja.id,
+            pekerja.nik,
+            pekerja.nama,
+            pekerja.tempat_lahir,
+            pekerja.tgl_lahir,
+                CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
+                pekerja.alamat,
+                domisili.nama as domisili,
+                pekerjaan.nama as pekerjaan,
+                lokasi_kerja.nama as lokasi_kerja,
+                jenis_pekerja.nama as jenis_pekerja,
+                pekerja.created_at,
+                pekerja.updated_at
             ')
-            ->where('id', $id)
+            ->join('domisili', 'pekerja.id_domisili = domisili.id', 'left')
+            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('pekerjaan', 'pekerja.id_pekerjaan = pekerjaan.id', 'left')
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
+            ->where('pekerja.id', $id)
             ->get()
             ->getRowObject();
     }
@@ -293,5 +219,48 @@ class PekerjaModel extends Model
             ->where('id', $id)
             ->delete();
         $this->db->enableForeignKeyChecks();
+    }
+
+    /**
+     * Get dropdown data
+     * 
+     * @return array
+     */
+    public function getDropdownData()
+    {
+        $lokasiKerja = $this->db->table('lokasi_kerja')
+            ->select('
+                id as value,
+                nama as text
+            ')
+            ->get()
+            ->getResultObject();
+        $pekerjaan = $this->db->table('pekerjaan')
+            ->select('
+                id as value,
+                nama as text
+            ')
+            ->get()
+            ->getResultObject();
+        $domisili = $this->db->table('domisili')
+            ->select('
+                id as value,
+                nama as text
+            ')
+            ->get()
+            ->getResultObject();
+        $jenisPekerja = $this->db->table('jenis_pekerja')
+            ->select('
+                id as value,
+                nama as text
+            ')
+            ->get()
+            ->getResultObject();
+        return [
+            'lokasi_kerja'  => $lokasiKerja,
+            'pekerjaan' => $pekerjaan,
+            'domisili'  => $domisili,
+            'jenis_pekerja' => $jenisPekerja
+        ];
     }
 }

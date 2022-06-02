@@ -12,9 +12,11 @@
             </div>
         <?php endif; ?>
         <div class="col-xs-12">
-            <div class="box box-warning">
+            <div class="box box-success">
                 <div class="box-header">
                     <a href="<?= route_to('pekerja.add') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Pekerja</a>
+                    <a href="<?= route_to('pekerja.add') ?>" class="btn btn-info btn-xs"><i class="ion ion-ios-download-outline"></i>&nbsp;&nbsp;Export Excel</a>
+                    <a href="<?= route_to('pekerja.add') ?>" class="btn btn-warning btn-xs"><i class="ion ion-ios-upload-outline"></i>&nbsp;&nbsp;Import Excel</a>
                     <?php $successMsg = session()->getFlashdata('success'); ?>
                     <?php if (isset($successMsg)) : ?>
                         <span data-message="<?= $successMsg ?>"></span>
@@ -25,7 +27,7 @@
                     <div class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="data-pekerja" class="table table-bordered table-striped dataTable">
+                                <table id="data-pekerja" class="table table-bordered table-striped dataTable" style="width: 100%;">
                                     <thead>
                                         <tr role="row">
                                             <th>#</th>
@@ -33,8 +35,10 @@
                                             <th>Nama</th>
                                             <th>TTL</th>
                                             <th>Alamat</th>
-                                            <th>Jenis Pekerja</th>
+                                            <th>Domisili</th>
+                                            <th>Pekerjaan</th>
                                             <th>Lokasi Kerja</th>
+                                            <th>Jenis Pekerja</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
@@ -65,6 +69,7 @@
             processing: true,
             serverSide: true,
             order: [],
+            scrollX: true,
             ajax: function(data, callback, settings) {
                 var data = {
                     ...data,
@@ -72,8 +77,11 @@
                 }
                 $.ajax({
                     type: 'post',
-                    url: '<?= route_to('pekerja.get-data') ?>',
+                    url: '<?= route_to('api.pekerja.get-data') ?>',
                     data: data,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('sitaninkadmin:admin123'));
+                    },
                     success: function(res) {
                         console.log(res);
                         callback(res);
@@ -116,16 +124,26 @@
                 },
                 {
                     targets: 6,
-                    orderable: true,
+                    orderable: false,
                     searchable: true
                 },
                 {
                     targets: 7,
-                    orderable: true,
+                    orderable: false,
                     searchable: false
                 },
                 {
                     targets: 8,
+                    orderable: false,
+                    searchable: true
+                },
+                {
+                    targets: 9,
+                    orderable: false,
+                    searchable: true
+                },
+                {
+                    targets: 10,
                     orderable: false,
                     searchable: false
                 },

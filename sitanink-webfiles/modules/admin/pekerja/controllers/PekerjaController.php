@@ -48,43 +48,6 @@ class PekerjaController extends BaseWebController
         return $this->renderView('v_index', $this->viewData);
     }
 
-    public function getData()
-    {
-        $postData   = $this->request->getPost();
-        $data       = $this->pekerjaModel->getData($postData);
-        $num        = $postData['start'];
-
-        $resData = [];
-        foreach ($data as $item) {
-            $num++;
-
-            $row    = [];
-            $row[]  = "<input type=\"hidden\" value=\"" . $item->id . "\">{$num}.";
-            $row[]  = $item->nik ?? '-';
-            $row[]  = $item->nama ?? '-';
-            $row[]  = $item->ttl ?? '-';
-            $row[]  = $item->alamat ?? '-';
-            $row[]  = $item->jenis_pekerja ?? '-';
-            $row[]  = $item->lokasi_kerja ?? '-';
-            $row[]  = $item->created_at ?? '-';
-            $row[]  = "<div class=\"text-center\">
-                            <a style=\"margin-bottom: 2px;\" href=\"" . route_to('pekerja.get', $item->id) . "\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail</a>
-                            <a style=\"margin-bottom: 2px;\" href=\"" . route_to('pekerja.edit', $item->id) . "\" class=\"btn btn-info btn-xs\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
-                            <button style=\"margin-bottom: 2px;\" data-pekerja-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
-                        </div>";
-            $resData[] = $row;
-        }
-
-        return $this->response
-            ->setJSON([
-                'draw'              => $postData['draw'],
-                'recordsTotal'      => $this->pekerjaModel->countData(),
-                'recordsFiltered'   => $this->pekerjaModel->countFilteredData($postData),
-                'data'              => $resData
-            ])
-            ->setStatusCode(ResponseInterface::HTTP_OK);
-    }
-
     public function add()
     {
         $dropdownData = $this->pekerjaModel->getDropdownData();
@@ -103,9 +66,9 @@ class PekerjaController extends BaseWebController
                 'active'    => true,
             ],
         ];
-        $this->viewData['dropdownData'] = $dropdownData;
+        $this->viewData['ddData'] = $dropdownData;
 
-        return $this->renderView('v_add', $this->viewData);
+        return $this->renderView('v_add_v2', $this->viewData);
     }
 
     public function create()
@@ -250,7 +213,168 @@ class PekerjaController extends BaseWebController
         // create new pekerja_temp
         $reviewId = $this->pekerjaModel->insertToReview($dataPost);
 
-        $filePath = ROOTPATH . 'public' . DIRECTORY_SEPARATOR . 'uploads';
+        $filePath = ROOTPATH . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . 'uploads';
+
+        // insert berkas one by one
+        $fotoName = $foto->getRandomName();
+        $fotoId = $this->pekerjaModel->insertBerkas([
+            'path'  => $filePath,
+            'filename'  => $fotoName,
+            'size_in_mb'    => $foto->getSizeByUnit('mb'),
+            'mime'    => $foto->getMimeType(),
+            'ext'    => $foto->getExtension(),
+            'type'    => 'foto',
+        ]);
+        $foto->move($filePath, $fotoName);
+
+        $ktpName = $ktp->getRandomName();
+        $ktpId = $this->pekerjaModel->insertBerkas([
+            'path'  => $filePath,
+            'filename'  => $ktpName,
+            'size_in_mb'    => $ktp->getSizeByUnit('mb'),
+            'mime'    => $ktp->getMimeType(),
+            'ext'    => $ktp->getExtension(),
+            'type'    => 'ktp',
+        ]);
+        $ktp->move($filePath, $ktpName);
+
+        $spName = $sp->getRandomName();
+        $spId = $this->pekerjaModel->insertBerkas([
+            'path'  => $filePath,
+            'filename'  => $spName,
+            'size_in_mb'    => $sp->getSizeByUnit('mb'),
+            'mime'    => $sp->getMimeType(),
+            'ext'    => $sp->getExtension(),
+            'type'    => 'sp',
+        ]);
+        $sp->move($filePath, $spName);
+
+        // create connection between pekerja_temp to berkas
+        $this->pekerjaModel->insertReviewBerkas([
+            ['id_pekerja_temp' => $reviewId, 'id_berkas' => $fotoId],
+            ['id_pekerja_temp' => $reviewId, 'id_berkas' => $ktpId],
+            ['id_pekerja_temp' => $reviewId, 'id_berkas' => $spId],
+        ]);
+
+        session()->setFlashdata('success', 'Pekerja telah ditambahkan untuk direview terlebih dahulu!');
+        return redirect()->back()
+            ->route('review.confirm', [$reviewId]);
+    }
+
+    public function createv2()
+    {
+        $rules = [
+            'nik'   => 'required'
+                . '|integer'
+                . '|is_unique[pekerja.nik]'
+                . '|exact_length[16]',
+            'nama'  => 'required',
+            'tempat_lahir'  => 'required',
+            'tgl_lahir' => 'required',
+            'alamat'    => 'required',
+            'id_domisili'  => 'required',
+            'id_lokasi_kerja'  => 'required',
+            'id_jenis_pekerja' => 'required',
+            'id_pekerjaan' => 'required',
+            'foto'  => 'uploaded[foto]'
+                . '|max_size[foto,512]'
+                . '|is_image[foto]',
+            'ktp'   => 'uploaded[ktp]'
+                . '|max_size[ktp,1024]'
+                . '|is_image[foto]',
+            'sp'    => 'uploaded[sp]'
+                . '|max_size[sp,1024]',
+        ];
+        $messages = [
+            'nik'  => [
+                'required'  => 'NIK harus diisi!',
+                'integer'  => 'NIK mengandung karakter yang tidak valid!',
+                'is_unique'  => 'NIK sudah terdaftar!',
+                'exact_length'  => 'Format NIK tidak valid!',
+            ],
+            'nama'  => [
+                'required'  => 'Nama harus diisi!',
+            ],
+            'tempat_lahir'    => [
+                'required'  => 'Tempat lahir harus diisi!',
+            ],
+            'tgl_lahir' => [
+                'required'  => 'Tanggal lahir harus diisi!',
+            ],
+            'alamat' => [
+                'required'  => 'Alamat harus diisi!',
+            ],
+            'id_domisili' => [
+                'required'  => 'Pilih salah satu atau tambah baru!',
+            ],
+            'id_lokasi_kerja' => [
+                'required'  => 'Pilih salah satu atau tambah baru!',
+            ],
+            'id_jenis_pekerja' => [
+                'required'  => 'Pilih salah satu atau tambah baru!',
+            ],
+            'id_pekerjaan' => [
+                'required'  => 'Pilih salah satu atau tambah baru!',
+            ],
+            'foto' => [
+                'uploaded'  => 'Foto harus diupload!',
+                'max_size'  => 'Ukuran file tidak boleh lebih dari 500 kb!',
+                'is_image'  => 'Foto harus berupa gambar!',
+            ],
+            'ktp' => [
+                'uploaded'  => 'Ktp harus diupload!',
+                'max_size'  => 'Ukuran file tidak boleh lebih dari 1 Mb!',
+                'is_image'  => 'Foto harus berupa gambar!',
+            ],
+            'sp' => [
+                'uploaded'  => 'SP harus diupload!',
+                'max_size'  => 'Ukuran file tidak boleh lebih dari 1 Mb!',
+            ]
+        ];
+
+        $nikFormatted = str_replace('_', '', join(explode('-', $_REQUEST['nik'])));
+        $_REQUEST['nik']   = $nikFormatted;
+
+        if (!$this->validate($rules, $messages)) {
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $dataPost = $this->request->getPost();
+        $dataPost['nik'] = $nikFormatted;
+
+        unset($dataPost['csrf_token_sitanink']);
+
+        // handle files
+        $foto = $this->request->getFile('foto');
+        if (!$foto->isValid() && $foto->hasMoved()) {
+            session()->setFlashdata('error_files', 'Something went wrong when processing the file!');
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $ktp = $this->request->getFile('ktp');
+        if (!$ktp->isValid() && $ktp->hasMoved()) {
+            session()->setFlashdata('error_files', 'Something went wrong when processing the file!');
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $sp = $this->request->getFile('sp');
+        if (!$sp->isValid() && $sp->hasMoved()) {
+            session()->setFlashdata('error_files', 'Something went wrong when processing the file!');
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $tglLahir = explode('/', $dataPost['tgl_lahir']);
+        $dataPost['tgl_lahir'] = $tglLahir[2] . '-' . $tglLahir[0] . '-' . $tglLahir[1];
+
+        // create new pekerja_temp
+        $reviewId = $this->pekerjaModel->insertToReview($dataPost);
+
+        $filePath = ROOTPATH . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . 'uploads';
 
         // insert berkas one by one
         $fotoName = $foto->getRandomName();

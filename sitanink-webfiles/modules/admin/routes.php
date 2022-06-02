@@ -60,6 +60,7 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->post('get-data',   'PekerjaController::getData',   ['as' => 'pekerja.get-data']);
         $routes->get('add',         'PekerjaController::add',       ['as' => 'pekerja.add']);
         $routes->post('create',     'PekerjaController::create',    ['as' => 'pekerja.create']);
+        $routes->post('createv2',     'PekerjaController::createv2',    ['as' => 'pekerja.create-v2']);
         $routes->post('(:segment)/delete', 'PekerjaController::delete/$1', ['as' => 'pekerja.delete']);
         $routes->get('(:segment)/edit', 'PekerjaController::edit/$1', ['as' => 'pekerja.edit']);
         $routes->get('(:segment)/update', 'PekerjaController::update/$1', ['as' => 'pekerja.update']);

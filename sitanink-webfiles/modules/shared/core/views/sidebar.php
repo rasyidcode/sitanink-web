@@ -84,6 +84,10 @@
             <li>
                 <a href="#"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>
             </li>
+            <li class="header">Tools</li>
+            <li>
+                <a href="#"><i class="ion ion-ios-reverse-camera-outline"></i> <span>QR Scanner</span></a>
+            </li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

@@ -1,23 +1,30 @@
-# CodeIgniter 4 Framework
+# Sitanink Web
 
-## To Do [2022-06-02]
-### Section 1
-- [ ] Master Data Domisili CRUD
-- [x] Master Data Lokasi Kerja CRUD
-- [ ] Master Data Jenis Pekerja CRUD
-- [ ] Master Data Pekerjaan CRUD
+- [https://usefulangle.com/post/352/javascript-capture-image-from-camera](js-capture-image-from-camera)
+- [https://image.intervention.io/v2/api/resize](image-reizerer)
+- [https://www.sourcecodester.com/download-code?nid=12040&title=ID+Generator+in+PHP+with+Source+Code](id-card-generator-example)
+
+## To Do [2022-06-03]
 - [ ] Update Data Pekerja CRUD
 - [ ] Data Per Wilayah
 - [ ] Data QRCode
 - [ ] Data Kartu
 - [ ] Data SK
 - [ ] Pusat Berkas
-- [ ] Deploy to Hosting
+
+## To Do [2022-06-02]
+### Section 1
+- [x] Master Data Domisili CRUD
+- [x] Master Data Lokasi Kerja CRUD
+- [x] Master Data Jenis Pekerja CRUD
+- [x] Master Data Pekerjaan CRUD
+
 ### Section 2
-- [ ] Seeder Master Data Domisili
-- [ ] Seeder Master Data Lokasi Kerja
-- [ ] Seeder Master Data Jenis Pekerja
-- [ ] Seeder Master Data Pekerjaan
+- [x] Seeder Master Data Domisili
+- [x] Seeder Master Data Lokasi Kerja
+- [x] Seeder Master Data Jenis Pekerja
+- [x] Seeder Master Data Pekerjaan
+- [x] Deploy to Hosting
 
 ## To Do [2022-05-29]
 - [ ] Edit Data Pekerja

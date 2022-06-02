@@ -4,11 +4,11 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-warning">
+            <div class="box box-success">
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h4 class="no-margin-top badge">Biodata</h4>
+                            <h4 class="no-margin-top">Biodata</h4>
                         </div>
                         <div class="col-xs-3">
                             <?php if (!is_null($berkasData['foto'])) : ?>
@@ -59,7 +59,7 @@
                     <div class="with-divider"></div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <h4 class="no-margin-top badge">Foto KTP</h4>
+                            <h4 class="no-margin-top">Foto KTP</h4>
                             <?php if (!is_null($berkasData['ktp'])) : ?>
                                 <img class="ktp-css" src="<?= site_url('uploads/' . $berkasData['ktp']->filename) ?>" alt="KTP">
                             <?php endif; ?>
@@ -68,7 +68,7 @@
                     <div class="with-divider"></div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <h4 class="no-margin-top badge">Surat Pernyataan</h4>
+                            <h4 class="no-margin-top">Surat Pernyataan</h4>
                             <?php if (!is_null($berkasData['sp'])) : ?>
                                 <img class="sp-css" src="<?= site_url('uploads/' . $berkasData['sp']->filename) ?>" alt="SP">
                             <?php endif; ?>
@@ -78,6 +78,7 @@
                     <div class="row">
                         <div class="col-xs-12 pull-right">
                             <form action="<?= route_to('review.do-confirm', $reviewData->id) ?>" method="POST">
+                                <?= csrf_field() ?>
                                 <button <?= !is_null($reviewData->deleted_at) ? 'disabled' : '' ?> class="btn btn-primary btn-sm pull-right" style="margin-left: 8px;"><i class="fa fa-check"></i>&nbsp;Konfirmasi</button>
                             </form>
                             <button id="btn-cancel" class="btn btn-danger btn-sm pull-right"><i class="fa fa-times"></i>&nbsp;Batalkan</button>

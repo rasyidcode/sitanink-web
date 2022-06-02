@@ -50,10 +50,25 @@ class ReviewModel extends Model
     {
         return $this->builder('pekerja_temp')
             ->select('
-                *,
-                CONCAT(tempat_lahir, ", ", tgl_lahir) as ttl
+                pekerja_temp.id,
+                pekerja_temp.nik,
+                pekerja_temp.nama,
+                pekerja_temp.tempat_lahir,
+                pekerja_temp.tgl_lahir,
+                CONCAT(pekerja_temp.tempat_lahir, ", ", pekerja_temp.tgl_lahir) as ttl,
+                pekerja_temp.alamat,
+                domisili.nama as domisili,
+                pekerjaan.nama as pekerjaan,
+                lokasi_kerja.nama as lokasi_kerja,
+                jenis_pekerja.nama as jenis_pekerja,
+                pekerja_temp.created_at,
+                pekerja_temp.deleted_at
             ')
-            ->where('id', $id)
+            ->join('domisili', 'pekerja_temp.id_domisili = domisili.id', 'left')
+            ->join('lokasi_kerja', 'pekerja_temp.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('pekerjaan', 'pekerja_temp.id_pekerjaan = pekerjaan.id', 'left')
+            ->join('jenis_pekerja', 'pekerja_temp.id_jenis_pekerja = jenis_pekerja.id', 'left')
+            ->where('pekerja_temp.id', $id)
             ->get()
             ->getRowObject();
     }

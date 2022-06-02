@@ -3,8 +3,8 @@
 <?= $renderer->section('content') ?>
 <section class="content">
     <div class="row">
-        <div class="col-xs-8">
-            <div class="box box-warning">
+        <div class="col-xs-12">
+            <div class="box box-success">
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-12">

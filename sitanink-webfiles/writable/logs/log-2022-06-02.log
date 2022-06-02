@@ -98,3 +98,208 @@ CRITICAL - 2022-06-02 17:29:47 --> Undefined property: Modules\Admin\Pekerjaan\C
 #3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
 #5 {main}
+CRITICAL - 2022-06-02 19:39:38 --> You must set the database table to be used with your query.
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Model.php(545): CodeIgniter\Database\BaseConnection->table(NULL)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Model.php(719): CodeIgniter\Model->builder()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\controllers\PekerjaController.php(90): CodeIgniter\Model->__call('getDropdownData', Array)
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->add()
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-02 19:48:03 --> You must set the database table to be used with your query.
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Model.php(545): CodeIgniter\Database\BaseConnection->table(NULL)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Model.php(719): CodeIgniter\Model->builder()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\controllers\PekerjaController.php(53): CodeIgniter\Model->__call('getDropdownData', Array)
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->add()
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#7 {main}
+ERROR - 2022-06-02 21:00:27 --> Can't DROP COLUMN `created_at`; check that it exists
+ERROR - 2022-06-02 21:04:57 --> Unknown column 'name' in 'pekerjaan'
+ERROR - 2022-06-02 21:07:35 --> Invalid default value for 'created_at'
+ERROR - 2022-06-02 21:09:56 --> Invalid default value for 'created_at'
+CRITICAL - 2022-06-02 21:21:15 --> You must set the database table to be used with your query.
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Model.php(545): CodeIgniter\Database\BaseConnection->table(NULL)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Model.php(719): CodeIgniter\Model->builder()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\controllers\PekerjaController.php(53): CodeIgniter\Model->__call('getDropdownData', Array)
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->add()
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-02 21:28:05 --> Class "Modules\Api\Pekerja\Controllers\ResponseInterface" not found
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Api\Pekerja\Controllers\PekerjaController->getData()
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\Pekerja\Controllers\PekerjaController))
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-06-02 21:30:39 --> You must set the database table to be used with your query.
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Model.php(545): CodeIgniter\Database\BaseConnection->table(NULL)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Model.php(719): CodeIgniter\Model->builder()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\controllers\PekerjaController.php(53): CodeIgniter\Model->__call('getDropdownData', Array)
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->add()
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#7 {main}
+ERROR - 2022-06-02 21:49:27 --> Unknown column 'domisili' in 'field list'
+CRITICAL - 2022-06-02 21:49:27 --> Unknown column 'domisili' in 'field list'
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\MySQLi\Connection.php(280): mysqli->query('INSERT INTO `pe...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pe...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pe...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseBuilder.php(1733): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pe...', Array, false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\models\PekerjaModel.php(94): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\controllers\PekerjaController.php(214): Modules\Admin\Pekerja\Models\PekerjaModel->insertToReview(Array)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->create()
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-06-02 21:51:03 --> Undefined array key "id_domisili"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\views\v_add_v2.php(77): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 77)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\p...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\controllers\PekerjaController.php(71): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_add_v2', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->add()
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-02 21:51:07 --> Undefined array key "id_domisili"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\views\v_add_v2.php(77): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 77)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\p...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\controllers\PekerjaController.php(71): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_add_v2', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->add()
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-02 22:00:40 --> Undefined property: stdClass::$domisili
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\review\views\v_review_confirm.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined prope...', 'C:\\xampp4\\htdoc...', 40)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\r...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\review\controllers\ReviewController.php(83): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_review_confir...', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Review\Controllers\ReviewController->confirm('10')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Review\Controllers\ReviewController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-06-02 22:08:11 --> Unknown column 'lokasi_kerja.id_lokasi_kerja' in 'on clause'
+CRITICAL - 2022-06-02 22:08:11 --> Unknown column 'lokasi_kerja.id_lokasi_kerja' in 'on clause'
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\MySQLi\Connection.php(280): mysqli->query('SELECT `pekerja...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `pekerja...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `pekerja...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseBuilder.php(1428): CodeIgniter\Database\BaseConnection->query('SELECT `pekerja...', Array, false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\review\models\ReviewModel.php(72): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\review\controllers\ReviewController.php(45): Modules\Admin\Review\Models\ReviewModel->getPekerja(10)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Review\Controllers\ReviewController->confirm('10')
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Review\Controllers\ReviewController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-06-02 22:30:35 --> Unknown column 'pekerja.deleted_at' in 'field list'
+CRITICAL - 2022-06-02 22:30:35 --> Unknown column 'pekerja.deleted_at' in 'field list'
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\MySQLi\Connection.php(280): mysqli->query('SELECT `pekerja...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `pekerja...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `pekerja...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseBuilder.php(1428): CodeIgniter\Database\BaseConnection->query('SELECT `pekerja...', Array, false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\models\PekerjaModel.php(185): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\controllers\PekerjaController.php(443): Modules\Admin\Pekerja\Models\PekerjaModel->getPekerjaFull(16)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->get('16')
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-06-02 22:31:59 --> Undefined property: stdClass::$deleted_at
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\review\views\v_review_confirm.php(82): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined prope...', 'C:\\xampp4\\htdoc...', 82)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\r...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\review\controllers\ReviewController.php(83): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_review_confir...', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Review\Controllers\ReviewController->confirm('11')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Review\Controllers\ReviewController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-02 22:32:18 --> Undefined property: stdClass::$deleted_at
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\review\views\v_review_confirm.php(82): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined prope...', 'C:\\xampp4\\htdoc...', 82)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\r...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\review\controllers\ReviewController.php(83): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_review_confir...', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Review\Controllers\ReviewController->confirm('11')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Review\Controllers\ReviewController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-06-02 22:40:37 --> Unknown column 'pekejer.nama' in 'where clause'
+CRITICAL - 2022-06-02 22:40:37 --> Unknown column 'pekejer.nama' in 'where clause'
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\MySQLi\Connection.php(280): mysqli->query('SELECT `pekerja...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `pekerja...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `pekerja...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseBuilder.php(1428): CodeIgniter\Database\BaseConnection->query('SELECT `pekerja...', Array, false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\api\pekerja\models\PekerjaModel.php(73): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\api\pekerja\controllers\PekerjaController.php(24): Modules\Api\Pekerja\Models\PekerjaModel->getData(Array)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Api\Pekerja\Controllers\PekerjaController->getData()
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\Pekerja\Controllers\PekerjaController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-06-02 22:42:16 --> Unknown column 'pekejer.nama' in 'where clause'
+CRITICAL - 2022-06-02 22:42:16 --> Unknown column 'pekejer.nama' in 'where clause'
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\MySQLi\Connection.php(280): mysqli->query('SELECT `pekerja...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `pekerja...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `pekerja...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseBuilder.php(1428): CodeIgniter\Database\BaseConnection->query('SELECT `pekerja...', Array, false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\api\pekerja\models\PekerjaModel.php(73): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\api\pekerja\controllers\PekerjaController.php(24): Modules\Api\Pekerja\Models\PekerjaModel->getData(Array)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Api\Pekerja\Controllers\PekerjaController->getData()
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\Pekerja\Controllers\PekerjaController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-06-02 22:42:31 --> Unknown column 'pekejer.nama' in 'where clause'
+CRITICAL - 2022-06-02 22:42:31 --> Unknown column 'pekejer.nama' in 'where clause'
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\MySQLi\Connection.php(280): mysqli->query('SELECT `pekerja...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `pekerja...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `pekerja...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseBuilder.php(1428): CodeIgniter\Database\BaseConnection->query('SELECT `pekerja...', Array, false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\api\pekerja\models\PekerjaModel.php(73): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\api\pekerja\controllers\PekerjaController.php(24): Modules\Api\Pekerja\Models\PekerjaModel->getData(Array)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Api\Pekerja\Controllers\PekerjaController->getData()
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\Pekerja\Controllers\PekerjaController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-06-02 22:43:11 --> Unknown column 'pekejer.nama' in 'where clause'
+CRITICAL - 2022-06-02 22:43:11 --> Unknown column 'pekejer.nama' in 'where clause'
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\MySQLi\Connection.php(280): mysqli->query('SELECT `pekerja...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `pekerja...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `pekerja...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseBuilder.php(1428): CodeIgniter\Database\BaseConnection->query('SELECT `pekerja...', Array, false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\api\pekerja\models\PekerjaModel.php(73): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\api\pekerja\controllers\PekerjaController.php(24): Modules\Api\Pekerja\Models\PekerjaModel->getData(Array)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Api\Pekerja\Controllers\PekerjaController->getData()
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\Pekerja\Controllers\PekerjaController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-06-02 22:49:25 --> Unknown column 'domisili' in 'field list'
+CRITICAL - 2022-06-02 22:49:25 --> Unknown column 'domisili' in 'field list'
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\MySQLi\Connection.php(280): mysqli->query('SELECT DISTINCT...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('SELECT DISTINCT...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT DISTINCT...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\Database\BaseBuilder.php(1428): CodeIgniter\Database\BaseConnection->query('SELECT DISTINCT...', Array, false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerja\models\PekerjaModel.php(28): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\inputdata\controllers\InputDataController.php(24): Modules\Admin\Pekerja\Models\PekerjaModel->getListDomisili()
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Inputdata\Controllers\InputDataController->index()
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Inputdata\Controllers\InputDataController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
