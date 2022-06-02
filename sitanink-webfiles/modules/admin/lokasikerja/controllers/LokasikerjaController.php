@@ -3,7 +3,7 @@
 namespace Modules\Admin\Lokasikerja\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
-use Modules\Admin\Lokasikerja\Models\LokasiKerjaModel;
+use Modules\Admin\Lokasikerja\Models\LokasikerjaModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
 
 class LokasikerjaController extends BaseWebController
@@ -21,7 +21,7 @@ class LokasikerjaController extends BaseWebController
 
         $db = \Config\Database::connect();
 
-        $this->lokasiKerjaModel = new LokasiKerjaModel($db);
+        $this->lokasiKerjaModel = new LokasikerjaModel($db);
 
         $this->__initViewData();
     }

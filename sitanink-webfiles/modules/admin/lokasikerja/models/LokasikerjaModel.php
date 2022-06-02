@@ -5,7 +5,7 @@ namespace Modules\Admin\Lokasikerja\Models;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Database\ConnectionInterface;
 
-class LokasiKerjaModel
+class LokasikerjaModel
 {
 
     protected $db;
