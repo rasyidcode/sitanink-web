@@ -30,8 +30,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li><a href="#"><i class="ion ion-location"></i> Lokasi</a></li>
+                <ul class="treeview-menu" style="display: <?= isMenuOpen('master', 1) ?>;">
+                    <li class="<?= isLinkActive('lokasi-kerja', 2) ?>"><a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> Lokasi</a></li>
                     <li><a href="#"><i class="fa fa-square-o"></i> Jenis</a></li>
                     <li><a href="#"><i class="fa fa-gavel"></i> Pekerjaan</a></li>
                     <li><a href="#"><i class="fa fa-map"></i> Domisili</a></li>

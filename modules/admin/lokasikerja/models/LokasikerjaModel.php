@@ -1,27 +1,83 @@
 <?php
 
-namespace Modules\Admin\User\Models;
+namespace Modules\Admin\Lokasikerja\Models;
 
-class LokasikerjaModel extends Model
+use CodeIgniter\Database\BaseBuilder;
+use CodeIgniter\Database\ConnectionInterface;
+
+class LokasiKerjaModel
 {
-    protected $table      = 'lokasi_kerja';
-    protected $primaryKey = 'id';
 
-    protected $useAutoIncrement = true;
+    protected $db;
 
-    protected $returnType     = 'object';
-    protected $useSoftDeletes = false;
+    /**
+     * @var BaseBuilder
+     */
+    private BaseBuilder $builder;
 
-    protected $allowedFields = ['name', 'email'];
+    public function __construct(ConnectionInterface &$db)
+    {
+        $this->db = &$db;
+        $this->builder = $this->db->table('lokasi_kerja');
+    }
 
-    protected $useTimestamps = true;
-    protected $dateFormat = 'datetime';
-    
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    /**
+     * Create new lokasi kerja
+     * 
+     * @param array $data
+     * 
+     * @return void
+     */
+    public function create(array $data)
+    {
+        $now = date('Y-m-d H:i:s');
+        $data['created_at'] = $now;
+        $data['updated_at'] = $now;
+        $this->builder->insert($data);
+    }
 
-    protected $validationRules    = [];
-    protected $validationMessages = [];
-    protected $skipValidation     = false;
+    /**
+     * Get lokasi kerja by id
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function get(int $id) : ?object
+    {
+        return $this->builder
+            ->where('id', $id)
+            ->get()
+            ->getRowObject();
+    }
+
+    /**
+     * Update lokasi kerja by id
+     * 
+     * @param array $data
+     * @param int $id
+     * 
+     * @return void
+     */
+    public function update(array $data, int $id)
+    {
+        $this->builder
+            ->where('id', $id)
+            ->update($data);
+    }
+
+    /**
+     * Delete lokasi kerja by id
+     * 
+     * @param int $id
+     * 
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        $this->builder
+            ->where('id', $id)
+            ->delete();
+    }
+
 }

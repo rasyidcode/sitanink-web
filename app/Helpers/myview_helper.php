@@ -7,7 +7,7 @@ function isMenuOpen(string $module, int $segment = 0) {
     }
 
     try {
-        return $segments[$segment - 1] == $module ? 'menu-open' : '';
+        return $segments[$segment - 1] == $module ? 'block' : 'none';
     } catch (Exception $e) {
         return '';
     }
