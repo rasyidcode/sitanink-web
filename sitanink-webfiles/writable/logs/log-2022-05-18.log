@@ -1,0 +1,81 @@
+CRITICAL - 2022-05-18 14:22:30 --> scandir(C:\xampp4\htdocs\alrasyid-software\sitanink\modules/.gitkeep): The directory name is inval (code: 267)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'scandir(C:\\xamp...', 'C:\\xampp4\\htdoc...', 43)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\app\Config\Routes.php(43): scandir('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(689): require('C:\\xampp4\\htdoc...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(358): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-18 14:22:30 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at C:\xampp4\htdocs\alrasyid-software\sitanink\app\Config\Events.php:32) in C:\xampp4\htdocs\alrasyid-software\sitanink\system\Debug\Exceptions.php:123
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', 'C:\\xampp4\\htdoc...', 123)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Debug\Exceptions.php(123): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-05-18 14:22:30 --> scandir(C:\xampp4\htdocs\alrasyid-software\sitanink\modules/.gitkeep): The directory name is inval (code: 267)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'scandir(C:\\xamp...', 'C:\\xampp4\\htdoc...', 43)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\app\Config\Routes.php(43): scandir('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(689): require('C:\\xampp4\\htdoc...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(358): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-18 14:22:30 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at C:\xampp4\htdocs\alrasyid-software\sitanink\app\Config\Events.php:32) in C:\xampp4\htdocs\alrasyid-software\sitanink\system\Debug\Exceptions.php:123
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', 'C:\\xampp4\\htdoc...', 123)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Debug\Exceptions.php(123): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-05-18 14:23:27 --> scandir(C:\xampp4\htdocs\alrasyid-software\sitanink\modules/.gitkeep): The directory name is inval (code: 267)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'scandir(C:\\xamp...', 'C:\\xampp4\\htdoc...', 43)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\app\Config\Routes.php(43): scandir('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(689): require('C:\\xampp4\\htdoc...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(358): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-18 14:23:28 --> scandir(C:\xampp4\htdocs\alrasyid-software\sitanink\modules/.gitkeep): The directory name is inval (code: 267)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'scandir(C:\\xamp...', 'C:\\xampp4\\htdoc...', 43)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\app\Config\Routes.php(43): scandir('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(689): require('C:\\xampp4\\htdoc...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(358): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-18 14:41:22 --> Undefined variable $route_namespaces
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\routes.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp4\\htdoc...', 3)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\app\Config\Routes.php(46): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(689): require('C:\\xampp4\\htdoc...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(358): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-18 14:43:38 --> Class "Modules\Shared\Core\Controllers\View" not found
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\dashboard\controllers\DashboardController.php(14): Modules\Shared\Core\Controllers\BaseWebController->__construct()
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(779): Modules\Admin\Dashboard\Controllers\DashboardController->__construct()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(390): CodeIgniter\CodeIgniter->createController()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-18 14:44:42 --> CodeIgniter\View\View::__construct(): Argument #1 ($config) must be of type Config\View, CodeIgniter\Config\View given, called in C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php on line 20
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(20): CodeIgniter\View\View->__construct(Object(CodeIgniter\Config\View), 'C:\\xampp4\\htdoc...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\dashboard\controllers\DashboardController.php(14): Modules\Shared\Core\Controllers\BaseWebController->__construct()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(779): Modules\Admin\Dashboard\Controllers\DashboardController->__construct()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(390): CodeIgniter\CodeIgniter->createController()
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-18 14:45:20 --> CodeIgniter\View\View::__construct(): Argument #1 ($config) must be of type Config\View, CodeIgniter\Config\View given, called in C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php on line 20
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(20): CodeIgniter\View\View->__construct(Object(CodeIgniter\Config\View), 'C:\\xampp4\\htdoc...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\dashboard\controllers\DashboardController.php(14): Modules\Shared\Core\Controllers\BaseWebController->__construct()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(779): Modules\Admin\Dashboard\Controllers\DashboardController->__construct()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(390): CodeIgniter\CodeIgniter->createController()
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}

@@ -1,0 +1,101 @@
+CRITICAL - 2022-05-25 08:20:50 --> CodeIgniter\Validation\FileRules::is_image(): Argument #2 ($params) must be of type string, null given, called in C:\xampp4\htdocs\alrasyid-software\sitanink\system\Validation\Validation.php on line 277
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Validation\Validation.php(277): CodeIgniter\Validation\FileRules->is_image(NULL, NULL)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('foto', 'foto', NULL, Array, Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(195): CodeIgniter\Controller->validate(Array, Array)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->create()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-25 08:23:13 --> CodeIgniter\Validation\FileRules::is_image(): Argument #2 ($params) must be of type string, null given, called in C:\xampp4\htdocs\alrasyid-software\sitanink\system\Validation\Validation.php on line 277
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Validation\Validation.php(277): CodeIgniter\Validation\FileRules->is_image(NULL, NULL)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('foto', 'foto', NULL, Array, Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(195): CodeIgniter\Controller->validate(Array, Array)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->create()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-25 08:26:10 --> Call to a member function getClientName() on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(214): include()
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(39): CodeIgniter\View\View->render('modules\\admin\\p...', Array, true)
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(105): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_add', Array)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->add()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#8 {main}
+ERROR - 2022-05-25 10:14:19 --> Cannot drop index 'id_media': needed in a foreign key constraint
+ERROR - 2022-05-25 10:15:10 --> Can't DROP FOREIGN KEY `id_media`; check that it exists
+ERROR - 2022-05-25 11:10:00 --> Unknown column 'berkas_id' in 'field list'
+CRITICAL - 2022-05-25 11:10:00 --> Unknown column 'berkas_id' in 'field list'
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Database\MySQLi\Connection.php(280): mysqli->query('INSERT INTO `pe...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pe...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pe...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Database\BaseBuilder.php(1612): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pe...', Array, false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\models\PekerjaModel.php(214): CodeIgniter\Database\BaseBuilder->insertBatch(Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(267): Modules\Admin\Pekerja\Models\PekerjaModel->insertReviewBerkas(Array)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->create()
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-05-25 11:22:17 --> finfo_file(C:\xampp4\tmp\phpFA00.tmp): Failed to open stream: No such file or directory
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'finfo_file(C:\\x...', 'C:\\xampp4\\htdoc...', 109)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Files\File.php(109): finfo_file(Resource id #177, 'C:\\xampp4\\tmp\\p...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\HTTP\Files\UploadedFile.php(297): CodeIgniter\Files\File->getMimeType()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\HTTP\Files\UploadedFile.php(286): CodeIgniter\HTTP\Files\UploadedFile->guessExtension()
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Files\File.php(121): CodeIgniter\HTTP\Files\UploadedFile->getExtension()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(249): CodeIgniter\Files\File->getRandomName()
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->create()
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-05-25 11:27:45 --> finfo_file(C:\xampp4\tmp\phpFA0B.tmp): Failed to open stream: No such file or directory
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'finfo_file(C:\\x...', 'C:\\xampp4\\htdoc...', 109)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Files\File.php(109): finfo_file(Resource id #177, 'C:\\xampp4\\tmp\\p...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\HTTP\Files\UploadedFile.php(297): CodeIgniter\Files\File->getMimeType()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\HTTP\Files\UploadedFile.php(286): CodeIgniter\HTTP\Files\UploadedFile->guessExtension()
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Files\File.php(121): CodeIgniter\HTTP\Files\UploadedFile->getExtension()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(249): CodeIgniter\Files\File->getRandomName()
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->create()
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-05-25 11:29:22 --> The uploaded file has already been moved.
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\HTTP\Files\UploadedFile.php(133): CodeIgniter\HTTP\Exceptions\HTTPException::forAlreadyMoved()
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(258): CodeIgniter\HTTP\Files\UploadedFile->move('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->create()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-25 11:39:10 --> Undefined array key 0
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Router\RouteCollection.php(1119): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 1119)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Router\RouteCollection.php(996): CodeIgniter\Router\RouteCollection->fillRouteParams('pekerja/review/...', Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Common.php(886): CodeIgniter\Router\RouteCollection->reverseRoute('pekerja.review-...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\ReviewController.php(44): route_to('pekerja.review-...')
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\ReviewController->confirm('6')
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\ReviewController))
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-25 16:40:57 --> Cannot access private property Modules\Admin\Pekerja\Controllers\PekerjaController::$pekerjaModel
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(18): Modules\Shared\Core\Controllers\BaseWebController->__construct()
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(779): Modules\Admin\Pekerja\Controllers\PekerjaController->__construct()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(390): CodeIgniter\CodeIgniter->createController()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-25 16:41:53 --> Undefined variable $total
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(38): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp4\\htdoc...', 38)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->index()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}

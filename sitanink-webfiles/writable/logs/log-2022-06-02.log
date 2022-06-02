@@ -1,0 +1,93 @@
+CRITICAL - 2022-06-02 08:21:50 --> Attempt to read property "username" on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\user\controllers\UserController.php(230): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp4\\htdoc...', 230)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\User\Controllers\UserController->update('7')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\User\Controllers\UserController))
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-06-02 08:22:50 --> Attempt to read property "username" on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\user\controllers\UserController.php(230): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp4\\htdoc...', 230)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\User\Controllers\UserController->update('7')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\User\Controllers\UserController))
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-06-02 10:22:38 --> Undefined array key "password"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\lokasikerja\controllers\LokasikerjaController.php(99): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 99)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Lokasikerja\Controllers\LokasikerjaController->create()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Lokasikerja\Controllers\LokasikerjaController))
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-06-02 10:22:58 --> Undefined array key "password"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\lokasikerja\controllers\LokasikerjaController.php(99): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 99)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Lokasikerja\Controllers\LokasikerjaController->create()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Lokasikerja\Controllers\LokasikerjaController))
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-06-02 11:00:31 --> Class "Modules\Admin\Lokasikerja\Controllers\ResponseInterface" not found
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Lokasikerja\Controllers\LokasikerjaController->delete('3')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Lokasikerja\Controllers\LokasikerjaController))
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-06-02 11:01:11 --> Undefined variable $lokasiKerjaData
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\lokasikerja\views\v_add.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'C:\\xampp4\\htdoc...', 19)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\l...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\lokasikerja\controllers\LokasikerjaController.php(70): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_add', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Lokasikerja\Controllers\LokasikerjaController->add()
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Lokasikerja\Controllers\LokasikerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-02 14:21:22 -->  route cannot be found while reverse-routing.
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\HTTP\RedirectResponse.php(56): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\jenispekerja\controllers\JenispekerjaController.php(95): CodeIgniter\HTTP\RedirectResponse->route(false)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Jenispekerja\Controllers\JenispekerjaController->create()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Jenispekerja\Controllers\JenispekerjaController))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-06-02 14:25:10 --> Attempt to read property "id" on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\lokasikerja\views\v_edit.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp4\\htdoc...', 19)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\l...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\lokasikerja\controllers\LokasikerjaController.php(124): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_edit', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Lokasikerja\Controllers\LokasikerjaController->edit('1')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Lokasikerja\Controllers\LokasikerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-02 14:26:04 --> Attempt to read property "id" on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\lokasikerja\views\v_edit.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp4\\htdoc...', 19)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\l...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\lokasikerja\controllers\LokasikerjaController.php(124): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_edit', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Lokasikerja\Controllers\LokasikerjaController->edit('1')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Lokasikerja\Controllers\LokasikerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-02 14:27:27 --> Attempt to read property "id" on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\lokasikerja\views\v_edit.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp4\\htdoc...', 19)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\l...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\lokasikerja\controllers\LokasikerjaController.php(124): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_edit', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Lokasikerja\Controllers\LokasikerjaController->edit('1')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Lokasikerja\Controllers\LokasikerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-02 14:30:38 --> Modules\Admin\Jenispekerja\Models\JenispekerjaModel::get(): Argument #1 ($id) must be of type int, string given, called in C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\jenispekerja\controllers\JenispekerjaController.php on line 145
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\jenispekerja\controllers\JenispekerjaController.php(145): Modules\Admin\Jenispekerja\Models\JenispekerjaModel->get('undefined')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Jenispekerja\Controllers\JenispekerjaController->delete('undefined')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Jenispekerja\Controllers\JenispekerjaController))
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}

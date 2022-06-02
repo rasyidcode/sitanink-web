@@ -1,0 +1,77 @@
+CRITICAL - 2022-05-31 13:48:02 --> Only variables should be passed by reference
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\controllers\UserController.php(15): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Only variables ...', 'C:\\xampp4\\htdoc...', 15)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(779): Modules\Api\User\Controllers\UserController->__construct()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(390): CodeIgniter\CodeIgniter->createController()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-31 13:49:23 --> Class "Modules\Api\User\Controllers\ResponseInterface" not found
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Api\User\Controllers\UserController->getData()
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\User\Controllers\UserController))
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-05-31 14:02:18 --> Undefined array key "search"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\models\UserModel.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 32)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\controllers\UserController.php(24): Modules\Api\User\Models\UserModel->getData(Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Api\User\Controllers\UserController->getData()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\User\Controllers\UserController))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-31 14:11:01 --> Undefined array key "search"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\models\UserModel.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 32)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\controllers\UserController.php(24): Modules\Api\User\Models\UserModel->getData(Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Api\User\Controllers\UserController->getData()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\User\Controllers\UserController))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-31 14:29:05 --> Undefined array key "search"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\models\UserModel.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 32)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\controllers\UserController.php(24): Modules\Api\User\Models\UserModel->getData(Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Api\User\Controllers\UserController->getData()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\User\Controllers\UserController))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-31 14:29:06 --> Undefined array key "search"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\models\UserModel.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 32)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\controllers\UserController.php(24): Modules\Api\User\Models\UserModel->getData(Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Api\User\Controllers\UserController->getData()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\User\Controllers\UserController))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-31 14:29:07 --> Undefined array key "search"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\models\UserModel.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 32)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\controllers\UserController.php(24): Modules\Api\User\Models\UserModel->getData(Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Api\User\Controllers\UserController->getData()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\User\Controllers\UserController))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-31 14:29:14 --> Undefined array key "search"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\models\UserModel.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 32)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\controllers\UserController.php(24): Modules\Api\User\Models\UserModel->getData(Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Api\User\Controllers\UserController->getData()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\User\Controllers\UserController))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-31 14:47:55 --> Undefined array key "search"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\models\UserModel.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 32)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\controllers\UserController.php(24): Modules\Api\User\Models\UserModel->getData(Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Api\User\Controllers\UserController->getData()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\User\Controllers\UserController))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-31 15:08:59 --> Undefined array key "search"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\models\UserModel.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 32)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\api\user\controllers\UserController.php(24): Modules\Api\User\Models\UserModel->getData(Array)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Api\User\Controllers\UserController->getData()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Api\User\Controllers\UserController))
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#6 {main}

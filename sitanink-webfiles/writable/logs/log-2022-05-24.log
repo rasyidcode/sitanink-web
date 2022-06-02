@@ -1,0 +1,36 @@
+ERROR - 2022-05-24 21:37:32 --> Unknown column 'jenis_pekerjaan' in 'field list'
+CRITICAL - 2022-05-24 21:37:32 --> Unknown column 'jenis_pekerjaan' in 'field list'
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Database\MySQLi\Connection.php(280): mysqli->query('SELECT DISTINCT...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Database\BaseConnection.php(663): CodeIgniter\Database\MySQLi\Connection->execute('SELECT DISTINCT...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Database\BaseConnection.php(591): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT DISTINCT...')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Database\BaseBuilder.php(1428): CodeIgniter\Database\BaseConnection->query('SELECT DISTINCT...', Array, false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\models\PekerjaModel.php(168): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(83): Modules\Admin\Pekerja\Models\PekerjaModel->getListJenisPekerjaan()
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->add()
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-05-24 22:25:07 --> add-pekerja-filter filter must have a matching alias defined.
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Filters\Filters.php(338): CodeIgniter\Filters\Exceptions\FilterException::forNoAlias('add-pekerja-fil...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(366): CodeIgniter\Filters\Filters->enableFilter('add-pekerja-fil...', 'before')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-05-24 22:25:36 --> Undefined array key "nik"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\app\Filters\AddPekerjaFilter.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 28)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Filters\Filters.php(169): App\Filters\AddPekerjaFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(374): CodeIgniter\Filters\Filters->run('pekerja/add', 'before')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-24 22:25:53 --> Undefined array key "nik"
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\app\Filters\AddPekerjaFilter.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp4\\htdoc...', 28)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\Filters\Filters.php(169): App\Filters\AddPekerjaFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(374): CodeIgniter\Filters\Filters->run('pekerja/add', 'before')
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-24 23:01:32 --> Cannot use isset() on the result of an expression (you can use "null !== expression" instead)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}

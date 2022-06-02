@@ -1,0 +1,55 @@
+CRITICAL - 2022-05-28 09:40:58 --> Attempt to read property "filename" on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\views\v_detail.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp4\\htdoc...', 15)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\p...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(355): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_detail', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->get('1')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-28 09:41:04 --> Attempt to read property "filename" on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\views\v_detail.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp4\\htdoc...', 15)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\p...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(355): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_detail', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->get('2')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-28 09:42:27 --> Attempt to read property "filename" on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\views\v_detail.php(15): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp4\\htdoc...', 15)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\p...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(355): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_detail', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->get('1')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-28 09:42:57 --> Attempt to read property "filename" on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\views\v_detail.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp4\\htdoc...', 79)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\p...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(355): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_detail', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->get('1')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-28 09:43:22 --> Attempt to read property "filename" on null
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\views\v_detail.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp4\\htdoc...', 79)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(214): include('C:\\xampp4\\htdoc...')
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(217): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\p...', Array, true)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\pekerja\controllers\PekerjaController.php(355): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_detail', Array)
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Pekerja\Controllers\PekerjaController->get('1')
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerja\Controllers\PekerjaController))
+#7 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#9 {main}

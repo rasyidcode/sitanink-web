@@ -1,0 +1,9 @@
+CRITICAL - 2022-05-26 13:59:41 --> Invalid file: modules\admin\inputdata\views/v_add.php
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('modules\\admin\\i...')
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\shared\core\controllers\BaseWebController.php(46): CodeIgniter\View\View->render('modules\\admin\\i...', Array, true)
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\modules\admin\inputdata\controllers\InputDataController.php(49): Modules\Shared\Core\Controllers\BaseWebController->renderView('v_add', Array)
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(802): Modules\Admin\Inputdata\Controllers\InputDataController->index()
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Inputdata\Controllers\InputDataController))
+#5 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
+#7 {main}
