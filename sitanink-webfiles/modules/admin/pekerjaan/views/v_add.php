@@ -11,18 +11,18 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Tambah Jenis Pekerja</h3>
+                    <h3 class="box-title">Tambah Pekerjaan</h3>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-12 col-sm-offset-1 col-sm-8 col-md-offset-1 col-md-8 col-lg-offset-4 col-lg-4">
-                            <form action="<?= route_to('jenis-pekerja.create') ?>" method="POST" role="form">
+                            <form action="<?= route_to('pekerjaan.create') ?>" method="POST" role="form">
                                 <?= csrf_field() ?>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="form-group <?= isset($fdErr['nama']) ? 'has-error' : '' ?>">
                                             <label class="control-label"><?= isset($fdErr['nama']) ? $errIcon : '' ?>&nbsp;Nama</label>
-                                            <input type="text" name="nama" class="form-control" placeholder="Masukkan jenis pekerja ..." value="<?= old('nama') ?? '' ?>">
+                                            <input type="text" name="nama" class="form-control" placeholder="Masukkan nama ..." value="<?= old('nama') ?? '' ?>">
                                             <?php if (isset($fdErr['nama'])) : ?>
                                                 <span class="help-block"><?= $fdErr['nama'] ?></span>
                                             <?php endif; ?>

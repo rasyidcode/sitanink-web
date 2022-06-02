@@ -91,3 +91,10 @@ CRITICAL - 2022-06-02 14:30:38 --> Modules\Admin\Jenispekerja\Models\Jenispekerj
 #3 C:\xampp4\htdocs\alrasyid-software\sitanink\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 C:\xampp4\htdocs\alrasyid-software\sitanink\public\index.php(53): CodeIgniter\CodeIgniter->run()
 #5 {main}
+CRITICAL - 2022-06-02 17:29:47 --> Undefined property: Modules\Admin\Pekerjaan\Controllers\PekerjaanController::$jenispekerjaModel
+#0 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\modules\admin\pekerjaan\controllers\PekerjaanController.php(91): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined prope...', 'C:\\xampp4\\htdoc...', 91)
+#1 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(802): Modules\Admin\Pekerjaan\Controllers\PekerjaanController->create()
+#2 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(399): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Pekerjaan\Controllers\PekerjaanController))
+#3 C:\xampp4\htdocs\alrasyid-software\sitanink\sitanink-webfiles\system\CodeIgniter.php(317): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp4\htdocs\alrasyid-software\sitanink\public_html\index.php(53): CodeIgniter\CodeIgniter->run()
+#5 {main}

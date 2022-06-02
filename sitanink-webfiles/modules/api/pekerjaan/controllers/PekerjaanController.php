@@ -35,7 +35,7 @@ class PekerjaanController extends BaseController
             $row[]  = "<div class=\"text-center\">
                             <!--<a onclick=\"javascript:void(0)\" class=\"btn btn-success btn-xs mr-2\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail</a>-->
                             <a href=\"" . route_to('pekerjaan.edit', $item->id) . "\" class=\"btn btn-info btn-xs mr-2\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
-                            <button data-lokasi-kerja-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
+                            <button data-pekerjaan-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
                         </div>";
             $resData[] = $row;
         }

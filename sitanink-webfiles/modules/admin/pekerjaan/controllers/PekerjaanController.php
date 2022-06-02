@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\Admin\Jenispekerja\Controllers;
+namespace Modules\Admin\Pekerjaan\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
-use Modules\Admin\Jenispekerja\Models\JenispekerjaModel;
+use Modules\Admin\Pekerjaan\Models\PekerjaanModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
 
-class JenispekerjaController extends BaseWebController
+class PekerjaanController extends BaseWebController
 {
 
     protected $viewPath = __DIR__;
 
-    private $jenispekerjaModel;
+    private $pekerjaanModel;
 
     private $viewData = [];
 
@@ -21,7 +21,7 @@ class JenispekerjaController extends BaseWebController
 
         $db = \Config\Database::connect();
 
-        $this->jenispekerjaModel = new JenispekerjaModel($db);
+        $this->pekerjaanModel = new PekerjaanModel($db);
 
         $this->__initViewData();
     }
@@ -29,8 +29,8 @@ class JenispekerjaController extends BaseWebController
     private function __initViewData()
     {
         $this->viewData = [
-            'pageTitle' => 'Master Data Jenis Pekerja',
-            'pageDesc'  => 'Halaman manajemen master data pekerja'
+            'pageTitle' => 'Master Data Pekerjaan',
+            'pageDesc'  => 'Halaman manajemen master data pekerjaan'
         ];
     }
 
@@ -41,8 +41,8 @@ class JenispekerjaController extends BaseWebController
                 'url'       => route_to('admin'),
                 'active'    => false,
             ],
-            'master-data-jenis-pekerja' => [
-                'url'       => route_to('jenis-pekerja'),
+            'master-data-pekerjaan' => [
+                'url'       => route_to('pekerjaan'),
                 'active'    => true,
             ],
         ];
@@ -57,12 +57,12 @@ class JenispekerjaController extends BaseWebController
                 'url'       => route_to('admin'),
                 'active'    => false,
             ],
-            'master-data-jenis-pekerja' => [
-                'url'       => route_to('jenis-pekerja'),
+            'master-data-pekerjaan' => [
+                'url'       => route_to('pekerjaan'),
                 'active'    => false,
             ],
-            'tambah-master-data-jenis-pekerja' => [
-                'url'       => route_to('jenis-pekerja.add'),
+            'tambah-master-data-pekerjaan' => [
+                'url'       => route_to('pekerjaan.add'),
                 'active'    => true,
             ],
         ];
@@ -73,12 +73,12 @@ class JenispekerjaController extends BaseWebController
     public function create()
     {
         $rules = [
-            'nama'  => 'required|is_unique[jenis_pekerja.nama]',
+            'nama'  => 'required|is_unique[pekerjaan.nama]',
         ];
         $messages = [
             'nama'  => [
-                'required'  => 'Nama lokasi tidak boleh kosong!',
-                'is_unique'  => 'Nama lokasi sudah terdaftar!',
+                'required'  => 'Nama pekerjaan tidak boleh kosong!',
+                'is_unique'  => 'Nama pekerjaan sudah terdaftar!',
             ],
         ];
         if (!$this->validate($rules, $messages)) {
@@ -88,11 +88,11 @@ class JenispekerjaController extends BaseWebController
         }
 
         $dataPost = $this->request->getPost();
-        $this->jenispekerjaModel->create($dataPost);
+        $this->pekerjaanModel->create($dataPost);
 
         session()->setFlashdata('success', 'Data berhasil ditambahkan!');
         return redirect()->back()
-            ->route('jenis-pekerja');
+            ->route('pekerjaan');
     }
 
     public function edit($id)
@@ -102,16 +102,16 @@ class JenispekerjaController extends BaseWebController
                 'url'       => route_to('admin'),
                 'active'    => false,
             ],
-            'master-data-jenis-pekerja' => [
-                'url'       => route_to('jenis-pekerja'),
+            'master-data-pekerjaan' => [
+                'url'       => route_to('pekerjaan'),
                 'active'    => false,
             ],
-            'tambah-master-data-jenis-pekerja' => [
-                'url'       => route_to('jenis-pekerja.add'),
+            'tambah-master-data-pekerjaan' => [
+                'url'       => route_to('pekerjaan.add'),
                 'active'    => true,
             ],
         ];
-        $this->viewData['data'] = $this->jenispekerjaModel->get((int)$id);
+        $this->viewData['data'] = $this->pekerjaanModel->get((int)$id);
 
         return $this->renderView('v_edit', $this->viewData);
     }
@@ -133,21 +133,21 @@ class JenispekerjaController extends BaseWebController
         }
 
         $dataPost = $this->request->getPost();
-        $this->jenispekerjaModel->update($dataPost, (int)$id);
+        $this->pekerjaanModel->update($dataPost, (int)$id);
         
         session()->setFlashdata('success', 'Data berhasil diupdate!');
         return redirect()->back()
-            ->route('jenis-pekerja');
+            ->route('pekerjaan');
     }
 
     public function delete($id)
     {
-        $lokasiKerja = $this->jenispekerjaModel->get($id);
-        if (is_null($lokasiKerja)) {
+        $pekerjaan = $this->pekerjaanModel->get($id);
+        if (is_null($pekerjaan)) {
             throw new ApiAccessErrorException(message: 'Data tidak ditemukan', statusCode: ResponseInterface::HTTP_NOT_FOUND);
         }
 
-        $this->jenispekerjaModel->delete($id);
+        $this->pekerjaanModel->delete($id);
 
         return $this->response
             ->setJSON([

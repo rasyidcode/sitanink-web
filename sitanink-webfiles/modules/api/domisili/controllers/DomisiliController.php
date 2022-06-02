@@ -1,13 +1,12 @@
 <?php
 
-namespace Modules\Api\Lokasikerja\Controllers;
+namespace Modules\Api\Domisili\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Api\Domisili\Models\DomisiliModel;
-use Modules\Api\Lokasikerja\Models\LokasikerjaModel;
 
-class LokasikerjaController extends BaseController
+class DomisiliController extends BaseController
 {
 
     private $domisiliModel;
@@ -32,13 +31,11 @@ class LokasikerjaController extends BaseController
             $row    = [];
             $row[]  = "<input type=\"hidden\" value=\"" . $item->id . "\">{$num}.";
             $row[]  = $item->nama ?? '-';
-            $row[]  = "<span class=\"label label-info\">" . $item->lat . "</span>";
-            $row[]  = "<span class=\"label label-warning\">" . $item->lon . "</span>";
             $row[]  = $item->created_at ?? '-';
             $row[]  = "<div class=\"text-center\">
-                            <a onclick=\"javascript:void(0)\" class=\"btn btn-success btn-xs mr-2\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail</a>
-                            <a href=\"" . route_to('lokasi-kerja.edit', $item->id) . "\" class=\"btn btn-info btn-xs mr-2\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
-                            <button data-lokasi-kerja-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
+                            <!--<a onclick=\"javascript:void(0)\" class=\"btn btn-success btn-xs mr-2\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail</a>-->
+                            <a href=\"" . route_to('domisili.edit', $item->id) . "\" class=\"btn btn-info btn-xs mr-2\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
+                            <button data-domisili-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
                         </div>";
             $resData[] = $row;
         }

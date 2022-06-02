@@ -6,7 +6,7 @@
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header">
-                    <a href="<?= route_to('jenis-pekerja.add') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Jenis Pekerja</a>
+                    <a href="<?= route_to('pekerjaan.add') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Pekerjaan</a>
                     <?php $successMsg = session()->getFlashdata('success'); ?>
                     <?php if (isset($successMsg)) : ?>
                         <span data-message="<?= $successMsg ?>"></span>
@@ -17,7 +17,7 @@
                     <div class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="data-jenis-pekerja" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                <table id="data-pekerjaan" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                     <thead>
                                         <tr role="row">
                                             <th>#</th>
@@ -44,7 +44,7 @@
 <script src="<?= site_url('adminlte2/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
 <script>
     $(function() {
-        $('#data-jenis-pekerja').DataTable({
+        $('#data-pekerjaan').DataTable({
             dom: 'lrtip',
             searching: true,
             responsive: true,
@@ -59,7 +59,7 @@
                 }
                 $.ajax({
                     type: 'post',
-                    url: '<?= route_to('api.jenis-pekerja.get-data') ?>',
+                    url: '<?= route_to('api.pekerjaan.get-data') ?>',
                     data: data,
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader('Authorization', 'Basic ' + btoa('sitaninkadmin:admin123'));
@@ -104,8 +104,8 @@
         }
 
         // delete user
-        $('#data-jenis-pekerja tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
-            var id = $(this).data().jenisPekerjaId;
+        $('#data-pekerjaan tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
+            var id = $(this).data().pekerjaanId;
             var baseUrl = window.location.href;
 
             if (confirm('Anda yakin mau dihapus?')) {
@@ -130,7 +130,7 @@
             }
         });
 
-        $('#data-jenis-pekerja tbody').on('click', 'tr td a.btn.btn-success', function(e) {
+        $('#data-pekerjaan tbody').on('click', 'tr td a.btn.btn-success', function(e) {
             console.log('comming soon');
             alert('Comming soon!');
         });
