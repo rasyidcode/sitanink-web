@@ -13,29 +13,39 @@ class PekerjaController extends BaseWebController
 
     private $pekerjaModel;
 
+    private $viewData = [];
+
     public function __construct()
     {
         parent::__construct();
 
         $this->pekerjaModel = new PekerjaModel();
+
+        $this->__initViewData();
+    }
+
+    private function __initViewData()
+    {
+        $this->viewData = [
+            'pageTitle' => 'Data Pekerja',
+            'pageDesc'  => 'Pusat manajemen data pekerja'
+        ];
     }
 
     public function index()
     {
-        return $this->renderView('v_index', [
-            'pageTitle' => 'Data Pekerja',
-            'pageDesc'  => 'Halaman List Data Pekerja',
-            'pageLinks' => [
-                'dashboard' => [
-                    'url'       => route_to('admin'),
-                    'active'    => false,
-                ],
-                'data-pekerja' => [
-                    'url'       => route_to('pekerja'),
-                    'active'    => true,
-                ],
-            ]
-        ]);
+        $this->viewData['pageLinks'] = [
+            'dashboard' => [
+                'url'       => route_to('admin'),
+                'active'    => false,
+            ],
+            'data-pekerja' => [
+                'url'       => route_to('pekerja'),
+                'active'    => true,
+            ],
+        ];
+
+        return $this->renderView('v_index', $this->viewData);
     }
 
     public function getData()
@@ -59,7 +69,7 @@ class PekerjaController extends BaseWebController
             $row[]  = $item->created_at ?? '-';
             $row[]  = "<div class=\"text-center\">
                             <a style=\"margin-bottom: 2px;\" href=\"" . route_to('pekerja.get', $item->id) . "\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail</a>
-                            <a style=\"margin-bottom: 2px;\" href=\"" . base_url() . "\" class=\"btn btn-info btn-xs\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
+                            <a style=\"margin-bottom: 2px;\" href=\"" . route_to('pekerja.edit', $item->id) . "\" class=\"btn btn-info btn-xs\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
                             <button style=\"margin-bottom: 2px;\" data-pekerja-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
                         </div>";
             $resData[] = $row;
@@ -77,33 +87,25 @@ class PekerjaController extends BaseWebController
 
     public function add()
     {
-        $listDomisili = $this->pekerjaModel->getListDomisili();
-        $listLokasiKerja = $this->pekerjaModel->getListLokasiKerja();
-        $listPekerjaan = $this->pekerjaModel->getListPekerjaan();
-        $listJenisPekerja = $this->pekerjaModel->getListJenisPekerja();
+        $dropdownData = $this->pekerjaModel->getDropdownData();
 
-        return $this->renderView('v_add', [
-            'pageTitle' => 'Tambah Pekerja',
-            'pageDesc'  => 'Form penambahan data pekerja baru',
-            'pageLinks' => [
-                'dashboard' => [
-                    'url'       => route_to('admin'),
-                    'active'    => false,
-                ],
-                'data-pekerja' => [
-                    'url'       => route_to('pekerja'),
-                    'active'    => false,
-                ],
-                'tambah-pekerja' => [
-                    'url'       => route_to('pekerja.add'),
-                    'active'    => true,
-                ],
+        $this->viewData['pageLinks'] = [
+            'dashboard' => [
+                'url'       => route_to('admin'),
+                'active'    => false,
             ],
-            'listDomisili'  => $listDomisili,
-            'listLokasiKerja'  => $listLokasiKerja,
-            'listPekerjaan'  => $listPekerjaan,
-            'listJenisPekerja'  => $listJenisPekerja,
-        ]);
+            'data-pekerja' => [
+                'url'       => route_to('pekerja'),
+                'active'    => false,
+            ],
+            'tambah-pekerja' => [
+                'url'       => route_to('pekerja.add'),
+                'active'    => true,
+            ],
+        ];
+        $this->viewData['dropdownData'] = $dropdownData;
+
+        return $this->renderView('v_add', $this->viewData);
     }
 
     public function create()
@@ -314,8 +316,8 @@ class PekerjaController extends BaseWebController
 
     public function get($id)
     {
-        $dataPekerja = $this->pekerjaModel->getPekerjaFull($id);
-        $dataBerkas = $this->pekerjaModel->getBerkasPekerja($id);
+        $dataPekerja = $this->pekerjaModel->getPekerjaFull((int)$id);
+        $dataBerkas = $this->pekerjaModel->getBerkasPekerja((int)$id);
 
         $foto = null;
         $ktp = null;
@@ -355,5 +357,45 @@ class PekerjaController extends BaseWebController
                 'sp'    => $sp
             ],
         ]);
+    }
+
+    public function edit($id)
+    {
+        $dataPekerja = $this->pekerjaModel->getPekerja($id);
+        $dataBerkas = $this->pekerjaModel->getBerkasPekerja($id);
+
+        $listDomisili = $this->pekerjaModel->getListDomisili();
+        $listLokasiKerja = $this->pekerjaModel->getListLokasiKerja();
+        $listPekerjaan = $this->pekerjaModel->getListPekerjaan();
+        $listJenisPekerja = $this->pekerjaModel->getListJenisPekerja();
+
+        return $this->renderView('v_edit', [
+            'pageTitle' => 'Edit Pekerja',
+            'pageDesc'  => 'Form edit data pekerja',
+            'pageLinks' => [
+                'dashboard' => [
+                    'url'       => route_to('admin'),
+                    'active'    => false,
+                ],
+                'data-pekerja' => [
+                    'url'       => route_to('pekerja'),
+                    'active'    => false,
+                ],
+                'edit-pekerja' => [
+                    'url'       => route_to('pekerja.edit', $id),
+                    'active'    => true,
+                ],
+            ],
+            'listDomisili'  => $listDomisili,
+            'listLokasiKerja'  => $listLokasiKerja,
+            'listPekerjaan'  => $listPekerjaan,
+            'listJenisPekerja'  => $listJenisPekerja,
+            'dataPekerja'   => $dataPekerja,
+            'dataBerkas'    => $dataBerkas
+        ]);
+    }
+
+    public function update($id)
+    {
     }
 }

@@ -65,7 +65,7 @@
     <!-- /.row -->
 
     <!-- Default box -->
-    <div class="box box-warning">
+    <div class="box box-success">
         <!-- <div class="box-header with-border">
             <h3 class="box-title">Title</h3>
         </div> -->

@@ -7,85 +7,9 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
 
-    private $columnOrder = ['username', 'email', 'level'];
-
     public function __construct()
     {
         parent::__construct();
-    }
-
-    /**
-     * Get user list with datatable params
-     * 
-     * @param array $dtParams
-     * 
-     * @return array|null
-     */
-    public function getData(array $dtParams) : ?array
-    {
-        $user = $this->builder('users');
-
-        $user->groupStart();
-        $user->like('username', $dtParams['search']['value']);
-        $user->orLike('email', $dtParams['search']['value']);
-        $user->orLike('level', $dtParams['search']['value']);
-        $user->groupEnd();
-
-        if (isset($dtParams['order'])) {
-            $user->orderBy($this->columnOrder[$dtParams['order']['0']['column']], $dtParams['order']['0']['dir']);
-        }
-
-        if (isset($dtParams['length']) && isset($dtParams['start'])) {
-            if ($dtParams['length'] !== -1) {
-                $user->limit($dtParams['length'], $dtParams['start']);
-            }
-        }
-
-        return $user->get()
-            ->getResultObject();
-    }
-
-    /**
-     * count filtered data
-     * 
-     * @param array $dtParams
-     * 
-     * @return int|null
-     */
-    public function countFilteredData(array $dtParams) : int
-    {
-        $user = $this->builder('users');
-
-        $user->groupStart();
-        $user->like('username', $dtParams['search']['value']);
-        $user->orLike('email', $dtParams['search']['value']);
-        $user->orLike('level', $dtParams['search']['value']);
-        $user->groupEnd();
-
-        if (isset($dtParams['order'])) {
-            $user->orderBy($this->columnOrder[$dtParams['order']['0']['column']], $dtParams['order']['0']['dir']);
-        }
-
-        if (isset($dtParams['length']) && isset($dtParams['start'])) {
-            if ($dtParams['length'] !== -1) {
-                $user->limit($dtParams['length'], $dtParams['start']);
-            }
-        }
-
-        return $user->countAllResults();
-    }
-
-    /**
-     * count total data
-     * 
-     * @param array $dt_params
-     * 
-     * @return int
-     */
-    public function countData() : int
-    {
-        return $this->builder('users')
-                    ->countAllResults();
     }
 
     /**
@@ -125,7 +49,7 @@ class UserModel extends Model
      * 
      * @return object|null
      */
-    public function get($userId) : ?object
+    public function get($userId): ?object
     {
         return $this->builder('users')
             ->select('
@@ -135,7 +59,7 @@ class UserModel extends Model
                 level
             ')
             ->where('id', $userId)
-            ->get(limit:1)
+            ->get(limit: 1)
             ->getRowObject();
     }
 
@@ -143,12 +67,12 @@ class UserModel extends Model
      * Update user data
      * 
      * @param array $data
+     * @param int $id
      * 
      * @return void
      */
-    public function updateUser(array $data)
+    public function updateUser(array $data, int $id)
     {
-        $id = array_shift($data);
         $this->builder('users')
             ->where('id', $id)
             ->update($data);
@@ -168,5 +92,33 @@ class UserModel extends Model
             ->delete();
     }
 
+    /**
+     * Check username
+     * 
+     * @param string $username
+     * 
+     * @return object|null
+     */
+    public function getByUsername(string $username) : ?object
+    {
+        return $this->db->table('users')
+            ->where('username', $username)
+            ->get()
+            ->getRowObject();
+    }
 
+    /**
+     * Check email
+     * 
+     * @param string $email
+     * 
+     * @return object|null
+     */
+    public function getByEmail(string $email) : ?object
+    {
+        return $this->db->table('users')
+            ->where('email', $email)
+            ->get()
+            ->getRowObject();
+    }
 }

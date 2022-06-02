@@ -21,7 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="<?= site_url('adminlte2/dist/css/skins/skin-yellow.min.css') ?>">
+    <link rel="stylesheet" href="<?= site_url('adminlte2/dist/css/skins/_all-skins.min.css') ?>">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,6 +34,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <?= $renderer->renderSection('custom-css') ?>
+    <style>
+        .circular-image {
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -56,7 +61,7 @@ desired effect
 |---------------------------------------------------------|
 -->
 
-<body class="hold-transition skin-yellow sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini">
     <div class="wrapper">
 
         <!-- Main Header -->

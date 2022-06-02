@@ -10,24 +10,35 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Form Tambah Pekerja</h3>
+                </div>
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-offset-3 col-xs-6">
                             <form id="form-add-pekerja" action="<?= route_to('pekerja.create') ?>" method="POST" role="form" enctype="multipart/form-data">
                                 <?= csrf_field() ?>
-                                <div class="form-group <?= isset($fdErr['nik']) ? 'has-error' : '' ?>">
-                                    <label class="control-label"><?= isset($fdErr['nik']) ? $errIcon : '' ?>&nbsp;NIK</label>
-                                    <input type="text" name="nik" class="form-control" placeholder="Masukkan nik ..." value="<?= old('nik') ?? '' ?>">
-                                    <?php if (isset($fdErr['nik'])) : ?>
-                                        <span class="help-block"><?= $fdErr['nik'] ?></span>
-                                    <?php endif; ?>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="form-group <?= isset($fdErr['nik']) ? 'has-error' : '' ?>">
+                                            <label class="control-label"><?= isset($fdErr['nik']) ? $errIcon : '' ?>&nbsp;NIK</label>
+                                            <input type="text" name="nik" class="form-control" placeholder="Masukkan nik ..." value="<?= old('nik') ?? '' ?>">
+                                            <?php if (isset($fdErr['nik'])) : ?>
+                                                <span class="help-block"><?= $fdErr['nik'] ?></span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group <?= isset($fdErr['nama']) ? 'has-error' : '' ?>">
-                                    <label class="control-label"><?= isset($fdErr['nama']) ? $errIcon : '' ?>&nbsp;Nama Lengkap</label>
-                                    <input type="text" name="nama" class="form-control" placeholder="Masukkan nama lengkap ..." value="<?= old('nama') ?? '' ?>">
-                                    <?php if (isset($fdErr['nama'])) : ?>
-                                        <span class="help-block"><?= $fdErr['nama'] ?></span>
-                                    <?php endif; ?>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="form-group <?= isset($fdErr['nama']) ? 'has-error' : '' ?>">
+                                            <label class="control-label"><?= isset($fdErr['nama']) ? $errIcon : '' ?>&nbsp;Nama Lengkap</label>
+                                            <input type="text" name="nama" class="form-control" placeholder="Masukkan nama lengkap ..." value="<?= old('nama') ?? '' ?>">
+                                            <?php if (isset($fdErr['nama'])) : ?>
+                                                <span class="help-block"><?= $fdErr['nama'] ?></span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group <?= isset($fdErr['tempat_lahir']) || isset($fdErr['tgl_lahir']) ? 'has-error' : '' ?>">
                                     <label class="control-label"><?= isset($fdErr['tempat_lahir']) || isset($fdErr['tgl_lahir']) ? $errIcon : '' ?>&nbsp;TTL</label>

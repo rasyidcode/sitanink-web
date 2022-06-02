@@ -14,92 +14,59 @@ class UserController extends BaseWebController
 
     private $userModel;
 
+    private $viewData = [];
+
     public function __construct()
     {
         parent::__construct();
 
         $this->userModel = new UserModel();
+
+        $this->__initViewData();
+    }
+
+    private function __initViewData()
+    {
+        $this->viewData = [
+            'pageTitle' => 'Data User',
+            'pageDesc'  => 'Halaman manajemen data user'
+        ];
     }
 
     public function index()
     {
-        return $this->renderView('v_index', [
-            'pageTitle' => 'Data User',
-            'pageDesc'  => 'Halaman Managemen Data User',
-            'pageLinks' => [
-                'dashboard' => [
-                    'url'       => route_to('admin'),
-                    'active'    => false,
-                ],
-                'data-user' => [
-                    'url'       => route_to('user'),
-                    'active'    => true,
-                ],
-            ]
-        ]);
-    }
+        $this->viewData['pageLinks'] = [
+            'dashboard' => [
+                'url'       => route_to('admin'),
+                'active'    => false,
+            ],
+            'data-user' => [
+                'url'       => route_to('user'),
+                'active'    => true,
+            ],
+        ];
 
-    public function getData()
-    {
-        $postData   = $this->request->getPost();
-        $data       = $this->userModel->getData($postData);
-        $num        = $postData['start'];
-
-        $resData = [];
-        foreach ($data as $item) {
-            $num++;
-
-            $row    = [];
-            $row[]  = "<input type=\"hidden\" value=\"" . $item->id . "\">{$num}.";
-            $row[]  = $item->username ?? '-';
-            $row[]  = $item->email ?? '-';
-            $badge = '';
-            if ($item->level == 'admin') {
-                $badge = 'success';
-            } else if ($item->level == 'reguler') {
-                $badge = 'info';
-            }
-            $row[]  = "<span class=\"badge btn-" . $badge . "\">" . $item->level . "</span>";
-            $row[]  = $item->last_login ?? '-';
-            $row[]  = $item->created_at ?? '-';
-            $row[]  = "<div class=\"text-center\">
-                            <a href=\"" . route_to('user.change-pass', $item->id). "\" class=\"btn btn-warning btn-xs mr-2\"><i class=\"fa fa-key\"></i>&nbsp;Ganti Password</a>
-                            <a href=\"" . route_to('user.edit', $item->id) . "\" class=\"btn btn-info btn-xs mr-2\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
-                            <button data-user-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
-                        </div>";
-            $resData[] = $row;
-        }
-
-        return $this->response
-            ->setJSON([
-                'draw'              => $postData['draw'],
-                'recordsTotal'      => $this->userModel->countData(),
-                'recordsFiltered'   => $this->userModel->countFilteredData($postData),
-                'data'              => $resData
-            ])
-            ->setStatusCode(ResponseInterface::HTTP_OK);
+        return $this->renderView('v_index', $this->viewData);
     }
 
     public function add()
     {
-        return $this->renderView('v_add', [
-            'pageTitle' => 'Tambah User',
-            'pageDesc'  => 'Form penambahan user baru',
-            'pageLinks' => [
-                'dashboard' => [
-                    'url'       => route_to('admin'),
-                    'active'    => false,
-                ],
-                'data-user' => [
-                    'url'       => route_to('user'),
-                    'active'    => false,
-                ],
-                'tambah-user' => [
-                    'url'       => route_to('user.add'),
-                    'active'    => true,
-                ],
-            ]
-        ]);
+        $this->viewData['pageLinks'] = [
+            'dashboard' => [
+                'url'       => route_to('admin'),
+                'active'    => false,
+            ],
+            'data-user' => [
+                'url'       => route_to('user'),
+                'active'    => false,
+            ],
+            'tambah-user' => [
+                'url'       => route_to('user.add'),
+                'active'    => true,
+            ],
+        ];
+
+        return $this->renderView('v_add', $this->viewData);
     }
 
     public function create()
@@ -114,7 +81,7 @@ class UserController extends BaseWebController
         $messages = [
             'username'  => [
                 'required'  => 'Username tidak boleh kosong!',
-                'is_unique'  => 'Username harus unik!',
+                'is_unique'  => 'Username telah dipakai!',
                 'min_length'  => 'Username minimal harus memiliki 3 karakter!',
             ],
             'password'  => [
@@ -128,7 +95,8 @@ class UserController extends BaseWebController
             ],
             'email' => [
                 'required'  => 'Email tidak boleh kosong!',
-                'valid_email'   => 'Email tidak valid'
+                'valid_email'   => 'Email tidak valid',
+                'is_unique'  => 'Email telah dipakai!',
             ],
             'level' => [
                 'required'  => 'Pilih salah satu level',
@@ -148,30 +116,28 @@ class UserController extends BaseWebController
 
         session()->setFlashdata('success', 'User berhasil ditambahkan!');
         return redirect()->back()
-                    ->route('user');
+            ->route('user');
     }
 
     public function changePass($id)
     {
-        return $this->renderView('v_reset_pass', [
-            'pageTitle' => 'Reset Password User',
-            'pageDesc'  => 'Form mereset password user',
-            'pageLinks' => [
-                'dashboard' => [
-                    'url'       => route_to('admin'),
-                    'active'    => false,
-                ],
-                'data-user' => [
-                    'url'       => route_to('user'),
-                    'active'    => false,
-                ],
-                'reset-password-user' => [
-                    'url'       => route_to('user.change-pass', $id),
-                    'active'    => true,
-                ],
+        $this->viewData['pageLinks'] = [
+            'dashboard' => [
+                'url'       => route_to('admin'),
+                'active'    => false,
             ],
-            'userId'    => $id
-        ]);
+            'data-user' => [
+                'url'       => route_to('user'),
+                'active'    => false,
+            ],
+            'reset-password-user' => [
+                'url'       => route_to('user.change-pass', $id),
+                'active'    => true,
+            ],
+        ];
+        $this->viewData['userId'] = $id;
+
+        return $this->renderView('v_change_pass', $this->viewData);
     }
 
     public function doChangePass($id)
@@ -191,6 +157,7 @@ class UserController extends BaseWebController
                 'matches'   => 'Harus sama dengan kolom password'
             ],
         ];
+
         if (!$this->validate($rules, $messages)) {
             session()->setFlashdata('error', $this->validator->getErrors());
             return redirect()->back();
@@ -202,31 +169,27 @@ class UserController extends BaseWebController
 
         session()->setFlashdata('success', 'Password telah diubah!');
         return redirect()->back()
-                    ->route('user');
+            ->route('user');
     }
 
     public function edit($id)
     {
-        $userdata = $this->userModel->get($id);
-        return $this->renderView('v_edit', [
-            'pageTitle' => 'Edit User',
-            'pageDesc'  => 'Form edit user',
-            'pageLinks' => [
-                'dashboard' => [
-                    'url'       => route_to('admin'),
-                    'active'    => false,
-                ],
-                'data-user' => [
-                    'url'       => route_to('user'),
-                    'active'    => false,
-                ],
-                'edit-user' => [
-                    'url'       => route_to('user.edit', $id),
-                    'active'    => true,
-                ],
+        $this->viewData['userdata'] = $this->userModel->get($id);
+        $this->viewData['pageLinks'] = [
+            'dashboard' => [
+                'url'       => route_to('admin'),
+                'active'    => false,
             ],
-            'userdata'    => $userdata
-        ]);
+            'data-user' => [
+                'url'       => route_to('user'),
+                'active'    => false,
+            ],
+            'edit-user' => [
+                'url'       => route_to('user.edit', $id),
+                'active'    => true,
+            ],
+        ];
+        return $this->renderView('v_edit', $this->viewData);
     }
 
     public function update($id)
@@ -239,11 +202,12 @@ class UserController extends BaseWebController
         $messages = [
             'username'  => [
                 'required'  => 'Username tidak boleh kosong!',
-                'is_unique'  => 'Username harus unik!',
+                'is_unique'  => 'Username telah dipakai!',
                 'min_length'  => 'Username minimal harus memiliki 3 karakter!',
             ],
             'email' => [
                 'required'  => 'Email tidak boleh kosong!',
+                'is_unique'  => 'Email telah dipakai!',
                 'valid_email'   => 'Email tidak valid'
             ],
             'level' => [
@@ -258,19 +222,44 @@ class UserController extends BaseWebController
         }
 
         $dataPost = $this->request->getPost();
-        unset($dataPost['csrf_test_name']);
-        $this->userModel->updateUser($dataPost);
+        unset($dataPost['csrf_token_sitanink']);
+
+        $currData = $this->userModel->get((int)$id);
+
+        $getByUser = $this->userModel->getByUsername($dataPost['username']);
+        if (!is_null($getByUser)) {
+            if ($currData->username != $getByUser->username) {
+                session()->setFlashdata('error', [
+                    'username'  => 'Username telah dipakai!'
+                ]);
+                return redirect()->back()
+                    ->withInput();
+            }
+        }
+
+        $getByEmail = $this->userModel->getByEmail($dataPost['email']);
+        if (!is_null($getByEmail)) {
+            if ($currData->email != $getByEmail->email) {
+                session()->setFlashdata('error', [
+                    'email'  => 'Email telah dipakai!'
+                ]);
+                return redirect()->back()
+                    ->withInput();
+            }
+        }
+
+        $this->userModel->updateUser($dataPost, (int) $id);
 
         session()->setFlashdata('success', 'Data user telah diperbaharui!');
         return redirect()->back()
-                    ->route('user');
+            ->route('user');
     }
 
     public function delete($id)
     {
         $user = $this->userModel->get($id);
         if (is_null($user)) {
-            throw new ApiAccessErrorException(message:'User not found', statusCode:ResponseInterface::HTTP_NOT_FOUND);
+            throw new ApiAccessErrorException(message: 'User not found', statusCode: ResponseInterface::HTTP_NOT_FOUND);
         }
 
         $this->userModel->deleteUser($id);

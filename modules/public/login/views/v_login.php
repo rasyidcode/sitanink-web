@@ -16,7 +16,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= site_url('adminlte2/dist/css/AdminLTE.min.css') ?>">
   <!-- iCheck -->
-  <link rel="stylesheet" href="<?= site_url('adminlte2/plugins/iCheck/square/yellow.css') ?>">
+  <link rel="stylesheet" href="<?= site_url('adminlte2/plugins/iCheck/square/green.css') ?>">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,18 +27,46 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <style>
+    .overlay-green-bg {
+      background: linear-gradient(135deg,
+          rgba(0, 166, 90, .8),
+          rgba(0, 141, 76, .2)), url('assets/petani-wallpaper2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .image-logo {
+      max-width: 100%;
+      height: 80px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .text-logo {
+      background: #fff;
+      padding-left: 40px;
+      margin-left: 45px;
+    }
+  </style>
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page overlay-green-bg">
   <div class="login-box">
-    <div class="login-logo">
-      <a href="#"><b>Sitanink</b>Admin</a>
+    <div style="position: relative;" class="login-logo">
+      <img class="image-logo" src="<?= site_url('assets/logo2.png') ?>" alt="Logo2">
+      <a class="text-logo" href="#"><b>Sitanink</b>Admin</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
       <p class="login-box-msg">Silahkan login untuk memulai sesi</p>
 
-      <form action="#" method="post">
+      <form action="<?= route_to('do-login') ?>" method="post">
+        <?= csrf_field() ?>
         <div class="form-group has-feedback">
           <input type="text" name="username" class="form-control" placeholder="Username" required>
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -57,7 +85,7 @@
           </div>
           <!-- /.col -->
           <div class="col-xs-4">
-            <button type="submit" class="btn btn-warning btn-block btn-flat">Masuk</button>
+            <button type="submit" class="btn btn-success btn-block btn-flat">Masuk</button>
           </div>
           <!-- /.col -->
         </div>
@@ -100,8 +128,8 @@
   <script>
     $(function() {
       $('input').iCheck({
-        checkboxClass: 'icheckbox_square-yellow',
-        radioClass: 'iradio_square-yellow',
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
         increaseArea: '20%' /* optional */
       });
     });

@@ -21,16 +21,49 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Master</li>
             <li class="<?= isLinkActive('user', 1) ?>">
-                <a href="<?= route_to('user') ?>"><i class="fa fa-user"></i> <span>Data User</span></a>
+                <a href="<?= route_to('user') ?>"><i class="fa fa-user"></i> <span>Master Data User</span></a>
+            </li>
+            <li class="treeview" style="height: auto;">
+                <a href="#">
+                    <i class="ion ion-ios-people-outline"></i> <span>Master Data Pekerja</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="#"><i class="ion ion-location"></i> Lokasi</a></li>
+                    <li><a href="#"><i class="fa fa-square-o"></i> Jenis</a></li>
+                    <li><a href="#"><i class="fa fa-gavel"></i> Pekerjaan</a></li>
+                    <li><a href="#"><i class="fa fa-map"></i> Domisili</a></li>
+                </ul>
             </li>
             <li class="header">Data</li>
             <li class="<?= isLinkActive('pekerja', 1) ?>">
-                <a href="<?= route_to('pekerja') ?>"><i class="fa fa-users"></i> <span>Data Pekerja</span></a>
+                <a href="<?= route_to('pekerja') ?>">
+                    <i class="fa fa-user-o"></i> <span>Data Pekerja</span>
+                </a>
             </li>
-            <li><a href="#">
-                    <i class="fa fa-map-marker"></i> <span>Data Per Wilayah</span>
-                </a></li>
-            <li class="header">Pekerja</li>
+            <li>
+                <a href="#">
+                    <i class="ion ion-map"></i> <span>Data Per Wilayah</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-qrcode"></i> <span>Data QRCode</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-vcard-o"></i> <span>Data Kartu</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="ion ion-document-text"></i> <span>Data SK</span>
+                </a>
+            </li>
+            <li class="header">Shortcut</li>
             <li class="<?= isLinkActive('input-data', 1) ?>">
                 <a href="<?= route_to('input-data') ?>"><i class="fa fa-pencil"></i> <span>Input Data</span></a>
             </li>

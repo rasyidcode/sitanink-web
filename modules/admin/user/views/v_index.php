@@ -4,7 +4,7 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-warning">
+            <div class="box box-success">
                 <div class="box-header">
                     <a href="<?= route_to('user.add') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah User</a>
                     <?php $successMsg = session()->getFlashdata('success'); ?>
@@ -62,8 +62,11 @@
                 }
                 $.ajax({
                     type: 'post',
-                    url: '<?= route_to('user.get-data') ?>',
+                    url: '<?= route_to('api.user.get-data') ?>',
                     data: data,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('Authorization', 'Basic '+btoa('sitaninkadmin:admin123'));
+                    },
                     success: function(res) {
                         console.log(res);
                         callback(res);

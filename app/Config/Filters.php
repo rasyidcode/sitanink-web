@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Filters\AddPekerjaFilter;
+use App\Filters\ApiFilter;
 use App\Filters\WebAuthFilter;
 use App\Filters\WebRedirectIfAuth;
 use CodeIgniter\Config\BaseConfig;
@@ -25,6 +26,7 @@ class Filters extends BaseConfig
         'web-auth-filter'               => WebAuthFilter::class,
         'web-redirect-if-auth'          => WebRedirectIfAuth::class,
         'add-pekerja-filter'            => AddPekerjaFilter::class,
+        'api-filter'                    => ApiFilter::class,
     ];
 
     /**
@@ -37,7 +39,7 @@ class Filters extends BaseConfig
         'before' => [
             'csrf' => [
                 'except'    => [
-                    // 'api/v1/*',
+                    'api/v1/*',
                     // 'admin/*/get-data',
                     // 'admin/*/*/get-data',
                 ]
@@ -46,9 +48,10 @@ class Filters extends BaseConfig
             // 'authfilter'
             'web-auth-filter'   => [
                 'except'    => [
-                    'login'
+                    'login',
+                    'api/v1/*'
                 ]
-            ]
+            ],
         ],
         'after' => [
             'toolbar',
@@ -88,5 +91,10 @@ class Filters extends BaseConfig
         //         '/*'
         //     ]
         // ]
+        'api-filter'    => [
+            'before'    => [
+                'api/v1/*'
+            ]
+        ]
     ];
 }

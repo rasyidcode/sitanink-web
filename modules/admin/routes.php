@@ -3,10 +3,16 @@
 $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($routes_namespace) {
     $routes->get('/',   'Dashboard\Controllers\DashboardController::index',     ['as' => 'admin']);
     $routes->post('/',  'Dashboard\Controllers\DashboardController::logout',    ['as' => 'admin.logout']);
+    // lokasi kerja
+    $routes->group('lokasi-kerja', $routes_namespace . 'Lokasikerja\Controllers\\', function($routes) {
+        $routes->get('/', 'LokasikerjaController::index', ['as' => 'lokasi-kerja']);
+    });
+    // pekerjaan
+    // domisili
+    // jenis pekerja
     // user
     $routes->group('user', ['namespace' => $routes_namespace . 'User\Controllers\\'], function ($routes) {
         $routes->get('/',                       'UserController::index',            ['as' => 'user']);
-        $routes->post('get-data',               'UserController::getData',          ['as' => 'user.get-data']);
         $routes->get('add',                     'UserController::add',              ['as' => 'user.add']);
         $routes->get('(:segment)/edit',         'UserController::edit/$1',          ['as' => 'user.edit']);
         $routes->post('(:segment)/update',      'UserController::update/$1',        ['as' => 'user.update']);
@@ -18,11 +24,13 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
     // pekerja
     $routes->group('pekerja', ['namespace' => $routes_namespace . 'Pekerja\Controllers\\'], function ($routes) {
         $routes->get('/',           'PekerjaController::index',     ['as' => 'pekerja']);
-        $routes->get('(:segment)',           'PekerjaController::get/$1',     ['as' => 'pekerja.get']);
+        $routes->get('(:segment)/detail',           'PekerjaController::get/$1',     ['as' => 'pekerja.get']);
         $routes->post('get-data',   'PekerjaController::getData',   ['as' => 'pekerja.get-data']);
         $routes->get('add',         'PekerjaController::add',       ['as' => 'pekerja.add']);
         $routes->post('create',     'PekerjaController::create',    ['as' => 'pekerja.create']);
         $routes->post('(:segment)/delete', 'PekerjaController::delete/$1', ['as' => 'pekerja.delete']);
+        $routes->get('(:segment)/edit', 'PekerjaController::edit/$1', ['as' => 'pekerja.edit']);
+        $routes->get('(:segment)/update', 'PekerjaController::update/$1', ['as' => 'pekerja.update']);
     });
     // review
     $routes->group('review', ['namespace' => $routes_namespace . 'Review\Controllers\\'], function ($routes) {

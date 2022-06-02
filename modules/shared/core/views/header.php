@@ -4,11 +4,11 @@
     <a href="<?= route_to('admin') ?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
-            <img src="<?= site_url('assets/logo-small2.png') ?>" alt="">
+            <img class="circular-image" src="<?= site_url('assets/logo-small2.png') ?>" alt="">
         </span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
-            <img src="<?= site_url('assets/logo2.png') ?>" alt="">
+            <img class="circular-image" src="<?= site_url('assets/logo2.png') ?>" alt="">
             Sitanink Admin
         </span>
     </a>

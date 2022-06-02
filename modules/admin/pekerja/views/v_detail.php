@@ -11,8 +11,12 @@
                             <h3 style="margin-top: 0">Data Personal</h3>
                             <div class="row">
                                 <div class="col-xs-2">
-                                    <?php if (!empty($dataBerkas)) : ?>
+                                    <?php if (!is_null($dataBerkas['foto'])) : ?>
                                         <img class="foto-css" src="<?= site_url('uploads/' . $dataBerkas['foto']->filename) ?>" alt="Photo">
+                                    <?php else : ?>
+                                        <div class="foto-css add-border">
+                                            <p class="text-left text-danger">Berkas Foto tidak ada!</p>
+                                        </div>
                                     <?php endif ?>
                                 </div>
                                 <div class="col-xs-10">
@@ -21,29 +25,33 @@
                                             <tbody>
                                                 <tr>
                                                     <th>NIK</th>
-                                                    <td><?= $dataPekerja->nik ?></td>
+                                                    <td><?= $dataPekerja->nik ?? '' ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Nama</th>
-                                                    <td><?= $dataPekerja->nama ?></td>
+                                                    <td><?= $dataPekerja->nama ?? '' ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>TTL</th>
-                                                    <td><?= $dataPekerja->ttl ?></td>
+                                                    <td><?= $dataPekerja->ttl ?? '' ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Alamat</th>
-                                                    <td><?= $dataPekerja->alamat ?></td>
+                                                    <td><?= $dataPekerja->alamat ?? '' ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Domisili</th>
-                                                    <td><?= $dataPekerja->domisili ?></td>
+                                                    <td><?= $dataPekerja->domisili ?? '' ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>KTP</th>
                                                     <td>
-                                                        <?php if (!empty($dataBerkas)) : ?>
+                                                        <?php if (!is_null($dataBerkas['ktp'])) : ?>
                                                             <img class="ktp-css" src="<?= site_url('uploads/' . $dataBerkas['ktp']->filename) ?>" alt="KTP">
+                                                        <?php else : ?>
+                                                            <div class="ktp-css add-border">
+                                                                <p class="text-left text-danger">Berkas KTP tidak ada!</p>
+                                                            </div>
                                                         <?php endif ?>
                                                     </td>
                                                 </tr>
@@ -62,24 +70,16 @@
                                     <tbody>
                                         <tr>
                                             <th>Pekerjaan</th>
-                                            <td><?= $dataPekerja->pekerjaan ?></td>
+                                            <td><?= $dataPekerja->pekerjaan ?? '' ?></td>
                                         </tr>
                                         <tr>
                                             <th>Lokasi Kerja</th>
-                                            <td><?= $dataPekerja->lokasi_kerja ?></td>
+                                            <td><?= $dataPekerja->lokasi_kerja ?? '' ?></td>
                                         </tr>
                                         <tr>
                                             <th>Jenis Pekerja</th>
-                                            <td><?= $dataPekerja->jenis_pekerja ?></td>
+                                            <td><?= $dataPekerja->jenis_pekerja ?? '' ?></td>
                                         </tr>
-                                        <!-- <tr>
-                                            <th>Surat Perijinan</th>
-                                            <td>
-                                                <?php if (!empty($dataBerkas)) : ?>
-                                                    <img class="sp-css" src="<?= site_url('uploads/' . $dataBerkas['sp']->filename) ?>" alt="KTP">
-                                                <?php endif ?>
-                                            </td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -89,10 +89,14 @@
                                 <table class="table">
                                     <tbody>
                                         <tr>
-                                            <th>Surat Perijinan</th>
+                                            <th width="15%">Surat Perijinan</th>
                                             <td>
-                                                <?php if (!empty($dataBerkas)) : ?>
+                                                <?php if (!is_null($dataBerkas['sp'])) : ?>
                                                     <img class="sp-css" src="<?= site_url('uploads/' . $dataBerkas['sp']->filename) ?>" alt="KTP">
+                                                <?php else : ?>
+                                                    <div class="sp-css add-border">
+                                                        <p class="text-left text-danger">Berkas Surat Perijinan tidak ada!</p>
+                                                    </div>
                                                 <?php endif ?>
                                             </td>
                                         </tr>
@@ -135,6 +139,10 @@
         width: 80%;
         height: 80%;
         object-fit: cover;
+    }
+
+    .add-border {
+        border: 1px solid #aaa;
     }
 </style>
 <?= $renderer->endSection() ?>
