@@ -217,8 +217,8 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
         });
 
         $('#modal-camera').on('shown.bs.modal', async function(e) {
-            if (location.protocol !== 'https') {
-                $('#video').parent().append('<p class="text-danger">This website is not secured</p>');
+            if (location.protocol !== 'https:') {
+                $('#video').parent().html('<p class="text-danger">This website is not secured</p>');
             } else {
                 var stream = await navigator.mediaDevices.getUserMedia({
                     video: true,
