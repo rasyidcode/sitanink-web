@@ -225,7 +225,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                     audio: false
                 });
 
-                $('#video').attr('src', stream);
+                $('#video').attr('srcObj', stream);
             }
         });
 
