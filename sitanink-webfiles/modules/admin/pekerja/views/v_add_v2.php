@@ -205,6 +205,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
 <script>
     $(function() {
         var canvas = document.querySelector('#canvas');
+        var video = document.getElementById('video');
 
         $('#datepicker').datepicker({
             autoclose: true
@@ -225,7 +226,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                     audio: false
                 });
 
-                $('#video').attr('srcObject', stream);
+                video.srcObject = stream;
             }
         });
 
