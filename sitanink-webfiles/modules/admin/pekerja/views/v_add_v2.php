@@ -130,7 +130,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group <?= isset($fdErr['ktp']) ? 'has-error' : '' ?>"">
-                            <label for=" ktp"><?= isset($fdErr['ktp']) ? $errIcon : '' ?>&nbsp;KTP</label>
+                            <label for=" ktp"><?= isset($fdErr['ktp']) ? $errIcon : '' ?>&nbsp;KTP <a id="camera-ktp" href="javascript:void(0)" style="text-decoration: underline; font-size: 12px;" href="">(Camera)</a></label>
                                     <input type="file" name="ktp">
                                     <p>Max. <strong>1 MB</strong></p>
                                     <?php if (isset($fdErr['ktp'])) : ?>
@@ -138,7 +138,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group <?= isset($fdErr['sp']) ? 'has-error' : '' ?>"">
-                            <label for=" foto"><?= isset($fdErr['sp']) ? $errIcon : '' ?>&nbsp;Kartu Keluarga</label>
+                            <label for=" foto"><?= isset($fdErr['sp']) ? $errIcon : '' ?>&nbsp;Kartu Keluarga <a id="camera-kk" href="javascript:void(0)" style="text-decoration: underline; font-size: 12px;" href="">(Camera)</a></label>
                                     <input type="file" name="sp">
                                     <p class="help-block">Max. <strong>1 MB</strong></p>
                                     <?php if (isset($fdErr['sp'])) : ?>
@@ -146,7 +146,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group <?= isset($fdErr['sp']) ? 'has-error' : '' ?>"">
-                            <label for=" foto"><?= isset($fdErr['sp']) ? $errIcon : '' ?>&nbsp;Surat Permohohan Ijin Usaha</label>
+                            <label for=" foto"><?= isset($fdErr['sp']) ? $errIcon : '' ?>&nbsp;Surat Permohohan Ijin Usaha <a id="camera-spiu" href="javascript:void(0)" style="text-decoration: underline; font-size: 12px;" href="">(Camera)</a></label>
                                     <input type="file" name="sp">
                                     <p class="help-block">Max. <strong>1 MB</strong></p>
                                     <?php if (isset($fdErr['sp'])) : ?>
@@ -154,7 +154,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group <?= isset($fdErr['sp']) ? 'has-error' : '' ?>"">
-                            <label for=" foto"><?= isset($fdErr['sp']) ? $errIcon : '' ?>&nbsp;Surat Pernyataan</label>
+                            <label for=" foto"><?= isset($fdErr['sp']) ? $errIcon : '' ?>&nbsp;Surat Pernyataan <a id="camera-sp" href="javascript:void(0)" style="text-decoration: underline; font-size: 12px;" href="">(Camera)</a></label>
                                     <input type="file" name="sp">
                                     <p class="help-block">Max. <strong>1 MB</strong></p>
                                     <?php if (isset($fdErr['sp'])) : ?>
@@ -172,6 +172,27 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="modal-camera" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Camera</h4>
+            </div>
+            <div class="modal-body">
+                <video id="video" width="640" height="480" autoplay></video>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button id="btn-camera-confirm" type="button" class="btn btn-primary">Konfirmasi</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 <?= $renderer->endSection() ?>
 
 <?= $renderer->section('custom-css') ?>
@@ -183,11 +204,36 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
 <script src="<?= site_url('adminlte2/plugins/input-mask/jquery.inputmask.js') ?>"></script>
 <script>
     $(function() {
+        var canvas = document.querySelector('#canvas');
+
         $('#datepicker').datepicker({
             autoclose: true
         });
 
         $('#form-add-pekerja input[name="nik"]').inputmask('9999-9999-9999-9999');
+
+        $('#camera-ktp').on('click', function(e) {
+            $('#modal-camera').modal('show');
+        });
+
+        $('#modal-camera').on('shown.bs.modal', async function(e) {
+            if (location.protocol !== 'https') {
+                $('#video').parent().append('<p class="text-danger">This website is not secured</p>');
+            } else {
+                var stream = await navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: false
+                });
+
+                $('#video').attr('src', stream);
+            }
+        });
+
+        $('#btn-camera-confirm').on('click', function(e) {
+            canvas.getContext('2d')
+                .drawImage(video, 0, 0, canvas.width, canvas.height);
+            var imageDataUrl = canvas.DataToURL('image/jpeg');
+        });
     });
 </script>
 <?= $renderer->endSection() ?>
