@@ -36,7 +36,6 @@ class PekerjaModel
             pekerja.tgl_lahir,
             CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
             pekerja.alamat,
-            domisili.nama as domisili,
             lokasi_kerja.nama as lokasi_kerja,
             jenis_pekerja.nama as jenis_pekerja,
             pekerjaan.nama as pekerjaan,
@@ -46,7 +45,6 @@ class PekerjaModel
         $this->builder->join('pekerjaan', 'pekerja.id_pekerjaan = pekerjaan.id', 'left');
         $this->builder->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left');
         $this->builder->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left');
-        $this->builder->join('domisili', 'pekerja.id_domisili = domisili.id', 'left');
 
         $this->builder->groupStart();
         $this->builder->like('pekerja.nik', $dtParams['search']['value']);
@@ -54,7 +52,6 @@ class PekerjaModel
         $this->builder->orLike('pekerja.tempat_lahir', $dtParams['search']['value']);
         $this->builder->orLike('pekerja.tgl_lahir', $dtParams['search']['value']);
         $this->builder->orLike('pekerja.alamat', $dtParams['search']['value']);
-        $this->builder->orLike('domisili.nama', $dtParams['search']['value']);
         $this->builder->orLike('jenis_pekerja.nama', $dtParams['search']['value']);
         $this->builder->orLike('pekerjaan.nama', $dtParams['search']['value']);
         $this->builder->orLike('lokasi_kerja.nama', $dtParams['search']['value']);
@@ -91,7 +88,6 @@ class PekerjaModel
             pekerja.tgl_lahir,
             CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
             pekerja.alamat,
-            domisili.nama as domisili,
             lokasi_kerja.nama as lokasi_kerja,
             jenis_pekerja.nama as jenis_pekerja,
             pekerjaan.nama as pekerjaan,
@@ -101,7 +97,6 @@ class PekerjaModel
         $this->builder->join('pekerjaan', 'pekerja.id_pekerjaan = pekerjaan.id', 'left');
         $this->builder->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left');
         $this->builder->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left');
-        $this->builder->join('domisili', 'pekerja.id_domisili = domisili.id', 'left');
 
         $this->builder->groupStart();
         $this->builder->like('pekerja.nik', $dtParams['search']['value']);
@@ -109,7 +104,7 @@ class PekerjaModel
         $this->builder->orLike('pekerja.tempat_lahir', $dtParams['search']['value']);
         $this->builder->orLike('pekerja.tgl_lahir', $dtParams['search']['value']);
         $this->builder->orLike('pekerja.alamat', $dtParams['search']['value']);
-        $this->builder->orLike('domisili.nama', $dtParams['search']['value']);
+        // $this->builder->orLike('domisili.nama', $dtParams['search']['value']);
         $this->builder->orLike('jenis_pekerja.nama', $dtParams['search']['value']);
         $this->builder->orLike('pekerjaan.nama', $dtParams['search']['value']);
         $this->builder->orLike('lokasi_kerja.nama', $dtParams['search']['value']);
@@ -138,5 +133,26 @@ class PekerjaModel
     public function countData(): int
     {
         return $this->builder->countAllResults();
+    }
+
+    /**
+     * get berkas by id
+     * 
+     * @param int $id
+     * 
+     * @return array|object
+     */
+    public function getBerkas($id, $tipe = null)
+    {
+        $berkas = $this->db->table('berkas')
+            ->where('id_pekerja', $id);
+        if (!is_null($tipe)) {
+            return $berkas->where('type', $tipe)
+                ->get()
+                ->getRowObject();
+        }
+
+        return $berkas->get()
+            ->getResultObject();
     }
 }

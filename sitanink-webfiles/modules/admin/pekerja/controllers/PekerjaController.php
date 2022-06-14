@@ -263,79 +263,10 @@ class PekerjaController extends BaseWebController
 
     public function createv2()
     {
-        $rules = [
-            'nik'   => 'required'
-                . '|integer'
-                . '|is_unique[pekerja.nik]'
-                . '|exact_length[16]',
-            'nama'  => 'required',
-            'tempat_lahir'  => 'required',
-            'tgl_lahir' => 'required',
-            'alamat'    => 'required',
-            'id_domisili'  => 'required',
-            'id_lokasi_kerja'  => 'required',
-            'id_jenis_pekerja' => 'required',
-            'id_pekerjaan' => 'required',
-            'foto'  => 'uploaded[foto]'
-                . '|max_size[foto,512]'
-                . '|is_image[foto]',
-            'ktp'   => 'uploaded[ktp]'
-                . '|max_size[ktp,1024]'
-                . '|is_image[foto]',
-            'sp'    => 'uploaded[sp]'
-                . '|max_size[sp,1024]',
-        ];
-        $messages = [
-            'nik'  => [
-                'required'  => 'NIK harus diisi!',
-                'integer'  => 'NIK mengandung karakter yang tidak valid!',
-                'is_unique'  => 'NIK sudah terdaftar!',
-                'exact_length'  => 'Format NIK tidak valid!',
-            ],
-            'nama'  => [
-                'required'  => 'Nama harus diisi!',
-            ],
-            'tempat_lahir'    => [
-                'required'  => 'Tempat lahir harus diisi!',
-            ],
-            'tgl_lahir' => [
-                'required'  => 'Tanggal lahir harus diisi!',
-            ],
-            'alamat' => [
-                'required'  => 'Alamat harus diisi!',
-            ],
-            'id_domisili' => [
-                'required'  => 'Pilih salah satu atau tambah baru!',
-            ],
-            'id_lokasi_kerja' => [
-                'required'  => 'Pilih salah satu atau tambah baru!',
-            ],
-            'id_jenis_pekerja' => [
-                'required'  => 'Pilih salah satu atau tambah baru!',
-            ],
-            'id_pekerjaan' => [
-                'required'  => 'Pilih salah satu atau tambah baru!',
-            ],
-            'foto' => [
-                'uploaded'  => 'Foto harus diupload!',
-                'max_size'  => 'Ukuran file tidak boleh lebih dari 500 kb!',
-                'is_image'  => 'Foto harus berupa gambar!',
-            ],
-            'ktp' => [
-                'uploaded'  => 'Ktp harus diupload!',
-                'max_size'  => 'Ukuran file tidak boleh lebih dari 1 Mb!',
-                'is_image'  => 'Foto harus berupa gambar!',
-            ],
-            'sp' => [
-                'uploaded'  => 'SP harus diupload!',
-                'max_size'  => 'Ukuran file tidak boleh lebih dari 1 Mb!',
-            ]
-        ];
-
         $nikFormatted = str_replace('_', '', join(explode('-', $_REQUEST['nik'])));
         $_REQUEST['nik']   = $nikFormatted;
 
-        if (!$this->validate($rules, $messages)) {
+        if (!$this->validate($this->getRules(), $this->getMessages())) {
             session()->setFlashdata('error', $this->validator->getErrors());
             return redirect()->back()
                 ->withInput();
@@ -349,21 +280,35 @@ class PekerjaController extends BaseWebController
         // handle files
         $foto = $this->request->getFile('foto');
         if (!$foto->isValid() && $foto->hasMoved()) {
-            session()->setFlashdata('error_files', 'Something went wrong when processing the file!');
+            session()->setFlashdata('error_files', 'Something went wrong when processing the [foto] file!');
             return redirect()->back()
                 ->withInput();
         }
 
         $ktp = $this->request->getFile('ktp');
         if (!$ktp->isValid() && $ktp->hasMoved()) {
-            session()->setFlashdata('error_files', 'Something went wrong when processing the file!');
+            session()->setFlashdata('error_files', 'Something went wrong when processing the [ktp] file!');
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $kk = $this->request->getFile('kk');
+        if (!$kk->isValid() && $kk->hasMoved()) {
+            session()->setFlashdata('error_files', 'Something went wrong when processing the [kk] file!');
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $spiu = $this->request->getFile('spiu');
+        if (!$spiu->isValid() && $spiu->hasMoved()) {
+            session()->setFlashdata('error_files', 'Something went wrong when processing the [spiu] file!');
             return redirect()->back()
                 ->withInput();
         }
 
         $sp = $this->request->getFile('sp');
         if (!$sp->isValid() && $sp->hasMoved()) {
-            session()->setFlashdata('error_files', 'Something went wrong when processing the file!');
+            session()->setFlashdata('error_files', 'Something went wrong when processing the [sp] file!');
             return redirect()->back()
                 ->withInput();
         }
@@ -371,64 +316,85 @@ class PekerjaController extends BaseWebController
         $tglLahir = explode('/', $dataPost['tgl_lahir']);
         $dataPost['tgl_lahir'] = $tglLahir[2] . '-' . $tglLahir[0] . '-' . $tglLahir[1];
 
-        // create new pekerja_temp
-        $reviewId = $this->pekerjaModel->insertToReview($dataPost);
+        // create new pekerja
+        $pekerjaId = $this->pekerjaModel->insertPekerja($dataPost);
 
+        // upload path
         $filePath = ROOTPATH . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . 'uploads';
 
         // insert berkas one by one
+        // foto
         $fotoName = $foto->getRandomName();
-        $fotoId = $this->pekerjaModel->insertBerkas([
-            'path'  => $filePath,
-            'filename'  => $fotoName,
+        $this->pekerjaModel->insertBerkas([
+            'id_pekerja'    => $pekerjaId,
+            'path'          => $filePath,
+            'filename'      => $fotoName,
             'size_in_mb'    => $foto->getSizeByUnit('mb'),
-            'mime'    => $foto->getMimeType(),
-            'ext'    => $foto->getExtension(),
-            'type'    => 'foto',
+            'mime'          => $foto->getMimeType(),
+            'ext'           => $foto->getExtension(),
+            'type'          => 'foto',
         ]);
         $foto->move($filePath, $fotoName);
 
+        // ktp
         $ktpName = $ktp->getRandomName();
-        $ktpId = $this->pekerjaModel->insertBerkas([
-            'path'  => $filePath,
-            'filename'  => $ktpName,
+        $this->pekerjaModel->insertBerkas([
+            'id_pekerja'    => $pekerjaId,
+            'path'          => $filePath,
+            'filename'      => $ktpName,
             'size_in_mb'    => $ktp->getSizeByUnit('mb'),
-            'mime'    => $ktp->getMimeType(),
-            'ext'    => $ktp->getExtension(),
-            'type'    => 'ktp',
+            'mime'          => $ktp->getMimeType(),
+            'ext'           => $ktp->getExtension(),
+            'type'          => 'ktp',
         ]);
         $ktp->move($filePath, $ktpName);
 
-        $spName = $sp->getRandomName();
-        $spId = $this->pekerjaModel->insertBerkas([
+        // kk
+        $kkName = $kk->getRandomName();
+        $this->pekerjaModel->insertBerkas([
+            'id_pekerja'    => $pekerjaId,
+            'path'          => $filePath,
+            'filename'      => $kkName,
+            'size_in_mb'    => $kk->getSizeByUnit('mb'),
+            'mime'          => $kk->getMimeType(),
+            'ext'           => $kk->getExtension(),
+            'type'          => 'kk',
+        ]);
+        $kk->move($filePath, $kkName);
+
+        // spiu
+        $spiuName = $spiu->getRandomName();
+        $this->pekerjaModel->insertBerkas([
+            'id_pekerja'    => $pekerjaId,
             'path'  => $filePath,
-            'filename'  => $spName,
+            'filename'  => $spiuName,
+            'size_in_mb'    => $spiu->getSizeByUnit('mb'),
+            'mime'    => $spiu->getMimeType(),
+            'ext'    => $spiu->getExtension(),
+            'type'    => 'spiu',
+        ]);
+        $spiu->move($filePath, $spiuName);
+
+        // sp
+        $spName = $sp->getRandomName();
+        $this->pekerjaModel->insertBerkas([
+            'id_pekerja'    => $pekerjaId,
+            'path'          => $filePath,
+            'filename'      => $spName,
             'size_in_mb'    => $sp->getSizeByUnit('mb'),
-            'mime'    => $sp->getMimeType(),
-            'ext'    => $sp->getExtension(),
-            'type'    => 'sp',
+            'mime'          => $sp->getMimeType(),
+            'ext'           => $sp->getExtension(),
+            'type'          => 'sp',
         ]);
         $sp->move($filePath, $spName);
 
-        // create connection between pekerja_temp to berkas
-        $this->pekerjaModel->insertReviewBerkas([
-            ['id_pekerja_temp' => $reviewId, 'id_berkas' => $fotoId],
-            ['id_pekerja_temp' => $reviewId, 'id_berkas' => $ktpId],
-            ['id_pekerja_temp' => $reviewId, 'id_berkas' => $spId],
-        ]);
-
-        session()->setFlashdata('success', 'Pekerja telah ditambahkan untuk direview terlebih dahulu!');
+        session()->setFlashdata('success', 'Pekerja berhasil ditambahkan!');
         return redirect()->back()
-            ->route('review.confirm', [$reviewId]);
+                         ->route('pekerja');
     }
 
     public function delete($id)
     {
-        $pekerja = $this->pekerjaModel->getPekerja($id);
-        if (is_null($pekerja)) {
-            throw new ApiAccessErrorException(message: 'Pekerja tidak ditemukan!', statusCode: ResponseInterface::HTTP_NOT_FOUND);
-        }
-
         $this->pekerjaModel->deletePekerja($id);
 
         return $this->response
@@ -440,86 +406,132 @@ class PekerjaController extends BaseWebController
 
     public function get($id)
     {
-        $dataPekerja = $this->pekerjaModel->getPekerjaFull((int)$id);
-        $dataBerkas = $this->pekerjaModel->getBerkasPekerja((int)$id);
-
-        $foto = null;
-        $ktp = null;
-        $sp = null;
-
-        foreach ($dataBerkas as $berkasDataItem) {
-            if ($berkasDataItem->type === 'foto') {
-                $foto = $berkasDataItem;
-            } else if ($berkasDataItem->type === 'ktp') {
-                $ktp = $berkasDataItem;
-            } else if ($berkasDataItem->type === 'sp') {
-                $sp = $berkasDataItem;
-            }
-        }
-
-        return $this->renderView('v_detail', [
-            'pageTitle' => 'Detail Pekerja',
-            'pageDesc'  => 'Halaman untuk melihat detail daripada pekerja',
-            'pageLinks' => [
-                'dashboard' => [
-                    'url'       => route_to('admin'),
-                    'active'    => false,
-                ],
-                'data-pekerja' => [
-                    'url'       => route_to('pekerja'),
-                    'active'    => false,
-                ],
-                'detail-pekerja' => [
-                    'url'       => route_to('pekerja.get', $id),
-                    'active'    => true,
-                ],
+        $data = $this->pekerjaModel->getPekerja((int)$id);
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+        // die();
+        $this->viewData['pageLinks'] = [
+            'dashboard' => [
+                'url'       => route_to('admin'),
+                'active'    => false,
             ],
-            'dataPekerja'   => $dataPekerja,
-            'dataBerkas'   => [
-                'foto'  => $foto,
-                'ktp'   => $ktp,
-                'sp'    => $sp
+            'data-pekerja' => [
+                'url'       => route_to('pekerja'),
+                'active'    => false,
             ],
-        ]);
+            'detail-pekerja' => [
+                'url'       => route_to('pekerja.get', $id),
+                'active'    => true,
+            ],
+        ];
+        $this->viewData['data'] = $data;
+
+        return $this->renderView('v_detail', $this->viewData);
     }
 
     public function edit($id)
     {
-        $dataPekerja = $this->pekerjaModel->getPekerja($id);
-        $dataBerkas = $this->pekerjaModel->getBerkasPekerja($id);
+        $data = $this->pekerjaModel->getPekerja($id);
+        $berkas = $this->pekerjaModel->getBerkas($id);
+        $data->berkas = $berkas;
 
-        $listDomisili = $this->pekerjaModel->getListDomisili();
-        $listLokasiKerja = $this->pekerjaModel->getListLokasiKerja();
-        $listPekerjaan = $this->pekerjaModel->getListPekerjaan();
-        $listJenisPekerja = $this->pekerjaModel->getListJenisPekerja();
+        $dropdownData = $this->pekerjaModel->getDropdownData();
 
-        return $this->renderView('v_edit', [
-            'pageTitle' => 'Edit Pekerja',
-            'pageDesc'  => 'Form edit data pekerja',
-            'pageLinks' => [
-                'dashboard' => [
-                    'url'       => route_to('admin'),
-                    'active'    => false,
-                ],
-                'data-pekerja' => [
-                    'url'       => route_to('pekerja'),
-                    'active'    => false,
-                ],
-                'edit-pekerja' => [
-                    'url'       => route_to('pekerja.edit', $id),
-                    'active'    => true,
-                ],
+        $this->viewData['pageLinks'] = [
+            'dashboard' => [
+                'url'       => route_to('admin'),
+                'active'    => false,
             ],
-            'listDomisili'  => $listDomisili,
-            'listLokasiKerja'  => $listLokasiKerja,
-            'listPekerjaan'  => $listPekerjaan,
-            'listJenisPekerja'  => $listJenisPekerja,
-            'dataPekerja'   => $dataPekerja,
-            'dataBerkas'    => $dataBerkas
-        ]);
+            'data-pekerja' => [
+                'url'       => route_to('pekerja'),
+                'active'    => false,
+            ],
+            'edit-pekerja' => [
+                'url'       => route_to('pekerja.edit', $id),
+                'active'    => true,
+            ],
+        ];
+        $this->viewData['data'] = $data;
+        $this->viewData['ddData'] = $dropdownData;
+        return $this->renderView('v_edit_v2', $this->viewData);
     }
 
     public function update($id)
     {
+    }
+
+    private function getRules()
+    {
+        return [
+            'nik'           => 'required'
+                            . '|integer'
+                            . '|is_unique[pekerja.nik]'
+                            . '|exact_length[16]',
+            'nama'          => 'required',
+            'tempat_lahir'  => 'required',
+            'tgl_lahir'     => 'required',
+            'alamat'        => 'required',
+            'id_pekerjaan'      => 'required',
+            'id_lokasi_kerja'   => 'required',
+            'id_jenis_pekerja'  => 'required',
+            'foto'              => 'uploaded[foto]'
+                                . '|max_size[foto,200]'
+                                . '|is_image[foto]',
+            'ktp'               => 'uploaded[ktp]'
+                                . '|max_size[ktp,200]'
+                                . '|is_image[ktp]',
+            'kk'                => 'uploaded[kk]'
+                                . '|max_size[kk,200]'
+                                . '|is_image[kk]',
+            'spiu'              => 'uploaded[spiu]'
+                                . '|max_size[spiu,200]',
+            'sp'                => 'uploaded[sp]'
+                                . '|max_size[sp,200]',
+        ];
+    }
+
+    private function getMessages()
+    {
+        return [
+            'nik'  => [
+                'required'  => 'NIK harus diisi!',
+                'integer'  => 'NIK mengandung karakter yang tidak valid!',
+                'is_unique'  => 'NIK sudah terdaftar!',
+                'exact_length'  => 'Format NIK tidak valid!',
+            ],
+            'nama'  => ['required'  => 'Nama harus diisi!'],
+            'tempat_lahir'    => ['required'  => 'Tempat lahir harus diisi!'],
+            'tgl_lahir' => ['required'  => 'Tanggal lahir harus diisi!'],
+            'alamat' => ['required'  => 'Alamat harus diisi!'],
+            'id_lokasi_kerja' => ['required'  => 'Pilih salah satu atau tambah baru!'],
+            'id_jenis_pekerja' => ['required'  => 'Pilih salah satu atau tambah baru!'],
+            'id_pekerjaan' => ['required'  => 'Pilih salah satu atau tambah baru!'],
+            'foto' => [
+                'uploaded'  => 'Foto harus diupload!',
+                'max_size'  => 'Ukuran file tidak boleh lebih dari 200 kb!',
+                'is_image'  => 'Foto harus berupa gambar!',
+            ],
+            'ktp' => [
+                'uploaded'  => 'KTP harus diupload!',
+                'max_size'  => 'Ukuran file tidak boleh lebih dari 200 kb!',
+                'is_image'  => 'KTP harus berupa gambar!',
+            ],
+            'kk' => [
+                'uploaded'  => 'KK harus diupload!',
+                'max_size'  => 'Ukuran file tidak boleh lebih dari 200 kb!',
+                'is_image'  => 'KK harus berupa gambar!',
+            ],
+            'spiu' => [
+                'uploaded'  => 'Surat Perijinan Izin Usaha harus diupload!',
+                'max_size'  => 'Ukuran file tidak boleh lebih dari 200 kb!',
+                'is_image'  => 'Surat Perijinan Izin Usaha harus berupa gambar!',
+            ],
+            'sp' => [
+                'uploaded'  => 'Surat Pernyataan harus diupload!',
+                'max_size'  => 'Ukuran file tidak boleh lebih dari 200 kb!',
+                'is_image'  => 'Surat Pernyataan harus berupa gambar!',
+            ],
+        ];
     }
 }

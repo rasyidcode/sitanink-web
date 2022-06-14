@@ -3,14 +3,6 @@
 <?= $renderer->section('content') ?>
 <section class="content">
     <div class="row">
-        <?php if ($totalDataToReview > 0) : ?>
-            <div class="col-xs-6">
-                <div class="callout callout-danger">
-                    <h4><i class="fa fa-bell"></i>&nbsp;&nbsp;Review Data Pekerja</h4>
-                    <p>Ada total <strong><?= $totalDataToReview ?> data pekerja</strong> yang harus segera direview, silahkan klik <a href="<?= route_to('pekerja.review') ?>">disini</a> untuk melakukan pengecekan.</p>
-                </div>
-            </div>
-        <?php endif; ?>
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header">
@@ -35,7 +27,6 @@
                                             <th>Nama</th>
                                             <th>TTL</th>
                                             <th>Alamat</th>
-                                            <th>Domisili</th>
                                             <th>Pekerjaan</th>
                                             <th>Lokasi Kerja</th>
                                             <th>Jenis Pekerja</th>
@@ -134,19 +125,14 @@
                 },
                 {
                     targets: 8,
-                    orderable: false,
-                    searchable: true
+                    orderable: true,
+                    searchable: false
                 },
                 {
                     targets: 9,
                     orderable: false,
-                    searchable: true
-                },
-                {
-                    targets: 10,
-                    orderable: false,
                     searchable: false
-                },
+                }
             ],
             drawCallback: function(settings) {}
         });

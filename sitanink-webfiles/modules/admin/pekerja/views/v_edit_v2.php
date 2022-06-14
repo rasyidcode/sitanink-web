@@ -11,18 +11,18 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Form Tambah Pekerja</h3>
+                    <h3 class="box-title">Form Edit Pekerja</h3>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <form id="form-add-pekerja" action="<?= route_to('pekerja.create-v2') ?>" method="POST" role="form" enctype="multipart/form-data">
+                            <form id="form-add-pekerja" action="<?= route_to('pekerja.update-v2') ?>" method="POST" role="form" enctype="multipart/form-data">
                                 <?= csrf_field() ?>
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="form-group <?= isset($fdErr['nik']) ? 'has-error' : '' ?>">
                                             <label class="control-label"><?= isset($fdErr['nik']) ? $errIcon : '' ?>&nbsp;NIK (<span style="color: #dd4b39;">*</span>)</label>
-                                            <input type="text" name="nik" class="form-control" placeholder="Masukkan nik ..." value="<?= old('nik') ?? '' ?>">
+                                            <input type="text" name="nik" class="form-control" placeholder="Masukkan nik ..." value="<?= old('nik', $data->nik) ?? '' ?>">
                                             <?php if (isset($fdErr['nik'])) : ?>
                                                 <span class="help-block"><?= $fdErr['nik'] ?></span>
                                             <?php endif; ?>
@@ -33,7 +33,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                     <div class="col-xs-6">
                                         <div class="form-group <?= isset($fdErr['nama']) ? 'has-error' : '' ?>">
                                             <label class="control-label"><?= isset($fdErr['nama']) ? $errIcon : '' ?>&nbsp;Nama Lengkap (<span style="color: #dd4b39;">*</span>)</label>
-                                            <input type="text" name="nama" class="form-control" placeholder="Masukkan nama lengkap ..." value="<?= old('nama') ?? '' ?>">
+                                            <input type="text" name="nama" class="form-control" placeholder="Masukkan nama lengkap ..." value="<?= old('nama', $data->nama) ?? '' ?>">
                                             <?php if (isset($fdErr['nama'])) : ?>
                                                 <span class="help-block"><?= $fdErr['nama'] ?></span>
                                             <?php endif; ?>
@@ -44,14 +44,14 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                     <label class="control-label"><?= isset($fdErr['tempat_lahir']) || isset($fdErr['tgl_lahir']) ? $errIcon : '' ?>&nbsp;TTL (<span style="color: #dd4b39;">*</span>)</label>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <input type="text" name="tempat_lahir" class="form-control" placeholder="Masukkan tempat lahir ..." value="<?= old('tempat_lahir') ?? '' ?>">
+                                            <input type="text" name="tempat_lahir" class="form-control" placeholder="Masukkan tempat lahir ..." value="<?= old('tempat_lahir', $data->tempat_lahir) ?? '' ?>">
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" name="tgl_lahir" class="form-control pull-right" id="datepicker" placeholder="Masukkan tanggal lahir ..." value="<?= old('tgl_lahir') ?? '' ?>">
+                                                <input type="text" name="tgl_lahir" class="form-control pull-right" id="datepicker" placeholder="Masukkan tanggal lahir ..." value="<?= old('tgl_lahir', $data->tgl_lahir) ?? '' ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                 </div>
                                 <div class="form-group <?= isset($fdErr['alamat']) ? 'has-error' : '' ?>">
                                     <label class="control-label"><?= isset($fdErr['alamat']) ? $errIcon : '' ?>&nbsp;</i>Alamat (<span style="color: #dd4b39;">*</span>)</label>
-                                    <textarea name="alamat" class="form-control" rows="3" placeholder="Masukkan alamat lengkap ..."><?= old('alamat') ?? '' ?></textarea>
+                                    <textarea name="alamat" class="form-control" rows="3" placeholder="Masukkan alamat lengkap ..."><?= old('alamat', $data->alamat) ?? '' ?></textarea>
                                     <?php if (isset($fdErr['alamat'])) : ?>
                                         <span class="help-block"><?= $fdErr['alamat'] ?></span>
                                     <?php endif; ?>
@@ -73,7 +73,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                     <label class=" control-label"><?= isset($fdErr['pekerjaan']) ? $errIcon : '' ?>&nbsp;Pekerjaan (<span style="color: #dd4b39;">*</span>)</label>
                                     <select name="id_pekerjaan" class="form-control">
                                         <option value="">-- Pilih salah satu --</option>
-                                        <?php $oldPekerjaan = old('id_pekerjaan'); ?>
+                                        <?php $oldPekerjaan = old('id_pekerjaan', $data->id_pekerjaan); ?>
                                         <?php foreach ($ddData['pekerjaan'] as $pekerjaanItem) : ?>
                                             <option value="<?= $pekerjaanItem->value ?>" <?= isset($oldPekerjaan) ? ($oldPekerjaan == $pekerjaanItem->value ? 'selected' : '') : '' ?>><?= $pekerjaanItem->text ?></option>
                                         <?php endforeach; ?>
@@ -86,7 +86,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                     <label class=" control-label"><?= isset($fdErr['jenis_pekerja']) ? $errIcon : '' ?>&nbsp;Jenis Pekerja (<span style="color: #dd4b39;">*</span>)</label>
                                     <select name="id_jenis_pekerja" class="form-control">
                                         <option value="">-- Pilih salah satu --</option>
-                                        <?php $oldJenisPekerja = old('id_jenis_pekerja'); ?>
+                                        <?php $oldJenisPekerja = old('id_jenis_pekerja', $data->id_jenis_pekerja); ?>
                                         <?php foreach ($ddData['jenis_pekerja'] as $jenisPekerjaItem) : ?>
                                             <option value="<?= $jenisPekerjaItem->value ?>" <?= isset($oldJenisPekerja) ? ($oldJenisPekerja == $jenisPekerjaItem->value ? 'selected' : '') : '' ?>><?= $jenisPekerjaItem->text ?></option>
                                         <?php endforeach; ?>
@@ -99,7 +99,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                     <label class=" control-label"><?= isset($fdErr['id_lokasi_kerja']) ? $errIcon : '' ?>&nbsp;Lokasi Kerja (<span style="color: #dd4b39;">*</span>)</label>
                                     <select name="id_lokasi_kerja" class="form-control">
                                         <option value="">-- Pilih salah satu --</option>
-                                        <?php $oldLokasikerja = old('id_lokasi_kerja'); ?>
+                                        <?php $oldLokasikerja = old('id_lokasi_kerja', $data->id_lokasi_kerja); ?>
                                         <?php foreach ($ddData['lokasi_kerja'] as $lokasikerjaItem) : ?>
                                             <option value="<?= $lokasikerjaItem->value ?>" <?= isset($oldLokasikerja) ? ($oldLokasikerja == $lokasikerjaItem->value ? 'selected' : '') : '' ?>><?= $lokasikerjaItem->text ?></option>
                                         <?php endforeach; ?>

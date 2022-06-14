@@ -23,7 +23,7 @@ class BaseWebController extends BaseController
         $this->renderer = new View(new ConfigView(), ROOTPATH);
         
         $pekerjaModel = new PekerjaModel();
-        $this->totalDataToReview = $pekerjaModel->getTotalDataToReview();
+        // $this->totalDataToReview = $pekerjaModel->getTotalDataToReview();
     }
 
     protected function renderView(string $name, array $data = [], array $options = [])
@@ -39,7 +39,7 @@ class BaseWebController extends BaseController
         $modulepath = str_replace('controllers', 'views', $modulepath);
 
         $data['renderer'] = $this->renderer;
-        $data['totalDataToReview'] = $this->totalDataToReview;
+        // $data['totalDataToReview'] = $this->totalDataToReview;
 
         return $this->renderer
             ->setData($data, 'raw')

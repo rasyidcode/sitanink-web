@@ -15,12 +15,10 @@ $routes->group('api/v1', ['namespace' => $routes_namespace], function ($routes) 
         $routes->group('pekerjaan', ['namespace' => $routes_namespace . 'Pekerjaan\Controllers\\'], function($routes) {
             $routes->post('get-data', 'PekerjaanController::getData', ['as' => 'api.pekerjaan.get-data']);
         });
-        $routes->group('domisili', ['namespace' => $routes_namespace . 'Domisili\Controllers\\'], function($routes) {
-            $routes->post('get-data', 'DomisiliController::getData', ['as' => 'api.domisili.get-data']);
-        });
     });
 
     $routes->group('pekerja', ['namespace' => $routes_namespace . 'Pekerja\Controllers\\'], function ($routes) {
         $routes->post('get-data', 'PekerjaController::getData', ['as' => 'api.pekerja.get-data']);
+        $routes->get('(:segment)/berkas', 'PekerjaController::getBerkas/$1', ['as' => 'api.pekerja.get-berkas']);
     });
 });

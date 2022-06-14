@@ -17,68 +17,68 @@ class PekerjaModel extends Model
      * 
      * @return array
      */
-    public function getListDomisili(): array
-    {
-        return $this->builder('pekerja')
-            ->select('
-                LOWER(domisili) as value,
-                domisili as text
-            ')
-            ->distinct()
-            ->get()
-            ->getResultObject();
-    }
+    // public function getListDomisili(): array
+    // {
+    //     return $this->builder('pekerja')
+    //         ->select('
+    //             LOWER(domisili) as value,
+    //             domisili as text
+    //         ')
+    //         ->distinct()
+    //         ->get()
+    //         ->getResultObject();
+    // }
 
     /**
      * Get list lokasi kerja
      * 
      * @return array
      */
-    public function getListLokasiKerja(): array
-    {
-        return $this->builder('pekerja')
-            ->select('
-                LOWER(lokasi_kerja) as value,
-                lokasi_kerja as text
-            ')
-            ->distinct()
-            ->get()
-            ->getResultObject();
-    }
+    // public function getListLokasiKerja(): array
+    // {
+    //     return $this->builder('pekerja')
+    //         ->select('
+    //             LOWER(lokasi_kerja) as value,
+    //             lokasi_kerja as text
+    //         ')
+    //         ->distinct()
+    //         ->get()
+    //         ->getResultObject();
+    // }
 
     /**
      * Get list pekerjaan
      * 
      * @return array
      */
-    public function getListPekerjaan(): array
-    {
-        return $this->builder('pekerja')
-            ->select('
-                LOWER(pekerjaan) as value,
-                pekerjaan as text
-            ')
-            ->distinct()
-            ->get()
-            ->getResultObject();
-    }
+    // public function getListPekerjaan(): array
+    // {
+    //     return $this->builder('pekerja')
+    //         ->select('
+    //             LOWER(pekerjaan) as value,
+    //             pekerjaan as text
+    //         ')
+    //         ->distinct()
+    //         ->get()
+    //         ->getResultObject();
+    // }
 
     /**
      * Get list jenis_pekerja
      * 
      * @return array
      */
-    public function getListJenisPekerja(): array
-    {
-        return $this->builder('pekerja')
-            ->select('
-                LOWER(jenis_pekerja) as value,
-                jenis_pekerja as text
-            ')
-            ->distinct()
-            ->get()
-            ->getResultObject();
-    }
+    // public function getListJenisPekerja(): array
+    // {
+    //     return $this->builder('pekerja')
+    //         ->select('
+    //             LOWER(jenis_pekerja) as value,
+    //             jenis_pekerja as text
+    //         ')
+    //         ->distinct()
+    //         ->get()
+    //         ->getResultObject();
+    // }
 
     /**
      * Create new pekerja to review
@@ -88,13 +88,13 @@ class PekerjaModel extends Model
      * @return int|string
      * 
      */
-    public function insertToReview(array $data)
-    {
-        $this->builder('pekerja_temp')
-            ->insert($data);
+    // public function insertToReview(array $data)
+    // {
+    //     $this->builder('pekerja_temp')
+    //         ->insert($data);
 
-        return $this->db->insertID();
-    }
+    //     return $this->db->insertID();
+    // }
 
     /**
      * Create new pekerja to review
@@ -108,6 +108,20 @@ class PekerjaModel extends Model
     {
         $this->builder('berkas')
             ->insert($data);
+    }
+
+    /**
+     * Create new pekerja
+     * 
+     * @param array $data
+     * 
+     * @return int|string
+     * 
+     */
+    public function insertPekerja(array $data)
+    {
+        $this->builder('pekerja')
+            ->insert($data);
 
         return $this->db->insertID();
     }
@@ -119,23 +133,23 @@ class PekerjaModel extends Model
      * 
      * @return void
      */
-    public function insertReviewBerkas(array $data)
-    {
-        $this->builder('pekerja_temp_berkas')
-            ->insertBatch($data);
-    }
+    // public function insertReviewBerkas(array $data)
+    // {
+    //     $this->builder('pekerja_temp_berkas')
+    //         ->insertBatch($data);
+    // }
 
     /**
      * Get total data to review
      * 
      * @return int|null
      */
-    public function getTotalDataToReview()
-    {
-        return $this->builder('pekerja_temp')
-            ->where('deleted_at', null)
-            ->countAllResults();
-    }
+    // public function getTotalDataToReview()
+    // {
+    //     return $this->builder('pekerja_temp')
+    //         ->where('deleted_at', null)
+    //         ->countAllResults();
+    // }
 
     /**
      * Get pekerja by id
@@ -147,7 +161,25 @@ class PekerjaModel extends Model
     public function getPekerja(int $id): ?object
     {
         return $this->builder('pekerja')
-            ->where('id', $id)
+            ->select('
+                pekerja.id,
+                pekerja.nik,
+                pekerja.nama,
+                pekerja.alamat,
+                pekerja.tempat_lahir,
+                pekerja.tgl_lahir,
+                pekerja.id_pekerjaan,
+                pekerja.id_lokasi_kerja,
+                pekerja.id_jenis_pekerja,
+                CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
+                pekerjaan.nama as pekerjaan,
+                lokasi_kerja.nama as lokasi_kerja,
+                jenis_pekerja.nama as jenis_pekerja
+            ')
+            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('pekerjaan', 'pekerja.id_pekerjaan = pekerjaan.id', 'left')
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
+            ->where('pekerja.id', $id)
             ->get()
             ->getRowObject();
     }
@@ -242,13 +274,13 @@ class PekerjaModel extends Model
             ')
             ->get()
             ->getResultObject();
-        $domisili = $this->db->table('domisili')
-            ->select('
-                id as value,
-                nama as text
-            ')
-            ->get()
-            ->getResultObject();
+        // $domisili = $this->db->table('domisili')
+        //     ->select('
+        //         id as value,
+        //         nama as text
+        //     ')
+        //     ->get()
+        //     ->getResultObject();
         $jenisPekerja = $this->db->table('jenis_pekerja')
             ->select('
                 id as value,
@@ -259,8 +291,25 @@ class PekerjaModel extends Model
         return [
             'lokasi_kerja'  => $lokasiKerja,
             'pekerjaan' => $pekerjaan,
-            'domisili'  => $domisili,
+            // 'domisili'  => $domisili,
             'jenis_pekerja' => $jenisPekerja
         ];
+    }
+
+    /**
+     * get berkas by id
+     * 
+     * @param int $id
+     * 
+     * @return array|object
+     */
+    public function getBerkas($id)
+    {
+        $berkas = $this->db->table('berkas')
+            ->where('id_pekerja', $id)
+            ->get()
+            ->getResultObject();
+
+        return $berkas;
     }
 }

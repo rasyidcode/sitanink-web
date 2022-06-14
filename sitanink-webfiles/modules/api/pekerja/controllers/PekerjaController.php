@@ -34,7 +34,6 @@ class PekerjaController extends BaseController
             $row[]  = $item->nama ?? '-';
             $row[]  = $item->ttl ?? '-';
             $row[]  = $item->alamat ?? '-';
-            $row[]  = $item->domisili ?? '-';
             $row[]  = $item->pekerjaan ?? '-';
             $row[]  = $item->lokasi_kerja ?? '-';
             $row[]  = $item->jenis_pekerja ?? '-';
@@ -53,6 +52,18 @@ class PekerjaController extends BaseController
                 'recordsTotal'      => $this->pekerjaModel->countData(),
                 'recordsFiltered'   => $this->pekerjaModel->countFilteredData($postData),
                 'data'              => $resData
+            ])
+            ->setStatusCode(ResponseInterface::HTTP_OK);
+    }
+
+    public function getBerkas($id)
+    {
+        $tipe = $this->request->getGet('tipe');
+        $berkas = $this->pekerjaModel->getBerkas($id, $tipe);
+        return $this->response
+            ->setJSON([
+                'data'  => $berkas,
+                'tipe'  => $tipe
             ])
             ->setStatusCode(ResponseInterface::HTTP_OK);
     }
