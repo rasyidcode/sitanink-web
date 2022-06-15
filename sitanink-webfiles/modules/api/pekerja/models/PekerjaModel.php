@@ -136,7 +136,7 @@ class PekerjaModel
     }
 
     /**
-     * get berkas by id
+     * get berkas by id_pekerja
      * 
      * @param int $id
      * 
@@ -154,5 +154,24 @@ class PekerjaModel
 
         return $berkas->get()
             ->getResultObject();
+    }
+
+    /**
+     * delete berkas by id_pekerja
+     * 
+     * @param int $id
+     * 
+     * @return void
+     */
+    public function deleteBerkas($id, $tipe = null) {
+        $berkas = $this->db->table('berkas')
+            ->where('id_pekerja', $id);
+        
+        if (!is_null($tipe)) {
+            $berkas->where('tipe', $tipe)
+                ->delete();
+        }
+
+        $berkas->delete();
     }
 }

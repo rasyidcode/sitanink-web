@@ -20,5 +20,6 @@ $routes->group('api/v1', ['namespace' => $routes_namespace], function ($routes) 
     $routes->group('pekerja', ['namespace' => $routes_namespace . 'Pekerja\Controllers\\'], function ($routes) {
         $routes->post('get-data', 'PekerjaController::getData', ['as' => 'api.pekerja.get-data']);
         $routes->get('(:segment)/berkas', 'PekerjaController::getBerkas/$1', ['as' => 'api.pekerja.get-berkas']);
+        $routes->post('(:segment)/berkas/delete', 'PekerjaController::deleteBerkas/$1', ['as' => 'api.pekerja.delete-berkas']);
     });
 });

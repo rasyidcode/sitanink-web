@@ -2,7 +2,9 @@
 
 namespace Modules\Admin\Pekerja\Controllers;
 
+use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\HTTP\ResponseInterface;
+use Modules\Admin\Berkas\Models\BerkasModel;
 use Modules\Admin\Pekerja\Models\PekerjaModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
 
@@ -13,13 +15,19 @@ class PekerjaController extends BaseWebController
 
     private $pekerjaModel;
 
+    private $berkasModel;
+
     private $viewData = [];
 
     public function __construct()
     {
         parent::__construct();
 
+        $db = \Config\Database::connect();
+
         $this->pekerjaModel = new PekerjaModel();
+
+        $this->berkasModel = new BerkasModel($db);
 
         $this->__initViewData();
     }
@@ -390,7 +398,7 @@ class PekerjaController extends BaseWebController
 
         session()->setFlashdata('success', 'Pekerja berhasil ditambahkan!');
         return redirect()->back()
-                         ->route('pekerja');
+            ->route('pekerja');
     }
 
     public function delete($id)
@@ -406,11 +414,7 @@ class PekerjaController extends BaseWebController
 
     public function get($id)
     {
-        $data = $this->pekerjaModel->getPekerja((int)$id);
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
-        // die();
+        $data = $this->pekerjaModel->getPekerja((int)$id, withFoto: true);
         $this->viewData['pageLinks'] = [
             'dashboard' => [
                 'url'       => route_to('admin'),
@@ -433,9 +437,6 @@ class PekerjaController extends BaseWebController
     public function edit($id)
     {
         $data = $this->pekerjaModel->getPekerja($id);
-        $berkas = $this->pekerjaModel->getBerkas($id);
-        $data->berkas = $berkas;
-
         $dropdownData = $this->pekerjaModel->getDropdownData();
 
         $this->viewData['pageLinks'] = [
@@ -459,15 +460,98 @@ class PekerjaController extends BaseWebController
 
     public function update($id)
     {
+        $nikFormatted = str_replace('_', '', join(explode('-', $_REQUEST['nik'])));
+        $_REQUEST['nik']   = $nikFormatted;
+
+        if (!$this->validate($this->getRules(isEdit: true), $this->getMessages())) {
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $dataPost = $this->request->getPost();
+        $dataPost['nik'] = $nikFormatted;
+
+        unset($dataPost['csrf_token_sitanink']);
+
+        $tglLahir = explode('/', $dataPost['tgl_lahir']);
+        $dataPost['tgl_lahir'] = $tglLahir[2] . '-' . $tglLahir[0] . '-' . $tglLahir[1];
+
+        // check if there is a file upload
+        $foto = $this->request->getFile('foto');
+        if ($foto instanceof UploadedFile && !$foto->isValid() && $foto->hasMoved()) {
+            session()->setFlashdata('error_files', 'Something went wrong when processing the [foto] file!');
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $ktp = $this->request->getFile('ktp');
+        if ($ktp instanceof UploadedFile && !$ktp->isValid() && $ktp->hasMoved()) {
+            session()->setFlashdata('error_files', 'Something went wrong when processing the [ktp] file!');
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $kk = $this->request->getFile('kk');
+        if ($kk instanceof UploadedFile && !$kk->isValid() && $kk->hasMoved()) {
+            session()->setFlashdata('error_files', 'Something went wrong when processing the [kk] file!');
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $spiu = $this->request->getFile('spiu');
+        if ($spiu instanceof UploadedFile && !$spiu->isValid() && $spiu->hasMoved()) {
+            session()->setFlashdata('error_files', 'Something went wrong when processing the [spiu] file!');
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $sp = $this->request->getFile('sp');
+        if ($sp instanceof UploadedFile && !$sp->isValid() && $sp->hasMoved()) {
+            session()->setFlashdata('error_files', 'Something went wrong when processing the [sp] file!');
+            return redirect()->back()
+                ->withInput();
+        }
+
+        $this->pekerjaModel->updatePekerja($id, $dataPost);
+
+        // foto
+        if (!is_null($foto)) {
+            $this->berkasUploadHandler($id, 'foto', $foto);
+        }
+
+        // ktp
+        if (!is_null($ktp)) {
+            $this->berkasUploadHandler($id, 'ktp', $ktp);
+        }
+
+        // kk
+        if (!is_null($kk)) {
+            $this->berkasUploadHandler($id, 'kk', $kk);
+        }
+
+        // spiu
+        if (!is_null($spiu)) {
+            $this->berkasUploadHandler($id, 'spiu', $spiu);
+        }
+
+        // sp
+        if (!is_null($sp)) {
+            $this->berkasUploadHandler($id, 'sp', $sp);
+        }
+
+        session()->setFlashdata('success', 'Pekerja berhasil diupdate!');
+        return redirect()->back()
+            ->route('pekerja');
     }
 
-    private function getRules()
+    private function getRules($isEdit = false)
     {
         return [
             'nik'           => 'required'
-                            . '|integer'
-                            . '|is_unique[pekerja.nik]'
-                            . '|exact_length[16]',
+                . '|integer'
+                . '|is_unique[pekerja.nik]'
+                . '|exact_length[16]',
             'nama'          => 'required',
             'tempat_lahir'  => 'required',
             'tgl_lahir'     => 'required',
@@ -475,19 +559,19 @@ class PekerjaController extends BaseWebController
             'id_pekerjaan'      => 'required',
             'id_lokasi_kerja'   => 'required',
             'id_jenis_pekerja'  => 'required',
-            'foto'              => 'uploaded[foto]'
-                                . '|max_size[foto,200]'
-                                . '|is_image[foto]',
-            'ktp'               => 'uploaded[ktp]'
-                                . '|max_size[ktp,200]'
-                                . '|is_image[ktp]',
-            'kk'                => 'uploaded[kk]'
-                                . '|max_size[kk,200]'
-                                . '|is_image[kk]',
-            'spiu'              => 'uploaded[spiu]'
-                                . '|max_size[spiu,200]',
-            'sp'                => 'uploaded[sp]'
-                                . '|max_size[sp,200]',
+            'foto'              => (!$isEdit ? 'uploaded[foto]|' : '')
+                . 'max_size[foto,200]'
+                . 'is_image[foto]',
+            'ktp'               => (!$isEdit ? 'uploaded[ktp]|' : '')
+                . 'max_size[ktp,200]'
+                . '|is_image[ktp]',
+            'kk'                => (!$isEdit ? 'uploaded[kk]|' : '')
+                . '|max_size[kk,200]'
+                . '|is_image[kk]',
+            'spiu'              => (!$isEdit ? 'uploaded[spiu]|' : '')
+                . 'max_size[spiu,200]',
+            'sp'                => (!$isEdit ? 'uploaded[sp]|' : '')
+                . 'max_size[sp,200]',
         ];
     }
 
@@ -533,5 +617,36 @@ class PekerjaController extends BaseWebController
                 'is_image'  => 'Surat Pernyataan harus berupa gambar!',
             ],
         ];
+    }
+
+    private function berkasUploadHandler(int $id, string $tipe, UploadedFile $file)
+    {
+        // upload path
+        $filePath = ROOTPATH . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . 'uploads';
+
+        $berkas = $this->pekerjaModel->getBerkas($id, $tipe);
+        $berkasName = $file->getRandomName();
+        $berkasData = [
+            'id_pekerja'    => $id,
+            'path'          => $filePath,
+            'filename'      => $berkasName,
+            'size_in_mb'    => $file->getSizeByUnit('mb'),
+            'mime'          => $file->getMimeType(),
+            'ext'           => $file->getExtension(),
+            'type'          => $tipe,
+        ];
+        if (!is_null($berkas)) {
+            // update
+            $this->berkasModel->update($berkas->id, $berkasData);
+            // check old files, delete if any
+            $successDelete = unlink($berkas->path . DIRECTORY_SEPARATOR . $berkas->filename);
+            if ($successDelete) {
+                $this->berkasModel->delete($berkas->id);
+            }
+        } else {
+            // create new
+            $this->pekerjaModel->insertBerkas($berkasData);
+        }
+        $file->move($filePath, $berkasName);
     }
 }

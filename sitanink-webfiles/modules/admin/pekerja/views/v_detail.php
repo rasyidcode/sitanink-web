@@ -29,37 +29,37 @@
                                                 <tr>
                                                     <th>NIK</th>
                                                     <td>:</td>
-                                                    <td><?= $data->nik ?></td>
+                                                    <td><?= $data->nik ?? '' ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Nama</th>
                                                     <td>:</td>
-                                                    <td><?= $data->nama?></td>
+                                                    <td><?= $data->nama ?? ''?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>TTL</th>
                                                     <td>:</td>
-                                                    <td><?= $data->ttl?></td>
+                                                    <td><?= $data->ttl ?? ''?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Alamat</th>
                                                     <td>:</td>
-                                                    <td><?= $data->alamat ?></td>
+                                                    <td><?= $data->alamat ?? '' ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Pekerjaan</th>
                                                     <td>:</td>
-                                                    <td><?=$data->pekerjaan?></td>
+                                                    <td><?=$data->pekerjaan ?? ''?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Lokasi Kerja</th>
                                                     <td>:</td>
-                                                    <td><?=$data->lokasi_kerja?></td>
+                                                    <td><?=$data->lokasi_kerja ?? ''?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Jenis Pekerja</th>
                                                     <td>:</td>
-                                                    <td><?=$data->jenis_pekerja?></td>
+                                                    <td><?=$data->jenis_pekerja ?? ''?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>KTP</th>
@@ -150,7 +150,7 @@
             var $thisElement = $(this);
             $.ajax({
                 type: 'get',
-                url: `<?= route_to('api.pekerja.get-berkas', $data->id) ?>?tipe=${tipe}`,
+                url: `<?= route_to('api.pekerja.get-berkas', $data->id ?? '0') ?>?tipe=${tipe}`,
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader('Authorization', 'Basic ' + btoa('sitaninkadmin:admin123'));
                 },

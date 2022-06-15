@@ -4,18 +4,21 @@ namespace Modules\Api\Pekerja\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use Modules\Api\Berkas\Models\BerkasModel;
 use Modules\Api\Pekerja\Models\PekerjaModel;
 
 class PekerjaController extends BaseController
 {
 
     private $pekerjaModel;
+    private $berkasModel;
 
     public function __construct()
     {
         $db = \Config\Database::connect();
 
         $this->pekerjaModel = new PekerjaModel($db);
+        $this->berkasModel = new BerkasModel($db);
     }
 
     public function getData()
@@ -62,8 +65,39 @@ class PekerjaController extends BaseController
         $berkas = $this->pekerjaModel->getBerkas($id, $tipe);
         return $this->response
             ->setJSON([
-                'data'  => $berkas,
-                'tipe'  => $tipe
+                'data'  => $berkas
+            ])
+            ->setStatusCode(ResponseInterface::HTTP_OK);
+    }
+
+    public function deleteBerkas($id)
+    {
+        helper('filesystem');
+
+        $tipe           = $this->request->getGet('tipe');
+        $berkas         = $this->pekerjaModel->getBerkas($id, $tipe ?? null);
+        $deleteMessage  = '';
+        $success        = false;
+
+        if (!is_array($berkas)) {
+            $successDelete = unlink($berkas->path . DIRECTORY_SEPARATOR . $berkas->filename);
+            if ($successDelete) {
+                $success = true;
+                $deleteMessage = 'Berhasil menghapus berkas!';
+                $this->berkasModel->delete($berkas->id);
+            } else {
+                $deleteMessage = 'Gagal menghapus berkas dengan tipe ['.$tipe.'] !';
+            }
+        } else {
+            // $this->pekerjaModel->deleteBerkas($id);
+            $deleteMessage = 'Belum support hapus beberapa berkas!';
+            $success = false;
+        }
+        
+        return $this->response
+            ->setJSON([
+                'success'   => $success,
+                'message'   => $deleteMessage
             ])
             ->setStatusCode(ResponseInterface::HTTP_OK);
     }

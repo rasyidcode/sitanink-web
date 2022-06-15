@@ -158,29 +158,45 @@ class PekerjaModel extends Model
      * 
      * @return object|null
      */
-    public function getPekerja(int $id): ?object
+    public function getPekerja(int $id, $withFoto = false): ?object
     {
-        return $this->builder('pekerja')
-            ->select('
-                pekerja.id,
-                pekerja.nik,
-                pekerja.nama,
-                pekerja.alamat,
-                pekerja.tempat_lahir,
-                pekerja.tgl_lahir,
-                pekerja.id_pekerjaan,
-                pekerja.id_lokasi_kerja,
-                pekerja.id_jenis_pekerja,
-                CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
-                pekerjaan.nama as pekerjaan,
-                lokasi_kerja.nama as lokasi_kerja,
-                jenis_pekerja.nama as jenis_pekerja
-            ')
+        $select = '
+            pekerja.id,
+            pekerja.nik,
+            pekerja.nama,
+            pekerja.alamat,
+            pekerja.tempat_lahir,
+            pekerja.tgl_lahir,
+            pekerja.id_pekerjaan,
+            pekerja.id_lokasi_kerja,
+            pekerja.id_jenis_pekerja,
+            CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
+            pekerjaan.nama as pekerjaan,
+            lokasi_kerja.nama as lokasi_kerja,
+            jenis_pekerja.nama as jenis_pekerja
+        ';
+        
+        if ($withFoto) {
+            $select .= ',berkas.filename as foto';
+        }
+
+        $pekerja = $this->builder('pekerja')
+            ->select($select)
             ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
             ->join('pekerjaan', 'pekerja.id_pekerjaan = pekerjaan.id', 'left')
-            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
-            ->where('pekerja.id', $id)
-            ->get()
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left');
+        
+        if ($withFoto) {
+           $pekerja->join('berkas', 'pekerja.id = berkas.id_pekerja', 'left') ;
+        }
+
+        $pekerja->where('pekerja.id', $id);
+        
+        if ($withFoto) {
+            $pekerja->where('berkas.type', 'foto');
+        }
+        
+        return $pekerja->get()
             ->getRowObject();
     }
 
@@ -300,16 +316,43 @@ class PekerjaModel extends Model
      * get berkas by id
      * 
      * @param int $id
+     * @param string $tipe
      * 
      * @return array|object
      */
-    public function getBerkas($id)
+    public function getBerkas($id, $tipe = null)
     {
         $berkas = $this->db->table('berkas')
-            ->where('id_pekerja', $id)
-            ->get()
-            ->getResultObject();
+            ->where('id_pekerja', $id);
+        
+        if (!is_null($berkas)) {
+            return $berkas->where('type', $tipe)
+                ->get()
+                ->getRowObject();
+        }
 
-        return $berkas;
+        return $berkas->get()
+            ->getResultObject();
     }
+
+    /**
+     * update pekerja by id
+     * 
+     * @param array $data
+     * 
+     */
+    public function updatePekerja(int $id, array $data)
+    {
+        $this->db->table('pekerja')
+            ->where('id', $id)
+            ->update($data);
+    }
+
+    /**
+     * get berkas by id_pekerja
+     * 
+     * @param int $id
+     * 
+     * @return array|object
+     */
 }

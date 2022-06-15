@@ -16,7 +16,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <form id="form-add-pekerja" action="<?= route_to('pekerja.update-v2') ?>" method="POST" role="form" enctype="multipart/form-data">
+                            <form id="form-edit-pekerja" action="<?= route_to('pekerja.update', $data->id) ?>" method="POST" role="form" enctype="multipart/form-data">
                                 <?= csrf_field() ?>
                                 <div class="row">
                                     <div class="col-xs-4">
@@ -109,40 +109,100 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group <?= isset($fdErr['foto']) ? 'has-error' : '' ?>">
-                            <label for="foto"><?= isset($fdErr['foto']) ? $errIcon : '' ?>&nbsp;Foto (<span style="color: #dd4b39;">*</span>)</label>
-                                    <input type="file" name="foto">
+                                    <label for="foto"><?= isset($fdErr['foto']) ? $errIcon : '' ?>&nbsp;Foto (<span style="color: #dd4b39;">*</span>)</label>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="file" name="foto">
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <a style="cursor: pointer;" 
+                                                data-toggle="modal" 
+                                                data-target="#modal-show-image" 
+                                                data-tipe-berkas="foto"
+                                                onclick="return false"><i class="fa fa-eye"></i>&nbsp;lihat berkas</a>&nbsp;&nbsp;
+                                            <a class="hapus-berkas text-danger" href="javascript:void(0)"><i class="fa fa-trash"></i>&nbsp;hapus</a>
+                                        </div>
+                                    </div>
                                     <p>Max. <strong>200 KB</strong></p>
                                     <?php if (isset($fdErr['foto'])) : ?>
                                         <span class="help-block"><?= $fdErr['foto'] ?></span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group <?= isset($fdErr['ktp']) ? 'has-error' : '' ?>">
-                            <label for="ktp"><?= isset($fdErr['ktp']) ? $errIcon : '' ?>&nbsp;KTP (<span style="color: #dd4b39;">*</span>)</label>
-                                    <input type="file" name="ktp">
+                                    <label for="ktp"><?= isset($fdErr['ktp']) ? $errIcon : '' ?>&nbsp;KTP (<span style="color: #dd4b39;">*</span>)</label>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="file" name="ktp">
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <a style="cursor: pointer;" 
+                                                data-toggle="modal" 
+                                                data-target="#modal-show-image" 
+                                                data-tipe-berkas="ktp"
+                                                onclick="return false"><i class="fa fa-eye"></i>&nbsp;lihat berkas</a>&nbsp;&nbsp;
+                                            <a class="hapus-berkas text-danger" href="javascript:void(0)"><i class="fa fa-trash"></i>&nbsp;hapus</a>
+                                        </div>
+                                    </div>
                                     <p>Max. <strong>200 KB</strong></p>
                                     <?php if (isset($fdErr['ktp'])) : ?>
                                         <span class="help-block"><?= $fdErr['ktp'] ?></span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group <?= isset($fdErr['kk']) ? 'has-error' : '' ?>">
-                            <label for="kk"><?= isset($fdErr['kk']) ? $errIcon : '' ?>&nbsp;Kartu Keluarga (<span style="color: #dd4b39;">*</span>)</label>
-                                    <input type="file" name="kk">
+                                    <label for="kk"><?= isset($fdErr['kk']) ? $errIcon : '' ?>&nbsp;Kartu Keluarga (<span style="color: #dd4b39;">*</span>)</label>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="file" name="kk">
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <a style="cursor: pointer;" 
+                                                data-toggle="modal" 
+                                                data-target="#modal-show-image" 
+                                                data-tipe-berkas="kk"
+                                                onclick="return false"><i class="fa fa-eye"></i>&nbsp;lihat berkas</a>&nbsp;&nbsp;
+                                            <a class="hapus-berkas text-danger" href="javascript:void(0)"><i class="fa fa-trash"></i>&nbsp;hapus</a>
+                                        </div>
+                                    </div>
                                     <p>Max. <strong>200 KB</strong></p>
                                     <?php if (isset($fdErr['kk'])) : ?>
                                         <span class="help-block"><?= $fdErr['kk'] ?></span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group <?= isset($fdErr['spiu']) ? 'has-error' : '' ?>">
-                            <label for="spiu"><?= isset($fdErr['spiu']) ? $errIcon : '' ?>&nbsp;Surat Permohohan Ijin Usaha (<span style="color: #dd4b39;">*</span>)</label>
-                                    <input type="file" name="spiu">
+                                    <label for="spiu"><?= isset($fdErr['spiu']) ? $errIcon : '' ?>&nbsp;Surat Permohohan Ijin Usaha (<span style="color: #dd4b39;">*</span>)</label>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="file" name="spiu">
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <a style="cursor: pointer;" 
+                                                data-toggle="modal" 
+                                                data-target="#modal-show-image" 
+                                                data-tipe-berkas="spiu"
+                                                onclick="return false"><i class="fa fa-eye"></i>&nbsp;lihat berkas</a>&nbsp;&nbsp;
+                                            <a class="hapus-berkas text-danger" href="javascript:void(0)"><i class="fa fa-trash"></i>&nbsp;hapus</a>
+                                        </div>
+                                    </div>
                                     <p>Max. <strong>200 KB</strong></p>
                                     <?php if (isset($fdErr['spiu'])) : ?>
                                         <span class="help-block"><?= $fdErr['spiu'] ?></span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group <?= isset($fdErr['sp']) ? 'has-error' : '' ?>">
-                                    <label for="foto"><?= isset($fdErr['sp']) ? $errIcon : '' ?>&nbsp;Surat Pernyataan (<span style="color: #dd4b39;">*</span>)</label>
-                                    <input type="file" name="sp">
+                                    <label for="sp"><?= isset($fdErr['sp']) ? $errIcon : '' ?>&nbsp;Surat Pernyataan (<span style="color: #dd4b39;">*</span>)</label>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="file" name="sp">
+                                        </div>
+                                        <div class="col-xs-6 text-right">
+                                            <a style="cursor: pointer;" 
+                                                data-toggle="modal" 
+                                                data-target="#modal-show-image" 
+                                                data-tipe-berkas="sp"
+                                                onclick="return false"><i class="fa fa-eye"></i>&nbsp;lihat berkas</a>&nbsp;&nbsp;
+                                            <a class="hapus-berkas text-danger" href="javascript:void(0)"><i class="fa fa-trash"></i>&nbsp;hapus</a>
+                                        </div>
+                                    </div>
                                     <p>Max. <strong>200 KB</strong></p>
                                     <?php if (isset($fdErr['sp'])) : ?>
                                         <span class="help-block"><?= $fdErr['sp'] ?></span>
@@ -158,28 +218,47 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
             </div>
         </div>
     </div>
-</section>
 
-<div class="modal fade" id="modal-camera" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Camera</h4>
-            </div>
-            <div class="modal-body">
-                <video id="video" width="640" height="480" autoplay></video>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button id="btn-camera-confirm" type="button" class="btn btn-primary">Konfirmasi</button>
+    <!-- <div class="modal fade" id="modal-camera" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Camera</h4>
+                </div>
+                <div class="modal-body">
+                    <video id="video" width="640" height="480" autoplay></video>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button id="btn-camera-confirm" type="button" class="btn btn-primary">Konfirmasi</button>
+                </div>
             </div>
         </div>
-        <!-- /.modal-content -->
+    </div> -->
+
+    <div class="modal fade" id="modal-show-image">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <img class="center-block img-responsive" src="#" alt="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-</div>
+</section>
+
 <?= $renderer->endSection() ?>
 
 <?= $renderer->section('custom-css') ?>
@@ -200,27 +279,85 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
 
         $('#form-add-pekerja input[name="nik"]').inputmask('9999-9999-9999-9999');
 
-        $('#camera-ktp').on('click', function(e) {
-            $('#modal-camera').modal('show');
-        });
+        // $('#camera-ktp').on('click', function(e) {
+        //     $('#modal-camera').modal('show');
+        // });
 
-        $('#modal-camera').on('shown.bs.modal', async function(e) {
-            if (location.protocol !== 'https:') {
-                $('#video').parent().html('<p class="text-danger">This website is not secured</p>');
-            } else {
-                var stream = await navigator.mediaDevices.getUserMedia({
-                    video: true,
-                    audio: false
+        // $('#modal-camera').on('shown.bs.modal', async function(e) {
+        //     if (location.protocol !== 'https:') {
+        //         $('#video').parent().html('<p class="text-danger">This website is not secured</p>');
+        //     } else {
+        //         var stream = await navigator.mediaDevices.getUserMedia({
+        //             video: true,
+        //             audio: false
+        //         });
+
+        //         video.srcObject = stream;
+        //     }
+        // });
+
+        // $('#btn-camera-confirm').on('click', function(e) {
+        //     canvas.getContext('2d')
+        //         .drawImage(video, 0, 0, canvas.width, canvas.height);
+        //     var imageDataUrl = canvas.DataToURL('image/jpeg');
+        // });
+
+        $('#form-edit-pekerja').on('click', '.row .col-xs-6.text-right a.hapus-berkas', function(e) {
+            if (confirm('Apakah yakin ingin menghapus berkas ini?')) {
+                var tipe = $(this).prev().data().tipeBerkas;
+                $.ajax({
+                    type: 'post',
+                    url: `<?= route_to('api.pekerja.delete-berkas', $data->id) ?>?tipe=${tipe}`,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('Authorization', 'Basic ' + btoa('sitaninkadmin:admin123'));
+                    },
+                    success: function(res) {
+                        console.log(res);
+
+                        alert(res.message);
+                        if (res.success) {
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                        }
+                    },
+                    error: function(err) {
+                        console.log(err);
+
+                        alert('Gagal menghapus berkas, silahkan hubungi administrator!');
+                    }
                 });
-
-                video.srcObject = stream;
             }
         });
 
-        $('#btn-camera-confirm').on('click', function(e) {
-            canvas.getContext('2d')
-                .drawImage(video, 0, 0, canvas.width, canvas.height);
-            var imageDataUrl = canvas.DataToURL('image/jpeg');
+        $('#modal-show-image').on('show.bs.modal', function(e) {
+            var relatedTarget = $(e.relatedTarget).data();
+            var tipe = relatedTarget.tipeBerkas;
+            console.log(tipe);
+            var $thisElement = $(this);
+            $.ajax({
+                type: 'get',
+                url: `<?= route_to('api.pekerja.get-berkas', $data->id) ?>?tipe=${tipe}`,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic ' + btoa('sitaninkadmin:admin123'));
+                },
+                success: function(res) {
+                    console.log(res);
+
+                    if (res.data) {
+                        $thisElement.find('img')
+                               .attr('src', `<?= site_url('uploads') ?>/${res.data.filename}`)
+                               .attr('alt', tipe);
+                    } else {
+                        alert('Failed to show image!');
+                    }
+                },
+                error: function(err) {
+                    console.log(err);
+
+                    alert('Failed to show image!');
+                }
+            })
         });
     });
 </script>
