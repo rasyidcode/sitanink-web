@@ -437,6 +437,8 @@ class PekerjaController extends BaseWebController
     public function edit($id)
     {
         $data = $this->pekerjaModel->getPekerja($id);
+        $data->tgl_lahir = explode('-', $data->tgl_lahir);
+        $data->tgl_lahir = $data->tgl_lahir[1] . '/' . $data->tgl_lahir[2] . '/' . $data->tgl_lahir[0];
         $dropdownData = $this->pekerjaModel->getDropdownData();
 
         $this->viewData['pageLinks'] = [
@@ -462,7 +464,7 @@ class PekerjaController extends BaseWebController
     {
         $nikFormatted = str_replace('_', '', join(explode('-', $_REQUEST['nik'])));
         $_REQUEST['nik']   = $nikFormatted;
-
+        
         if (!$this->validate($this->getRules(isEdit: true), $this->getMessages())) {
             session()->setFlashdata('error', $this->validator->getErrors());
             return redirect()->back()
@@ -470,6 +472,7 @@ class PekerjaController extends BaseWebController
         }
 
         $dataPost = $this->request->getPost();
+        
         $dataPost['nik'] = $nikFormatted;
 
         unset($dataPost['csrf_token_sitanink']);
@@ -516,27 +519,27 @@ class PekerjaController extends BaseWebController
         $this->pekerjaModel->updatePekerja($id, $dataPost);
 
         // foto
-        if (!is_null($foto)) {
+        if ($foto->getPath()) {
             $this->berkasUploadHandler($id, 'foto', $foto);
         }
 
         // ktp
-        if (!is_null($ktp)) {
+        if ($ktp->getPath()) {
             $this->berkasUploadHandler($id, 'ktp', $ktp);
         }
 
         // kk
-        if (!is_null($kk)) {
+        if ($kk->getPath()) {
             $this->berkasUploadHandler($id, 'kk', $kk);
         }
 
         // spiu
-        if (!is_null($spiu)) {
+        if ($spiu->getPath()) {
             $this->berkasUploadHandler($id, 'spiu', $spiu);
         }
 
         // sp
-        if (!is_null($sp)) {
+        if ($sp->getPath()) {
             $this->berkasUploadHandler($id, 'sp', $sp);
         }
 
@@ -547,10 +550,10 @@ class PekerjaController extends BaseWebController
 
     private function getRules($isEdit = false)
     {
-        return [
+        $rules = [
             'nik'           => 'required'
                 . '|integer'
-                . '|is_unique[pekerja.nik]'
+                . (!$isEdit ? '|is_unique[pekerja.nik]' : '')
                 . '|exact_length[16]',
             'nama'          => 'required',
             'tempat_lahir'  => 'required',
@@ -561,18 +564,22 @@ class PekerjaController extends BaseWebController
             'id_jenis_pekerja'  => 'required',
             'foto'              => (!$isEdit ? 'uploaded[foto]|' : '')
                 . 'max_size[foto,200]'
-                . 'is_image[foto]',
+                . '|is_image[foto]',
             'ktp'               => (!$isEdit ? 'uploaded[ktp]|' : '')
                 . 'max_size[ktp,200]'
                 . '|is_image[ktp]',
             'kk'                => (!$isEdit ? 'uploaded[kk]|' : '')
-                . '|max_size[kk,200]'
+                . 'max_size[kk,200]'
                 . '|is_image[kk]',
             'spiu'              => (!$isEdit ? 'uploaded[spiu]|' : '')
                 . 'max_size[spiu,200]',
             'sp'                => (!$isEdit ? 'uploaded[sp]|' : '')
                 . 'max_size[sp,200]',
         ];
+        // echo "<pre>";
+        // print_r($rules);die();
+        // echo "</pre>";
+        return $rules;
     }
 
     private function getMessages()

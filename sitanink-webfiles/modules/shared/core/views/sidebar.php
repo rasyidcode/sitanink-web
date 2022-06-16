@@ -42,8 +42,8 @@
                     <i class="fa fa-user-o"></i> <span>Data Pekerja</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
+            <li class="<?= isLinkActive('wilayah', 1) ?>">
+                <a href="<?=route_to('wilayah')?>">
                     <i class="ion ion-map"></i> <span>Data Per Wilayah</span>
                 </a>
             </li>

@@ -333,8 +333,11 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
         $('#modal-show-image').on('show.bs.modal', function(e) {
             var relatedTarget = $(e.relatedTarget).data();
             var tipe = relatedTarget.tipeBerkas;
-            console.log(tipe);
             var $thisElement = $(this);
+
+            $($thisElement).find('img')
+                .attr('src', '')
+                .attr('alt', tipe);
             $.ajax({
                 type: 'get',
                 url: `<?= route_to('api.pekerja.get-berkas', $data->id) ?>?tipe=${tipe}`,

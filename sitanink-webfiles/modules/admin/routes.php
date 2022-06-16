@@ -80,7 +80,9 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
     // $routes->get('pekerja/(:segment)/delete', 'Pekerja\Controllers\PekerjaController::delete/$1', ['as' => 'pekerja.delete']);
 
     // data wilayah
-    // $routes->get('wilayah', 'Wilayah\Controllers\WilayahController::index', ['as' => 'wilayah']);
+    $routes->group('wilayah', ['namespace' => $routes_namespace . 'Wilayah\Controllers\\'], function($routes) {
+        $routes->get('/', 'WilayahController::index', ['as' => 'wilayah']);
+    });
     // $routes->get('wilayah/detail', 'Wilayah\Controllers\WilayahController::detail', ['as' => 'wilayah.detail']);
 
     // notifikasi

@@ -22,4 +22,9 @@ $routes->group('api/v1', ['namespace' => $routes_namespace], function ($routes) 
         $routes->get('(:segment)/berkas', 'PekerjaController::getBerkas/$1', ['as' => 'api.pekerja.get-berkas']);
         $routes->post('(:segment)/berkas/delete', 'PekerjaController::deleteBerkas/$1', ['as' => 'api.pekerja.delete-berkas']);
     });
+
+    $routes->group('wilayah', ['namespace' => $routes_namespace . 'Wilayah\Controllers\\'], function($routes) {
+        $routes->get('(:segment)/pekerja', 'WilayahController::getListPekerja/$1', ['as' => 'api.wilayah.list-pekerja']);
+        $routes->post('get-data', 'WilayahController::getData', ['as' => 'api.wilayah.get-data']);
+    });
 });
