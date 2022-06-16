@@ -14,4 +14,22 @@ class WilayahModel
         $this->db = &$db;
     }
 
+    public function getList()
+    {
+        $data = $this->db
+            ->table('lokasi_kerja')
+            ->select('
+            lokasi_kerja.id,
+            lokasi_kerja.nama,
+            lokasi_kerja.lon,
+            lokasi_kerja.lat,
+            lokasi_kerja.created_at,
+            count(pekerja.id) as total_pekerja,
+        ')
+            ->join('pekerja', 'lokasi_kerja.id = pekerja.id_lokasi_kerja', 'left')
+            ->get()
+            ->getResultObject();
+
+        return $data;
+    }
 }

@@ -4,6 +4,7 @@ namespace Modules\Admin\Wilayah\Controllers;
 
 use Modules\Admin\Wilayah\Models\WilayahModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class WilayahController extends BaseWebController
 {
@@ -46,6 +47,13 @@ class WilayahController extends BaseWebController
         ];
 
         return $this->renderView('v_index', $this->viewData);
+    }
+
+    public function downloadExcel()
+    {
+        $data = $this->wilayahModel->getList();
+        $spreadsheet = new Spreadsheet();
+        print_r($spreadsheet);die();
     }
 
 }

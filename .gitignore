@@ -84,6 +84,7 @@ phpunit
 # Composer
 #-------------------------
 vendor/
+sitanink-webfiles/vendor/
 
 #-------------------------
 # IDE / Development Files
@@ -127,7 +128,8 @@ nb-configuration.xml
 
 /envs/*.env
 
-/public/adminlte3/
-/public/adminlte2/
+/public/adminlte2/*
+/public/adminlte3/*
+/public/adminlte2/*
 /app/Database/old-migrations
 /public_html/uploads/*

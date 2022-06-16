@@ -82,6 +82,7 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
     // data wilayah
     $routes->group('wilayah', ['namespace' => $routes_namespace . 'Wilayah\Controllers\\'], function($routes) {
         $routes->get('/', 'WilayahController::index', ['as' => 'wilayah']);
+        $routes->get('download/excel', 'WilayahController::downloadExcel', ['as' => 'wilayah.download-excel']);
     });
     // $routes->get('wilayah/detail', 'Wilayah\Controllers\WilayahController::detail', ['as' => 'wilayah.detail']);
 

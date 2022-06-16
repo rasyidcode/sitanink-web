@@ -18,7 +18,8 @@
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header">
-                    <h3 class="box-title">Data Wilayah Pekerja</h3>
+                    <h3 style="margin-right: 8px;" class="box-title">Data Wilayah Pekerja</h3>
+                    <a href="<?= route_to('wilayah.download-excel') ?>" class="btn btn-primary btn-xs"><i class="ion ion-ios-download-outline"></i>&nbsp;&nbsp;Export Excel</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -190,7 +191,9 @@
 
         $('#data-wilayah tbody').on('click', 'tr td button.btn.btn-success', function(e) {
             var id = $(this).data().id;
-            $('#modal-list-pekerja').modal('show', {id: id});
+            $('#modal-list-pekerja').modal('show', {
+                id: id
+            });
         });
 
         $('#modal-list-pekerja').on('show.bs.modal', function(e) {
@@ -238,7 +241,10 @@
         $('#data-wilayah').on('click', 'tr td button.btn.btn-info', function(e) {
             var lon = $(this).data().lon;
             var lat = $(this).data().lat;
-            map.flyTo({center: [lat,lon], zoom: 10});
+            map.flyTo({
+                center: [lat, lon],
+                zoom: 10
+            });
             window.scrollTo(0, 0);
         });
     });
