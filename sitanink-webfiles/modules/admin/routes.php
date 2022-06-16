@@ -67,30 +67,21 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
     $routes->group('input-data', ['namespace' => $routes_namespace . 'Inputdata\Controllers\\'], function ($routes) {
         $routes->get('/', 'InputDataController::index', ['as' => 'input-data']);
     });
-    // notifikasi
-    // pengaturan
-
-    // pekerja
-    // $routes->get('pekerja', 'Pekerja\Controllers\PekerjaController::index', ['as' => 'pekerja']);
-    // $routes->get('pekerja/(:segment)', 'Pekerja\Controllers\PekerjaController::get/$1', ['as' => 'pekerja.get']);
-    // $routes->get('pekerja/add', 'Pekerja\Controllers\PekerjaController::add', ['as' => 'pekerja.add']);
-    // $routes->get('pekerja/create', 'Pekerja\Controllers\PekerjaController::create', ['as' => 'pekerja.create']);
-    // $routes->get('pekerja/(:segment)/edit', 'Pekerja\Controllers\PekerjaController::edit/$1', ['as' => 'pekerja.edit']);
-    // $routes->get('pekerja/(:segment)/update', 'Pekerja\Controllers\PekerjaController::update/$1', ['as' => 'pekerja.update']);
-    // $routes->get('pekerja/(:segment)/delete', 'Pekerja\Controllers\PekerjaController::delete/$1', ['as' => 'pekerja.delete']);
-
     // data wilayah
     $routes->group('wilayah', ['namespace' => $routes_namespace . 'Wilayah\Controllers\\'], function($routes) {
         $routes->get('/', 'WilayahController::index', ['as' => 'wilayah']);
         $routes->get('download/excel', 'WilayahController::downloadExcel', ['as' => 'wilayah.download-excel']);
     });
-
     // data qrcode
     $routes->group('qrcode', ['namespace' => $routes_namespace . 'Qrcode\Controllers\\'], function($routes) {
         $routes->get('/', 'QrcodeController::index', ['as' => 'qrcode']);
     });
-    // $routes->get('wilayah/detail', 'Wilayah\Controllers\WilayahController::detail', ['as' => 'wilayah.detail']);
-
+    // data kartu
+    $routes->group('kartu', ['namespace' => $routes_namespace . 'Kartu\Controllers\\'], function($routes) {
+        $routes->get('/', 'KartuController::index', ['as' => 'kartu']);
+        $routes->get('add', 'KartuController::add', ['as' => 'kartu.add']);
+    });
     // notifikasi
+    // pengaturan
     // $routes->get('notifikasi', 'Notifikasi\Controllers\NotifikasiControllers::index', ['as' => 'notifikasi']);
 });

@@ -52,8 +52,8 @@
                     <i class="fa fa-qrcode"></i> <span>Data QRCode</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
+            <li class="<?= isLinkActive('kartu', 1) ?>">
+                <a href="<?=route_to('kartu')?>">
                     <i class="fa fa-vcard-o"></i> <span>Data Kartu</span>
                 </a>
             </li>
