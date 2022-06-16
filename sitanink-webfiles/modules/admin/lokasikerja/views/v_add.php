@@ -58,9 +58,11 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
 
 <?= $renderer->section('custom-js') ?>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+<!-- <script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl-csp.js'></script> -->
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
 <script>
     $(function() {
+        // mapboxgl.workerUrl = "https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl-csp-worker.js";
         mapboxgl.accessToken = 'pk.eyJ1IjoiamFtaWxjaGFuIiwiYSI6ImNrNG1oOWI1YjJqNmUzZG9iZjU3MHRhYzQifQ.U4Y11hHODjokNS7Jmlw0Xg';
         var map = new mapboxgl.Map({
             container: 'lokasi-kerja-peta', //id elemen html
@@ -103,6 +105,6 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
 <?= $renderer->endSection() ?>
 
 <?= $renderer->section('custom-css') ?>
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet' />
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css">
 <?= $renderer->endSection() ?>
