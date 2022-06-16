@@ -11,9 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>Sitanink Admin - <?= $pageTitle ?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- <meta http-equiv="Content-Security-Policy" content="child-src blob: ; img-src data: blob: ; script-src 'self' 'unsafe-eval'; connect-src https://*.tiles.mapbox.com https://api.mapbox.com"> -->
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-IFvY57hghDdSYuM1k1m1Nbu4VcB8xASWZVih2CQp+to='; script-src-elem 'unsafe-inline' 'self' https://api.mapbox.com; worker-src 'self' blob: ;child-src blob: ;img-src 'self' data: blob: ;connect-src https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com ;">
-    <!-- <meta http-equiv="Content-Security-Policy" content="img-src 'self' data: blob: ;child-src blob: ; img-src data: blob: ; script-src 'self' 'unsafe-eval'; connect-src https://*.tiles.mapbox.com https://api.mapbox.com"> -->
+    <meta http-equiv="Content-Security-Policy" content="worker-src blob: ;child-src blob: ;img-src data: blob: ;connect-src https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com ;">
     <link rel="stylesheet" href="<?= site_url('adminlte2/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= site_url('adminlte2/bower_components/font-awesome/css/font-awesome.min.css') ?>">
