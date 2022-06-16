@@ -42,13 +42,13 @@ class MasterDataSeeder extends Seeder
                 ['nama'  => 'Pembelanjaan Kantin Permisan'],
             ]);
         // domisili
-        $this->db->table('domisili')
-            ->insertBatch([
-                ['nama'  => 'Lapas Terbuka'],
-                ['nama'  => 'Lapas Permisan'],
-                ['nama'  => 'Nirbaya'],
-                ['nama'  => 'Lapas Kelas 1 Batu'],
-                ['nama'  => 'Lapas Kembangkuning'],
-            ]);
+        // $this->db->table('domisili')
+        //     ->insertBatch([
+        //         ['nama'  => 'Lapas Terbuka'],
+        //         ['nama'  => 'Lapas Permisan'],
+        //         ['nama'  => 'Nirbaya'],
+        //         ['nama'  => 'Lapas Kelas 1 Batu'],
+        //         ['nama'  => 'Lapas Kembangkuning'],
+        //     ]);
     }
 }
