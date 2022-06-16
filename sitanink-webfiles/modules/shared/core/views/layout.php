@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- <meta http-equiv="Content-Security-Policy" content="child-src blob: ; img-src data: blob: ; script-src 'self' 'unsafe-eval'; connect-src https://*.tiles.mapbox.com https://api.mapbox.com"> -->
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval'; worker-src 'self' blob: ;child-src blob: ;img-src 'self' data: blob: ;connect-src https://*;">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval'; worker-src 'self' blob: ;child-src blob: ;img-src 'self' data: blob: ;connect-src https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com ;">
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://* blob: data:; script-src https://* 'sha256-NwPGqa9Mxa7ZIeBSPi4K97Vtt3uBWjwtJsUlZfeqG5E' 'unsafe-eval'; style-src 'unsafe-inline' https://*; child-src blob: ; connect-src https://*;"> -->
     <link rel="stylesheet" href="<?= site_url('adminlte2/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>">
     <!-- Font Awesome -->
