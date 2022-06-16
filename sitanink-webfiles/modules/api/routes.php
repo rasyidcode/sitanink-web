@@ -27,4 +27,9 @@ $routes->group('api/v1', ['namespace' => $routes_namespace], function ($routes) 
         $routes->get('(:segment)/pekerja', 'WilayahController::getListPekerja/$1', ['as' => 'api.wilayah.list-pekerja']);
         $routes->post('get-data', 'WilayahController::getData', ['as' => 'api.wilayah.get-data']);
     });
+
+    $routes->group('qrcode', ['namespace' => $routes_namespace . 'Qrcode\Controllers\\'], function($routes) {
+        $routes->post('get-data', 'QrcodeController::getData', ['as' => 'api.qrcode.get-data']);
+        $routes->post('(:segment)/generate', 'QrcodeController::generate/$1', ['as' => 'qrcode.generate']);
+    });
 });

@@ -84,6 +84,11 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->get('/', 'WilayahController::index', ['as' => 'wilayah']);
         $routes->get('download/excel', 'WilayahController::downloadExcel', ['as' => 'wilayah.download-excel']);
     });
+
+    // data qrcode
+    $routes->group('qrcode', ['namespace' => $routes_namespace . 'Qrcode\Controllers\\'], function($routes) {
+        $routes->get('/', 'QrcodeController::index', ['as' => 'qrcode']);
+    });
     // $routes->get('wilayah/detail', 'Wilayah\Controllers\WilayahController::detail', ['as' => 'wilayah.detail']);
 
     // notifikasi

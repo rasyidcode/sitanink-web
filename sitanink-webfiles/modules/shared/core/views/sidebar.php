@@ -47,8 +47,8 @@
                     <i class="ion ion-map"></i> <span>Data Per Wilayah</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
+            <li class="<?= isLinkActive('qrcode', 1) ?>">
+                <a href="<?=route_to('qrcode')?>">
                     <i class="fa fa-qrcode"></i> <span>Data QRCode</span>
                 </a>
             </li>
