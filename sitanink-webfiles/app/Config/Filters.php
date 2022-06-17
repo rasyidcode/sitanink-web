@@ -49,7 +49,8 @@ class Filters extends BaseConfig
             'web-auth-filter'   => [
                 'except'    => [
                     'login',
-                    'api/v1/*'
+                    'api/v1/*',
+                    'show-data'
                 ]
             ],
         ],
