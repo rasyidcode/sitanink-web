@@ -137,7 +137,7 @@
                 qrsecret = 'invalid';
             }
             
-            qrcode.makeCode(`<?=site_url('qrcode/show-data')?>?qrsecret=${qrsecret}`);
+            qrcode.makeCode(`<?=site_url('show-data')?>?qrsecret=${qrsecret}`);
         });
 
         $('#data-qrcode tbody').on('click', 'tr td button.btn.btn-primary', function(e) {
