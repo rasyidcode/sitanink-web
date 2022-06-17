@@ -31,8 +31,8 @@ class WilayahController extends BaseController
             $row    = [];
             $row[]  = "<input type=\"hidden\" value=\"" . $item->id . "\">{$num}.";
             $row[]  = $item->nama ?? '-';
-            $row[]  = $item->lat ?? '-';
             $row[]  = $item->lon ?? '-';
+            $row[]  = $item->lat ?? '-';
             $row[]  = $item->total_pekerja ?? '-';
             $row[]  = $item->created_at ?? '-';
             $row[]  = "<div class=\"text-center\">
