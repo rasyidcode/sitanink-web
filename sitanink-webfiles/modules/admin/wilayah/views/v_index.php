@@ -244,7 +244,7 @@
             var lon = $(this).data().lon;
             var lat = $(this).data().lat;
             map.flyTo({
-                center: [lat, lon],
+                center: [lon, lat],
                 zoom: 10
             });
             window.scrollTo(0, 0);
