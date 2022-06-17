@@ -141,7 +141,7 @@
                                 .setText('Jumlah Pekerja: ' + item[4])
                                 .addTo(map);
                             new mapboxgl.Marker()
-                                .setLngLat([item[3], item[2]])
+                                .setLngLat([item[2], item[3]])
                                 .addTo(map)
                                 .setPopup(popup);
                         });
