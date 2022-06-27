@@ -327,7 +327,7 @@ class PekerjaModel extends Model
             ->where('id_pekerja', $id);
         
         if (!is_null($berkas)) {
-            return $berkas->where('type', $tipe)
+            return $berkas->where('berkas_type_id', $tipe)
                 ->get()
                 ->getRowObject();
         }
