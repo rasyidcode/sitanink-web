@@ -424,6 +424,42 @@ class CardController extends BaseController
 
         //-- qrcode
         $datasecret = site_url('show-data') . '?qrsecret='.$pekerja->qr_secret;
+
+        //-- convert to bitly
+        $bitlyaccesstoken = 'b43c250fc0107927f5ea902dd1fe75687f74f2fe';
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL 		   => "https://api-ssl.bitly.com/v4/shorten",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING       => "",
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_TIMEOUT        => 500,
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST  => "POST",
+            CURLOPT_POSTFIELDS     => json_encode([
+                'long_url'  => $datasecret,
+                'domain'    => 'bit.ly'
+            ]),
+            CURLOPT_HTTPHEADER     => array(
+                "Authorization: Bearer " . $bitlyaccesstoken,
+                "content-type: application/json"
+            ),
+            // CURLOPT_SSL_VERIFYPEER  => false,
+            // CURLOPT_SSL_VERIFYHOST => false
+        ));
+
+        $bitlyresponse = curl_exec($curl);
+        $err = curl_error($curl);
+        if ($err) {
+            $datasecret = site_url('show-data') . '?id=' . $pekerja->id;
+        } else {
+            $bitlyresponse = (array) json_decode($bitlyresponse);
+            $datasecret = $bitlyresponse['link'] ?? '';
+            if ($datasecret == '') {
+                $datasecret = site_url('show-data') . '?id=' . $pekerja->id;
+            }
+        }
+
         $qrcode = imagecreatefrompng('https://qrickit.com/api/qr.php?qrsize=100&d=' . $datasecret);
         imagecopy($image, $qrcode, imagesx($image) / 2 - imagesx($qrcode) / 2 - 90, imagesy($image) / 2 + 100, 0, 0, imagesx($qrcode), imagesy($qrcode));
         imagesavealpha($image, true);
