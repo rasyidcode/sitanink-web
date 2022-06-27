@@ -111,28 +111,28 @@
                                     <th>KTP</th>
                                     <td>:</td>
                                     <td>
-                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-show-image" data-tipe-berkas="ktp" onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
+                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-show-image" data-tipe-berkas="2" onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>KK</th>
                                     <td>:</td>
                                     <td>
-                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-show-image" data-tipe-berkas="kk" onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
+                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-show-image" data-tipe-berkas="3" onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Surat Permohonan Ijin Usaha</th>
                                     <td>:</td>
                                     <td>
-                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-show-image" data-tipe-berkas="spiu" onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
+                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-show-image" data-tipe-berkas="4" onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Surat Perijinan</th>
                                     <td>:</td>
                                     <td>
-                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-show-image" data-tipe-berkas="sp" onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
+                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-show-image" data-tipe-berkas="5" onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
                                     </td>
                                 </tr>
                             </tbody>
