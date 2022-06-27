@@ -109,22 +109,49 @@ class CardController extends BaseController
             );
         }
 
-        $path = new Paths();
-
-        $pubsImagePath = $path->publicImagesDirectory;
-        $resizePath = $path->publicResizeDirectory;
-
         $generateRequest = $dataPost['generate_request'];
+
+        $pubsImagePath = '';
+        $resizePath = '';
         $workingPath = '';
-        if ($generateRequest == 'preview') {
-            $workingPath = $path->publicPreviewDirectory;
-        } else if ($generateRequest == 'save') {
-            $workingPath = $path->publicKartuDirectory;
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $path = new Paths();
+
+            $pubsImagePath = $path->publicImagesDirectory;
+            $resizePath = $path->publicResizeDirectory;
+
+            if ($generateRequest == 'preview') {
+                $workingPath = $path->publicPreviewDirectory;
+            } else if ($generateRequest == 'save') {
+                $workingPath = $path->publicKartuDirectory;
+            } else {
+                throw new ApiAccessErrorException(
+                    message: 'Generate request is not recognized!',
+                    statusCode: ResponseInterface::HTTP_BAD_REQUEST
+                );
+            }
         } else {
-            throw new ApiAccessErrorException(
-                message: 'Generate request is not recognized!',
-                statusCode: ResponseInterface::HTTP_BAD_REQUEST
-            );
+            $pubsImagePath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
+                'public_html' . DIRECTORY_SEPARATOR .
+                'assets' . DIRECTORY_SEPARATOR .
+                'images';
+            $resizePath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
+                'public_html' . DIRECTORY_SEPARATOR .
+                'resize';
+            if ($generateRequest == 'preview') {
+                $workingPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
+                    'public_html' . DIRECTORY_SEPARATOR .
+                    'preview';
+            } else if ($generateRequest == 'save') {
+                $workingPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
+                    'public_html' . DIRECTORY_SEPARATOR .
+                    'kartu';
+            } else {
+                throw new ApiAccessErrorException(
+                    message: 'Generate request is not recognized!',
+                    statusCode: ResponseInterface::HTTP_BAD_REQUEST
+                );
+            }
         }
 
         $fcPath = $this->generateFrontCard($pubsImagePath, $workingPath, $resizePath, $pekerja, $dataPost['valid_until']);
