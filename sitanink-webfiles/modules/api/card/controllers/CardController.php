@@ -423,7 +423,8 @@ class CardController extends BaseController
         imagecopy($image, $pp, 50, imagesy($image) / 2 - $npph / 2 + 40, 0, 0, $nppw, $npph);
 
         //-- qrcode
-        $qrcode = imagecreatefrompng('https://qrickit.com/api/qr.php?qrsize=100&d=' . $pekerja->qr_secret);
+        $datasecret = site_url('show-data') . '?qrsecret='.$pekerja->qr_secret;
+        $qrcode = imagecreatefrompng('https://qrickit.com/api/qr.php?qrsize=100&d=' . $datasecret);
         imagecopy($image, $qrcode, imagesx($image) / 2 - imagesx($qrcode) / 2 - 90, imagesy($image) / 2 + 100, 0, 0, imagesx($qrcode), imagesy($qrcode));
         imagesavealpha($image, true);
 
