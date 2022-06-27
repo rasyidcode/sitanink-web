@@ -85,13 +85,13 @@ class Paths
 
     public $modulesDirectory = __DIR__ . '/../../modules';
 
-    public $publicImagesDirectory = __DIR__ . '../../../../public_html/assets/images';
+    public $publicImagesDirectory = __DIR__ . '/../../../../public_html/assets/images';
 
-    public $publicFontsDirectory = __DIR__ . '../../../../public_html/assets/fonts';
+    public $publicFontsDirectory = __DIR__ . '/../../../../public_html/assets/fonts';
 
-    public $publicKartuDirectory = __DIR__ . '../../../../public_html/kartu';
+    public $publicKartuDirectory = __DIR__ . '/../../../../public_html/kartu';
 
-    public $publicResizeDirectory = __DIR__ . '../../../../public_html/resize';
+    public $publicResizeDirectory = __DIR__ . '/../../../../public_html/resize';
 
-    public $publicPreviewDirectory = __DIR__ . '../../../../public_html/preview';
+    public $publicPreviewDirectory = __DIR__ . '/../../../../public_html/preview';
 }
