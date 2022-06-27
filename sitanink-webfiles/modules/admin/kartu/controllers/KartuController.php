@@ -3,6 +3,7 @@
 namespace Modules\Admin\Kartu\Controllers;
 
 use CodeIgniter\Config\Services;
+use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Admin\Kartu\Models\KartuModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
 
@@ -76,6 +77,38 @@ class KartuController extends BaseWebController
         ];
 
         return $this->renderView('v_generate', $this->viewData);
+    }
+
+    public function delete($id)
+    {
+        $card = $this->kartuModel->get($id);
+        if (is_null($card)) {
+            return $this->response
+                ->setJSON([
+                    'success'   => false,
+                    'message'   => 'Kartu tidak ditemukan!'
+                ]);
+        }
+
+        $berkas = $this->kartuModel->getBerkas($card->id_berkas);
+        if (is_null($berkas)) {
+            return $this->response
+                ->setJSON([
+                    'success'   => false,
+                    'message'   => 'Berkas tidak ditemukan!'
+                ]);
+        }
+
+        $this->kartuModel->delete($id);
+
+        $this->kartuModel->deleteBerkas($berkas->id);
+        unlink($berkas->path . '/' . $berkas->filename);
+
+        return $this->response
+            ->setJSON([
+                'message' => 'Kartu berhasil dihapus!'
+            ])
+            ->setStatusCode(ResponseInterface::HTTP_OK);
     }
 
     public function doGenerate()

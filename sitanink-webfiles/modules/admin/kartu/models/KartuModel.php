@@ -45,6 +45,7 @@ class KartuModel
                 generated_cards.valid_until,
                 pekerja.id as id_pekerja,
                 pekerja.nama as name,
+                generated_cards.id_berkas,
                 berkas.path,
                 berkas.filename
             ')
@@ -53,6 +54,52 @@ class KartuModel
             ->where('generated_cards.id', $id)
             ->get()
             ->getRowObject();
+    }
+
+    /**
+     * Delete generated card by id
+     * 
+     * @param int $id
+     * 
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        return $this->db
+            ->table('generated_cards')
+            ->where('id', $id)
+            ->delete();
+    }
+
+    /**
+     * Get berkas by id
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function getBerkas(int $id) : ?object
+    {
+        return $this->db
+            ->table('berkas')
+            ->where('id', $id)
+            ->get()
+            ->getRowObject();
+    }
+
+    /**
+     * Delete berkas by id
+     * 
+     * @param int $id
+     * 
+     * @return void
+     */
+    public function deleteBerkas(int $id)
+    {
+        return $this->db
+            ->table('berkas')
+            ->where('id', $id)
+            ->delete();
     }
 
 }

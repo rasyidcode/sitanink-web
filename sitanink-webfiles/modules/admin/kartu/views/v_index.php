@@ -260,6 +260,32 @@
                 }
             });
         });
+
+        // delete pekerja
+        $('#data-kartu tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
+            var cardId = $(this).data().cardId;
+
+            if (confirm('Anda yakin mau dihapus?')) {
+                $.ajax({
+                    url: `<?=site_url('kartu2')?>/${cardId}/delete`,
+                    type: 'post',
+                    data: {
+                        ['<?= csrf_token() ?>']: '<?= csrf_hash() ?>'
+                    },
+                    success: function(res, textStatus, xhr) {
+                        console.log(res);
+
+                        alert(res.message);
+                        location.reload();
+                    },
+                    error: function(err) {
+                        console.log(err);
+
+                        alert('Something went wrong!');
+                    }
+                });
+            }
+        });
     });
 </script>
 <?= $renderer->endSection() ?>
