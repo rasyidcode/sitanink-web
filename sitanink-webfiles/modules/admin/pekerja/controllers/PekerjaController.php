@@ -340,7 +340,7 @@ class PekerjaController extends BaseWebController
             'size_in_mb'    => $foto->getSizeByUnit('mb'),
             'mime'          => $foto->getMimeType(),
             'ext'           => $foto->getExtension(),
-            'type'          => 'foto',
+            'berkas_type_id'          => 1,
         ]);
         $foto->move($filePath, $fotoName);
 
@@ -353,7 +353,7 @@ class PekerjaController extends BaseWebController
             'size_in_mb'    => $ktp->getSizeByUnit('mb'),
             'mime'          => $ktp->getMimeType(),
             'ext'           => $ktp->getExtension(),
-            'type'          => 'ktp',
+            'berkas_type_id'          => 2,
         ]);
         $ktp->move($filePath, $ktpName);
 
@@ -366,7 +366,7 @@ class PekerjaController extends BaseWebController
             'size_in_mb'    => $kk->getSizeByUnit('mb'),
             'mime'          => $kk->getMimeType(),
             'ext'           => $kk->getExtension(),
-            'type'          => 'kk',
+            'berkas_type_id'          => 3,
         ]);
         $kk->move($filePath, $kkName);
 
@@ -379,7 +379,7 @@ class PekerjaController extends BaseWebController
             'size_in_mb'    => $spiu->getSizeByUnit('mb'),
             'mime'    => $spiu->getMimeType(),
             'ext'    => $spiu->getExtension(),
-            'type'    => 'spiu',
+            'berkas_type_id'    => 4,
         ]);
         $spiu->move($filePath, $spiuName);
 
@@ -392,7 +392,7 @@ class PekerjaController extends BaseWebController
             'size_in_mb'    => $sp->getSizeByUnit('mb'),
             'mime'          => $sp->getMimeType(),
             'ext'           => $sp->getExtension(),
-            'type'          => 'sp',
+            'berkas_type_id'          => 5,
         ]);
         $sp->move($filePath, $spName);
 
@@ -520,27 +520,27 @@ class PekerjaController extends BaseWebController
 
         // foto
         if ($foto->getPath()) {
-            $this->berkasUploadHandler($id, 'foto', $foto);
+            $this->berkasUploadHandler($id, 1, $foto);
         }
 
         // ktp
         if ($ktp->getPath()) {
-            $this->berkasUploadHandler($id, 'ktp', $ktp);
+            $this->berkasUploadHandler($id, 2, $ktp);
         }
 
         // kk
         if ($kk->getPath()) {
-            $this->berkasUploadHandler($id, 'kk', $kk);
+            $this->berkasUploadHandler($id, 3, $kk);
         }
 
         // spiu
         if ($spiu->getPath()) {
-            $this->berkasUploadHandler($id, 'spiu', $spiu);
+            $this->berkasUploadHandler($id, 4, $spiu);
         }
 
         // sp
         if ($sp->getPath()) {
-            $this->berkasUploadHandler($id, 'sp', $sp);
+            $this->berkasUploadHandler($id, 5, $sp);
         }
 
         session()->setFlashdata('success', 'Pekerja berhasil diupdate!');
@@ -626,7 +626,7 @@ class PekerjaController extends BaseWebController
         ];
     }
 
-    private function berkasUploadHandler(int $id, string $tipe, UploadedFile $file)
+    private function berkasUploadHandler(int $id, int $tipe, UploadedFile $file)
     {
         // upload path
         $filePath = ROOTPATH . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . 'uploads';
@@ -640,7 +640,7 @@ class PekerjaController extends BaseWebController
             'size_in_mb'    => $file->getSizeByUnit('mb'),
             'mime'          => $file->getMimeType(),
             'ext'           => $file->getExtension(),
-            'type'          => $tipe,
+            'berkas_type_id'          => $tipe,
         ];
         if (!is_null($berkas)) {
             // update

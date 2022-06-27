@@ -108,6 +108,7 @@ class PekerjaModel extends Model
     {
         $this->builder('berkas')
             ->insert($data);
+        return $this->db->insertID();
     }
 
     /**
@@ -193,7 +194,7 @@ class PekerjaModel extends Model
         $pekerja->where('pekerja.id', $id);
         
         if ($withFoto) {
-            $pekerja->where('berkas.type', 'foto');
+            $pekerja->where('berkas.berkas_type_id', 1);
         }
         
         return $pekerja->get()

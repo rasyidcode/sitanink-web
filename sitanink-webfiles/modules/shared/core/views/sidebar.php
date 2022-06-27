@@ -34,7 +34,11 @@
                     <li class="<?= isLinkActive('lokasi-kerja', 2) ?>"><a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> Lokasi</a></li>
                     <li class="<?= isLinkActive('jenis-pekerja', 2) ?>"><a href="<?= route_to('jenis-pekerja') ?>"><i class="fa fa-square-o"></i> Jenis</a></li>
                     <li class="<?= isLinkActive('pekerjaan', 2) ?>"><a href="<?= route_to('pekerjaan') ?>"><i class="fa fa-gavel"></i> Pekerjaan</a></li>
+                    <!-- <li class="<?= isLinkActive('tipe-berkas', 2) ?>"><a href="<?= route_to('tipe-berkas') ?>"><i class="fa fa-file"></i> Tipe Berkas</a></li> -->
                 </ul>
+            </li>
+            <li class="<?= isLinkActive('tipe-berkas', 1) ?>">
+                <a href="<?= route_to('tipe-berkas') ?>"><i class="fa fa-file"></i> <span>Master Data Tipe Berkas</span></a>
             </li>
             <li class="header">Data</li>
             <li class="<?= isLinkActive('pekerja', 1) ?>">
@@ -52,10 +56,17 @@
                     <i class="fa fa-qrcode"></i> <span>Data QRCode</span>
                 </a>
             </li>
-            <li class="<?= isLinkActive('kartu', 1) ?>">
-                <a href="<?=route_to('kartu')?>">
+            <li class="treeview" style="height: auto;">
+                <a href="#">
                     <i class="fa fa-vcard-o"></i> <span>Data Kartu</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
+                <ul class="treeview-menu" style="display: <?= isMenuOpen('kartu2', 1) ?>;">
+                    <li class="<?= isLinkActive('list', 2) ?>"><a href="<?= route_to('kartu') ?>"><i class="fa fa-square-o"></i> List</a></li>
+                    <li class="<?= isLinkActive('generate', 2) ?>"><a href="<?= route_to('kartu.generate') ?>"><i class="fa fa-square-o"></i> Generate</a></li>
+                </ul>
             </li>
             <li>
                 <a href="#">
@@ -66,8 +77,8 @@
             <li>
                 <a href="#"><i class="ion ion-android-notifications-none"></i> <span>Notifikasi</span></a>
             </li>
-            <li>
-                <a href="#"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>
+            <li <?= isLinkActive('setting', 1) ?>>
+                <a href="<?=route_to('setting')?>"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>
             </li>
             <li class="header">Tools</li>
             <li>

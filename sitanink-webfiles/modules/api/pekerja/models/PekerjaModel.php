@@ -147,7 +147,7 @@ class PekerjaModel
         $berkas = $this->db->table('berkas')
             ->where('id_pekerja', $id);
         if (!is_null($tipe)) {
-            return $berkas->where('type', $tipe)
+            return $berkas->where('berkas_type_id', $tipe)
                 ->get()
                 ->getRowObject();
         }

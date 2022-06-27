@@ -33,6 +33,15 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
             $routes->post('(:segment)/delete', 'JenispekerjaController::delete/$1', ['as' => 'jenis-pekerja.delete']);
         });
     });
+    // tipe berkas
+    $routes->group('tipe-berkas', ['namespace' => $routes_namespace . 'Berkastype\Controllers\\'], function ($routes) {
+        $routes->get('/', 'BerkastypeController::index', ['as' => 'tipe-berkas']);
+        $routes->get('add', 'BerkastypeController::add', ['as' => 'tipe-berkas.add']);
+        $routes->post('create', 'BerkastypeController::create', ['as' => 'tipe-berkas.create']);
+        $routes->get('(:segment)/edit', 'BerkastypeController::edit/$1', ['as' => 'tipe-berkas.edit']);
+        $routes->post('(:segment)/update', 'BerkastypeController::update/$1', ['as' => 'tipe-berkas.update']);
+        $routes->post('(:segment)/delete', 'BerkastypeController::delete/$1', ['as' => 'tipe-berkas.delete']);
+    });
     // user
     $routes->group('user', ['namespace' => $routes_namespace . 'User\Controllers\\'], function ($routes) {
         $routes->get('/',                       'UserController::index',            ['as' => 'user']);
@@ -77,11 +86,21 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->get('/', 'QrcodeController::index', ['as' => 'qrcode']);
     });
     // data kartu
-    $routes->group('kartu', ['namespace' => $routes_namespace . 'Kartu\Controllers\\'], function($routes) {
-        $routes->get('/', 'KartuController::index', ['as' => 'kartu']);
-        $routes->get('add', 'KartuController::add', ['as' => 'kartu.add']);
+    $routes->group('kartu2', ['namespace' => $routes_namespace . 'Kartu\Controllers\\'], function($routes) {
+        $routes->get('list', 'KartuController::index', ['as' => 'kartu']);        
+        $routes->get('generate', 'KartuController::generate', ['as' => 'kartu.generate']);
+        $routes->post('generate', 'KartuController::doGenerate', ['as' => 'kartu.do-generate']);
+        $routes->post('preview', 'KartuController::cardPreview', ['as' => 'kartu.preview']);
+        // $routes->get('test-generate', 'KartuController::testGenerate', ['as' => 'kartu.test-generate']);
+        // $routes->get('test-generate2', 'KartuController::testGenerate2', ['as' => 'kartu.test-generate2']);
+        // $routes->get('phpinfo', 'KartuController::phpinfo', ['as' => 'kartu.phpinfo']);
     });
-    // notifikasi
     // pengaturan
+    $routes->group('setting', ['namespace' => $routes_namespace . 'Setting\Controllers\\'], function($routes) {
+        $routes->get('/', 'SettingController::index', ['as' => 'setting']);
+        $routes->post('pas-foto-config', 'SettingController::pasFotoConfig', ['as' => 'setting.tipe-berkas.pas-foto']);
+    });
+
+    // notifikasi
     // $routes->get('notifikasi', 'Notifikasi\Controllers\NotifikasiControllers::index', ['as' => 'notifikasi']);
 });

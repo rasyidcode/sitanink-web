@@ -24,4 +24,19 @@ class BerkasModel
             ->delete();
     }
 
+    /**
+     * Get by id
+     * 
+     * @param int $id
+     * 
+     * @param object
+     */
+    public function get(int $id)
+    {
+        return $this->builder
+            ->where('id', $id)
+            ->get()
+            ->getRowObject();
+    }
+
 }

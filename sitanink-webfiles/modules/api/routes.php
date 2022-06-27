@@ -15,6 +15,9 @@ $routes->group('api/v1', ['namespace' => $routes_namespace], function ($routes) 
         $routes->group('pekerjaan', ['namespace' => $routes_namespace . 'Pekerjaan\Controllers\\'], function($routes) {
             $routes->post('get-data', 'PekerjaanController::getData', ['as' => 'api.pekerjaan.get-data']);
         });
+        $routes->group('tipe-berkas', ['namespace' => $routes_namespace . 'Berkastype\Controllers\\'], function($routes) {
+            $routes->post('get-data', 'BerkastypeController::getData', ['as' => 'api.tipe-berkas.get-data']);
+        });
     });
 
     $routes->group('pekerja', ['namespace' => $routes_namespace . 'Pekerja\Controllers\\'], function ($routes) {
@@ -32,4 +35,12 @@ $routes->group('api/v1', ['namespace' => $routes_namespace], function ($routes) 
         $routes->post('get-data', 'QrcodeController::getData', ['as' => 'api.qrcode.get-data']);
         $routes->post('(:segment)/generate', 'QrcodeController::generate/$1', ['as' => 'qrcode.generate']);
     });
+
+    $routes->group('card', ['namespace' => $routes_namespace . 'Card\Controllers\\'], function($routes) {
+        $routes->post('get-data', 'CardController::getData', ['as' => 'api.card.get-data']);
+        $routes->get('get-berkas/(:segment)', 'CardController::getCard/$1', ['as' => 'api.card.get-berkas']);
+        $routes->post('generate', 'CardController::generate', ['as' => 'api.card.generate']);
+        $routes->post('test-backcard', 'CardController::testGenerateBackCard', ['as' => 'api.card.test-backcard']);
+    });
+
 });

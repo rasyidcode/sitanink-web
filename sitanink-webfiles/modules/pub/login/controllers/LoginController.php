@@ -60,7 +60,8 @@ class LoginController extends BaseWebController
         session()->set([
             'logged_in' => true,
             'username'  => $userdata->username,
-            'level'     => $userdata->level
+            'level'     => $userdata->level,
+            'user_id'   => $userdata->id,
         ]);
 
         return redirect()->route('admin');
