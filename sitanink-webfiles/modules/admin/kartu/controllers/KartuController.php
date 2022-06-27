@@ -51,6 +51,14 @@ class KartuController extends BaseWebController
 
     public function generate()
     {
+        $action = $this->request->getGet('action');
+        $cardId = $this->request->getGet('cardId');
+
+        $this->viewData['action']   = $action ?? 'add';
+        if ($action == 'edit') {
+            $pekerjaCard = $this->kartuModel->get((int)$cardId);
+            $this->viewData['pekerjaCard'] = $pekerjaCard;
+        }
         $this->viewData['listPekerja'] = $this->kartuModel->getPekerjaNoCard();
         $this->viewData['pageLinks'] = [
             'dashboard' => [

@@ -69,6 +69,7 @@ class Autoload extends AutoloadConfig
         'Firebase\JWT\JWT'                  => APPPATH . 'ThirdParty/php-jwt/src/JWT.php',
         'Firebase\JWT\Key'                  => APPPATH . 'ThirdParty/php-jwt/src/Key.php',
         'Firebase\JWT\ExpiredException'     => APPPATH . 'ThirdParty/php-jwt/src/ExpiredException.php',
+        'FPDF'                              => APPPATH . 'ThirdParty/fpdf184/fpdf.php',
     ];
 
     /**

@@ -40,6 +40,7 @@ $routes->group('api/v1', ['namespace' => $routes_namespace], function ($routes) 
         $routes->post('get-data', 'CardController::getData', ['as' => 'api.card.get-data']);
         $routes->get('get-berkas/(:segment)', 'CardController::getCard/$1', ['as' => 'api.card.get-berkas']);
         $routes->post('generate', 'CardController::generate', ['as' => 'api.card.generate']);
+        $routes->post('(:segment)/print', 'CardController::print/$1', ['as' => 'api.card.print']);
         $routes->post('test-backcard', 'CardController::testGenerateBackCard', ['as' => 'api.card.test-backcard']);
     });
 

@@ -20,29 +20,49 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                 <?= csrf_field() ?>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="form-group">
-                                            <label class="control-label">Pekerja (<span style="color: #dd4b39;">*</span>)</label>
-                                            <select name="pekerja" class="form-control">
-                                                <option value="">-- Pilih salah satu --</option>
-                                                <?php foreach ($listPekerja as $pekerja) : ?>
-                                                    <option value="<?= $pekerja->id ?>"><?= $pekerja->nama ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <span class="help-block">Pilih pekerja yang akan digenerate kartu nya.</span>
-                                        </div>
+                                        <?php if ($action != 'edit') : ?>
+                                            <div class="form-group">
+                                                <label class="control-label">Pekerja (<span style="color: #dd4b39;">*</span>)</label>
+                                                <select name="pekerja" class="form-control">
+                                                    <option value="">-- Pilih salah satu --</option>
+                                                    <?php foreach ($listPekerja as $pekerja) : ?>
+                                                        <option value="<?= $pekerja->id ?>"><?= $pekerja->nama ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                                <span class="help-block">Pilih pekerja yang akan digenerate kartu nya.</span>
+                                            </div>
+                                        <?php else : ?>
+                                            <div class="form-group">
+                                                <label class="control-label">Pekerja</label>
+                                                <input type="hidden" name="pekerja" id="pekerja" value="<?= $pekerjaCard->id_pekerja ?? '' ?>">
+                                                <input type="text" name="pekerja_text" id="pekerja_text" class="form-control" readonly value="<?= $pekerjaCard->name ?? '' ?>">
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="form-group <?= isset($fdErr['valid_until']) || isset($fdErr['valid_until']) ? 'has-error' : '' ?>">
-                                            <label><?= isset($fdErr['tempat_lahir']) || isset($fdErr['tgl_lahir']) ? $errIcon : '' ?>&nbsp;Valid Until (<span style="color: #dd4b39;">*</span>)</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
+                                        <?php if ($action != 'edit') : ?>
+                                            <div class="form-group">
+                                                <label>Valid Until (<span style="color: #dd4b39;">*</span>)</label>
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" name="valid_until" class="form-control pull-right" id="datepicker" placeholder="Masukkan tanggal expired...">
                                                 </div>
-                                                <input type="text" name="valid_until" class="form-control pull-right" id="datepicker" placeholder="Masukkan tanggal expired..." value="<?= old('valid_until') ?? '' ?>">
                                             </div>
-                                        </div>
+                                        <?php else : ?>
+                                            <div class="form-group">
+                                                <label>Valid Until (<span style="color: #dd4b39;">*</span>)</label>
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" name="valid_until" class="form-control pull-right" id="datepicker" placeholder="Masukkan tanggal expired...">
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <?php if (isset($fdErr['tgl_lahir'])) : ?>
@@ -74,10 +94,18 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <img id="card-front" width="500" height="300" src="<?= site_url('assets/images/card-front.png') ?>" alt="Card Front">
+                            <?php if ($action == 'edit'): ?>
+                                <img id="card-front" width="500" height="300" src="<?= site_url('kartu/' . $pekerjaCard->filename) ?>" alt="Card Front">
+                            <?php else: ?>
+                                <img id="card-front" width="500" height="300" src="<?= site_url('assets/images/card-front.png') ?>" alt="Card Front">
+                            <?php endif; ?>
                         </div>
                         <div class="col-lg-12">
-                            <img id="card-back" width="500" height="300" src="<?= site_url('assets/images/card-back.png') ?>" alt="Card Back">
+                            <?php if ($action == 'edit'): ?>
+                                <img id="card-back" width="500" height="300" src="<?= site_url('kartu/back-card.png') ?>" alt="Card Back">
+                            <?php else: ?>
+                                <img id="card-back" width="500" height="300" src="<?= site_url('assets/images/card-back.png') ?>" alt="Card Back">
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -95,23 +123,37 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
             format: 'yyyy-mm-dd',
             autoclose: true
         });
+        $('#datepicker')
+            .val('<?=$pekerjaCard->valid_until ?? ''?>')
+            .datepicker('update');
 
         $('#form-generate-kartu').find('button.btn-success').on('click', function(e) {
             $('.now-loading').show();
 
             var idPekerja = $('#form-generate-kartu').find('select[name="pekerja"]').val();
+            if (idPekerja === undefined) {
+                idPekerja = $('#form-generate-kartu').find('input[name="pekerja"]').val();
+            }
+            if (idPekerja === undefined) {
+                idPekerja = '';
+            }
             var validUntil = $('#form-generate-kartu').find('input[name="valid_until"]').val();
 
-            if (idPekerja == '' && validUntil == '') {
+            if (idPekerja == '' || validUntil == '') {
                 console.log('empty');
+                $('.now-loading').hide();
                 return;
             }
 
             var data = {
                 id_pekerja: idPekerja,
                 valid_until: validUntil,
-                generate_request: 'preview'
+                generate_request: 'preview',
+                action: '<?=$action?>',
+                card_id: '<?=$pekerjaCard->id ?? ""?>'
             };
+
+            console.log('data:', data);
 
             setTimeout(() => {
                 $.ajax({
@@ -155,18 +197,30 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
             $('.now-loading2').show();
 
             var idPekerja = $('#form-generate-kartu').find('select[name="pekerja"]').val();
+            if (idPekerja === undefined) {
+                idPekerja = $('#form-generate-kartu').find('input[name="pekerja"]').val();
+            }
+            if (idPekerja === undefined) {
+                idPekerja = '';
+            }
+            
             var validUntil = $('#form-generate-kartu').find('input[name="valid_until"]').val();
 
-            if (idPekerja == '' && validUntil == '') {
+            if (idPekerja == '' || validUntil == '') {
                 console.log('empty');
+                $('.now-loading2').hide();
                 return;
             }
 
             var data = {
                 id_pekerja: idPekerja,
                 valid_until: validUntil,
-                generate_request: 'save'
+                generate_request: 'save',
+                action: '<?=$action?>',
+                card_id: '<?=$pekerjaCard->id ?? ""?>'
             };
+
+            console.log(data);
 
             setTimeout(() => {
                 $.ajax({
@@ -194,7 +248,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                         alert('Berhasil, silahkan kembali ke halaman list');
 
                         setTimeout(() => {
-                            window.location.href = '<?=route_to('kartu')?>'
+                            window.location.href = '<?= route_to('kartu') ?>'
                         }, 500);
 
                         $('.now-loading2').hide();

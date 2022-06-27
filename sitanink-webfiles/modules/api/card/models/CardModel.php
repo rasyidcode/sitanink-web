@@ -138,4 +138,44 @@ class CardModel
         $this->builder
             ->insert($data);
     }
+
+    /**
+     * Update generated file
+     * 
+     * @param array $data
+     * 
+     * @return void
+     */
+    public function update(array $data)
+    {
+        $cardId = $data['card_id'];
+        unset($data['card_id']);
+
+        $this->builder
+            ->where('id', $cardId)
+            ->update($data);
+    }
+
+    /**
+     * Get data by id
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function get(int $id) : ?object
+    {
+        return $this->builder
+            ->select('
+                generated_cards.id,
+                berkas.path,
+                berkas.filename,
+                pekerja.nama as name
+            ')
+            ->join('berkas', 'generated_cards.id_berkas = berkas.id', 'left')
+            ->join('pekerja', 'berkas.id_pekerja = pekerja.id', 'left')
+            ->where('generated_cards.id', $id)
+            ->get()
+            ->getRowObject();
+    }
 }

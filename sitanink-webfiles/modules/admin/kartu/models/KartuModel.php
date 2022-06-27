@@ -29,4 +29,30 @@ class KartuModel
             ->getResultObject();
     }
 
+    /**
+     * Get card by id
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function get(int $id)
+    {
+        return $this->db
+            ->table('generated_cards')
+            ->select('
+                generated_cards.id,
+                generated_cards.valid_until,
+                pekerja.id as id_pekerja,
+                pekerja.nama as name,
+                berkas.path,
+                berkas.filename
+            ')
+            ->join('berkas', 'generated_cards.id_berkas = berkas.id', 'left')
+            ->join('pekerja', 'berkas.id_pekerja = pekerja.id', 'left')
+            ->where('generated_cards.id', $id)
+            ->get()
+            ->getRowObject();
+    }
+
 }

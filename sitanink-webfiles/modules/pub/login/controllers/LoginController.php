@@ -44,9 +44,7 @@ class LoginController extends BaseWebController
         }
 
         $dataPost = (object) $this->request->getPost();
-        // print_r($dataPost);die();
         $userdata = $this->loginModel->getUser($dataPost->username);
-        // print_r($userdata);die();
         if (is_null($userdata)) {
             session()->setFlashdata('error', 'User tidak ditemukan!');
             return redirect()->back()->withInput();

@@ -139,9 +139,92 @@
             drawCallback: function(settings) {}
         });
 
-        // $('#data-kartu tbody').on('click', 'button.btn.btn-success', function(e) {
-        //     console.log('clicked');
-        // });
+        $('#data-kartu tbody').on('click', 'button.btn.btn-primary', function(e) {
+            var idCard = $(this).data().cardId;
+            var pekerjaName = $(this).data().pekerjaName;
+
+            fetch(`<?= site_url('api/v1/card') ?>/${idCard}/print`, {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Authorization': 'Basic ' + btoa('sitaninkadmin:admin123')
+                    })
+                })
+                .then((result) => {
+                    if (result.status != 200) {
+                        throw new Error('Bad server response');
+                    }
+                    return result.blob();
+                })
+                .then((data) => {
+                    console.log(data);
+                    var url = window.URL.createObjectURL(data);
+                    var anchor = document.createElement('a');
+                    anchor.href = url;
+                    anchor.download = Date.now() + '_' + pekerjaName + '.pdf';
+                    anchor.click();
+                    anchor.remove();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    alert('download error');
+                });
+
+            // $.ajax({
+            //     type: 'post',
+            //     url: `<?= site_url('api/v1/card') ?>/${idCard}/print`,
+            //     beforeSend: function(xhr) {
+            //         xhr.setRequestHeader('Authorization', 'Basic ' + btoa('sitaninkadmin:admin123'));
+            //     },
+            //     // xhr: function() {
+            //     //     var xhr = new XMLHttpRequest();
+            //     //     xhr.onreadystatechange = function() {
+            //     //         if (xhr.readyState == 2) {
+            //     //             if (xhr.status === 200) {
+            //     //                 xhr.responseType = 'blob';
+            //     //             } else {
+            //     //                 xhr.responseType = 'text';
+            //     //             }
+            //     //         }
+            //     //     }
+            //     //     return xhr;
+            //     // },
+            //     xhrFields: {
+            //         responseType: 'blob'
+            //     },
+            //     success: function(data) {
+            //         // var blob = new Blob([data], { type: "application/octetstream" });
+
+            //         // var isIE = false || !!document.documentMode;
+            //         // if (isIE) {
+            //         //     window.navigator.msSaveBlob(blob, Date.now() + '_' + pekerjaName + '.pdf');
+            //         // } else {
+            //         //     var url = window.URL || window.webkitURL;
+            //         //     link = url.createObjectURL(blob);
+            //         //     var a = $('<a>');
+            //         //     a.attr('id', 'card-download');
+            //         //     a.attr('download', Date.now() + '_' + pekerjaName + '.pdf');
+            //         //     a.attr('href', link);
+            //         //     $('body').append('a');
+            //         //     a[0].click();
+            //         //     $('body').find('a#card-download')
+            //         //         .remove();
+            //         //     url.revokeObjectURL(link);
+            //         // }
+            //         var a = document.createElement('a');
+            //         var url = window.URL.createObjectURL(blob);
+            //         a.href = url;
+            //         a.download = 'myfile.pdf';
+            //         document.body.append(a);
+            //         a.click();
+            //         a.remove();
+            //         window.URL.revokeObjectURL(url);
+            //     },
+            //     error: function(err) {
+            //         console.log(err);
+            //     }
+            // });
+        });
 
         $('#modal-show-image').on('show.bs.modal', function(e) {
             var relatedTarget = $(e.relatedTarget).data();
@@ -161,11 +244,11 @@
 
                     if (res.data) {
                         $thisElement.find('img.front')
-                               .attr('src', `<?= site_url('kartu') ?>/${res.data.filename}`)
-                               .attr('alt', 'Front Card');
+                            .attr('src', `<?= site_url('kartu') ?>/${res.data.filename}`)
+                            .attr('alt', 'Front Card');
                         $thisElement.find('img.back')
-                               .attr('src', `<?= site_url('kartu') ?>/back-card.png`)
-                               .attr('alt', 'Back Card');
+                            .attr('src', `<?= site_url('kartu') ?>/back-card.png`)
+                            .attr('alt', 'Back Card');
                     } else {
                         alert('Failed to show image!');
                     }
@@ -175,7 +258,7 @@
 
                     alert('Failed to show image!');
                 }
-            })
+            });
         });
     });
 </script>
