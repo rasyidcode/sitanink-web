@@ -15,8 +15,8 @@
                             <div class="row">
                                 <div class="col-xs-2">
                                     <div class="foto-css add-border center-block">
-                                        <?php if (!is_null($data->foto ?? null)) : ?>
-                                            <img class="foto-css center-block" src="<?= site_url('uploads/' . $data->foto) ?>" alt="Photo">
+                                        <?php if (!is_null($data->foto_filename ?? null)) : ?>
+                                            <img class="foto-css center-block" src="<?= site_url('uploads/' . $data->foto_filename) ?>" alt="Photo">
                                         <?php else : ?>
                                             <p class="text-left text-danger">Berkas Foto tidak ada!</p>
                                         <?php endif; ?>
@@ -127,6 +127,7 @@
                 </div>
                 <div class="modal-body">
                     <img class="center-block img-responsive" src="#" alt="">
+                    <span style="display: none;"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
@@ -146,11 +147,17 @@
         $('#modal-show-image').on('show.bs.modal', function(e) {
             var relatedTarget = $(e.relatedTarget).data();
             var tipe = relatedTarget.tipeBerkas;
-            console.log(tipe);
+
             var $thisElement = $(this);
+
+            $($thisElement)
+                .find('img')
+                .attr('src', '')
+                .attr('alt', '');
+
             $.ajax({
                 type: 'get',
-                url: `<?= route_to('api.pekerja.get-berkas', $data->id ?? '0') ?>?tipe=${tipe}`,
+                url: `<?= site_url('api/v1/berkas/get-by-pekerja-and-type/'.($data->id ?? '')) ?>/${tipe}`,
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader('Authorization', 'Basic ' + btoa('sitaninkadmin:admin123'));
                 },
@@ -158,17 +165,52 @@
                     console.log(res);
 
                     if (res.data) {
+                        $thisElement
+                            .find('img')
+                            .show();
+                        $thisElement
+                            .find('img')
+                            .next()
+                            .hide()
                         $thisElement.find('img')
                                .attr('src', `<?= site_url('uploads') ?>/${res.data.filename}`)
                                .attr('alt', tipe);
                     } else {
-                        alert('Failed to show image!');
+                        $($thisElement)
+                            .find('img')
+                            .attr('src', '')
+                            .attr('alt', '');
+                        $thisElement
+                            .find('img')
+                            .hide();
+                        $thisElement
+                            .find('img')
+                            .next()
+                            .show()
+                        $thisElement
+                            .find('img')
+                            .next()
+                            .html('[Gambar tidak ditemukan]');
                     }
                 },
                 error: function(err) {
                     console.log(err);
 
-                    alert('Failed to show image!');
+                    $($thisElement)
+                        .find('img')
+                        .attr('src', '')
+                        .attr('alt', '');
+                    $thisElement
+                        .find('img')
+                        .hide();
+                    $thisElement
+                        .find('img')
+                        .next()
+                        .show()
+                    $thisElement
+                        .find('img')
+                        .next()
+                        .html('[Gambar tidak ditemukan]');
                 }
             })
         });

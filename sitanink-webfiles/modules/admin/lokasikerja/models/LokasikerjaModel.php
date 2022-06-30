@@ -18,7 +18,9 @@ class LokasikerjaModel
     public function __construct(ConnectionInterface &$db)
     {
         $this->db = &$db;
-        $this->builder = $this->db->table('lokasi_kerja');
+        $this->builder = $this
+            ->db
+            ->table('lokasi_kerja');
     }
 
     /**
@@ -79,6 +81,23 @@ class LokasikerjaModel
         $this->builder
             ->where('id', $id)
             ->delete();
+    }
+
+    /**
+     * Get all as select dropdown
+     * 
+     * @return array
+     */
+    public function getAllAsDropdown()
+    {
+        return $this
+            ->builder
+            ->select('
+                id as value,
+                nama as text
+            ')
+            ->get()
+            ->getResultObject();
     }
 
 }

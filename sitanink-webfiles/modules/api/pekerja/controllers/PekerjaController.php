@@ -3,6 +3,7 @@
 namespace Modules\Api\Pekerja\Controllers;
 
 use App\Controllers\BaseController;
+use Carbon\Carbon;
 use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Api\Berkas\Models\BerkasModel;
 use Modules\Api\Pekerja\Models\PekerjaModel;
@@ -35,7 +36,9 @@ class PekerjaController extends BaseController
             $row[]  = "<input type=\"hidden\" value=\"" . $item->id . "\">{$num}.";
             $row[]  = $item->nik ?? '-';
             $row[]  = $item->nama ?? '-';
-            $row[]  = $item->ttl ?? '-';
+            $row[]  = $item->tempat_lahir ?? '-';
+            $row[]  = $item->tgl_lahir ?? '-';
+            $row[]  = !is_null($item->tgl_lahir) ? Carbon::createFromDate($item->tgl_lahir)->age : '-';
             $row[]  = $item->alamat ?? '-';
             $row[]  = $item->pekerjaan ?? '-';
             $row[]  = $item->lokasi_kerja ?? '-';
@@ -59,45 +62,13 @@ class PekerjaController extends BaseController
             ->setStatusCode(ResponseInterface::HTTP_OK);
     }
 
-    public function getBerkas($id)
+    public function delete($id)
     {
-        $tipe = $this->request->getGet('tipe');
-        $berkas = $this->pekerjaModel->getBerkas($id, $tipe);
+        $this->pekerjaModel->delete($id);
+
         return $this->response
             ->setJSON([
-                'data'  => $berkas
-            ])
-            ->setStatusCode(ResponseInterface::HTTP_OK);
-    }
-
-    public function deleteBerkas($id)
-    {
-        helper('filesystem');
-
-        $tipe           = $this->request->getGet('tipe');
-        $berkas         = $this->pekerjaModel->getBerkas($id, $tipe ?? null);
-        $deleteMessage  = '';
-        $success        = false;
-
-        if (!is_array($berkas)) {
-            $successDelete = unlink($berkas->path . DIRECTORY_SEPARATOR . $berkas->filename);
-            if ($successDelete) {
-                $success = true;
-                $deleteMessage = 'Berhasil menghapus berkas!';
-                $this->berkasModel->delete($berkas->id);
-            } else {
-                $deleteMessage = 'Gagal menghapus berkas dengan tipe ['.$tipe.'] !';
-            }
-        } else {
-            // $this->pekerjaModel->deleteBerkas($id);
-            $deleteMessage = 'Belum support hapus beberapa berkas!';
-            $success = false;
-        }
-        
-        return $this->response
-            ->setJSON([
-                'success'   => $success,
-                'message'   => $deleteMessage
+                'message' => 'Pekerja terhapus!'
             ])
             ->setStatusCode(ResponseInterface::HTTP_OK);
     }

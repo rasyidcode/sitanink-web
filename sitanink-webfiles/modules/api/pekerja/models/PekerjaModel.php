@@ -11,12 +11,40 @@ class PekerjaModel
 
     private $builder;
 
-    private $columnOrder = ['nama', 'tempat_lahir', 'tgl_lahir', 'alamat'];
+    private $columnSearch = [
+        null,
+        'pekerja.nik',
+        'pekerja.nama',
+        'pekerja.tempat_lahir',
+        'pekerja.tgl_lahir',
+        'pekerja.alamat',
+        'pekerja.pekerjaan',
+        'lokasi_kerja.nama',
+        'jenis_pekerja.nama',
+        null,
+        null
+    ];
+
+    private $columnOrder = [
+        null,
+        'pekerja.nik',
+        'pekerja.nama',
+        'pekerja.tempat_lahir',
+        'pekerja.tgl_lahir',
+        'pekerja.alamat',
+        'pekerja.pekerjaan',
+        'lokasi_kerja.nama',
+        'jenis_pekerja.nama',
+        'pekerja.created_at',
+        null
+    ];
 
     public function __construct(ConnectionInterface &$db)
     {
         $this->db = &$db;
-        $this->builder = $this->db->table('pekerja');
+        $this->builder = $this
+            ->db
+            ->table('pekerja');
     }
 
     /**
@@ -28,46 +56,63 @@ class PekerjaModel
      */
     public function getData(array $dtParams): ?array
     {
-        $this->builder->select('
-            pekerja.id,
-            pekerja.nik,
-            pekerja.nama,
-            pekerja.tempat_lahir,
-            pekerja.tgl_lahir,
-            CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
-            pekerja.alamat,
-            lokasi_kerja.nama as lokasi_kerja,
-            jenis_pekerja.nama as jenis_pekerja,
-            pekerjaan.nama as pekerjaan,
-            pekerja.created_at
-        ');
+        $this
+            ->builder
+            ->select('
+                pekerja.*,
+                CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
+                lokasi_kerja.nama as lokasi_kerja,
+                jenis_pekerja.nama as jenis_pekerja,
+            ')
+            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left');
 
-        $this->builder->join('pekerjaan', 'pekerja.id_pekerjaan = pekerjaan.id', 'left');
-        $this->builder->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left');
-        $this->builder->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left');
+        if (!empty($dtParams['search']['value'])) {
+            $this
+                ->builder
+                ->groupStart();
+            foreach ($this->columnSearch as $index => $columnItem) {
+                if (!is_null($columnItem)) {
+                    if ($index == 0) {
+                        $this
+                            ->builder
+                            ->like($columnItem, $dtParams['search']['value']);
+                    } else {
+                        $this
+                            ->builder
+                            ->orLike($columnItem, $dtParams['search']['value']);
+                    }
+                }
+            }
+            $this
+                ->builder
+                ->groupEnd();
+        }
 
-        $this->builder->groupStart();
-        $this->builder->like('pekerja.nik', $dtParams['search']['value']);
-        $this->builder->orLike('pekerja.nama', $dtParams['search']['value']);
-        $this->builder->orLike('pekerja.tempat_lahir', $dtParams['search']['value']);
-        $this->builder->orLike('pekerja.tgl_lahir', $dtParams['search']['value']);
-        $this->builder->orLike('pekerja.alamat', $dtParams['search']['value']);
-        $this->builder->orLike('jenis_pekerja.nama', $dtParams['search']['value']);
-        $this->builder->orLike('pekerjaan.nama', $dtParams['search']['value']);
-        $this->builder->orLike('lokasi_kerja.nama', $dtParams['search']['value']);
-        $this->builder->groupEnd();
 
         if (isset($dtParams['order'])) {
-            $this->builder->orderBy($this->columnOrder[$dtParams['order']['0']['column']], $dtParams['order']['0']['dir']);
+            $this
+                ->builder
+                ->orderBy(
+                    $this->columnOrder[$dtParams['order']['0']['column']],
+                    $dtParams['order']['0']['dir']
+                );
         }
 
         if (isset($dtParams['length']) && isset($dtParams['start'])) {
             if ($dtParams['length'] !== -1) {
-                $this->builder->limit($dtParams['length'], $dtParams['start']);
+                $this
+                    ->builder
+                    ->limit(
+                        $dtParams['length'], 
+                        $dtParams['start']
+                    );
             }
         }
 
-        return $this->builder->get()
+        return $this
+            ->builder
+            ->get()
             ->getResultObject();
     }
 
@@ -80,38 +125,46 @@ class PekerjaModel
      */
     public function countFilteredData(array $dtParams): int
     {
-        $this->builder->select('
-            pekerja.id,
-            pekerja.nik,
-            pekerja.nama,
-            pekerja.tempat_lahir,
-            pekerja.tgl_lahir,
-            CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
-            pekerja.alamat,
-            lokasi_kerja.nama as lokasi_kerja,
-            jenis_pekerja.nama as jenis_pekerja,
-            pekerjaan.nama as pekerjaan,
-            pekerja.created_at
-        ');
+        $this
+            ->builder
+            ->select('
+                pekerja.*,
+                CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
+                lokasi_kerja.nama as lokasi_kerja,
+                jenis_pekerja.nama as jenis_pekerja,
+            ')
+            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left');
 
-        $this->builder->join('pekerjaan', 'pekerja.id_pekerjaan = pekerjaan.id', 'left');
-        $this->builder->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left');
-        $this->builder->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left');
-
-        $this->builder->groupStart();
-        $this->builder->like('pekerja.nik', $dtParams['search']['value']);
-        $this->builder->orLike('pekerja.nama', $dtParams['search']['value']);
-        $this->builder->orLike('pekerja.tempat_lahir', $dtParams['search']['value']);
-        $this->builder->orLike('pekerja.tgl_lahir', $dtParams['search']['value']);
-        $this->builder->orLike('pekerja.alamat', $dtParams['search']['value']);
-        // $this->builder->orLike('domisili.nama', $dtParams['search']['value']);
-        $this->builder->orLike('jenis_pekerja.nama', $dtParams['search']['value']);
-        $this->builder->orLike('pekerjaan.nama', $dtParams['search']['value']);
-        $this->builder->orLike('lokasi_kerja.nama', $dtParams['search']['value']);
-        $this->builder->groupEnd();
+        if (!empty($dtParams['search']['value'])) {
+            $this
+                ->builder
+                ->groupStart();
+            foreach ($this->columnSearch as $index => $columnItem) {
+                if (!is_null($columnItem)) {
+                    if ($index == 0) {
+                        $this
+                            ->builder
+                            ->like($columnItem, $dtParams['search']['value']);
+                    } else {
+                        $this
+                            ->builder
+                            ->orLike($columnItem, $dtParams['search']['value']);
+                    }
+                }
+            }
+            $this
+                ->builder
+                ->groupEnd();
+        }
 
         if (isset($dtParams['order'])) {
-            $this->builder->orderBy($this->columnOrder[$dtParams['order']['0']['column']], $dtParams['order']['0']['dir']);
+            $this
+                ->builder
+                ->orderBy(
+                    $this->columnOrder[$dtParams['order']['0']['column']],
+                    $dtParams['order']['0']['dir']
+                );
         }
 
         if (isset($dtParams['length']) && isset($dtParams['start'])) {
@@ -120,7 +173,9 @@ class PekerjaModel
             }
         }
 
-        return $this->builder->countAllResults();
+        return $this
+            ->builder
+            ->countAllResults();
     }
 
     /**
@@ -132,46 +187,23 @@ class PekerjaModel
      */
     public function countData(): int
     {
-        return $this->builder->countAllResults();
+        return $this
+            ->builder
+            ->countAllResults();
     }
 
     /**
-     * get berkas by id_pekerja
-     * 
-     * @param int $id
-     * 
-     * @return array|object
-     */
-    public function getBerkas($id, $tipe = null)
-    {
-        $berkas = $this->db->table('berkas')
-            ->where('id_pekerja', $id);
-        if (!is_null($tipe)) {
-            return $berkas->where('berkas_type_id', $tipe)
-                ->get()
-                ->getRowObject();
-        }
-
-        return $berkas->get()
-            ->getResultObject();
-    }
-
-    /**
-     * delete berkas by id_pekerja
+     * Delete pekerja by id
      * 
      * @param int $id
      * 
      * @return void
      */
-    public function deleteBerkas($id, $tipe = null) {
-        $berkas = $this->db->table('berkas')
-            ->where('id_pekerja', $id);
-        
-        if (!is_null($tipe)) {
-            $berkas->where('tipe', $tipe)
-                ->delete();
-        }
-
-        $berkas->delete();
+    public function delete($id)
+    {
+        $this
+            ->builder
+            ->where('id', $id)
+            ->delete();
     }
 }

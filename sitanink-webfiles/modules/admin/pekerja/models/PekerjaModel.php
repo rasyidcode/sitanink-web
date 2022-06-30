@@ -2,155 +2,53 @@
 
 namespace Modules\Admin\Pekerja\Models;
 
-use CodeIgniter\Model;
+use CodeIgniter\Database\BaseBuilder;
+use CodeIgniter\Database\ConnectionInterface;
 
-class PekerjaModel extends Model
+class PekerjaModel
 {
+    protected $db;
 
-    public function __construct()
+    /**
+     * @var BaseBuilder
+     */
+    private BaseBuilder $builder;
+
+    public function __construct(ConnectionInterface &$db)
     {
-        parent::__construct();
+        $this->db       = &$db;
+        $this->builder  = $this
+            ->db
+            ->table('pekerja');
     }
 
     /**
-     * Get list domisili
-     * 
-     * @return array
-     */
-    // public function getListDomisili(): array
-    // {
-    //     return $this->builder('pekerja')
-    //         ->select('
-    //             LOWER(domisili) as value,
-    //             domisili as text
-    //         ')
-    //         ->distinct()
-    //         ->get()
-    //         ->getResultObject();
-    // }
-
-    /**
-     * Get list lokasi kerja
-     * 
-     * @return array
-     */
-    // public function getListLokasiKerja(): array
-    // {
-    //     return $this->builder('pekerja')
-    //         ->select('
-    //             LOWER(lokasi_kerja) as value,
-    //             lokasi_kerja as text
-    //         ')
-    //         ->distinct()
-    //         ->get()
-    //         ->getResultObject();
-    // }
-
-    /**
-     * Get list pekerjaan
-     * 
-     * @return array
-     */
-    // public function getListPekerjaan(): array
-    // {
-    //     return $this->builder('pekerja')
-    //         ->select('
-    //             LOWER(pekerjaan) as value,
-    //             pekerjaan as text
-    //         ')
-    //         ->distinct()
-    //         ->get()
-    //         ->getResultObject();
-    // }
-
-    /**
-     * Get list jenis_pekerja
-     * 
-     * @return array
-     */
-    // public function getListJenisPekerja(): array
-    // {
-    //     return $this->builder('pekerja')
-    //         ->select('
-    //             LOWER(jenis_pekerja) as value,
-    //             jenis_pekerja as text
-    //         ')
-    //         ->distinct()
-    //         ->get()
-    //         ->getResultObject();
-    // }
-
-    /**
-     * Create new pekerja to review
+     * Create pekerja
      * 
      * @param array $data
-     * 
-     * @return int|string
-     * 
-     */
-    // public function insertToReview(array $data)
-    // {
-    //     $this->builder('pekerja_temp')
-    //         ->insert($data);
-
-    //     return $this->db->insertID();
-    // }
-
-    /**
-     * Create new pekerja to review
-     * 
-     * @param array $data
-     * 
-     * @return int|string
-     * 
-     */
-    public function insertBerkas(array $data)
-    {
-        $this->builder('berkas')
-            ->insert($data);
-        return $this->db->insertID();
-    }
-
-    /**
-     * Create new pekerja
-     * 
-     * @param array $data
-     * 
-     * @return int|string
-     * 
-     */
-    public function insertPekerja(array $data)
-    {
-        $this->builder('pekerja')
-            ->insert($data);
-
-        return $this->db->insertID();
-    }
-
-    /**
-     * Insert new pekerja review berkas
-     * 
-     * @param array $data
-     * 
-     * @return void
-     */
-    // public function insertReviewBerkas(array $data)
-    // {
-    //     $this->builder('pekerja_temp_berkas')
-    //         ->insertBatch($data);
-    // }
-
-    /**
-     * Get total data to review
+     * @param bool $returnId
      * 
      * @return int|null
+     * 
      */
-    // public function getTotalDataToReview()
-    // {
-    //     return $this->builder('pekerja_temp')
-    //         ->where('deleted_at', null)
-    //         ->countAllResults();
-    // }
+    public function create(array $data, bool $returnId = false) : ?int
+    {
+        $this
+            ->builder
+            ->insert($data);
+
+        if ($returnId) {
+            $row = $this
+                ->db
+                ->query('SELECT LAST_INSERT_ID() as last_id')
+                ->getRowObject() ?? 0;
+
+            return $row
+                ->last_id ?? 0;
+        }
+
+        return null;
+    }
 
     /**
      * Get pekerja by id
@@ -159,99 +57,30 @@ class PekerjaModel extends Model
      * 
      * @return object|null
      */
-    public function getPekerja(int $id, $withFoto = false): ?object
+    public function get(int $id): ?object
     {
-        $select = '
-            pekerja.id,
-            pekerja.nik,
-            pekerja.nama,
-            pekerja.alamat,
-            pekerja.tempat_lahir,
-            pekerja.tgl_lahir,
-            pekerja.id_pekerjaan,
-            pekerja.id_lokasi_kerja,
-            pekerja.id_jenis_pekerja,
-            CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
-            pekerjaan.nama as pekerjaan,
-            lokasi_kerja.nama as lokasi_kerja,
-            jenis_pekerja.nama as jenis_pekerja
-        ';
-        
-        if ($withFoto) {
-            $select .= ',berkas.filename as foto';
-        }
-
-        $pekerja = $this->builder('pekerja')
-            ->select($select)
-            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
-            ->join('pekerjaan', 'pekerja.id_pekerjaan = pekerjaan.id', 'left')
-            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left');
-        
-        if ($withFoto) {
-           $pekerja->join('berkas', 'pekerja.id = berkas.id_pekerja', 'left') ;
-        }
-
-        $pekerja->where('pekerja.id', $id);
-        
-        if ($withFoto) {
-            $pekerja->where('berkas.berkas_type_id', 1);
-        }
-        
-        return $pekerja->get()
-            ->getRowObject();
-    }
-
-    /**
-     * Get pekerja
-     * 
-     * @param int $id
-     * 
-     * @return object|null
-     */
-    public function getPekerjaFull(int $id): ?object
-    {
-        return $this->builder('pekerja')
-            ->select('
-            pekerja.id,
-            pekerja.nik,
-            pekerja.nama,
-            pekerja.tempat_lahir,
-            pekerja.tgl_lahir,
-                CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
-                pekerja.alamat,
-                domisili.nama as domisili,
-                pekerjaan.nama as pekerjaan,
-                lokasi_kerja.nama as lokasi_kerja,
-                jenis_pekerja.nama as jenis_pekerja,
-                pekerja.created_at,
-                pekerja.updated_at
-            ')
-            ->join('domisili', 'pekerja.id_domisili = domisili.id', 'left')
-            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
-            ->join('pekerjaan', 'pekerja.id_pekerjaan = pekerjaan.id', 'left')
-            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
-            ->where('pekerja.id', $id)
+        return $this
+            ->builder
+            ->where('id', $id)
             ->get()
             ->getRowObject();
     }
 
+
     /**
-     * Get pekerja with berkas
+     * update pekerja by id
      * 
-     * @param int $id
+     * @param array $data
      * 
-     * @return object|null
+     * @return void
      */
-    public function getBerkasPekerja(int $id): array
+    public function update(int $id, array $data)
     {
-        return $this->builder('berkas')
-            ->select('
-                berkas.*
-            ')
-            ->join('pekerja_berkas', 'pekerja_berkas.id_berkas = berkas.id', 'left')
-            ->where('pekerja_berkas.id_pekerja', $id)
-            ->get()
-            ->getResultObject();
+        $this
+            ->db
+            ->table('pekerja')
+            ->where('id', $id)
+            ->update($data);
     }
 
     /**
@@ -261,99 +90,63 @@ class PekerjaModel extends Model
      * 
      * @return void
      */
-    public function deletePekerja($id)
+    public function delete($id)
     {
-        $this->db->disableForeignKeyChecks();
-        $this->builder('pekerja')
+        $this
+            ->builder
             ->where('id', $id)
             ->delete();
-        $this->db->enableForeignKeyChecks();
     }
 
     /**
-     * Get dropdown data
-     * 
-     * @return array
-     */
-    public function getDropdownData()
-    {
-        $lokasiKerja = $this->db->table('lokasi_kerja')
-            ->select('
-                id as value,
-                nama as text
-            ')
-            ->get()
-            ->getResultObject();
-        $pekerjaan = $this->db->table('pekerjaan')
-            ->select('
-                id as value,
-                nama as text
-            ')
-            ->get()
-            ->getResultObject();
-        // $domisili = $this->db->table('domisili')
-        //     ->select('
-        //         id as value,
-        //         nama as text
-        //     ')
-        //     ->get()
-        //     ->getResultObject();
-        $jenisPekerja = $this->db->table('jenis_pekerja')
-            ->select('
-                id as value,
-                nama as text
-            ')
-            ->get()
-            ->getResultObject();
-        return [
-            'lokasi_kerja'  => $lokasiKerja,
-            'pekerjaan' => $pekerjaan,
-            // 'domisili'  => $domisili,
-            'jenis_pekerja' => $jenisPekerja
-        ];
-    }
-
-    /**
-     * get berkas by id
-     * 
-     * @param int $id
-     * @param string $tipe
-     * 
-     * @return array|object
-     */
-    public function getBerkas($id, $tipe = null)
-    {
-        $berkas = $this->db->table('berkas')
-            ->where('id_pekerja', $id);
-        
-        if (!is_null($berkas)) {
-            return $berkas->where('berkas_type_id', $tipe)
-                ->get()
-                ->getRowObject();
-        }
-
-        return $berkas->get()
-            ->getResultObject();
-    }
-
-    /**
-     * update pekerja by id
-     * 
-     * @param array $data
-     * 
-     */
-    public function updatePekerja(int $id, array $data)
-    {
-        $this->db->table('pekerja')
-            ->where('id', $id)
-            ->update($data);
-    }
-
-    /**
-     * get berkas by id_pekerja
+     * Get pekerja by id, with lokasi_kerja and tipe_pekerja type
      * 
      * @param int $id
      * 
-     * @return array|object
+     * @return object|null
      */
+    public function getDetail(int $id): ?object
+    {
+        return $this
+            ->builder
+            ->select('
+                pekerja.*,
+                CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
+                lokasi_kerja.nama as lokasi_kerja,
+                jenis_pekerja.nama as jenis_pekerja
+            ')
+            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
+            ->where('pekerja.id', $id)
+            ->get()
+            ->getRowObject();
+    }
+    
+    /**
+     * Get pekerja by id, with lokasi_kerja, tipe_pekerja, and berkas_foto
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function getDetailWithFoto(int $id, int $berkasTypeFotoId): ?object
+    {
+        return $this
+            ->builder
+            ->select('
+                pekerja.*,
+                CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
+                lokasi_kerja.nama as lokasi_kerja,
+                jenis_pekerja.nama as jenis_pekerja,
+                berkas.filename as foto_filename
+            ')
+            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
+            ->join('berkas', 'pekerja.id = berkas.id_pekerja', 'left')
+            ->where('pekerja.id', $id)
+            ->where('berkas.berkas_type_id', $berkasTypeFotoId)
+            ->get()
+            ->getRowObject();
+    }
+    
 }

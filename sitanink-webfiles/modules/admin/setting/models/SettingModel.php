@@ -21,12 +21,16 @@ class SettingModel
     public function __construct(ConnectionInterface &$db)
     {
         $this->db = &$db;
-        $this->builder = $this->db->table('site_config');
+        $this->builder = $this
+            ->db
+            ->table('site_config');
     }
 
     public function getListBerkasType()
     {
-        return $this->db->table('berkas_types')
+        return $this
+            ->db
+            ->table('berkas_types')
             ->select('
                 id as value,
                 name as text
@@ -36,15 +40,16 @@ class SettingModel
     }
 
     /**
-     * Get site config by key
+     * Get by key
      * 
      * @param string $key
      * 
      * @return object|null
      */
-    public function getSiteConfig(string $key) : ?object
+    public function getByKey(string $key) : ?object
     {
-        return $this->builder
+        return $this
+            ->builder
             ->where('key', $key)
             ->get()
             ->getRowObject();
@@ -57,7 +62,8 @@ class SettingModel
      */
     public function getAllConfig() : array
     {
-        return $this->builder
+        return $this
+            ->builder
             ->get()
             ->getResultObject();
     }
@@ -71,7 +77,8 @@ class SettingModel
      */
     public function createConfig(array $data)
     {
-        return $this->builder
+        return $this
+            ->builder
             ->insert($data);
     }
 
@@ -84,7 +91,8 @@ class SettingModel
      */
     public function updateConfig(array $data)
     {
-        return $this->builder
+        return $this
+            ->builder
             ->where('key', $data['key'])
             ->update($data);
     }

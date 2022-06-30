@@ -55,15 +55,14 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
     });
     // pekerja
     $routes->group('pekerja', ['namespace' => $routes_namespace . 'Pekerja\Controllers\\'], function ($routes) {
-        $routes->get('/',           'PekerjaController::index',     ['as' => 'pekerja']);
-        $routes->get('(:segment)/detail',           'PekerjaController::get/$1',     ['as' => 'pekerja.get']);
-        $routes->post('get-data',   'PekerjaController::getData',   ['as' => 'pekerja.get-data']);
-        $routes->get('add',         'PekerjaController::add',       ['as' => 'pekerja.add']);
-        $routes->post('create',     'PekerjaController::create',    ['as' => 'pekerja.create']);
-        $routes->post('createv2',     'PekerjaController::createv2',    ['as' => 'pekerja.create-v2']);
-        $routes->post('(:segment)/delete', 'PekerjaController::delete/$1', ['as' => 'pekerja.delete']);
-        $routes->get('(:segment)/edit', 'PekerjaController::edit/$1', ['as' => 'pekerja.edit']);
-        $routes->post('(:segment)/update', 'PekerjaController::update/$1', ['as' => 'pekerja.update']);
+        $routes->get('/',                   'PekerjaController::index',         ['as' => 'pekerja']);
+        $routes->get('(:segment)/detail',   'PekerjaController::get/$1',        ['as' => 'pekerja.get']);
+        $routes->post('get-data',           'PekerjaController::getData',       ['as' => 'pekerja.get-data']);
+        $routes->get('add',                 'PekerjaController::add',           ['as' => 'pekerja.add']);
+        $routes->post('create',             'PekerjaController::create',        ['as' => 'pekerja.create']);
+        $routes->post('(:segment)/delete',  'PekerjaController::delete/$1',     ['as' => 'pekerja.delete']);
+        $routes->get('(:segment)/edit',     'PekerjaController::edit/$1',       ['as' => 'pekerja.edit']);
+        $routes->post('(:segment)/update',  'PekerjaController::update/$1',     ['as' => 'pekerja.update']);
     });
     // review
     $routes->group('review', ['namespace' => $routes_namespace . 'Review\Controllers\\'], function ($routes) {
@@ -84,6 +83,12 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
     // data qrcode
     $routes->group('qrcode', ['namespace' => $routes_namespace . 'Qrcode\Controllers\\'], function($routes) {
         $routes->get('/', 'QrcodeController::index', ['as' => 'qrcode']);
+    });
+    // data sk
+    $routes->group('sk', ['namespace' => $routes_namespace . 'Sk\Controllers\\'], function($routes) {
+        $routes->get('/', 'SkController::index', ['as' => 'sk']);
+        $routes->get('create', 'SkController::create', ['as' => 'sk.create']);
+        $routes->post('create', 'SkController::doCreate', ['as' => 'sk.do-create']);
     });
     // data kartu
     $routes->group('kartu2', ['namespace' => $routes_namespace . 'Kartu\Controllers\\'], function($routes) {

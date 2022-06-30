@@ -33,7 +33,7 @@
                 <ul class="treeview-menu" style="display: <?= isMenuOpen('master', 1) ?>;">
                     <li class="<?= isLinkActive('lokasi-kerja', 2) ?>"><a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> Lokasi</a></li>
                     <li class="<?= isLinkActive('jenis-pekerja', 2) ?>"><a href="<?= route_to('jenis-pekerja') ?>"><i class="fa fa-square-o"></i> Jenis</a></li>
-                    <li class="<?= isLinkActive('pekerjaan', 2) ?>"><a href="<?= route_to('pekerjaan') ?>"><i class="fa fa-gavel"></i> Pekerjaan</a></li>
+                    <!-- <li class="<?= isLinkActive('pekerjaan', 2) ?>"><a href="<?= route_to('pekerjaan') ?>"><i class="fa fa-gavel"></i> Pekerjaan</a></li> -->
                     <!-- <li class="<?= isLinkActive('tipe-berkas', 2) ?>"><a href="<?= route_to('tipe-berkas') ?>"><i class="fa fa-file"></i> Tipe Berkas</a></li> -->
                 </ul>
             </li>
@@ -68,8 +68,8 @@
                     <li class="<?= isLinkActive('generate', 2) ?>"><a href="<?= route_to('kartu.generate') ?>"><i class="fa fa-square-o"></i> Generate</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#">
+            <li class="<?= isLinkActive('sk', 1) ?>">
+                <a href="<?=route_to('sk')?>">
                     <i class="ion ion-document-text"></i> <span>Data SK</span>
                 </a>
             </li>

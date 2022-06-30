@@ -81,4 +81,21 @@ class JenispekerjaModel
             ->delete();
     }
 
+    /**
+     * Get all as select dropdown
+     * 
+     * @return array
+     */
+    public function getAllAsDropdown()
+    {
+        return $this
+            ->builder
+            ->select('
+                id as value,
+                nama as text
+            ')
+            ->get()
+            ->getResultObject();
+    }
+
 }
