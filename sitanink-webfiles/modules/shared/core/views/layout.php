@@ -12,6 +12,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta http-equiv="Content-Security-Policy" content="worker-src 'self' blob: ;child-src blob: ;img-src 'self' data: blob: ;connect-src 'self' https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com ;">
+
+    <?= $renderer->renderSection('custom-css') ?>
+    
     <link rel="stylesheet" href="<?= site_url('adminlte2/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= site_url('adminlte2/bower_components/font-awesome/css/font-awesome.min.css') ?>">
@@ -34,7 +37,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    <?= $renderer->renderSection('custom-css') ?>
     <style>
         .circular-image {
             border-radius: 50%;
