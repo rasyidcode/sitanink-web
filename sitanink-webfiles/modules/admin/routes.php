@@ -63,6 +63,8 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->post('(:segment)/delete',  'PekerjaController::delete/$1',     ['as' => 'pekerja.delete']);
         $routes->get('(:segment)/edit',     'PekerjaController::edit/$1',       ['as' => 'pekerja.edit']);
         $routes->post('(:segment)/update',  'PekerjaController::update/$1',     ['as' => 'pekerja.update']);
+        $routes->get('export',              'PekerjaController::export',        ['as' => 'pekerja.export']);
+        $routes->post('import',             'PekerjaController::import',        ['as' => 'pekerja.import']);
     });
     // review
     $routes->group('review', ['namespace' => $routes_namespace . 'Review\Controllers\\'], function ($routes) {

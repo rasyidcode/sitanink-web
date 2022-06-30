@@ -7,8 +7,8 @@
             <div class="box box-success">
                 <div class="box-header">
                     <a href="<?= route_to('pekerja.add') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Pekerja</a>
-                    <a href="<?= route_to('pekerja.add') ?>" class="btn btn-info btn-xs"><i class="ion ion-ios-download-outline"></i>&nbsp;&nbsp;Export Excel</a>
-                    <a href="<?= route_to('pekerja.add') ?>" class="btn btn-warning btn-xs"><i class="ion ion-ios-upload-outline"></i>&nbsp;&nbsp;Import Excel</a>
+                    <a href="<?= route_to('pekerja.export') ?>" class="btn btn-info btn-xs"><i class="ion ion-ios-download-outline"></i>&nbsp;&nbsp;Export Excel</a>
+                    <a href="<?= route_to('pekerja.import') ?>" class="btn btn-warning btn-xs"><i class="ion ion-ios-upload-outline"></i>&nbsp;&nbsp;Import Excel</a>
                     <?php $successMsg = session()->getFlashdata('success'); ?>
                     <?php if (isset($successMsg)) : ?>
                         <span data-message="<?= $successMsg ?>"></span>

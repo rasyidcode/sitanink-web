@@ -2,13 +2,17 @@
 
 namespace Modules\Admin\Pekerja\Controllers;
 
+use Carbon\Carbon;
 use CodeIgniter\HTTP\Files\UploadedFile;
-use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Admin\Berkas\Models\BerkasModel;
 use Modules\Admin\Jenispekerja\Models\JenispekerjaModel;
 use Modules\Admin\Lokasikerja\Models\LokasikerjaModel;
 use Modules\Admin\Pekerja\Models\PekerjaModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat as StyleNumberFormat;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class PekerjaController extends BaseWebController
 {
@@ -256,7 +260,7 @@ class PekerjaController extends BaseWebController
     }
 
     public function edit($id)
-    {        
+    {
         $this->viewData['pageLinks'] = [
             'dashboard' => [
                 'url'       => route_to('admin'),
@@ -275,20 +279,20 @@ class PekerjaController extends BaseWebController
         $this->viewData['dataEdit'] = $this
             ->pekerjaModel
             ->get($id);
-        
+
         $this->viewData['djp'] = $this
             ->jenisPekerjaModel
             ->getAllAsDropdown();
         $this->viewData['dlk'] = $this
             ->lokasiKerjaModel
             ->getAllAsDropdown();
-        
+
         $berkas = $this
             ->berkasModel
             ->getByPekerjaId($id);
 
         $berkasEdit = [];
-        foreach($berkas as $item) {
+        foreach ($berkas as $item) {
             $berkasEdit[$item->berkas_type_id] = $item;
         }
 
@@ -298,7 +302,7 @@ class PekerjaController extends BaseWebController
     }
 
     public function update($id)
-    {        
+    {
         if (!$this->validate($this->getUpdateRules(), $this->getMessages())) {
             session()->setFlashdata('error', $this->validator->getErrors());
             return redirect()->back()
@@ -386,6 +390,78 @@ class PekerjaController extends BaseWebController
         return redirect()
             ->back()
             ->route('pekerja');
+    }
+
+    public function export()
+    {
+        $data           = $this->pekerjaModel->getExportList();
+
+        $spreadsheet    = new Spreadsheet();
+        $sheet          = $spreadsheet
+            ->getActiveSheet();
+
+        foreach (range('A', 'K') as $columnID) {
+            $sheet
+                ->getColumnDimension($columnID)
+                ->setAutoSize(true);
+        }
+
+        $sheet
+            ->getStyle('A1:K1')
+            ->getFont()
+            ->setBold(true);
+
+        $sheet
+            ->setCellValue('A1', '#')
+            ->setCellValue('B1', 'NIK')
+            ->setCellValue('C1', 'Nama')
+            ->setCellValue('D1', 'Tempat Lahir')
+            ->setCellValue('E1', 'Tanggal Lahir')
+            ->setCellValue('F1', 'Umur')
+            ->setCellValue('G1', 'Alamat')
+            ->setCellValue('H1', 'Pekerjaan')
+            ->setCellValue('I1', 'Lokasi Kerja')
+            ->setCellValue('J1', 'Jenis Pekerja')
+            ->setCellValue('K1', 'Created At');
+
+        $startColumn = 2;
+        foreach ($data as $index => $item) {
+            $sheet
+                ->getStyle('B' . $startColumn)
+                ->getNumberFormat()
+                ->setFormatCode(
+                    StyleNumberFormat::FORMAT_TEXT
+                );
+
+            $sheet
+                ->setCellValue('A' . $startColumn, $index + 1)
+                ->setCellValueExplicit('B' . $startColumn, "{$item->nik}", DataType::TYPE_STRING);
+            $sheet
+                ->setCellValue('C' . $startColumn, $item->nama)
+                ->setCellValue('D' . $startColumn, $item->tempat_lahir)
+                ->setCellValue('E' . $startColumn, $item->tgl_lahir)
+                ->setCellValue('F' . $startColumn, Carbon::createFromDate($item->tgl_lahir))
+                ->setCellValue('G' . $startColumn, $item->alamat)
+                ->setCellValue('H' . $startColumn, $item->pekerjaan)
+                ->setCellValue('I' . $startColumn, $item->lokasi_kerja)
+                ->setCellValue('J' . $startColumn, $item->jenis_pekerja)
+                ->setCellValue('K' . $startColumn, $item->created_at);
+            $startColumn++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = time() . '_data_pekerja';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $filename . '.xlsx');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+        die();
+    }
+
+    public function import()
+    {
     }
 
     private function getCreateRules()

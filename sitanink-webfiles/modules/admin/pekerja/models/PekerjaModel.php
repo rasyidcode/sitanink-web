@@ -148,5 +148,25 @@ class PekerjaModel
             ->get()
             ->getRowObject();
     }
+
+    /**
+     * Get list pekerja to export
+     * 
+     * @return array
+     */
+    public function getExportList() : array
+    {
+        return $this
+            ->builder
+            ->select('
+                pekerja.*,
+                lokasi_kerja.nama as lokasi_kerja,
+                jenis_pekerja.nama as jenis_pekerja
+            ')
+            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
+            ->get()
+            ->getResultObject();
+    }
     
 }
