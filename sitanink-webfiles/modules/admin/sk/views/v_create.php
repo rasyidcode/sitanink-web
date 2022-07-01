@@ -101,25 +101,16 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="form-group <?= isset($fdErr['boss_name']) ? 'has-error' : '' ?>">
-                                            <label class="control-label"><?= isset($fdErr['boss_name']) ? $errIcon : '' ?>&nbsp;Nama Kepala (<span style="color: #dd4b39;">*</span>)</label>
-                                            <input type="text" name="boss_name" class="form-control" placeholder="Masukkan Nama Kepala ..." value="<?= old('boss_name') ?? '' ?>">
-                                            <?php if (isset($fdErr['boss_name'])) : ?>
-                                                <span class="help-block"><?= $fdErr['boss_name'] ?></span>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label <?= isset($fdErr['attachments']) ? 'has-error' : '' ?>"><?= isset($fdErr['boss_name']) ? $errIcon : '' ?>&nbsp;List Pekerja Pada Lampiran (<span style="color: #dd4b39;">*</span>)</label>
-                                            <select class="form-control select2" multiple="multiple" data-placeholder="Pilih Pekerja Yang Akan Dilampirkan" style="width: 100%;">
-                                                <option value="id">Ahmad Jamil Al Rasyid [NIK: 7202190710960001]</option>
-                                                
+                                            <label class="control-label <?= isset($fdErr['attachments']) ? 'has-error' : '' ?>"><?= isset($fdErr['attachments']) ? $errIcon : '' ?>&nbsp;List Pekerja Pada Lampiran (<span style="color: #dd4b39;">*</span>)</label>
+                                            <select name="attachments_view" class="form-control select2" multiple="multiple" data-placeholder="Pilih Pekerja Yang Akan Dilampirkan" style="width: 100%;">
+                                                <?php foreach($listPekerja as $itemPekerja): ?>
+                                                    <option value="<?=$itemPekerja->id?>"><?=$itemPekerja->nama . ' [' . $itemPekerja->nik . ']'?></option>
+                                                <?php endforeach; ?>
                                             </select>
-                                            <?php if (isset($fdErr['boss_name'])) : ?>
-                                                <span class="help-block"><?= $fdErr['boss_name'] ?></span>
+                                            <input type="hidden" name="attachments" value="">
+                                            <?php if (isset($fdErr['attachments'])) : ?>
+                                                <span class="help-block"><?= $fdErr['attachments'] ?></span>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -143,17 +134,26 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
 <script src="<?= site_url('adminlte2/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') ?>"></script>
 <script>
     $(function() {
-        $('.select2').select2();
+        $('select[name="attachments_view"]').select2({
+            multiple: true
+        });
+
+        $('select[name="attachments_view"]').on('change', function(e) {
+            $('input[name="attachments"]').val($(this).val());
+        });
+
         $('#year-picker').datepicker({
             format: 'yyyy',
             viewMode: 'years',
             minViewMode: 'years',
             autoclose: true
         });
+
         $('#valid-until-picker').datepicker({
             format: 'yyyy-mm-dd',
             autoclose: true
         });
+
         $('#set-date-picker').datepicker({
             format: 'yyyy-mm-dd',
             autoclose: true

@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Sk\Controllers;
 
+use Modules\Admin\Pekerja\Models\PekerjaModel;
 use Modules\Admin\Sk\Models\SkModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
 
@@ -10,7 +11,15 @@ class SkController extends BaseWebController
 
     protected $viewPath = __DIR__;
 
+    /**
+     * @var SkModel
+     */
     private $skModel;
+
+    /**
+     * @var PekerjaModel
+     */
+    private $pekerjaModel;
 
     private $viewData = [];
 
@@ -21,6 +30,7 @@ class SkController extends BaseWebController
         $db = \Config\Database::connect();
 
         $this->skModel = new SkModel($db);
+        $this->pekerjaModel = new PekerjaModel($db);
 
         $this->__initViewData();
     }
@@ -65,13 +75,14 @@ class SkController extends BaseWebController
                 'active'    => true,
             ],
         ];
+        $this->viewData['listPekerja'] = $this->pekerjaModel->getListPekerjaForSK();
 
         return $this->renderView('v_create', $this->viewData);
     }
 
     public function doCreate()
     {
-        
+        print_r($this->request->getPost());
     }
 
 }

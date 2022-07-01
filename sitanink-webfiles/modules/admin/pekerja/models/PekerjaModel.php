@@ -129,7 +129,7 @@ class PekerjaModel
      * 
      * @return object|null
      */
-    public function getDetailWithFoto(int $id, int $berkasTypeFotoId): ?object
+    public function getDetailWithBerkas(int $id, int $berkasTypeId): ?object
     {
         return $this
             ->builder
@@ -144,7 +144,7 @@ class PekerjaModel
             ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
             ->join('berkas', 'pekerja.id = berkas.id_pekerja', 'left')
             ->where('pekerja.id', $id)
-            ->where('berkas.berkas_type_id', $berkasTypeFotoId)
+            ->where('berkas.berkas_type_id', $berkasTypeId)
             ->get()
             ->getRowObject();
     }
@@ -169,4 +169,21 @@ class PekerjaModel
             ->getResultObject();
     }
     
+    /**
+     * Get list pekerja for sk dropdown
+     * 
+     * @return array
+     */
+    public function getListPekerjaForSK()
+    {
+        return $this
+            ->builder
+            ->select('
+                pekerja.id,
+                pekerja.nama,
+                pekerja.nik
+            ')
+            ->get()
+            ->getResultObject();
+    }
 }

@@ -238,7 +238,7 @@ class PekerjaController extends BaseWebController
 
     public function get($id)
     {
-        $data = $this->pekerjaModel->getDetailWithFoto((int)$id, 1);
+        $data = $this->pekerjaModel->getDetailWithBerkas((int)$id, 1);
 
         $this->viewData['pageLinks'] = [
             'dashboard' => [
