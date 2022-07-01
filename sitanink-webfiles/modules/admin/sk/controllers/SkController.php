@@ -2,7 +2,9 @@
 
 namespace Modules\Admin\Sk\Controllers;
 
+use Modules\Admin\Berkas\Models\BerkasModel;
 use Modules\Admin\Pekerja\Models\PekerjaModel;
+use Modules\Admin\Setting\Models\SettingModel;
 use Modules\Admin\Sk\Models\SkModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
 use PhpOffice\PhpWord\Element\Table;
@@ -25,6 +27,16 @@ class SkController extends BaseWebController
      */
     private $pekerjaModel;
 
+    /**
+     * @var SettingModel
+     */
+    private $settingModel;
+
+    /**
+     * @var BerkasModel
+     */
+    private $berkasModel;
+
     private $viewData = [];
 
     public function __construct()
@@ -33,8 +45,10 @@ class SkController extends BaseWebController
 
         $db = \Config\Database::connect();
 
-        $this->skModel = new SkModel($db);
+        $this->skModel      = new SkModel($db);
         $this->pekerjaModel = new PekerjaModel($db);
+        $this->settingModel = new SettingModel($db);
+        $this->berkasModel  = new BerkasModel($db);
 
         $this->__initViewData();
     }
@@ -91,8 +105,6 @@ class SkController extends BaseWebController
             'year'          => 'required',
             'valid_until'   => 'required',
             'set_date'      => 'required',
-            'boss_name'     => 'required',
-            'boss_nip'      => 'required',
             'attachments'   => 'required',
         ])) {
             session()->setFlashdata('error', $this->validator->getErrors());
@@ -102,7 +114,9 @@ class SkController extends BaseWebController
         }
 
         $dataPost = $this->request->getPost();
-        
+        $dataPost['boss_name']  = $this->settingModel->getByKey('nama_kepala')->value ?? '-';
+        $dataPost['boss_id']    = $this->settingModel->getByKey('nip_kepala')->value ?? '-';
+
         $templateProcessor = new TemplateProcessor($this->path->publicDocsDirectory . '/sk_petani.docx');
         $templateProcessor->setValues([
             'nomor' => $dataPost['number'],
@@ -110,10 +124,12 @@ class SkController extends BaseWebController
             'berlaku_sampai' => convertDate($dataPost['valid_until']),
             'tanggal_terbit' => convertDate($dataPost['set_date']),
             'nama_kepala' => $dataPost['boss_name'],
-            'nip_kepala' => $dataPost['boss_nip'],
+            'nip_kepala' => $dataPost['boss_id'],
         ]);
 
-        $listPekerja = $this->pekerjaModel->getListPekerjaAsAttachments(explode(',', $dataPost['attachments']));
+        $attachments = explode(',', $dataPost['attachments']);
+
+        $listPekerja = $this->pekerjaModel->getListPekerjaAsAttachments($attachments);
 
         $table = new Table([
             'borderSize' => 2,
@@ -150,8 +166,42 @@ class SkController extends BaseWebController
         $templateProcessor->setComplexBlock('table', $table);
 
         $skFilename = time() . '_sk_petani.docx';
+        $skfullpath = $this->path->publicDocsGenDirectory . '/' . $skFilename;
 
-        $templateProcessor->saveAs($this->path->publicDocsGenDirectory . '/' . $skFilename);
+        $templateProcessor->saveAs($skfullpath);
+
+        $skFile = new \CodeIgniter\Files\File($skfullpath);
+        $idBerkas = $this->berkasModel->create([
+            'id_pekerja'        => null,
+            'path'              => $this->path->publicDocsGenDirectory,
+            'filename'          => $skFilename,
+            'size_in_mb'        => $skFile->getSizeByUnit('mb'),
+            'mime'              => $skFile->getMimeType(),
+            'ext'               => $skFile->getExtension(),
+            'berkas_type_id'    => 7,
+        ], true);
+
+        // create generated sk
+        $docId = $this->skModel->create([
+            'number'        => $dataPost['number'],
+            'year'          => $dataPost['year'],
+            'valid_until'   => $dataPost['valid_until'],
+            'set_date'      => $dataPost['set_date'],
+            'boss_nip'      => $dataPost['boss_id'],
+            'boss_name'     => $dataPost['boss_name'],
+            'id_berkas'     => $idBerkas ?? null,
+            'generated_by'  => session()->get('user_id') ?? null,
+            'recipient'      => null
+        ], true);
+
+        $dataattachments = [];
+        foreach($attachments as $attachment) {
+            $newattachments['id_generated_doc'] = $docId;
+            $newattachments['id_pekerja'] = $attachment;
+            $dataattachments[] = $newattachments;
+        }
+
+        $this->skModel->createAttachments($dataattachments);
 
         session()
             ->setFlashdata('success', 'Berkas berhasil dibuat!');

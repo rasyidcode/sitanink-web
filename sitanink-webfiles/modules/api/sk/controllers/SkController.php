@@ -38,6 +38,7 @@ class SkController extends BaseController
             $row[]  = $item->boss_name ?? '-';
             $row[]  = $item->created_at ?? '-';
             $row[]  = "<div class=\"text-center\">
+                            <a href=\"" . route_to('sk.download', $item->id) . "\" class=\"btn btn-warning btn-xs mr-2\"><i class=\"fa fa-download\"></i>&nbsp;Download SK</a>
                             <a href=\"" . route_to('sk.lampiran', $item->id) . "\" class=\"btn btn-success btn-xs mr-2\"><i class=\"fa fa-file\"></i>&nbsp;Lihat Lampiran</a>
                             <a href=\"" . route_to('sk.edit', $item->id) . "\" class=\"btn btn-info btn-xs mr-2\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
                             <button data-domisili-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>

@@ -79,28 +79,6 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="form-group <?= isset($fdErr['boss_nip']) ? 'has-error' : '' ?>">
-                                            <label class="control-label"><?= isset($fdErr['boss_nip']) ? $errIcon : '' ?>&nbsp;NIP Kepala (<span style="color: #dd4b39;">*</span>)</label>
-                                            <input type="text" name="boss_nip" class="form-control" placeholder="Masukkan NIP Kepala ..." value="<?= old('boss_nip') ?? '' ?>">
-                                            <?php if (isset($fdErr['boss_nip'])) : ?>
-                                                <span class="help-block"><?= $fdErr['boss_nip'] ?></span>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="form-group <?= isset($fdErr['boss_name']) ? 'has-error' : '' ?>">
-                                            <label class="control-label"><?= isset($fdErr['boss_name']) ? $errIcon : '' ?>&nbsp;Nama Kepala (<span style="color: #dd4b39;">*</span>)</label>
-                                            <input type="text" name="boss_name" class="form-control" placeholder="Masukkan Nama Kepala ..." value="<?= old('boss_name') ?? '' ?>">
-                                            <?php if (isset($fdErr['boss_name'])) : ?>
-                                                <span class="help-block"><?= $fdErr['boss_name'] ?></span>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label <?= isset($fdErr['attachments']) ? 'has-error' : '' ?>"><?= isset($fdErr['attachments']) ? $errIcon : '' ?>&nbsp;List Pekerja Pada Lampiran (<span style="color: #dd4b39;">*</span>)</label>
                                             <select name="attachments_view" class="form-control select2" multiple="multiple" data-placeholder="Pilih Pekerja Yang Akan Dilampirkan" style="width: 100%;">
