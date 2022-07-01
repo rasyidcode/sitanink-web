@@ -175,9 +175,9 @@ class SkController extends BaseWebController
             'id_pekerja'        => null,
             'path'              => $this->path->publicDocsGenDirectory,
             'filename'          => $skFilename,
-            'size_in_mb'        => $skFile->getSizeByUnit('mb'),
-            'mime'              => $skFile->getMimeType(),
-            'ext'               => $skFile->getExtension(),
+            'size_in_mb'        => $skFile->getSizeByUnit('mb') ?? '0',
+            'mime'              => $skFile->getMimeType() ?? '-',
+            'ext'               => $skFile->getExtension() ?? '-',
             'berkas_type_id'    => 7,
         ], true);
 
