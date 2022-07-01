@@ -91,6 +91,7 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->get('/', 'SkController::index', ['as' => 'sk']);
         $routes->get('create', 'SkController::create', ['as' => 'sk.create']);
         $routes->post('create', 'SkController::doCreate', ['as' => 'sk.do-create']);
+        $routes->get('dowload/(:segment)', 'SkController::download/$1', ['as' => 'sk.download']);
     });
     // data kartu
     $routes->group('kartu2', ['namespace' => $routes_namespace . 'Kartu\Controllers\\'], function($routes) {

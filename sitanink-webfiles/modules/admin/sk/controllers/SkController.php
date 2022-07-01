@@ -195,7 +195,7 @@ class SkController extends BaseWebController
         ], true);
 
         $dataattachments = [];
-        foreach($attachments as $attachment) {
+        foreach ($attachments as $attachment) {
             $newattachments['id_generated_doc'] = $docId;
             $newattachments['id_pekerja'] = $attachment;
             $dataattachments[] = $newattachments;
@@ -209,6 +209,23 @@ class SkController extends BaseWebController
         return redirect()
             ->back()
             ->route('sk');
+    }
+
+    public function download($id)
+    {
+        $sk = $this->skModel->getWithBerkas((int)$id);
+        if (is_null($sk)) {
+            return redirect()
+                ->back()
+                ->route('sk');
+        }
+
+        $templateProcessor = new TemplateProcessor($sk->path . '/' . $sk->filename);
+
+        header("Content-Disposition: attachment; filename=" . $sk->filename);
+
+        $templateProcessor->saveAs('php://output');
+        exit;
     }
 
     public function doCreate2()

@@ -62,4 +62,25 @@ class SkModel
             ->insertBatch($data);
     }
 
+    /**
+     * Get generated doc with the attachments, by id
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function getWithBerkas(int $id) : ?object
+    {
+        return $this
+            ->builder
+            ->select('
+                berkas.filename,
+                berkas.path
+            ')
+            ->join('berkas', 'generated_docs.id_berkas = berkas.id', 'left')
+            ->where('generated_docs.id', $id)
+            ->get()
+            ->getRowObject();
+    }
+
 }
