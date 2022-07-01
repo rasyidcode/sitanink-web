@@ -100,4 +100,16 @@ class LokasikerjaModel
             ->getResultObject();
     }
 
+    /**
+     * Count total lokasi kerja
+     * 
+     * @return int
+     */
+    public function countTotal() : int
+    {
+        return $this
+            ->builder
+            ->countAllResults();
+    }
+
 }

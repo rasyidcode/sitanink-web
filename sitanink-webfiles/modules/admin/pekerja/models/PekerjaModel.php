@@ -214,4 +214,16 @@ class PekerjaModel
             ->get()
             ->getResultObject();
     }
+
+    /**
+     * Count total pekerja
+     * 
+     * @return int
+     */
+    public function countTotal() : int
+    {
+        return $this
+            ->builder
+            ->countAllResults();
+    }
 }

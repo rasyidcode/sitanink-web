@@ -83,4 +83,16 @@ class SkModel
             ->getRowObject();
     }
 
+    /**
+     * Count total sk
+     * 
+     * @return int
+     */
+    public function countTotal() : int
+    {
+        return $this
+            ->builder
+            ->countAllResults();
+    }
+
 }

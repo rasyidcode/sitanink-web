@@ -102,4 +102,17 @@ class KartuModel
             ->delete();
     }
 
+    /**
+     * Count total kartu
+     * 
+     * @return int
+     */
+    public function countTotal() : int
+    {
+        return $this
+            ->db
+            ->table('generated_cards')
+            ->countAllResults();
+    }
+
 }
