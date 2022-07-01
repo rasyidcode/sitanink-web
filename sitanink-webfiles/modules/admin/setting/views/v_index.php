@@ -32,6 +32,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="nip_kepala" class="form-control" placeholder="Masukkan NIP Kepala ..." value="<?= $nipKepala->value ?? '' ?>">
+                                            <span class="help-block">NIP Kepala akan digunakan pada Kartu & SK petani.</span>
                                         </div>
                                     </div>
                                 </div>
@@ -40,6 +41,25 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input type="text" name="nama_kepala" class="form-control" placeholder="Masukkan Nama Kepala ..." value="<?= $namaKepala->value ?? '' ?>">
+                                            <span class="help-block">Nama Kepala akan digunakan pada Kartu & SK petani.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="value" class="col-sm-6 control-label">Jabatan</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="jabatan_kepala" class="form-control" placeholder="Masukkan Jabatan Kepala ..." value="<?= $jabatanKepala->value ?? '' ?>">
+                                            <span class="help-block">Jabatan Kepala akan digunakan pada Kartu & SK petani.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="value" class="col-sm-6 control-label">Nama Tempat</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" name="nama_tempat" class="form-control" placeholder="Masukkan Nama Kepala ..." value="<?= $namaTempat->value ?? '' ?>">
+                                            <span class="help-block">Nama Tempat Kartu atau SK petani diterbitkan.</span>
                                         </div>
                                     </div>
                                 </div>

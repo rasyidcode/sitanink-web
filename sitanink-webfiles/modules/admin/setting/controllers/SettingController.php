@@ -35,11 +35,13 @@ class SettingController extends BaseWebController
 
     public function index()
     {
-        $this->viewData['idPasFoto']    = $this->settingModel->getByKey('id_pas_foto');
-        $this->viewData['nipKepala']    = $this->settingModel->getByKey('nip_kepala');
-        $this->viewData['namaKepala']   = $this->settingModel->getByKey('nama_kepala');
-        $this->viewData['berkasTypes']  = $this->settingModel->getListBerkasType();
-        $this->viewData['pageLinks']    = [
+        $this->viewData['idPasFoto']        = $this->settingModel->getByKey('id_pas_foto');
+        $this->viewData['nipKepala']        = $this->settingModel->getByKey('nip_kepala');
+        $this->viewData['namaKepala']       = $this->settingModel->getByKey('nama_kepala');
+        $this->viewData['jabatanKepala']    = $this->settingModel->getByKey('jabatan_kepala');
+        $this->viewData['namaTempat']       = $this->settingModel->getByKey('nama_tempat');
+        $this->viewData['berkasTypes']      = $this->settingModel->getListBerkasType();
+        $this->viewData['pageLinks']        = [
             'dashboard' => [
                 'url'       => route_to('admin'),
                 'active'    => false,
@@ -93,6 +95,32 @@ class SettingController extends BaseWebController
             $this->settingModel->update([
                 'key'   => 'nama_kepala',
                 'value' => $postData['nama_kepala']
+            ]);
+        }
+
+        $jabatanKepala = $this->settingModel->getByKey('jabatan_kepala');
+        if (is_null($jabatanKepala)) {
+            $this->settingModel->create([
+                'key'   => 'jabatan_kepala',
+                'value' => $postData['jabatan_kepala']
+            ]);
+        } else {
+            $this->settingModel->update([
+                'key'   => 'jabatan_kepala',
+                'value' => $postData['jabatan_kepala']
+            ]);
+        }
+
+        $namaTempat = $this->settingModel->getByKey('nama_tempat');
+        if (is_null($namaTempat)) {
+            $this->settingModel->create([
+                'key'   => 'nama_tempat',
+                'value' => $postData['nama_tempat']
+            ]);
+        } else {
+            $this->settingModel->update([
+                'key'   => 'nama_tempat',
+                'value' => $postData['nama_tempat']
             ]);
         }
 

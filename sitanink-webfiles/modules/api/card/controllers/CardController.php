@@ -8,6 +8,7 @@ use App\Libraries\Fpdf;
 use Carbon\Carbon;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Paths;
+use Modules\Admin\Setting\Models\SettingModel;
 use Modules\Api\Berkas\Models\BerkasModel;
 use Modules\Api\Card\Models\CardModel;
 use Modules\Api\Pekerja\Models\PekerjaModel;
@@ -18,6 +19,7 @@ class CardController extends BaseController
     private $cardModel;
     private $pekerjaModel;
     private $berkasModel;
+    private $settingModel;
 
     public function __construct()
     {
@@ -26,6 +28,7 @@ class CardController extends BaseController
         $this->cardModel = new CardModel($db);
         $this->pekerjaModel = new PekerjaModel($db);
         $this->berkasModel = new BerkasModel($db);
+        $this->settingModel = new SettingModel($db);
     }
 
     public function getData()
@@ -315,7 +318,7 @@ class CardController extends BaseController
     ): array {
         $cardFrontTemplate = $publicPath . '/card-front.png';
         $capTemplate = $publicPath . '/cap.png';
-        $ttdTemplate = $publicPath . '/ttd2.png';
+        $ttdTemplate = $publicPath . '/ttd4.png';
 
         $cardFrontSave = $workingPath . '/' .
             time() . '_' . $pekerja->nik . '_' . $pekerja->nama . '_front.png';
@@ -342,14 +345,26 @@ class CardController extends BaseController
         $color = imagecolorallocate($image, 0, 0, 0);
 
         $areaStart = 135;
-        $dimen = imagettfbbox($titleFz, 0, $helvetica, $pekerja->lokasi_kerja);
+        $dimen = imagettfbbox($titleFz, 0, $helveticaBold, $pekerja->lokasi_kerja);
         $titleWidth = abs($dimen[4] - $dimen[0]) + 30;
         $titleX = imagesx($image) - $titleWidth;
+        
         imagettftext($image, $titleFz, 0, $titleX, $areaStart, $color, $helveticaBold, $pekerja->lokasi_kerja);
         $start = $areaStart + 50;
+
+        // max allowed width text
+        $maxallowedwidth = imagesx($image) - (imagesx($image) / 2 + 60);
+
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'Nama');
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helveticaBold, $pekerja->nama);
+        // auto resize font if text width is bigger
+        $namaFz = $regularFz;
+        $dimen = imagettfbbox($namaFz, 0, $helveticaBold, $pekerja->nama);
+        $namapekerjawidth = abs($dimen[4] - $dimen[0]) + 30;
+        if ($namapekerjawidth > $maxallowedwidth) {
+            $namaFz = 14;
+        }
+        imagettftext($image, $namaFz, 0, imagesx($image) / 2 + 60, $start, $color, $helveticaBold, $pekerja->nama);
         $start += 23;
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'NIK');
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
@@ -357,11 +372,40 @@ class CardController extends BaseController
         $start += 23;
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'TTL');
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->tempat_lahir . ', ' . convertDate($pekerja->tgl_lahir));
+        // auto resize font if text width is bigger
+        $ttlFz = $regularFz;
+        $dimen = imagettfbbox($ttlFz, 0, $helveticaBold, $pekerja->tempat_lahir . ', ' . convertDate($pekerja->tgl_lahir));
+        $ttlpekerjawidth = abs($dimen[4] - $dimen[0]) + 30;
+        if ($ttlpekerjawidth > $maxallowedwidth) {
+            $ttlFz = 14;
+        }
+        imagettftext($image, $ttlFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->tempat_lahir . ', ' . convertDate($pekerja->tgl_lahir));
         $start += 23;
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'Alamat');
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->alamat);
+        // auto resize font if text width is bigger
+        $alamatFz = $regularFz;
+        $dimen = imagettfbbox($alamatFz, 0, $helveticaBold, $pekerja->alamat);
+        $alamatpekerjawidth = abs($dimen[4] - $dimen[0]) + 30;
+        if ($alamatpekerjawidth > $maxallowedwidth) {
+            $alamatFz = 14;
+        }
+        $dimen = imagettfbbox($alamatFz, 0, $helveticaBold, $pekerja->alamat);
+        $alamatpekerjawidth = abs($dimen[4] - $dimen[0]) + 30;
+        if ($alamatpekerjawidth > $maxallowedwidth) {
+            $alamatFz = 12;
+        }
+        $dimen = imagettfbbox($alamatFz, 0, $helveticaBold, $pekerja->alamat);
+        $alamatpekerjawidth = abs($dimen[4] - $dimen[0]) + 30;
+        if ($alamatpekerjawidth > $maxallowedwidth) {
+            $alamatFz = 10;
+        }
+        $dimen = imagettfbbox($alamatFz, 0, $helveticaBold, $pekerja->alamat);
+        $alamatpekerjawidth = abs($dimen[4] - $dimen[0]) + 30;
+        if ($alamatpekerjawidth > $maxallowedwidth) {
+            $alamatFz = 8;
+        }
+        imagettftext($image, $alamatFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->alamat);
         $start += 23;
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'Pekerjaan');
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
@@ -373,13 +417,20 @@ class CardController extends BaseController
 
         $regularFz = 14;
         $start = imagesy($image) - 140;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, 'Nusakambangan, 21 Juni 2022');
+
+        $namaTempat     = $this->settingModel->getByKey('nama_tempat') ?? '-';
+        $jabatanKepala  = $this->settingModel->getByKey('jabatan_kepala') ?? '-';
+        $namaKepala     = $this->settingModel->getByKey('nama_kepala') ?? '-';
+        $nipKepala      = $this->settingModel->getByKey('nip_kepala') ?? '-';
+        $todayDate      = Carbon::now()->format('Y-m-d');
+        
+        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $namaTempat->value . ', ' . convertDate((string) $todayDate));
         $start += 23;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, 'Kalapas Kelas I Batu');
+        imagettftext($image, $regularFz - 4, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $jabatanKepala->value);
         $start = imagesy($image) - 40;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helveticaBold, 'JALU YUSWA PANJANG');
+        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helveticaBold, $namaKepala->value);
         $start += 23;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, 'NIP. 197312221998031001');
+        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, 'NIP. '.$nipKepala->value);
 
         //-- masa berlaku
         $regularFz = 12;
@@ -388,11 +439,11 @@ class CardController extends BaseController
 
         //-- cap
         $cap = imagecreatefromstring(file_get_contents($capTemplate));
-        imagecopy($image, $cap, imagesx($image) / 2 - 20, imagesy($image) - 130, 0, 0, imagesx($cap), imagesy($cap));
+        imagecopy($image, $cap, imagesx($image) / 2, imagesy($image) - 130, 0, 0, imagesx($cap), imagesy($cap));
 
         //-- ttd
         $ttd = imagecreatefromstring(file_get_contents($ttdTemplate));
-        imagecopy($image, $ttd, imagesx($image) / 2 + 50, imagesy($image) - 120, 0, 0, imagesx($ttd), imagesy($ttd));
+        imagecopy($image, $ttd, imagesx($image) / 2 + 20, imagesy($image) - 180, 0, 0, imagesx($ttd), imagesy($ttd));
 
         //-- pasFoto
         $pasFotoPath = $pekerja->path . DIRECTORY_SEPARATOR . $pekerja->filename;
