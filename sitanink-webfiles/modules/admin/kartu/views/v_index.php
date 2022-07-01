@@ -261,7 +261,7 @@
             });
         });
 
-        // delete pekerja
+        // delete card
         $('#data-kartu tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
             var cardId = $(this).data().cardId;
 

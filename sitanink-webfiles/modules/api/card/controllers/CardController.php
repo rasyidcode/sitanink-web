@@ -6,12 +6,11 @@ use App\Controllers\BaseController;
 use App\Exceptions\ApiAccessErrorException;
 use App\Libraries\Fpdf;
 use Carbon\Carbon;
-use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Paths;
-use Modules\Admin\Pekerja\Models\PekerjaModel;
 use Modules\Api\Berkas\Models\BerkasModel;
 use Modules\Api\Card\Models\CardModel;
+use Modules\Api\Pekerja\Models\PekerjaModel;
 
 class CardController extends BaseController
 {
@@ -25,7 +24,7 @@ class CardController extends BaseController
         $db = \Config\Database::connect();
 
         $this->cardModel = new CardModel($db);
-        $this->pekerjaModel = new PekerjaModel();
+        $this->pekerjaModel = new PekerjaModel($db);
         $this->berkasModel = new BerkasModel($db);
     }
 
@@ -33,6 +32,7 @@ class CardController extends BaseController
     {
         $postData   = $this->request->getPost();
         $data       = $this->cardModel->getData($postData);
+ 
         $num        = $postData['start'];
 
         $resData = [];
@@ -86,10 +86,12 @@ class CardController extends BaseController
         $dataPost = $this->request->getPost();
 
         // check pekerja has pas foto or not
-        $pekerja = $this->cardModel->getPasFoto($dataPost['id_pekerja']);
+        $pekerja = $this
+            ->pekerjaModel
+            ->getDetailWithBerkas($dataPost['id_pekerja'], 1);
         if (is_null($pekerja)) {
             throw new ApiAccessErrorException(
-                message: 'Pas foto tidak ada, silahkan upload terlebih dahulu!',
+                message: 'Pekerja tidak ditemukan!',
                 statusCode: ResponseInterface::HTTP_BAD_REQUEST
             );
         }
@@ -159,8 +161,8 @@ class CardController extends BaseController
 
         if ($generateRequest == 'save') {
             $fcFile = new \CodeIgniter\Files\File($fcPath['file_path']);
-            $idBerkas = $this->pekerjaModel
-                ->insertBerkas([
+            $idBerkas = $this->berkasModel
+                ->create([
                     'id_pekerja'    => $pekerja->id,
                     'path'          => $workingPath,
                     'filename'      => $fcPath['filename'],
@@ -168,7 +170,7 @@ class CardController extends BaseController
                     'mime'          => $fcFile->getMimeType(),
                     'ext'           => $fcFile->getExtension(),
                     'berkas_type_id'          => 6,
-                ]);
+                ], true);
             if ($dataPost['action'] === 'edit') {
                 $this->cardModel
                     ->update([
@@ -371,7 +373,7 @@ class CardController extends BaseController
 
         $regularFz = 14;
         $start = imagesy($image) - 140;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, 'Nusakembangan, 21 Juni 2022');
+        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, 'Nusakambangan, 21 Juni 2022');
         $start += 23;
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, 'Kalapas Kelas I Batu');
         $start = imagesy($image) - 40;

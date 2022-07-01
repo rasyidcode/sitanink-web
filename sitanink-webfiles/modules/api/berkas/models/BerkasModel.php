@@ -90,4 +90,31 @@ class BerkasModel
             ->delete();
     }
 
+        /**
+     * Create new berkas
+     * 
+     * @param array $data
+     * @param bool $returnId
+     * 
+     * @return int|null
+     */
+    public function create(array $data, bool $returnId = false) : ?int
+    {
+        $this
+            ->builder
+            ->insert($data);
+        
+        if ($returnId) {
+            $row = $this
+                ->db
+                ->query('SELECT LAST_INSERT_ID() as last_id')
+                ->getRowObject() ?? 0;
+
+            return $row
+                ->last_id ?? 0;
+        }
+
+        return null;
+    }
+
 }

@@ -104,7 +104,7 @@ class PekerjaModel
                 $this
                     ->builder
                     ->limit(
-                        $dtParams['length'], 
+                        $dtParams['length'],
                         $dtParams['start']
                     );
             }
@@ -205,5 +205,33 @@ class PekerjaModel
             ->builder
             ->where('id', $id)
             ->delete();
+    }
+
+    /**
+     * Get pekerja by id, with lokasi_kerja, tipe_pekerja, and berkas
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function getDetailWithBerkas(int $id, int $berkasTypeFotoId): ?object
+    {
+        return $this
+            ->builder
+            ->select('
+                pekerja.*,
+                CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
+                lokasi_kerja.nama as lokasi_kerja,
+                jenis_pekerja.nama as jenis_pekerja,
+                berkas.filename,
+                berkas.path
+            ')
+            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
+            ->join('berkas', 'pekerja.id = berkas.id_pekerja', 'left')
+            ->where('pekerja.id', $id)
+            ->where('berkas.berkas_type_id', $berkasTypeFotoId)
+            ->get()
+            ->getRowObject();
     }
 }

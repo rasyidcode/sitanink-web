@@ -93,40 +93,6 @@ class CardModel
     }
 
     /**
-     * Get pas foto pekerja by id_pekerja
-     * 
-     * @param int $idPekerja
-     * 
-     * @return object
-     */
-    public function getPasFoto(int $idPekerja) : ?object
-    {
-        return $this->db
-            ->table('pekerja')
-            ->select('
-                pekerja.id,
-                pekerja.nik,
-                pekerja.nama,
-                lokasi_kerja.nama as lokasi_kerja,
-                pekerja.alamat,
-                pekerjaan.nama as pekerjaan,
-                pekerja.tempat_lahir,
-                pekerja.tgl_lahir,
-                CONCAT(pekerja.tempat_lahir, ",", pekerja.tgl_lahir) as ttl,
-                pekerja.qr_secret,
-                berkas.path,
-                berkas.filename
-            ')
-            ->join('berkas', 'berkas.id_pekerja = pekerja.id', 'left')
-            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
-            ->join('pekerjaan', 'pekerja.id_pekerjaan = pekerjaan.id', 'left')
-            ->where('berkas.berkas_type_id', 1)
-            ->where('berkas.id_pekerja', $idPekerja)
-            ->get()
-            ->getRowObject();
-    }
-
-    /**
      * Insert new generated file
      * 
      * @param array $data
