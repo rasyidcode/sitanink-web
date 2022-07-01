@@ -168,8 +168,6 @@ class SkController extends BaseWebController
         $skFilename = time() . '_sk_petani.docx';
         $skfullpath = $this->path->publicDocsGenDirectory . '/' . $skFilename;
 
-        $templateProcessor->saveAs($skfullpath);
-
         $skFile = new \CodeIgniter\Files\File($skfullpath);
         $idBerkas = $this->berkasModel->create([
             'id_pekerja'        => null,
@@ -180,6 +178,8 @@ class SkController extends BaseWebController
             'ext'               => $skFile->getExtension() ?? '-',
             'berkas_type_id'    => 7,
         ], true);
+
+        $templateProcessor->saveAs($skfullpath);
 
         // create generated sk
         $docId = $this->skModel->create([
