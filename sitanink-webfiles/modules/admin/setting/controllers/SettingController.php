@@ -2,7 +2,6 @@
 
 namespace Modules\Admin\Setting\Controllers;
 
-use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Admin\Setting\Models\SettingModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
 
@@ -36,9 +35,11 @@ class SettingController extends BaseWebController
 
     public function index()
     {
-        $this->viewData['pasFotoId'] = $this->settingModel->getSiteConfig('id_pas_foto');
-        $this->viewData['berkasTypes'] = $this->settingModel->getListBerkasType();
-        $this->viewData['pageLinks'] = [
+        $this->viewData['idPasFoto']    = $this->settingModel->getByKey('id_pas_foto');
+        $this->viewData['nipKepala']    = $this->settingModel->getByKey('nip_kepala');
+        $this->viewData['namaKepala']   = $this->settingModel->getByKey('nama_kepala');
+        $this->viewData['berkasTypes']  = $this->settingModel->getListBerkasType();
+        $this->viewData['pageLinks']    = [
             'dashboard' => [
                 'url'       => route_to('admin'),
                 'active'    => false,
@@ -52,18 +53,51 @@ class SettingController extends BaseWebController
         return $this->renderView('v_index', $this->viewData);
     }
 
-    public function pasFotoConfig()
+    public function create()
     {
         $postData = $this->request->getPost();
         
-        $config = $this->settingModel->getSiteConfig($postData['key']);
-        if (is_null($config)) {
-            $this->settingModel->createConfig($postData);
+        $idPasFoto = $this->settingModel->getByKey('id_pas_foto');
+        if (is_null($idPasFoto)) {
+            $this->settingModel->create([
+                'key'   => 'id_pas_foto',
+                'value' => $postData['id_pas_foto']
+            ]);
         } else {
-            $this->settingModel->updateConfig($postData);
+            $this->settingModel->update([
+                'key'   => 'id_pas_foto',
+                'value' => $postData['id_pas_foto']
+            ]);
         }
 
-        return redirect()->back()
+        $nipKepala = $this->settingModel->getByKey('nip_kepala');
+        if (is_null($nipKepala)) {
+            $this->settingModel->create([
+                'key'   => 'nip_kepala',
+                'value' => $postData['nip_kepala']
+            ]);
+        } else {
+            $this->settingModel->update([
+                'key'   => 'nip_kepala',
+                'value' => $postData['nip_kepala']
+            ]);
+        }
+
+        $namaKepala = $this->settingModel->getByKey('nama_kepala');
+        if (is_null($namaKepala)) {
+            $this->settingModel->create([
+                'key'   => 'nama_kepala',
+                'value' => $postData['nama_kepala']
+            ]);
+        } else {
+            $this->settingModel->update([
+                'key'   => 'nama_kepala',
+                'value' => $postData['nama_kepala']
+            ]);
+        }
+
+        return redirect()
+            ->back()
             ->route('setting');
     }
 }

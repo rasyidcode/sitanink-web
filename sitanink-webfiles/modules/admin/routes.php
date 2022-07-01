@@ -97,16 +97,11 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->get('list', 'KartuController::index', ['as' => 'kartu']);        
         $routes->get('generate', 'KartuController::generate', ['as' => 'kartu.generate']);
         $routes->post('(:segment)/delete', 'KartuController::delete/$1', ['as' => 'kartu.delete']);
-        // $routes->post('generate', 'KartuController::doGenerate', ['as' => 'kartu.do-generate']);
-        // $routes->post('preview', 'KartuController::cardPreview', ['as' => 'kartu.preview']);
-        // $routes->get('test-generate', 'KartuController::testGenerate', ['as' => 'kartu.test-generate']);
-        // $routes->get('test-generate2', 'KartuController::testGenerate2', ['as' => 'kartu.test-generate2']);
-        // $routes->get('phpinfo', 'KartuController::phpinfo', ['as' => 'kartu.phpinfo']);
     });
     // pengaturan
     $routes->group('setting', ['namespace' => $routes_namespace . 'Setting\Controllers\\'], function($routes) {
         $routes->get('/', 'SettingController::index', ['as' => 'setting']);
-        $routes->post('pas-foto-config', 'SettingController::pasFotoConfig', ['as' => 'setting.tipe-berkas.pas-foto']);
+        $routes->post('/', 'SettingController::create', ['as' => 'setting.create']);
     });
 
     // notifikasi

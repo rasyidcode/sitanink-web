@@ -16,7 +16,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                 <div class="box-body">
                     <div class="row">
                         <div class="col-xs-12 col-sm-offset-1 col-sm-8 col-md-offset-1 col-md-8 col-lg-offset-4 col-lg-4">
-                            <form action="<?= route_to('domisili.create') ?>" method="POST" role="form">
+                            <form action="<?= route_to('sk.do-create') ?>" method="POST" role="form">
                                 <?= csrf_field() ?>
                                 <div class="row">
                                     <div class="col-xs-12">

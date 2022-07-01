@@ -357,7 +357,7 @@ class CardController extends BaseController
         $start += 23;
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'TTL');
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->tempat_lahir . ', ' . $this->convertDate($pekerja->tgl_lahir));
+        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->tempat_lahir . ', ' . convertDate($pekerja->tgl_lahir));
         $start += 23;
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'Alamat');
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
@@ -384,7 +384,7 @@ class CardController extends BaseController
         //-- masa berlaku
         $regularFz = 12;
         $color = imagecolorallocate($image, 255, 0, 0);
-        imagettftext($image, $regularFz, 0, 25, $start, $color, $helveticaBold, 'Berlaku sampai ' . $this->convertDate($validUntil));
+        imagettftext($image, $regularFz, 0, 25, $start, $color, $helveticaBold, 'Berlaku sampai ' . convertDate($validUntil));
 
         //-- cap
         $cap = imagecreatefromstring(file_get_contents($capTemplate));
@@ -545,35 +545,5 @@ class CardController extends BaseController
             'filename'  => $backCardFilename,
             'file_path' => $cardBackSave
         ];
-    }
-
-    private function convertDate(string $date)
-    {
-        $dateArr = explode('-', $date);
-        if ($dateArr[1] == '01') {
-            return $dateArr[2] . ' Januari ' . $dateArr[0];
-        } else if ($dateArr[1] == '02') {
-            return $dateArr[2] . ' Februari ' . $dateArr[0];
-        } else if ($dateArr[1] == '03') {
-            return $dateArr[2] . ' Maret ' . $dateArr[0];
-        } else if ($dateArr[1] == '04') {
-            return $dateArr[2] . ' April ' . $dateArr[0];
-        } else if ($dateArr[1] == '05') {
-            return $dateArr[2] . ' Mei ' . $dateArr[0];
-        } else if ($dateArr[1] == '06') {
-            return $dateArr[2] . ' Juni ' . $dateArr[0];
-        } else if ($dateArr[1] == '07') {
-            return $dateArr[2] . ' Juli ' . $dateArr[0];
-        } else if ($dateArr[1] == '08') {
-            return $dateArr[2] . ' Agustus ' . $dateArr[0];
-        } else if ($dateArr[1] == '09') {
-            return $dateArr[2] . ' September ' . $dateArr[0];
-        } else if ($dateArr[1] == '10') {
-            return $dateArr[2] . ' Oktober ' . $dateArr[0];
-        } else if ($dateArr[1] == '11') {
-            return $dateArr[2] . ' November ' . $dateArr[0];
-        } else if ($dateArr[1] == '12') {
-            return $dateArr[2] . ' Desember ' . $dateArr[0];
-        }
     }
 }

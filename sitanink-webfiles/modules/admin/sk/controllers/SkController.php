@@ -5,6 +5,10 @@ namespace Modules\Admin\Sk\Controllers;
 use Modules\Admin\Pekerja\Models\PekerjaModel;
 use Modules\Admin\Sk\Models\SkModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
+use PhpOffice\PhpWord\Element\Table;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\SimpleType\TblWidth;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class SkController extends BaseWebController
 {
@@ -82,7 +86,150 @@ class SkController extends BaseWebController
 
     public function doCreate()
     {
-        print_r($this->request->getPost());
+        if (!$this->validate([
+            'number'        => 'required|is_unique[generated_docs.number]',
+            'year'          => 'required',
+            'valid_until'   => 'required',
+            'set_date'      => 'required',
+            'boss_name'     => 'required',
+            'boss_nip'      => 'required',
+            'attachments'   => 'required',
+        ])) {
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()
+                ->back()
+                ->withInput();
+        }
+
+        $dataPost = $this->request->getPost();
+        
+        $templateProcessor = new TemplateProcessor($this->path->publicDocsDirectory . '/sk_petani.docx');
+        $templateProcessor->setValues([
+            'nomor' => $dataPost['number'],
+            'tahun' => $dataPost['year'],
+            'berlaku_sampai' => convertDate($dataPost['valid_until']),
+            'tanggal_terbit' => convertDate($dataPost['set_date']),
+            'nama_kepala' => $dataPost['boss_name'],
+            'nip_kepala' => $dataPost['boss_nip'],
+        ]);
+
+        $listPekerja = $this->pekerjaModel->getListPekerjaAsAttachments(explode(',', $dataPost['attachments']));
+
+        $table = new Table([
+            'borderSize' => 2,
+            'unit' => TblWidth::PERCENT,
+            'width' => 100 * 50,
+        ]);
+
+        // header
+        $table->addRow();
+        $table->addCell(150)->addText('No.');
+        $table->addCell(150)->addText('NIK');
+        $table->addCell(150)->addText('Nama');
+        $table->addCell(150)->addText('Tempat Lahir');
+        $table->addCell(150)->addText('Tanggal Lahir');
+        $table->addCell(150)->addText('Alamat');
+        $table->addCell(150)->addText('Pekerjaan');
+        $table->addCell(150)->addText('Jenis Pekerja');
+        $table->addCell(150)->addText('Lokasi Kerja');
+
+        foreach ($listPekerja as $index => $itemPekerja) {
+            $table->addRow();
+
+            $table->addCell(150)->addText($index + 1);
+            $table->addCell(150)->addText($itemPekerja->nik);
+            $table->addCell(150)->addText($itemPekerja->nama);
+            $table->addCell(150)->addText($itemPekerja->tempat_lahir);
+            $table->addCell(150)->addText($itemPekerja->tgl_lahir);
+            $table->addCell(150)->addText($itemPekerja->alamat);
+            $table->addCell(150)->addText($itemPekerja->pekerjaan);
+            $table->addCell(150)->addText($itemPekerja->jenis_pekerja);
+            $table->addCell(150)->addText($itemPekerja->lokasi_kerja);
+        }
+
+        $templateProcessor->setComplexBlock('table', $table);
+
+        $skFilename = time() . '_sk_petani.docx';
+
+        $templateProcessor->saveAs($this->path->publicDocsGenDirectory . '/' . $skFilename);
+
+        session()
+            ->setFlashdata('success', 'Berkas berhasil dibuat!');
+
+        return redirect()
+            ->back()
+            ->route('sk');
     }
 
+    public function doCreate2()
+    {
+        if (!$this->validate([
+            'number'        => 'required|is_unique[generated_docs.number]',
+            'year'          => 'required',
+            'valid_until'   => 'required',
+            'set_date'      => 'required',
+            'boss_name'     => 'required',
+            'boss_nip'      => 'required',
+            'attachments'   => 'required',
+        ])) {
+            session()->setFlashdata('error', $this->validator->getErrors());
+            return redirect()
+                ->back()
+                ->withInput();
+        }
+
+        $dataPost = $this->request->getPost();
+
+        $templateProcessor = new TemplateProcessor($this->path->publicDocsDirectory . '/sk_petani.docx');
+
+        $templateProcessor->setValues([
+            'nomor' => $dataPost['number'],
+            'tahun' => $dataPost['year'],
+            'berlaku_sampai' => convertDate($dataPost['valid_until']),
+            'tanggal_terbit' => convertDate($dataPost['set_date']),
+            'nama_kepala' => $dataPost['boss_name'],
+            'nip_kepala' => $dataPost['boss_nip'],
+        ]);
+
+        $listPekerja = $this->pekerjaModel->getListPekerjaAsAttachments(explode(',', $dataPost['attachments']));
+
+        $table = new Table([
+            'borderSize' => 2,
+            'unit' => TblWidth::PERCENT,
+            'width' => 100 * 50,
+        ]);
+
+        // header
+        $table->addRow();
+        $table->addCell(150)->addText('No.');
+        $table->addCell(150)->addText('NIK');
+        $table->addCell(150)->addText('Nama');
+        $table->addCell(150)->addText('Tempat Lahir');
+        $table->addCell(150)->addText('Tanggal Lahir');
+        $table->addCell(150)->addText('Alamat');
+        $table->addCell(150)->addText('Pekerjaan');
+        $table->addCell(150)->addText('Jenis Pekerja');
+        $table->addCell(150)->addText('Lokasi Kerja');
+
+        foreach ($listPekerja as $index => $itemPekerja) {
+            $table->addRow();
+
+            $table->addCell(150)->addText($index + 1);
+            $table->addCell(150)->addText($itemPekerja->nik);
+            $table->addCell(150)->addText($itemPekerja->nama);
+            $table->addCell(150)->addText($itemPekerja->tempat_lahir);
+            $table->addCell(150)->addText($itemPekerja->tgl_lahir);
+            $table->addCell(150)->addText($itemPekerja->alamat);
+            $table->addCell(150)->addText($itemPekerja->pekerjaan);
+            $table->addCell(150)->addText($itemPekerja->jenis_pekerja);
+            $table->addCell(150)->addText($itemPekerja->lokasi_kerja);
+        }
+
+        $templateProcessor->setComplexBlock('table', $table);
+
+        header("Content-Disposition: attachment; filename=template3.docx");
+
+        $templateProcessor->saveAs('php://output');
+        exit;
+    }
 }

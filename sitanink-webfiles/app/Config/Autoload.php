@@ -92,6 +92,7 @@ class Autoload extends AutoloadConfig
     public $files = [
         // APPPATH.'../modules/*.php'
         APPPATH . '/Helpers/myview_helper.php',
+        APPPATH . '/Helpers/date_helper.php',
     ];
 
     public function __construct()

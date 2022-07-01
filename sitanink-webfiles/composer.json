@@ -14,7 +14,8 @@
         "laminas/laminas-escaper": "^2.8",
         "psr/log": "^1.1",
         "phpoffice/phpspreadsheet": "^1.23",
-        "nesbot/carbon": "^2.58"
+        "nesbot/carbon": "^2.58",
+        "phpoffice/phpword": "^0.18.3"
     },
     "require-dev": {
         "codeigniter/coding-standard": "^1.1",

@@ -75,7 +75,7 @@ class SettingModel
      * 
      * @return void
      */
-    public function createConfig(array $data)
+    public function create(array $data)
     {
         return $this
             ->builder
@@ -89,12 +89,11 @@ class SettingModel
      * 
      * @return void
      */
-    public function updateConfig(array $data)
+    public function update(array $data)
     {
         return $this
             ->builder
             ->where('key', $data['key'])
             ->update($data);
     }
-
 }

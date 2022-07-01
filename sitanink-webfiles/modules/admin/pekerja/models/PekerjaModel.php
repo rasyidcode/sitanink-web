@@ -186,4 +186,32 @@ class PekerjaModel
             ->get()
             ->getResultObject();
     }
+
+    /**
+     * Get list pekerja by ids as sk attachments
+     * 
+     * @param array $ids
+     * 
+     * @return array
+     */
+    public function getListPekerjaAsAttachments(array $ids) : array
+    {
+        return $this
+            ->builder
+            ->select('
+                pekerja.nik,
+                pekerja.nama,
+                pekerja.tempat_lahir,
+                pekerja.tgl_lahir,
+                pekerja.alamat,
+                pekerja.pekerjaan,
+                jenis_pekerja.nama as jenis_pekerja,
+                lokasi_kerja.nama as lokasi_kerja,
+            ')
+            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
+            ->whereIn('pekerja.id', $ids)
+            ->get()
+            ->getResultObject();
+    }
 }
