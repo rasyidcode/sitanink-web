@@ -150,6 +150,33 @@ class PekerjaModel
     }
 
     /**
+     * Get pekerja by qr_secret, with lokasi_kerja, tipe_pekerja, and berkas_foto
+     * 
+     * @param string $qrsecret
+     * 
+     * @return object|null
+     */
+    public function getDetailWithBerkasByQR(string $qrsecret, int $berkasTypeId): ?object
+    {
+        return $this
+            ->builder
+            ->select('
+                pekerja.*,
+                CONCAT(pekerja.tempat_lahir, ", ", pekerja.tgl_lahir) as ttl,
+                lokasi_kerja.nama as lokasi_kerja,
+                jenis_pekerja.nama as jenis_pekerja,
+                berkas.filename as foto_filename
+            ')
+            ->join('lokasi_kerja', 'pekerja.id_lokasi_kerja = lokasi_kerja.id', 'left')
+            ->join('jenis_pekerja', 'pekerja.id_jenis_pekerja = jenis_pekerja.id', 'left')
+            ->join('berkas', 'pekerja.id = berkas.id_pekerja', 'left')
+            ->where('pekerja.qr_secret', $qrsecret)
+            ->where('berkas.berkas_type_id', $berkasTypeId)
+            ->get()
+            ->getRowObject();
+    }
+
+    /**
      * Get list pekerja to export
      * 
      * @return array
