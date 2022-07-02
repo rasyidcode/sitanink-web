@@ -6,7 +6,7 @@
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header">
-                    <h3 class="box-title">Data Kartu</h3>
+                    <a href="<?= route_to('kartu.generate') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Buat Kartu</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

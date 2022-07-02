@@ -23,18 +23,6 @@
             <li class="<?= isLinkActive('user', 1) ?>">
                 <a href="<?= route_to('user') ?>"><i class="fa fa-user"></i> <span>Master Data User</span></a>
             </li>
-            <!-- <li class="treeview" style="height: auto;">
-                <a href="#">
-                    <i class="ion ion-ios-people-outline"></i> <span>Master Data Pekerja</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu" style="display: <?= isMenuOpen('master', 1) ?>;">
-                    <li class="<?= isLinkActive('lokasi-kerja', 2) ?>"><a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> Lokasi</a></li>
-                    <li class="<?= isLinkActive('jenis-pekerja', 2) ?>"><a href="<?= route_to('jenis-pekerja') ?>"><i class="fa fa-square-o"></i> Jenis</a></li>
-                </ul>
-            </li> -->
             <li class="<?= isLinkActive('lokasi-kerja', 1) ?>">
                 <a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> <span>Master Data Lokasi Kerja</span></a>
             </li>
@@ -44,6 +32,8 @@
             <li class="<?= isLinkActive('tipe-berkas', 1) ?>">
                 <a href="<?= route_to('tipe-berkas') ?>"><i class="fa fa-file"></i> <span>Master Data Tipe Berkas</span></a>
             </li>
+            <!--/ master end -->
+
             <li class="header">Data</li>
             <li class="<?= isLinkActive('pekerja', 1) ?>">
                 <a href="<?= route_to('pekerja') ?>">
@@ -60,7 +50,7 @@
                     <i class="fa fa-qrcode"></i> <span>Data QRCode</span>
                 </a>
             </li>
-            <li class="treeview" style="height: auto;">
+            <!-- <li class="treeview" style="height: auto;">
                 <a href="#">
                     <i class="fa fa-vcard-o"></i> <span>Data Kartu</span>
                     <span class="pull-right-container">
@@ -71,12 +61,19 @@
                     <li class="<?= isLinkActive('list', 2) ?>"><a href="<?= route_to('kartu') ?>"><i class="fa fa-square-o"></i> List</a></li>
                     <li class="<?= isLinkActive('generate', 2) ?>"><a href="<?= route_to('kartu.generate') ?>"><i class="fa fa-square-o"></i> Generate</a></li>
                 </ul>
+            </li> -->
+            <li class="<?= isLinkActive('kartu2', 1) ?>">
+                <a href="<?=route_to('kartu')?>">
+                    <i class="fa fa-vcard-o"></i> <span>Data Kartu</span>
+                </a>
             </li>
             <li class="<?= isLinkActive('sk', 1) ?>">
                 <a href="<?=route_to('sk')?>">
                     <i class="ion ion-document-text"></i> <span>Data SK</span>
                 </a>
             </li>
+            <!--/ data end -->
+
             <li class="header">Lainnya</li>
             <li>
                 <a href="#"><i class="ion ion-android-notifications-none"></i> <span>Notifikasi</span></a>
@@ -84,10 +81,6 @@
             <li <?= isLinkActive('setting', 1) ?>>
                 <a href="<?=route_to('setting')?>"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>
             </li>
-            <!-- <li class="header">Tools</li>
-            <li>
-                <a href="#"><i class="ion ion-ios-reverse-camera-outline"></i> <span>QR Scanner</span></a>
-            </li> -->
         </ul>
         <!-- /.sidebar-menu -->
     </section>
