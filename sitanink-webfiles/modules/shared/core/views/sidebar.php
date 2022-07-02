@@ -23,7 +23,7 @@
             <li class="<?= isLinkActive('user', 1) ?>">
                 <a href="<?= route_to('user') ?>"><i class="fa fa-user"></i> <span>Master Data User</span></a>
             </li>
-            <li class="treeview" style="height: auto;">
+            <!-- <li class="treeview" style="height: auto;">
                 <a href="#">
                     <i class="ion ion-ios-people-outline"></i> <span>Master Data Pekerja</span>
                     <span class="pull-right-container">
@@ -33,9 +33,13 @@
                 <ul class="treeview-menu" style="display: <?= isMenuOpen('master', 1) ?>;">
                     <li class="<?= isLinkActive('lokasi-kerja', 2) ?>"><a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> Lokasi</a></li>
                     <li class="<?= isLinkActive('jenis-pekerja', 2) ?>"><a href="<?= route_to('jenis-pekerja') ?>"><i class="fa fa-square-o"></i> Jenis</a></li>
-                    <!-- <li class="<?= isLinkActive('pekerjaan', 2) ?>"><a href="<?= route_to('pekerjaan') ?>"><i class="fa fa-gavel"></i> Pekerjaan</a></li> -->
-                    <!-- <li class="<?= isLinkActive('tipe-berkas', 2) ?>"><a href="<?= route_to('tipe-berkas') ?>"><i class="fa fa-file"></i> Tipe Berkas</a></li> -->
                 </ul>
+            </li> -->
+            <li class="<?= isLinkActive('lokasi-kerja', 1) ?>">
+                <a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> <span>Master Data Lokasi Kerja</span></a>
+            </li>
+            <li class="<?= isLinkActive('jenis-pekerja', 1) ?>">
+                <a href="<?= route_to('jenis-pekerja') ?>"><i class="fa fa-square-o"></i> <span>Master Data Jenis Pekerja</span></a>
             </li>
             <li class="<?= isLinkActive('tipe-berkas', 1) ?>">
                 <a href="<?= route_to('tipe-berkas') ?>"><i class="fa fa-file"></i> <span>Master Data Tipe Berkas</span></a>
