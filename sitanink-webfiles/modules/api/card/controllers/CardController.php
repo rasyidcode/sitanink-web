@@ -35,7 +35,7 @@ class CardController extends BaseController
     {
         $postData   = $this->request->getPost();
         $data       = $this->cardModel->getData($postData);
- 
+
         $num        = $postData['start'];
 
         $resData = [];
@@ -348,15 +348,19 @@ class CardController extends BaseController
         $dimen = imagettfbbox($titleFz, 0, $helveticaBold, $pekerja->lokasi_kerja);
         $titleWidth = abs($dimen[4] - $dimen[0]) + 30;
         $titleX = imagesx($image) - $titleWidth;
-        
+
+        $keyX       = imagesx($image) / 2 - 160;
+        $dividerX   = imagesx($image) / 2 + 30;
+        $valueX     = imagesx($image) / 2 + 50;
+
         imagettftext($image, $titleFz, 0, $titleX, $areaStart, $color, $helveticaBold, $pekerja->lokasi_kerja);
         $start = $areaStart + 50;
 
         // max allowed width text
-        $maxallowedwidth = imagesx($image) - (imagesx($image) / 2 + 60);
+        $maxallowedwidth = imagesx($image) - $valueX;
 
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'Nama');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
+        imagettftext($image, $regularFz, 0, $dividerX, $start, $color, $helvetica, ':');
         // auto resize font if text width is bigger
         $namaFz = $regularFz;
         $dimen = imagettfbbox($namaFz, 0, $helveticaBold, $pekerja->nama);
@@ -364,14 +368,14 @@ class CardController extends BaseController
         if ($namapekerjawidth > $maxallowedwidth) {
             $namaFz = 14;
         }
-        imagettftext($image, $namaFz, 0, imagesx($image) / 2 + 60, $start, $color, $helveticaBold, $pekerja->nama);
+        imagettftext($image, $namaFz, 0, $valueX, $start, $color, $helveticaBold, $pekerja->nama);
         $start += 23;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'NIK');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->nik);
+        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helvetica, 'NIK');
+        imagettftext($image, $regularFz, 0, $dividerX, $start, $color, $helvetica, ':');
+        imagettftext($image, $regularFz, 0, $valueX, $start, $color, $helvetica, $pekerja->nik);
         $start += 23;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'TTL');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
+        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helvetica, 'TTL');
+        imagettftext($image, $regularFz, 0, $dividerX, $start, $color, $helvetica, ':');
         // auto resize font if text width is bigger
         $ttlFz = $regularFz;
         $dimen = imagettfbbox($ttlFz, 0, $helveticaBold, $pekerja->tempat_lahir . ', ' . convertDate($pekerja->tgl_lahir));
@@ -379,10 +383,10 @@ class CardController extends BaseController
         if ($ttlpekerjawidth > $maxallowedwidth) {
             $ttlFz = 14;
         }
-        imagettftext($image, $ttlFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->tempat_lahir . ', ' . convertDate($pekerja->tgl_lahir));
+        imagettftext($image, $ttlFz, 0, $valueX, $start, $color, $helvetica, $pekerja->tempat_lahir . ', ' . convertDate($pekerja->tgl_lahir));
         $start += 23;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'Alamat');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
+        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helvetica, 'Alamat');
+        imagettftext($image, $regularFz, 0, $dividerX, $start, $color, $helvetica, ':');
         // auto resize font if text width is bigger
         $alamatFz = $regularFz;
         $dimen = imagettfbbox($alamatFz, 0, $helveticaBold, $pekerja->alamat);
@@ -405,15 +409,15 @@ class CardController extends BaseController
         if ($alamatpekerjawidth > $maxallowedwidth) {
             $alamatFz = 8;
         }
-        imagettftext($image, $alamatFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->alamat);
+        imagettftext($image, $alamatFz, 0, $valueX, $start, $color, $helvetica, $pekerja->alamat);
         $start += 23;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'Pekerjaan');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->pekerjaan);
+        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helvetica, 'Pekerjaan');
+        imagettftext($image, $regularFz, 0, $dividerX, $start, $color, $helvetica, ':');
+        imagettftext($image, $regularFz, 0, $valueX, $start, $color, $helvetica, $pekerja->pekerjaan);
         $start += 23;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 - 160, $start, $color, $helvetica, 'Tempat Tinggal');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 40, $start, $color, $helvetica, ':');
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $pekerja->tempat_lahir);
+        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helvetica, 'Tempat Tinggal');
+        imagettftext($image, $regularFz, 0, $dividerX, $start, $color, $helvetica, ':');
+        imagettftext($image, $regularFz, 0, $valueX, $start, $color, $helvetica, $pekerja->tempat_lahir);
 
         $regularFz = 14;
         $start = imagesy($image) - 140;
@@ -423,14 +427,14 @@ class CardController extends BaseController
         $namaKepala     = $this->settingModel->getByKey('nama_kepala') ?? '-';
         $nipKepala      = $this->settingModel->getByKey('nip_kepala') ?? '-';
         $todayDate      = Carbon::now()->format('Y-m-d');
-        
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $namaTempat->value . ', ' . convertDate((string) $todayDate));
+
+        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helvetica, $namaTempat->value . ', ' . convertDate((string) $todayDate));
         $start += 23;
-        imagettftext($image, $regularFz - 2, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $jabatanKepala->value);
+        imagettftext($image, $regularFz - 2, 0, $keyX, $start, $color, $helvetica, $jabatanKepala->value);
         $start = imagesy($image) - 40;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helveticaBold, $namaKepala->value);
+        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helveticaBold, $namaKepala->value);
         $start += 23;
-        imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, 'NIP. '.$nipKepala->value);
+        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helvetica, 'NIP. ' . $nipKepala->value);
 
         //-- masa berlaku
         $regularFz = 12;
@@ -476,13 +480,13 @@ class CardController extends BaseController
         imagecopy($image, $pp, 50, imagesy($image) / 2 - $npph / 2 + 40, 0, 0, $nppw, $npph);
 
         //-- qrcode
-        $datasecret = site_url('show-data') . '?qrsecret='.$pekerja->qr_secret;
+        $datasecret = site_url('show-data') . '?qrsecret=' . $pekerja->qr_secret;
 
         //-- convert to bitly
         $bitlyaccesstoken = 'b43c250fc0107927f5ea902dd1fe75687f74f2fe';
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL 		   => "https://api-ssl.bitly.com/v4/shorten",
+            CURLOPT_URL            => "https://api-ssl.bitly.com/v4/shorten",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING       => "",
             CURLOPT_MAXREDIRS      => 10,
