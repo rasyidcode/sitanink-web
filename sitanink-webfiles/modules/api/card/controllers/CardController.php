@@ -426,7 +426,7 @@ class CardController extends BaseController
         
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $namaTempat->value . ', ' . convertDate((string) $todayDate));
         $start += 23;
-        imagettftext($image, $regularFz - 4, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $jabatanKepala->value);
+        imagettftext($image, $regularFz - 2, 0, imagesx($image) / 2 + 60, $start, $color, $helvetica, $jabatanKepala->value);
         $start = imagesy($image) - 40;
         imagettftext($image, $regularFz, 0, imagesx($image) / 2 + 60, $start, $color, $helveticaBold, $namaKepala->value);
         $start += 23;
