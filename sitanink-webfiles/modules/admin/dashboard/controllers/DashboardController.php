@@ -7,6 +7,7 @@ use Modules\Admin\Kartu\Models\KartuModel;
 use Modules\Admin\Lokasikerja\Models\LokasikerjaModel;
 use Modules\Admin\Pekerja\Models\PekerjaModel;
 use Modules\Admin\Sk\Models\SkModel;
+use Modules\Admin\Wilayah\Models\WilayahModel;
 use Modules\Shared\Core\Controllers\BaseWebController;
 
 class DashboardController extends BaseWebController
@@ -34,6 +35,11 @@ class DashboardController extends BaseWebController
      */
     private $skModel;
 
+    /**
+     * @var WilayahModel
+     */
+    private $wilayahModel;
+
     public function __construct()
     {
         parent::__construct();
@@ -44,6 +50,7 @@ class DashboardController extends BaseWebController
         $this->lokasikerjaModel = new LokasikerjaModel($db);
         $this->kartuModel       = new KartuModel($db);
         $this->skModel          = new SkModel($db);
+        $this->wilayahModel     = new WilayahModel($db);
     }
 
     public function index()
@@ -61,6 +68,7 @@ class DashboardController extends BaseWebController
             'totalWilayah'  => $this->lokasikerjaModel->countTotal(),
             'totalKartu'    => $this->kartuModel->countTotal(),
             'totalSk'       => $this->skModel->countTotal(),
+            'listWilayah'   => $this->wilayahModel->getList()
         ]);
     }
 

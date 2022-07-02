@@ -11,7 +11,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Total Pekerja</span>
-                    <span class="info-box-number"><?=$totalPekerja?></span>
+                    <span class="info-box-number"><?= $totalPekerja ?></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -24,7 +24,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Total Wilayah</span>
-                    <span class="info-box-number"><?=$totalWilayah?></span>
+                    <span class="info-box-number"><?= $totalWilayah ?></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -41,7 +41,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Total Kartu</span>
-                    <span class="info-box-number"><?=$totalKartu?></span>
+                    <span class="info-box-number"><?= $totalKartu ?></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -54,7 +54,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">SK Diterbitkan</span>
-                    <span class="info-box-number"><?=$totalSk?></span>
+                    <span class="info-box-number"><?= $totalSk ?></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -64,13 +64,40 @@
     </div>
     <!-- /.row -->
 
-    <!-- Default box -->
-    <div class="box box-success">
-        <div class="box-body">
-            <h3>Halo <strong><?=session()->get('username')?></strong>, selamat datang diaplikasi web sitani nusakambangan.</h3>
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Default box -->
+            <div class="box box-success">
+                <div class="box-body">
+                    <h3>Halo <strong><?= session()->get('username') ?></strong>, selamat datang diaplikasi web sitani nusakambangan.</h3>
+                </div>
+            </div>
+            <!-- /.box -->
         </div>
     </div>
-    <!-- /.box -->
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="box box-widget widget-user-2">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-green">
+                    <div class="widget-user-image">
+                        <i class="ion ion-map" style="float: left; font-size: 40px;"></i>
+                    </div>
+                    <!-- /.widget-user-image -->
+                    <h3 class="widget-user-username">Data Per Wilayah</h3>
+                    <h5 class="widget-user-desc"></h5>
+                </div>
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-stacked">
+                        <?php foreach ($listWilayah as $itemWilayah) : ?>
+                            <li><a href="#"><?= $itemWilayah->nama ?> <span class="pull-right badge bg-green"><?= $itemWilayah->total_pekerja ?></span></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </section>
 <?= $renderer->endSection() ?>
