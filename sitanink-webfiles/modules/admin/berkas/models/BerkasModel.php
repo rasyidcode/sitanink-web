@@ -112,4 +112,21 @@ class BerkasModel
             ->get()
             ->getRowObject();
     }
+
+    /**
+     * Get by id
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function get(int $id) : ?object
+    {
+        return $this
+            ->db
+            ->table('berkas')
+            ->where('id', $id)
+            ->get()
+            ->getRowObject();
+    }
 }

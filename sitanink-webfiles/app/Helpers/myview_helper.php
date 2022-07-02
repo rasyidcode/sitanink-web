@@ -15,6 +15,11 @@ function isMenuOpen(string $module, int $segment = 0) {
 
 function isLinkActive(string $module, int $segment = 0, string $parent = null) {
     $segments = service('uri')->getSegments();
+
+    if ($module == 'dashboard' && count($segments) == 0) {
+        return 'active';
+    }
+
     try {
         if (!is_null($parent)) {
             $isEqualParent = false;

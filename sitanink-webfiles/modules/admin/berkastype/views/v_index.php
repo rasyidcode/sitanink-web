@@ -103,7 +103,7 @@
             alert(spanData.message);
         }
 
-        // delete user
+        // delete berkastype
         $('#data-berkastype tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
             var id = $(this).data().berkastypeId;
             var baseUrl = window.location.href;

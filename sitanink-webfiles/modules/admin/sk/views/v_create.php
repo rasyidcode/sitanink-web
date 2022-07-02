@@ -38,10 +38,10 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
                                                 <input type="text" name="year" class="form-control pull-right" value="" id="year-picker" placeholder="Masukkan Tahun Surat...">
-                                                <?php if (isset($fdErr['year'])) : ?>
-                                                    <span class="help-block"><?= $fdErr['year'] ?></span>
-                                                <?php endif; ?>
                                             </div>
+                                            <?php if (isset($fdErr['year'])) : ?>
+                                                <span class="help-block"><?= $fdErr['year'] ?></span>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -54,10 +54,10 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
                                                 <input type="text" name="valid_until" class="form-control pull-right" value="" id="valid-until-picker" placeholder="Masukkan Berlaku Sampai...">
-                                                <?php if (isset($fdErr['valid_until'])) : ?>
-                                                    <span class="help-block"><?= $fdErr['valid_until'] ?></span>
-                                                <?php endif; ?>
                                             </div>
+                                            <?php if (isset($fdErr['valid_until'])) : ?>
+                                                <span class="help-block"><?= $fdErr['valid_until'] ?></span>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -70,10 +70,10 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
                                                 <input type="text" name="set_date" class="form-control pull-right" value="" id="set-date-picker" placeholder="Masukkan Tanggal Surat Ditetapkan...">
-                                                <?php if (isset($fdErr['set_date'])) : ?>
-                                                    <span class="help-block"><?= $fdErr['set_date'] ?></span>
-                                                <?php endif; ?>
                                             </div>
+                                            <?php if (isset($fdErr['set_date'])) : ?>
+                                                <span class="help-block"><?= $fdErr['set_date'] ?></span>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>

@@ -63,6 +63,22 @@ class SkModel
     }
 
     /**
+     * Delete doc attachments by doc_id
+     * 
+     * @param int $docId
+     * 
+     * @return void
+     */
+    public function deleteAttachments(int $docId)
+    {
+        $this
+            ->db
+            ->table('generated_doc_attachments')
+            ->where('id_generated_doc', $docId)
+            ->delete();
+    }
+
+    /**
      * Get generated doc with the attachments, by id
      * 
      * @param int $id
@@ -93,6 +109,37 @@ class SkModel
         return $this
             ->builder
             ->countAllResults();
+    }
+
+    /**
+     * Get by id
+     * 
+     * @param int $id
+     * 
+     * @return object|null
+     */
+    public function get(int $id)
+    {
+        return $this
+            ->builder
+            ->where('id', $id)
+            ->get()
+            ->getRowObject();
+    }
+
+    /**
+     * Delete by id
+     * 
+     * @param int $id
+     * 
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        return $this
+            ->builder
+            ->where('id', $id)
+            ->delete();
     }
 
 }

@@ -125,23 +125,23 @@
             drawCallback: function(settings) {}
         });
 
-        // delete user
-        $('#data-domisili tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
-            var id = $(this).data().domisiliId;
-            var baseUrl = window.location.href;
+        // delete sk
+        $('#data-sk tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
+            var id = $(this).data().skId;
 
             if (confirm('Anda yakin mau dihapus?')) {
                 $.ajax({
-                    url: baseUrl + '/' + id + '/delete',
+                    url: `<?=site_url('sk')?>/${id}/delete`,
                     type: 'post',
                     data: {
                         ['<?= csrf_token() ?>']: '<?= csrf_hash() ?>'
                     },
                     success: function(res, textStatus, xhr) {
                         console.log(res);
-
-                        alert(res.message);
-                        location.reload();
+                        if (xhr.status === 200) {
+                            alert('Berhasil terhapus!');
+                            location.reload();
+                        }
                     },
                     error: function(err) {
                         console.log(err);

@@ -19,6 +19,10 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">Dashboard</li>
+            <li class="<?= isLinkActive('dashboard') ?>">
+                <a href="<?= route_to('admin') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+            </li>
             <li class="header">Master</li>
             <li class="<?= isLinkActive('user', 1) ?>">
                 <a href="<?= route_to('user') ?>"><i class="fa fa-user"></i> <span>Data User</span></a>
@@ -41,22 +45,22 @@
                 </a>
             </li>
             <li class="<?= isLinkActive('wilayah', 1) ?>">
-                <a href="<?=route_to('wilayah')?>">
+                <a href="<?= route_to('wilayah') ?>">
                     <i class="ion ion-map"></i> <span>Data Per Wilayah</span>
                 </a>
             </li>
             <li class="<?= isLinkActive('qrcode', 1) ?>">
-                <a href="<?=route_to('qrcode')?>">
+                <a href="<?= route_to('qrcode') ?>">
                     <i class="fa fa-qrcode"></i> <span>Data QRCode</span>
                 </a>
             </li>
             <li class="<?= isLinkActive('kartu2', 1) ?>">
-                <a href="<?=route_to('kartu')?>">
+                <a href="<?= route_to('kartu') ?>">
                     <i class="fa fa-vcard-o"></i> <span>Data Kartu</span>
                 </a>
             </li>
             <li class="<?= isLinkActive('sk', 1) ?>">
-                <a href="<?=route_to('sk')?>">
+                <a href="<?= route_to('sk') ?>">
                     <i class="ion ion-document-text"></i> <span>Data SK</span>
                 </a>
             </li>
@@ -66,11 +70,11 @@
             <li>
                 <a href="#"><i class="ion ion-android-notifications-none"></i> <span>Notifikasi</span></a>
             </li>
-            <li <?= isLinkActive('setting', 1) ?>>
-                <a href="<?=route_to('setting')?>"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>
+            <li class="<?= isLinkActive('setting', 1) ?>">
+                <a href="<?= route_to('setting') ?>"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>
             </li>
-            <li>
-                <a href="#"><i class="fa fa-book"></i> <span>Dokumentasi</span></a>
+            <li class="<?= isLinkActive('dokumentasi', 1) ?>">
+                <a href="<?= route_to('dokumentasi') ?>"><i class="fa fa-book"></i> <span>Dokumentasi</span></a>
             </li>
         </ul>
         <!-- /.sidebar-menu -->

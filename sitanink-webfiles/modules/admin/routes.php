@@ -88,10 +88,12 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
     });
     // data sk
     $routes->group('sk', ['namespace' => $routes_namespace . 'Sk\Controllers\\'], function($routes) {
-        $routes->get('/', 'SkController::index', ['as' => 'sk']);
-        $routes->get('create', 'SkController::create', ['as' => 'sk.create']);
-        $routes->post('create', 'SkController::doCreate', ['as' => 'sk.do-create']);
-        $routes->get('dowload/(:segment)', 'SkController::download/$1', ['as' => 'sk.download']);
+        $routes->get('/',                   'SkController::index',          ['as' => 'sk']);
+        $routes->get('create',              'SkController::create',         ['as' => 'sk.create']);
+        $routes->post('create',             'SkController::doCreate',       ['as' => 'sk.do-create']);
+        $routes->get('dowload/(:segment)',  'SkController::download/$1',    ['as' => 'sk.download']);
+        $routes->get('show/(:segment)',     'SkController::show/$1',        ['as' => 'sk.show']);
+        $routes->post('(:segment)/delete',  'SkController::delete/$1',      ['as' => 'sk.delete']);
     });
     // data kartu
     $routes->group('kartu2', ['namespace' => $routes_namespace . 'Kartu\Controllers\\'], function($routes) {
@@ -107,4 +109,6 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
 
     // notifikasi
     // $routes->get('notifikasi', 'Notifikasi\Controllers\NotifikasiControllers::index', ['as' => 'notifikasi']);
+
+    $routes->get('dokumentasi', 'Dokumentasi\Controllers\DokumentasiController::index', ['as' => 'dokumentasi']);
 });

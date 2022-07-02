@@ -228,6 +228,49 @@ class SkController extends BaseWebController
         exit;
     }
 
+    public function show($id)
+    {
+        $sk = $this->skModel->getWithBerkas((int)$id);
+        if (is_null($sk)) {
+            return redirect()
+                ->back()
+                ->route('sk');
+        }
+        return redirect()
+            ->to(site_url('docs_gen/' . $sk->filename));
+    }
+
+    public function edit($id)
+    {
+    }
+
+    public function delete($id)
+    {
+        $sk = $this->skModel->get($id);
+        if (is_null($sk)) {
+            return redirect()
+                ->back()
+                ->route('sk');
+        }
+
+        $this->skModel->deleteAttachments($id);
+        $this->skModel->delete($id);
+
+        $berkas = $this->berkasModel->get($sk->id_berkas);
+        if (!is_null($berkas)) {
+            if (file_exists($berkas->path . '/' . $berkas->filename)) {
+                unlink($berkas->path . '/' . $berkas->filename);
+            }
+            $this->berkasModel->delete($berkas->id);
+        }
+
+        session()
+            ->setFlashdata('success', 'Sk berhasil terhapus!');
+        return redirect()
+            ->back()
+            ->route('sk');
+    }
+
     public function doCreate2()
     {
         if (!$this->validate([
