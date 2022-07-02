@@ -65,6 +65,21 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="id_pas_foto" class="col-sm-6 control-label">Treshold Notifikasi Kartu</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <select name="id_pas_foto" class="form-control">
+                                                <option value="">-- Pilih salah satu --</option>
+                                                <option value="3">3 Hari</option>
+                                                <option value="7">1 Minggu</option>
+                                                <option value="14">2 Minggu</option>
+                                                <option value="30">1 Bulan</option>
+                                                <option value="<?=6*30?>">6 Bulan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-sm pull-right">Simpan</button>
                                 </div>
                             </form>
