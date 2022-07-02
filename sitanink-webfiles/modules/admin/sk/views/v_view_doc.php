@@ -15,7 +15,7 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                     <h3 class="box-title">Lihat SK</h3>
                 </div>
                 <div class="box-body">
-                    <iframe width="100%" height="100vh" src="https://docs.google.com/gview?url=<?=site_url('docs_gen/'.$sk->filename)?>&embedded=true"></iframe>
+                    <iframe style="height: 100vh;" width="100%" height="100vh" src="https://docs.google.com/gview?url=<?=site_url('docs_gen/'.$sk->filename)?>&embedded=true"></iframe>
                 </div>
             </div>
         </div>
