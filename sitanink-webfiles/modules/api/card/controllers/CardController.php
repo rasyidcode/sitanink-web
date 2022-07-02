@@ -50,12 +50,23 @@ class CardController extends BaseController
             $row[]  = $item->valid_until ?? '-';
             $row[]  = Carbon::parse($item->valid_until)->diffForHumans(Carbon::now());
             $row[]  = $item->created_at ?? '-';
-            $row[]  = "<div class=\"text-center\">
-                            <button data-pekerja-name=\"$item->card_owner\" data-card-id=\"$item->id\" type=\"button\" class=\"btn btn-primary btn-xs mr-2\"><i class=\"fa fa-print\"></i>&nbsp;Print</button>
-                            <button data-toggle=\"modal\" data-target=\"#modal-show-image\" type=\"button\" data-id-berkas=\"$item->id_berkas\" class=\"btn btn-success btn-xs mr-2\"><i class=\"fa fa-info-circle\"></i>&nbsp;Lihat</button>
-                            <a href=\"" . route_to('kartu.generate') . "?action=edit&cardId=$item->id\" class=\"btn btn-info btn-xs mr-2\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
-                            <button data-card-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
-                        </div>";
+            
+            $actions = "
+                <div class=\"text-center\">
+                    <button data-pekerja-name=\"$item->card_owner\" data-card-id=\"$item->id\" type=\"button\" class=\"btn btn-primary btn-xs mr-2\"><i class=\"fa fa-print\"></i>&nbsp;Print</button>
+                    <button data-toggle=\"modal\" data-target=\"#modal-show-image\" type=\"button\" data-id-berkas=\"$item->id_berkas\" class=\"btn btn-success btn-xs mr-2\"><i class=\"fa fa-info-circle\"></i>&nbsp;Lihat</button>
+            ";
+
+            if (session()->get('level') === 'admin') {
+                $actions .= "
+                    <a href=\"" . route_to('kartu.generate') . "?action=edit&cardId=$item->id\" class=\"btn btn-info btn-xs mr-2\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
+                    <button data-card-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
+                ";
+            }
+
+            $actions .= "</div>";
+
+            $row[]  = $actions;
             $resData[] = $row;
         }
 

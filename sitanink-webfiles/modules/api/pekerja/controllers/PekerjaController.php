@@ -44,11 +44,22 @@ class PekerjaController extends BaseController
             $row[]  = $item->lokasi_kerja ?? '-';
             $row[]  = $item->jenis_pekerja ?? '-';
             $row[]  = $item->created_at ?? '-';
-            $row[]  = "<div class=\"text-center\">
-                            <a style=\"margin-bottom: 2px;\" href=\"" . route_to('pekerja.get', $item->id) . "\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail</a>
-                            <a style=\"margin-bottom: 2px;\" href=\"" . route_to('pekerja.edit', $item->id) . "\" class=\"btn btn-info btn-xs\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
-                            <button style=\"margin-bottom: 2px;\" data-pekerja-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
-                        </div>";
+
+            $actions = "
+                <div class=\"text-center\">
+                    <a 
+                        style=\"margin-bottom: 2px;\" 
+                        href=\"" . route_to('pekerja.get', $item->id) . "\" 
+                        class=\"btn btn-success btn-xs\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail
+                    </a>";
+            
+            if (session()->get('level') === 'admin') {
+                $actions .= "<a style=\"margin-bottom: 2px;\" href=\"" . route_to('pekerja.edit', $item->id) . "\" class=\"btn btn-info btn-xs\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
+                    <button style=\"margin-bottom: 2px;\" data-pekerja-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>";
+            }
+            $actions .= "</div>";
+            
+            $row[]  = $actions;
             $resData[] = $row;
         }
 

@@ -1,11 +1,12 @@
 <?php
 
 $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($routes_namespace) {
-    $routes->get('/',   'Dashboard\Controllers\DashboardController::index',     ['as' => 'admin']);
-    $routes->post('/',  'Dashboard\Controllers\DashboardController::logout',    ['as' => 'admin.logout']);
+    $routes->get('/',   'Dashboard\Controllers\DashboardController::index',                 ['as' => 'admin']);
+    $routes->post('/',  'Dashboard\Controllers\DashboardController::logout',                ['as' => 'admin.logout']);
+    $routes->get('/not-allowed',  'Dashboard\Controllers\DashboardController::notAllowed',     ['as' => 'admin.not-allowed']);
 
     // lokasi kerja
-    $routes->group('lokasi-kerja', ['namespace' => $routes_namespace . 'Lokasikerja\Controllers\\'], function ($routes) {
+    $routes->group('lokasi-kerja', ['namespace' => $routes_namespace . 'Lokasikerja\Controllers\\', 'filter' => 'only-admin-filter'], function ($routes) {
         $routes->get('/', 'LokasikerjaController::index', ['as' => 'lokasi-kerja']);
         $routes->get('add', 'LokasikerjaController::add', ['as' => 'lokasi-kerja.add']);
         $routes->post('create', 'LokasikerjaController::create', ['as' => 'lokasi-kerja.create']);
@@ -14,7 +15,7 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->post('(:segment)/delete', 'LokasikerjaController::delete/$1', ['as' => 'lokasi-kerja.delete']);
     });
     // jenis pekerja
-    $routes->group('jenis-pekerja', ['namespace' => $routes_namespace . 'Jenispekerja\Controllers\\'], function ($routes) {
+    $routes->group('jenis-pekerja', ['namespace' => $routes_namespace . 'Jenispekerja\Controllers\\', 'filter' => 'only-admin-filter'], function ($routes) {
         $routes->get('/', 'JenispekerjaController::index', ['as' => 'jenis-pekerja']);
         $routes->get('add', 'JenispekerjaController::add', ['as' => 'jenis-pekerja.add']);
         $routes->post('create', 'JenispekerjaController::create', ['as' => 'jenis-pekerja.create']);
@@ -23,7 +24,7 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->post('(:segment)/delete', 'JenispekerjaController::delete/$1', ['as' => 'jenis-pekerja.delete']);
     });
     // tipe berkas
-    $routes->group('tipe-berkas', ['namespace' => $routes_namespace . 'Berkastype\Controllers\\'], function ($routes) {
+    $routes->group('tipe-berkas', ['namespace' => $routes_namespace . 'Berkastype\Controllers\\', 'filter' => 'only-admin-filter'], function ($routes) {
         $routes->get('/', 'BerkastypeController::index', ['as' => 'tipe-berkas']);
         $routes->get('add', 'BerkastypeController::add', ['as' => 'tipe-berkas.add']);
         $routes->post('create', 'BerkastypeController::create', ['as' => 'tipe-berkas.create']);
@@ -32,7 +33,7 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->post('(:segment)/delete', 'BerkastypeController::delete/$1', ['as' => 'tipe-berkas.delete']);
     });
     // user
-    $routes->group('user', ['namespace' => $routes_namespace . 'User\Controllers\\'], function ($routes) {
+    $routes->group('user', ['namespace' => $routes_namespace . 'User\Controllers\\', 'filter' => 'only-admin-filter'], function ($routes) {
         $routes->get('/',                       'UserController::index',            ['as' => 'user']);
         $routes->get('add',                     'UserController::add',              ['as' => 'user.add']);
         $routes->post('create',                 'UserController::create',           ['as' => 'user.create']);
@@ -72,7 +73,7 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->get('download/excel', 'WilayahController::downloadExcel', ['as' => 'wilayah.download-excel']);
     });
     // data qrcode
-    $routes->group('qrcode', ['namespace' => $routes_namespace . 'Qrcode\Controllers\\'], function($routes) {
+    $routes->group('qrcode', ['namespace' => $routes_namespace . 'Qrcode\Controllers\\', 'filter' => 'only-admin-filter'], function($routes) {
         $routes->get('/', 'QrcodeController::index', ['as' => 'qrcode']);
     });
     // data sk

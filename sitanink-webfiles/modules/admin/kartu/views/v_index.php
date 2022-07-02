@@ -6,8 +6,10 @@
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header">
-                    <a href="<?= route_to('kartu.generate') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Buat Kartu</a>
-                    <?= $renderer->include('modules/shared/core/views/notification') ?>
+                    <?php if (session()->get('level') === 'admin'): ?>
+                        <a href="<?= route_to('kartu.generate') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Buat Kartu</a>
+                        <?= $renderer->include('modules/shared/core/views/notification') ?>
+                    <?php endif ?>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

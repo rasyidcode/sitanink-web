@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Filters\AddPekerjaFilter;
 use App\Filters\ApiFilter;
+use App\Filters\OnlyAdminFilter;
 use App\Filters\WebAuthFilter;
 use App\Filters\WebRedirectIfAuth;
 use CodeIgniter\Config\BaseConfig;
@@ -27,6 +28,7 @@ class Filters extends BaseConfig
         'web-redirect-if-auth'          => WebRedirectIfAuth::class,
         'add-pekerja-filter'            => AddPekerjaFilter::class,
         'api-filter'                    => ApiFilter::class,
+        'only-admin-filter'             => OnlyAdminFilter::class
     ];
 
     /**

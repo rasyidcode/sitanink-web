@@ -23,20 +23,22 @@
             <li class="<?= isLinkActive('dashboard') ?>">
                 <a href="<?= route_to('admin') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
             </li>
-            <li class="header">Master</li>
-            <li class="<?= isLinkActive('user', 1) ?>">
-                <a href="<?= route_to('user') ?>"><i class="fa fa-user"></i> <span>Data User</span></a>
-            </li>
-            <li class="<?= isLinkActive('lokasi-kerja', 1) ?>">
-                <a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> <span>Data Lokasi Kerja</span></a>
-            </li>
-            <li class="<?= isLinkActive('jenis-pekerja', 1) ?>">
-                <a href="<?= route_to('jenis-pekerja') ?>"><i class="fa fa-square-o"></i> <span>Data Jenis Pekerja</span></a>
-            </li>
-            <li class="<?= isLinkActive('tipe-berkas', 1) ?>">
-                <a href="<?= route_to('tipe-berkas') ?>"><i class="fa fa-file"></i> <span>Data Tipe Berkas</span></a>
-            </li>
-            <!--/ master end -->
+            <?php if (session()->get('level') === 'admin'): ?>
+                <li class="header">Master</li>
+                <li class="<?= isLinkActive('user', 1) ?>">
+                    <a href="<?= route_to('user') ?>"><i class="fa fa-user"></i> <span>Data User</span></a>
+                </li>
+                <li class="<?= isLinkActive('lokasi-kerja', 1) ?>">
+                    <a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> <span>Data Lokasi Kerja</span></a>
+                </li>
+                <li class="<?= isLinkActive('jenis-pekerja', 1) ?>">
+                    <a href="<?= route_to('jenis-pekerja') ?>"><i class="fa fa-square-o"></i> <span>Data Jenis Pekerja</span></a>
+                </li>
+                <li class="<?= isLinkActive('tipe-berkas', 1) ?>">
+                    <a href="<?= route_to('tipe-berkas') ?>"><i class="fa fa-file"></i> <span>Data Tipe Berkas</span></a>
+                </li>
+                <!--/ master end -->
+            <?php endif; ?>
 
             <li class="header">Data</li>
             <li class="<?= isLinkActive('pekerja', 1) ?>">
@@ -49,11 +51,13 @@
                     <i class="ion ion-map"></i> <span>Data Per Wilayah</span>
                 </a>
             </li>
-            <li class="<?= isLinkActive('qrcode', 1) ?>">
-                <a href="<?= route_to('qrcode') ?>">
-                    <i class="fa fa-qrcode"></i> <span>Data QRCode</span>
-                </a>
-            </li>
+            <?php if (session()->get('level') === 'admin'): ?>
+                <li class="<?= isLinkActive('qrcode', 1) ?>">
+                    <a href="<?= route_to('qrcode') ?>">
+                        <i class="fa fa-qrcode"></i> <span>Data QRCode</span>
+                    </a>
+                </li>
+            <?php endif ?>
             <li class="<?= isLinkActive('kartu2', 1) ?>">
                 <a href="<?= route_to('kartu') ?>">
                     <i class="fa fa-vcard-o"></i> <span>Data Kartu</span>
@@ -65,17 +69,19 @@
                 </a>
             </li>
             <!--/ data end -->
-
-            <li class="header">Lainnya</li>
-            <li>
-                <a href="#"><i class="ion ion-android-notifications-none"></i> <span>Notifikasi</span></a>
-            </li>
-            <li class="<?= isLinkActive('setting', 1) ?>">
-                <a href="<?= route_to('setting') ?>"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>
-            </li>
-            <li class="<?= isLinkActive('dokumentasi', 1) ?>">
-                <a href="<?= route_to('dokumentasi') ?>"><i class="fa fa-book"></i> <span>Dokumentasi</span></a>
-            </li>
+            
+            <?php if (session()->get('level') === 'admin'): ?>
+                <li class="header">Lainnya</li>
+                <li>
+                    <a href="#"><i class="ion ion-android-notifications-none"></i> <span>Notifikasi</span></a>
+                </li>
+                <li class="<?= isLinkActive('setting', 1) ?>">
+                    <a href="<?= route_to('setting') ?>"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>
+                </li>
+                <li class="<?= isLinkActive('dokumentasi', 1) ?>">
+                    <a href="<?= route_to('dokumentasi') ?>"><i class="fa fa-book"></i> <span>Dokumentasi</span></a>
+                </li>
+            <?php endif ?>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

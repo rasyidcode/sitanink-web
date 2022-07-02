@@ -6,8 +6,10 @@
         <div class="col-xs-12">
             <div class="box box-success">
                 <div class="box-header">
-                    <a href="<?= route_to('sk.create') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Buat SK</a>
-                    <?= $renderer->include('modules/shared/core/views/notification') ?>
+                    <?php if (session()->get('level') === 'admin') : ?>
+                        <a href="<?= route_to('sk.create') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Buat SK</a>
+                        <?= $renderer->include('modules/shared/core/views/notification') ?>
+                    <?php endif ?>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -131,7 +133,7 @@
 
             if (confirm('Anda yakin mau dihapus?')) {
                 $.ajax({
-                    url: `<?=site_url('sk')?>/${id}/delete`,
+                    url: `<?= site_url('sk') ?>/${id}/delete`,
                     type: 'post',
                     data: {
                         ['<?= csrf_token() ?>']: '<?= csrf_hash() ?>'

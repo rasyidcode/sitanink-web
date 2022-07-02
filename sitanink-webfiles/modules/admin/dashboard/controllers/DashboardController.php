@@ -81,4 +81,18 @@ class DashboardController extends BaseWebController
             ])
             ->setStatusCode(ResponseInterface::HTTP_OK);
     }
+
+    public function notAllowed()
+    {
+        return $this->renderView('v_not_allowed', [
+            'pageTitle' => 'Not Allowed',
+            'pageDesc'  => 'You are not allowed to access this resources',
+            'pageLinks' => [
+                'dashboard' => [
+                    'url'       => route_to('admin'),
+                    'active'    => true,
+                ]
+            ],
+        ]);
+    }
 }

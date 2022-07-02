@@ -37,12 +37,23 @@ class SkController extends BaseController
             $row[]  = $item->boss_nip ?? '-';
             $row[]  = $item->boss_name ?? '-';
             $row[]  = $item->created_at ?? '-';
-            $row[]  = "<div class=\"text-center\">
-                            <a href=\"" . route_to('sk.download', $item->id) . "\" class=\"btn btn-warning btn-xs mr-2\"><i class=\"fa fa-download\"></i>&nbsp;Download</a>
-                            <a target=\"_blank\" href=\"" . route_to('sk.show', $item->id) . "\" class=\"btn btn-success btn-xs mr-2\"><i class=\"fa fa-eye\"></i>&nbsp;Lihat</a>
-                            <a href=\"" . route_to('sk.edit', $item->id) . "\" class=\"btn btn-info btn-xs mr-2\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
-                            <button data-sk-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
-                        </div>";
+
+            $actions = "
+                <div class=\"text-center\">
+                    <a href=\"" . route_to('sk.download', $item->id) . "\" class=\"btn btn-warning btn-xs mr-2\"><i class=\"fa fa-download\"></i>&nbsp;Download</a>
+                    <a target=\"_blank\" href=\"" . route_to('sk.show', $item->id) . "\" class=\"btn btn-success btn-xs mr-2\"><i class=\"fa fa-eye\"></i>&nbsp;Lihat</a>
+            ";
+
+            if (session()->get('level') === 'admin') {
+                $actions .= "
+                    <a href=\"" . route_to('sk.edit', $item->id) . "\" class=\"btn btn-info btn-xs mr-2\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;Edit</a>
+                    <button data-sk-id=\"$item->id\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</button>
+                ";
+            }
+
+            $actions .= "</div>";
+
+            $row[]  = $actions;
             $resData[] = $row;
         }
 
