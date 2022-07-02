@@ -236,8 +236,25 @@ class SkController extends BaseWebController
                 ->back()
                 ->route('sk');
         }
-        return redirect()
-            ->to(site_url('docs_gen/' . $sk->filename));
+        
+        $this->viewData['pageLinks'] = [
+            'dashboard' => [
+                'url'       => route_to('admin'),
+                'active'    => false,
+            ],
+            'data-sk' => [
+                'url'       => route_to('sk'),
+                'active'    => false,
+            ],
+            'data-show-sk' => [
+                'url'       => route_to('sk.show', $id),
+                'active'    => true,
+            ],
+        ];
+
+        $this->viewData['sk']   = $sk;
+
+        return $this->renderView('v_view_doc', $this->viewData);
     }
 
     public function edit($id)

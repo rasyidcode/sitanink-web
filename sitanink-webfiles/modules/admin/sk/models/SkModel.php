@@ -90,8 +90,7 @@ class SkModel
         return $this
             ->builder
             ->select('
-                berkas.filename,
-                berkas.path
+                berkas.*
             ')
             ->join('berkas', 'generated_docs.id_berkas = berkas.id', 'left')
             ->where('generated_docs.id', $id)

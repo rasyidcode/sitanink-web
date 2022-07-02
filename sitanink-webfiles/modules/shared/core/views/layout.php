@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>Sitanink Admin - <?= $pageTitle ?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta http-equiv="Content-Security-Policy" content="worker-src 'self' blob: ;child-src blob: ;img-src 'self' data: blob: ;connect-src 'self' https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com ;">
+    <meta http-equiv="Content-Security-Policy" content="frame-src https://docs.google.com ;worker-src 'self' blob: ;child-src 'self' blob: ;img-src 'self' data: blob: ;connect-src 'self' https://*.tiles.mapbox.com https://api.mapbox.com https://events.mapbox.com ;">
 
     <?= $renderer->renderSection('custom-css') ?>
     
