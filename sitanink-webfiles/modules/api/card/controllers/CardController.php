@@ -428,13 +428,13 @@ class CardController extends BaseController
         $nipKepala      = $this->settingModel->getByKey('nip_kepala') ?? '-';
         $todayDate      = Carbon::now()->format('Y-m-d');
 
-        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helvetica, $namaTempat->value . ', ' . convertDate((string) $todayDate));
+        imagettftext($image, $regularFz, 0, $valueX, $start, $color, $helvetica, $namaTempat->value . ', ' . convertDate((string) $todayDate));
         $start += 23;
-        imagettftext($image, $regularFz - 2, 0, $keyX, $start, $color, $helvetica, $jabatanKepala->value);
+        imagettftext($image, $regularFz - 2, 0, $valueX, $start, $color, $helvetica, $jabatanKepala->value);
         $start = imagesy($image) - 40;
-        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helveticaBold, $namaKepala->value);
+        imagettftext($image, $regularFz, 0, $valueX, $start, $color, $helveticaBold, $namaKepala->value);
         $start += 23;
-        imagettftext($image, $regularFz, 0, $keyX, $start, $color, $helvetica, 'NIP. ' . $nipKepala->value);
+        imagettftext($image, $regularFz, 0, $valueX, $start, $color, $helvetica, 'NIP. ' . $nipKepala->value);
 
         //-- masa berlaku
         $regularFz = 12;
