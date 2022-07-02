@@ -7,10 +7,7 @@
             <div class="box box-success">
                 <div class="box-header">
                     <a href="<?= route_to('sk.create') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Buat SK</a>
-                    <?php $successMsg = session()->getFlashdata('success'); ?>
-                    <?php if (isset($successMsg)) : ?>
-                        <span data-message="<?= $successMsg ?>"></span>
-                    <?php endif; ?>
+                    <?= $renderer->include('modules/shared/core/views/notification') ?>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -128,11 +125,6 @@
             drawCallback: function(settings) {}
         });
 
-        var spanData = $('.box-header').find('span').data();
-        if (spanData !== undefined) {
-            alert(spanData.message);
-        }
-
         // delete user
         $('#data-domisili tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
             var id = $(this).data().domisiliId;
@@ -158,11 +150,6 @@
                     }
                 });
             }
-        });
-
-        $('#data-domisili tbody').on('click', 'tr td a.btn.btn-success', function(e) {
-            console.log('comming soon');
-            alert('Comming soon!');
         });
     });
 </script>

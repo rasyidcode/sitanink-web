@@ -7,10 +7,7 @@
             <div class="box box-success">
                 <div class="box-header">
                     <a href="<?= route_to('user.add') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah User</a>
-                    <?php $successMsg = session()->getFlashdata('success'); ?>
-                    <?php if (isset($successMsg)): ?>
-                    <span data-message="<?=$successMsg?>"></span>
-                    <?php endif; ?>
+                    <?= $renderer->include('modules/shared/core/views/notification') ?>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

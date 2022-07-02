@@ -21,16 +21,16 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Master</li>
             <li class="<?= isLinkActive('user', 1) ?>">
-                <a href="<?= route_to('user') ?>"><i class="fa fa-user"></i> <span>Master Data User</span></a>
+                <a href="<?= route_to('user') ?>"><i class="fa fa-user"></i> <span>Data User</span></a>
             </li>
             <li class="<?= isLinkActive('lokasi-kerja', 1) ?>">
-                <a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> <span>Master Data Lokasi Kerja</span></a>
+                <a href="<?= route_to('lokasi-kerja') ?>"><i class="ion ion-location"></i> <span>Data Lokasi Kerja</span></a>
             </li>
             <li class="<?= isLinkActive('jenis-pekerja', 1) ?>">
-                <a href="<?= route_to('jenis-pekerja') ?>"><i class="fa fa-square-o"></i> <span>Master Data Jenis Pekerja</span></a>
+                <a href="<?= route_to('jenis-pekerja') ?>"><i class="fa fa-square-o"></i> <span>Data Jenis Pekerja</span></a>
             </li>
             <li class="<?= isLinkActive('tipe-berkas', 1) ?>">
-                <a href="<?= route_to('tipe-berkas') ?>"><i class="fa fa-file"></i> <span>Master Data Tipe Berkas</span></a>
+                <a href="<?= route_to('tipe-berkas') ?>"><i class="fa fa-file"></i> <span>Data Tipe Berkas</span></a>
             </li>
             <!--/ master end -->
 
@@ -50,18 +50,6 @@
                     <i class="fa fa-qrcode"></i> <span>Data QRCode</span>
                 </a>
             </li>
-            <!-- <li class="treeview" style="height: auto;">
-                <a href="#">
-                    <i class="fa fa-vcard-o"></i> <span>Data Kartu</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu" style="display: <?= isMenuOpen('kartu2', 1) ?>;">
-                    <li class="<?= isLinkActive('list', 2) ?>"><a href="<?= route_to('kartu') ?>"><i class="fa fa-square-o"></i> List</a></li>
-                    <li class="<?= isLinkActive('generate', 2) ?>"><a href="<?= route_to('kartu.generate') ?>"><i class="fa fa-square-o"></i> Generate</a></li>
-                </ul>
-            </li> -->
             <li class="<?= isLinkActive('kartu2', 1) ?>">
                 <a href="<?=route_to('kartu')?>">
                     <i class="fa fa-vcard-o"></i> <span>Data Kartu</span>
@@ -80,6 +68,9 @@
             </li>
             <li <?= isLinkActive('setting', 1) ?>>
                 <a href="<?=route_to('setting')?>"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-book"></i> <span>Dokumentasi</span></a>
             </li>
         </ul>
         <!-- /.sidebar-menu -->

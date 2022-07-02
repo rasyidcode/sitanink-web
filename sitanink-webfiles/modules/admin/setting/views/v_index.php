@@ -7,6 +7,7 @@
             <div class="box box-success">
                 <div class="box-header">
                     <h3 class="box-title">Data Setting</h3>
+                    <?= $renderer->include('modules/shared/core/views/notification') ?>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

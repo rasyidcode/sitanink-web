@@ -124,6 +124,9 @@ class SettingController extends BaseWebController
             ]);
         }
 
+        session()
+            ->setFlashdata('success', 'Berhasil menyimpan konfigurasi!');
+        
         return redirect()
             ->back()
             ->route('setting');
