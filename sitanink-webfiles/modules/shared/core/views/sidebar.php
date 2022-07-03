@@ -72,8 +72,8 @@
             
             <?php if (session()->get('level') === 'admin'): ?>
                 <li class="header">Lainnya</li>
-                <li>
-                    <a href="#"><i class="ion ion-android-notifications-none"></i> <span>Notifikasi</span></a>
+                <li class="<?= isLinkActive('notifikasi', 1) ?>">
+                    <a href="<?= route_to('notifikasi') ?>"><i class="ion ion-android-notifications-none"></i> <span>Notifikasi</span></a>
                 </li>
                 <li class="<?= isLinkActive('setting', 1) ?>">
                     <a href="<?= route_to('setting') ?>"><i class="ion ion-gear-a"></i> <span>Pengaturan</span></a>

@@ -27,23 +27,29 @@
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-danger">10</span>
+                        <span class="label label-danger"><?= count($notifs) ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have 10 notifications</li>
+                        <li class="header">Anda punya <?= count($notifs) ?> notifikasi!</li>
                         <li>
                             <!-- Inner Menu: contains the notifications -->
                             <ul class="menu">
-                                <li>
-                                    <!-- start notification -->
-                                    <a href="#">
-                                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                    </a>
-                                </li>
+                                <?php foreach ($notifs as $notif) : ?>
+                                    <li>
+                                        <!-- start notification -->
+                                        <a href="#">
+                                            <?php if ($notif->type === 'info') : ?>
+                                                <i class="fa fa-info text-blue"></i> <?= $notif->message ?>
+                                            <?php else : ?>
+                                                <i class="fa fa-bell-o text-warning"></i> <?= $notif->message ?>
+                                            <?php endif; ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach ?>
                                 <!-- end notification -->
                             </ul>
                         </li>
-                        <li class="footer"><a href="#">View all</a></li>
+                        <li class="footer"><a href="<?= route_to('notifikasi') ?>">Lihat Semua</a></li>
                     </ul>
                 </li>
                 <li>

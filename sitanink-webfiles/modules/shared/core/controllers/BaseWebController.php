@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 use CodeIgniter\View\View;
 use Config\Paths;
 use Config\View as ConfigView;
-use Modules\Admin\Pekerja\Models\PekerjaModel;
+use Modules\Admin\Activities\Models\ActivityModel;
 
 class BaseWebController extends BaseController
 {
@@ -16,6 +16,10 @@ class BaseWebController extends BaseController
 
     protected $path;
 
+    protected $notifModel;
+
+    protected $db;
+
     public function __construct()
     {
         /**
@@ -23,6 +27,9 @@ class BaseWebController extends BaseController
          */
         $this->renderer = new View(new ConfigView(), ROOTPATH);
         $this->path     = new Paths();
+
+        $db = \Config\Database::connect();
+        $this->notifModel = new ActivityModel($db);
     }
 
     protected function renderView(string $name, array $data = [], array $options = [])
@@ -38,7 +45,8 @@ class BaseWebController extends BaseController
         $modulepath = strstr($this->viewPath, 'modules');
         $modulepath = str_replace('controllers', 'views', $modulepath);
 
-        $data['renderer'] = $this->renderer;
+        $data['renderer']   = $this->renderer;
+        $data['notifs']     = $this->notifModel->allNotRead();
 
         return $this
             ->renderer

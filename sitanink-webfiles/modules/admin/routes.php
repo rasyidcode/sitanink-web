@@ -96,9 +96,8 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->get('/', 'SettingController::index', ['as' => 'setting']);
         $routes->post('/', 'SettingController::create', ['as' => 'setting.create']);
     });
-
     // notifikasi
-    // $routes->get('notifikasi', 'Notifikasi\Controllers\NotifikasiControllers::index', ['as' => 'notifikasi']);
-
+    $routes->get('notifikasi', 'Notifikasi\Controllers\NotifikasiController::index', ['as' => 'notifikasi']);
+    // dokumentasi
     $routes->get('dokumentasi', 'Dokumentasi\Controllers\DokumentasiController::index', ['as' => 'dokumentasi']);
 });
