@@ -197,18 +197,18 @@ class PekerjaController extends BaseWebController
         ]);
         $ktp->move($filePath, $ktpName);
 
-        // kk
-        $kkName = $kk->getRandomName();
-        $this->berkasModel->create([
-            'id_pekerja'        => $pekerjaId,
-            'path'              => $filePath,
-            'filename'          => $kkName,
-            'size_in_mb'        => $kk->getSizeByUnit('mb'),
-            'mime'              => $kk->getMimeType(),
-            'ext'               => $kk->getExtension(),
-            'berkas_type_id'    => 3,
-        ]);
-        $kk->move($filePath, $kkName);
+        // // kk
+        // $kkName = $kk->getRandomName();
+        // $this->berkasModel->create([
+        //     'id_pekerja'        => $pekerjaId,
+        //     'path'              => $filePath,
+        //     'filename'          => $kkName,
+        //     'size_in_mb'        => $kk->getSizeByUnit('mb'),
+        //     'mime'              => $kk->getMimeType(),
+        //     'ext'               => $kk->getExtension(),
+        //     'berkas_type_id'    => 3,
+        // ]);
+        // $kk->move($filePath, $kkName);
 
         // spiu
         $spiuName = $spiu->getRandomName();
@@ -341,12 +341,12 @@ class PekerjaController extends BaseWebController
                 ->withInput();
         }
 
-        $kk = $this->request->getFile('kk');
-        if ($kk instanceof UploadedFile && !$kk->isValid() && $kk->hasMoved()) {
-            session()->setFlashdata('error_files', 'Something went wrong when processing the [kk] file!');
-            return redirect()->back()
-                ->withInput();
-        }
+        // $kk = $this->request->getFile('kk');
+        // if ($kk instanceof UploadedFile && !$kk->isValid() && $kk->hasMoved()) {
+        //     session()->setFlashdata('error_files', 'Something went wrong when processing the [kk] file!');
+        //     return redirect()->back()
+        //         ->withInput();
+        // }
 
         $spiu = $this->request->getFile('spiu');
         if ($spiu instanceof UploadedFile && !$spiu->isValid() && $spiu->hasMoved()) {
@@ -377,9 +377,9 @@ class PekerjaController extends BaseWebController
         }
 
         // kk
-        if ($kk->getPath()) {
-            $this->berkasUploadHandler($id, 3, $kk);
-        }
+        // if ($kk->getPath()) {
+        //     $this->berkasUploadHandler($id, 3, $kk);
+        // }
 
         // spiu
         if ($spiu->getPath()) {
@@ -491,9 +491,9 @@ class PekerjaController extends BaseWebController
             'ktp'               => 'uploaded[ktp]|'
                 . 'max_size[ktp,200]'
                 . '|is_image[ktp]',
-            'kk'                => 'uploaded[kk]|'
-                . 'max_size[kk,200]'
-                . '|is_image[kk]',
+            // 'kk'                => 'uploaded[kk]|'
+            //     . 'max_size[kk,200]'
+            //     . '|is_image[kk]',
             'spiu'              => 'uploaded[spiu]|'
                 . 'max_size[spiu,200]',
             'sp'                => 'uploaded[sp]|'
@@ -507,7 +507,7 @@ class PekerjaController extends BaseWebController
     {
         $fotoEdit   = $this->request->getPost('foto_edit');
         $ktpEdit    = $this->request->getPost('ktp_edit');
-        $kkEdit     = $this->request->getPost('kk_edit');
+        // $kkEdit     = $this->request->getPost('kk_edit');
         $spiuEdit   = $this->request->getPost('spiu_edit');
         $spEdit     = $this->request->getPost('sp_edit');
 
@@ -529,9 +529,9 @@ class PekerjaController extends BaseWebController
             'ktp'               => ($ktpEdit == 'required' ? 'uploaded[ktp]|' : '')
                 . 'max_size[ktp,200]'
                 . '|is_image[ktp]',
-            'kk'                => ($kkEdit == 'required' ? 'uploaded[kk]|' : '')
-                . 'max_size[kk,200]'
-                . '|is_image[kk]',
+            // 'kk'                => ($kkEdit == 'required' ? 'uploaded[kk]|' : '')
+            //     . 'max_size[kk,200]'
+            //     . '|is_image[kk]',
             'spiu'              => ($spiuEdit == 'required' ? 'uploaded[spiu]|' : '')
                 . 'max_size[spiu,200]',
             'sp'                => ($spEdit == 'required' ? 'uploaded[sp]|' : '')

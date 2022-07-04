@@ -119,14 +119,14 @@ $errIcon = '<i class="fa fa-times-circle-o"></i>';
                                         <span class="help-block"><?= $fdErr['ktp'] ?></span>
                                     <?php endif; ?>
                                 </div>
-                                <div class="form-group <?= isset($fdErr['kk']) ? 'has-error' : '' ?>">
+                                <!-- <div class="form-group <?= isset($fdErr['kk']) ? 'has-error' : '' ?>">
                                     <label for="kk"><?= isset($fdErr['kk']) ? $errIcon : '' ?>&nbsp;Kartu Keluarga (<span style="color: #dd4b39;">*</span>)</label>
                                     <input type="file" name="kk">
                                     <p>Max. <strong>200 KB</strong></p>
                                     <?php if (isset($fdErr['kk'])) : ?>
                                         <span class="help-block"><?= $fdErr['kk'] ?></span>
                                     <?php endif; ?>
-                                </div>
+                                </div> -->
                                 <div class="form-group <?= isset($fdErr['spiu']) ? 'has-error' : '' ?>">
                                     <label for="spiu"><?= isset($fdErr['spiu']) ? $errIcon : '' ?>&nbsp;Surat Permohohan Ijin Usaha (<span style="color: #dd4b39;">*</span>)</label>
                                     <input type="file" name="spiu">
