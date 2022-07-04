@@ -171,6 +171,12 @@ class CardController extends BaseController
         }
 
         $fcPath = $this->generateFrontCard($pubsImagePath, $workingPath, $resizePath, $pekerja, $dataPost['valid_until']);
+        if (!$fcPath['success']) {
+            throw new ApiAccessErrorException(
+                message: 'Pas foto tidak ditemukan, silahkan upload terlebih dahulu!',
+                statusCode: ResponseInterface::HTTP_BAD_REQUEST
+            );
+        }
         $bcPath = $this->generateBackCard($pubsImagePath, $workingPath);
 
         if ($generateRequest == 'save') {
@@ -462,6 +468,14 @@ class CardController extends BaseController
 
         //-- pasFoto
         $pasFotoPath = $pekerja->path . DIRECTORY_SEPARATOR . $pekerja->filename;
+        if (!file_exists($pasFotoPath)) {
+            return [
+                'success'   => false,
+                'url_path'  => null,
+                'filename'  => null,
+                'file_path' => null
+            ];
+        }
         list($ppw, $pph, $pptype) = getimagesize($pasFotoPath);
         $npp = '';
         if ($pptype == IMAGETYPE_JPEG) {
@@ -537,6 +551,7 @@ class CardController extends BaseController
         $frontCardFilename = explode('/', $cardFrontSave)[count(explode('/', $cardFrontSave)) - 1];
 
         return [
+            'success'   => true,
             'url_path'  => site_url('preview/' . $frontCardFilename),
             'filename'  => $frontCardFilename,
             'file_path' => $cardFrontSave
