@@ -148,11 +148,6 @@
             drawCallback: function(settings) {}
         });
 
-        var spanData = $('.box-header').find('span').data();
-        if (spanData !== undefined) {
-            alert(spanData.message);
-        }
-
         // delete pekerja
         $('#data-pekerja tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
             var pekerjaId = $(this).data().pekerjaId;

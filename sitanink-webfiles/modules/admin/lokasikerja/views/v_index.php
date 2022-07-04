@@ -109,11 +109,6 @@
             ],
             drawCallback: function(settings) {}
         });
-
-        var spanData = $('.box-header').find('span').data();
-        if (spanData !== undefined) {
-            alert(spanData.message);
-        }
         
         // delete user
         $('#data-lokasi-kerja tbody').on('click', 'tr td button.btn.btn-danger', function(e) {
