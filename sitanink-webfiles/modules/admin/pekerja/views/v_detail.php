@@ -72,7 +72,7 @@
                                                             onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                <!-- <tr>
                                                     <th>KK</th>
                                                     <td>:</td>
                                                     <td>
@@ -82,7 +82,7 @@
                                                             data-tipe-berkas="3"
                                                             onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
                                                     </td>
-                                                </tr>
+                                                </tr> -->
                                                 <tr>
                                                     <th>Surat Permohonan Ijin Usaha</th>
                                                     <td>:</td>

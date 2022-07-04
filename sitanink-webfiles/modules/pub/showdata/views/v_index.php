@@ -114,13 +114,13 @@
                                         <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-show-image" data-tipe-berkas="2" onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <th>KK</th>
                                     <td>:</td>
                                     <td>
                                         <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-show-image" data-tipe-berkas="3" onclick="return false"><i class="fa fa-eye"></i> Lihat</a>
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <th>Surat Permohonan Ijin Usaha</th>
                                     <td>:</td>
