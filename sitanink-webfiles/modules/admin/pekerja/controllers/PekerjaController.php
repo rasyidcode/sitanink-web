@@ -126,14 +126,14 @@ class PekerjaController extends BaseWebController
                 ->withInput();
         }
 
-        $kk = $this->request->getFile('kk');
-        if (!$kk->isValid() && $kk->hasMoved()) {
-            session()
-                ->setFlashdata('error_files', 'Something went wrong when processing the [kk] file!');
-            return redirect()
-                ->back()
-                ->withInput();
-        }
+        // $kk = $this->request->getFile('kk');
+        // if (!$kk->isValid() && $kk->hasMoved()) {
+        //     session()
+        //         ->setFlashdata('error_files', 'Something went wrong when processing the [kk] file!');
+        //     return redirect()
+        //         ->back()
+        //         ->withInput();
+        // }
 
         $spiu = $this->request->getFile('spiu');
         if (!$spiu->isValid() && $spiu->hasMoved()) {
