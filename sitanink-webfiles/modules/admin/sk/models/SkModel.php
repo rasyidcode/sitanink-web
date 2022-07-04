@@ -48,6 +48,22 @@ class SkModel
     }
 
     /**
+     * Update generated docs
+     * 
+     * @param int $id
+     * @param array $data
+     * 
+     * @return void
+     */
+    public function update(int $id, array $data)
+    {
+        $this
+            ->builder
+            ->where('id', $id)
+            ->update($data);
+    }
+
+    /**
      * Create doc attachments
      * 
      * @param array $data
@@ -69,13 +85,30 @@ class SkModel
      * 
      * @return void
      */
-    public function deleteAttachments(int $docId)
+    public function deleteAttachmentsByDocId(int $docId)
     {
         $this
             ->db
             ->table('generated_doc_attachments')
             ->where('id_generated_doc', $docId)
             ->delete();
+    }
+
+    /**
+     * Get attachments by id_sk
+     * 
+     * @param int $docId
+     * 
+     * @return array
+     */
+    public function getAttachmentsByDocId(int $docId)
+    {
+        return $this
+            ->db
+            ->table('generated_doc_attachments')
+            ->where('id_generated_doc', $docId)
+            ->get()
+            ->getResultObject();
     }
 
     /**

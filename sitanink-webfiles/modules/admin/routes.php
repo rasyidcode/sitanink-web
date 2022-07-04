@@ -1,9 +1,9 @@
 <?php
 
 $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($routes_namespace) {
-    $routes->get('/',   'Dashboard\Controllers\DashboardController::index',                 ['as' => 'admin']);
-    $routes->post('/',  'Dashboard\Controllers\DashboardController::logout',                ['as' => 'admin.logout']);
-    $routes->get('/not-allowed',  'Dashboard\Controllers\DashboardController::notAllowed',     ['as' => 'admin.not-allowed']);
+    $routes->get('/',               'Dashboard\Controllers\DashboardController::index',                 ['as' => 'admin']);
+    $routes->post('/',              'Dashboard\Controllers\DashboardController::logout',                ['as' => 'admin.logout']);
+    $routes->get('/not-allowed',    'Dashboard\Controllers\DashboardController::notAllowed',            ['as' => 'admin.not-allowed']);
 
     // lokasi kerja
     $routes->group('lokasi-kerja', ['namespace' => $routes_namespace . 'Lokasikerja\Controllers\\', 'filter' => 'only-admin-filter'], function ($routes) {
@@ -81,6 +81,8 @@ $routes->group('', ['namespace' => $routes_namespace], function ($routes) use ($
         $routes->get('/',                   'SkController::index',          ['as' => 'sk']);
         $routes->get('create',              'SkController::create',         ['as' => 'sk.create']);
         $routes->post('create',             'SkController::doCreate',       ['as' => 'sk.do-create']);
+        $routes->get('edit/(:segment)',     'SkController::edit/$1',        ['as' => 'sk.edit']);
+        $routes->post('update/(:segment)',  'SkController::update/$1',      ['as' => 'sk.update']);
         $routes->get('dowload/(:segment)',  'SkController::download/$1',    ['as' => 'sk.download']);
         $routes->get('show/(:segment)',     'SkController::show/$1',        ['as' => 'sk.show']);
         $routes->post('(:segment)/delete',  'SkController::delete/$1',      ['as' => 'sk.delete']);
