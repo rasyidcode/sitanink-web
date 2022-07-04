@@ -597,9 +597,11 @@ class PekerjaController extends BaseWebController
             // update
             $this->berkasModel->update($berkas->id, $berkasData);
             // check old files, delete if any
-            $successDelete = unlink($berkas->path . DIRECTORY_SEPARATOR . $berkas->filename);
-            if ($successDelete) {
-                $this->berkasModel->delete($berkas->id);
+            if (file_exists($berkas->path . DIRECTORY_SEPARATOR . $berkas->filename)) {
+                $successDelete = unlink($berkas->path . DIRECTORY_SEPARATOR . $berkas->filename);
+                if ($successDelete) {
+                    $this->berkasModel->delete($berkas->id);
+                }
             }
         } else {
             // create new
