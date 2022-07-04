@@ -158,10 +158,17 @@ class PekerjaController extends BaseWebController
             ->pekerjaModel
             ->create($dataPost, true);
 
+        $filePath = '';
         // upload path
-        $filePath = $this
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $filePath = $this
             ->path
             ->publicUploadDirectory;
+        } else {
+            $filePath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
+                'public_html' . DIRECTORY_SEPARATOR .
+                'uploads';
+        }
 
         // insert berkas one by one
         // foto
