@@ -48,7 +48,7 @@ class PekerjaController extends BaseController
             $actions = "
                 <div class=\"text-center\">
                     <a 
-                        style=\"margin-bottom: 2px;\" 
+                        style=\"margin-bottom: 2px; margin-right: 2px;\" 
                         href=\"" . route_to('pekerja.get', $item->id) . "\" 
                         class=\"btn btn-success btn-xs\"><i class=\"fa fa-info-circle\"></i>&nbsp;Detail
                     </a>";
