@@ -39,7 +39,7 @@ function isLinkActive(string $module, int $segment = 0, string $parent = null) {
     }
 }
 
-function isLinkActiveColor(string $module, int $segment = 0, string $color) {
+function isLinkActiveColor(string $module, int $segment = 0, string $color = '') {
     $segments = service('uri')->getSegments();
     if (count($segments) == 1) {
         return $color;
