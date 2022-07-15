@@ -126,6 +126,7 @@ class SkController extends BaseWebController
             'nama_kepala' => $dataPost['boss_name'],
             'nip_kepala' => $dataPost['boss_id'],
         ]);
+        $templateProcessor->setImageValue('ttd_kepala', $this->path->publicImagesDirectory . '/ttd4.png');
 
         $attachments = explode(',', $dataPost['attachments']);
 

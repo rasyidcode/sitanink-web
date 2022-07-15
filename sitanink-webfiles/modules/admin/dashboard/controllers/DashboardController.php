@@ -55,6 +55,7 @@ class DashboardController extends BaseWebController
 
     public function index()
     {
+        // print_r($this->wilayahModel->getList());die();
         return $this->renderView('v_index', [
             'pageTitle' => 'Dashboard',
             'pageDesc'  => 'Informasi ringkas',
