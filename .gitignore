@@ -48,19 +48,19 @@ Vagrantfile
 #-------------------------
 # Temporary Files
 #-------------------------
-sitanink-webfiles/writable/cache/*
-sitanink-webfiles/!writable/cache/index.html
+writable/cache/*
+!writable/cache/index.html
 
-sitanink-webfiles/writable/logs/*
-sitanink-webfiles/!writable/logs/index.html
+writable/logs/*
+!writable/logs/index.html
 
-sitanink-webfiles/writable/session/*
-sitanink-webfiles/!writable/session/index.html
+writable/session/*
+!writable/session/index.html
 
-sitanink-webfiles/writable/uploads/*
-sitanink-webfiles/!writable/uploads/index.html
+writable/uploads/*
+!writable/uploads/index.html
 
-sitanink-webfiles/writable/debugbar/*
+writable/debugbar/*
 
 php_errors.log
 
@@ -84,7 +84,6 @@ phpunit
 # Composer
 #-------------------------
 vendor/
-sitanink-webfiles/vendor/
 
 #-------------------------
 # IDE / Development Files
@@ -126,10 +125,12 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
-/envs/*.env
-
-/public/adminlte2/*
-/public/adminlte3/*
-/public/adminlte2/*
-/app/Database/old-migrations
-/public_html/uploads/*
+/public/adminlte2
+/public/uploads/*
+!/public/uploads/index.html
+/public/docs_gen
+!/public/docs_gen/.gitkeep
+/public/kartu
+!/public/kartu/.gitkeep
+/public/preview
+!/public/preview/.gitkeep

@@ -27,7 +27,9 @@ RUN a2enmod rewrite
 RUN set -eux; \
     install-php-extensions \
     intl \
-    mysqli
+    mysqli \
+    gd \
+    zip
 
 COPY --from=composer_upstream --link /usr/bin/composer /usr/local/bin/composer
 

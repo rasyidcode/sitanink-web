@@ -123,49 +123,49 @@ class KartuController extends BaseWebController
 
     public function testGenerate()
     {
-        $cardFrontPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $cardFrontPath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'assets' . DIRECTORY_SEPARATOR . 
             'images' . DIRECTORY_SEPARATOR . 
             'card-front2.png';
-        $capPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $capPath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'assets' . DIRECTORY_SEPARATOR . 
             'images' . DIRECTORY_SEPARATOR . 
             'cap.png';
-        $ttdPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $ttdPath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'assets' . DIRECTORY_SEPARATOR . 
             'images' . DIRECTORY_SEPARATOR . 
             'ttd2.png';
-        $pasFotoPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $pasFotoPath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'assets' . DIRECTORY_SEPARATOR . 
             'images' . DIRECTORY_SEPARATOR . 
             'pasfotosample.jpeg';
-        $savePath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $savePath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'kartu' . DIRECTORY_SEPARATOR . 
             'test6.png';
-        $resizePath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $resizePath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'resize' . DIRECTORY_SEPARATOR . 
             'res1.png';
-        $resizePath2 = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $resizePath2 = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'resize' . DIRECTORY_SEPARATOR . 
             'res2.png';
-        $resizePath3 = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $resizePath3 = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'resize' . DIRECTORY_SEPARATOR . 
             'res3.png';
-        $helvetica = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR .
+        $helvetica = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR .
             'assets' . DIRECTORY_SEPARATOR .
             'fonts' . DIRECTORY_SEPARATOR .
             'Helvetica.ttf';
-        $helveticaBold = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR .
+        $helveticaBold = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR .
             'assets' . DIRECTORY_SEPARATOR .
             'fonts' . DIRECTORY_SEPARATOR .
             'Helvetica-Bold.ttf';
@@ -280,49 +280,49 @@ class KartuController extends BaseWebController
 
     public function testGenerate2()
     {
-        $cardFrontPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $cardFrontPath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'assets' . DIRECTORY_SEPARATOR . 
             'images' . DIRECTORY_SEPARATOR . 
             'card-front.png';
-        $capPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $capPath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'assets' . DIRECTORY_SEPARATOR . 
             'images' . DIRECTORY_SEPARATOR . 
             'cap.png';
-        $ttdPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $ttdPath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'assets' . DIRECTORY_SEPARATOR . 
             'images' . DIRECTORY_SEPARATOR . 
             'ttd2.png';
-        $pasFotoPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $pasFotoPath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'assets' . DIRECTORY_SEPARATOR . 
             'images' . DIRECTORY_SEPARATOR . 
             'pasfotosample.jpeg';
-        $savePath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $savePath = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'kartu' . DIRECTORY_SEPARATOR . 
             'test7.png';
-        // $resizePath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-        //     'public_html' . DIRECTORY_SEPARATOR . 
+        // $resizePath = ROOTPATH . DIRECTORY_SEPARATOR .
+        //     'public' . DIRECTORY_SEPARATOR . 
         //     'resize' . DIRECTORY_SEPARATOR . 
         //     'res1.png';
-        // $resizePath2 = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-        //     'public_html' . DIRECTORY_SEPARATOR . 
+        // $resizePath2 = ROOTPATH . DIRECTORY_SEPARATOR .
+        //     'public' . DIRECTORY_SEPARATOR . 
         //     'resize' . DIRECTORY_SEPARATOR . 
         //     'res2.png';
-        $resizePath3 = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR . 
+        $resizePath3 = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR . 
             'resize' . DIRECTORY_SEPARATOR . 
             'res3.png';
-        $helvetica = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR .
+        $helvetica = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR .
             'assets' . DIRECTORY_SEPARATOR .
             'fonts' . DIRECTORY_SEPARATOR .
             'Helvetica.ttf';
-        $helveticaBold = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR .
+        $helveticaBold = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR .
             'assets' . DIRECTORY_SEPARATOR .
             'fonts' . DIRECTORY_SEPARATOR .
             'Helvetica-Bold.ttf';

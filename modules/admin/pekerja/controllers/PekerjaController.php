@@ -162,11 +162,11 @@ class PekerjaController extends BaseWebController
         // upload path
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $filePath = $this
-            ->path
-            ->publicUploadDirectory;
+                ->path
+                ->publicUploadDirectory;
         } else {
-            $filePath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-                'public_html' . DIRECTORY_SEPARATOR .
+            $filePath = ROOTPATH . DIRECTORY_SEPARATOR .
+                'public' . DIRECTORY_SEPARATOR .
                 'uploads';
         }
 
@@ -467,9 +467,7 @@ class PekerjaController extends BaseWebController
         die();
     }
 
-    public function import()
-    {
-    }
+    public function import() {}
 
     private function getCreateRules()
     {

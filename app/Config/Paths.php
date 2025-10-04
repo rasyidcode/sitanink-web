@@ -85,19 +85,19 @@ class Paths
 
     public $modulesDirectory        = __DIR__ . '/../../modules';
 
-    public $publicImagesDirectory   = __DIR__ . '../../../../public_html/assets/images';
+    public $publicImagesDirectory   = __DIR__ . '/../../public/assets/images';
 
-    public $publicFontsDirectory    = __DIR__ . '../../../../public_html/assets/fonts';
+    public $publicFontsDirectory    = __DIR__ . '/../../public/assets/fonts';
 
-    public $publicDocsDirectory   = __DIR__ . '../../../../public_html/assets/docs';
+    public $publicDocsDirectory   = __DIR__ . '/../../public/assets/docs';
 
-    public $publicKartuDirectory    = __DIR__ . '../../../../public_html/kartu';
+    public $publicKartuDirectory    = __DIR__ . '/../../public/kartu';
 
-    public $publicResizeDirectory   = __DIR__ . '../../../../public_html/resize';
+    public $publicResizeDirectory   = __DIR__ . '/../../public/resize';
 
-    public $publicPreviewDirectory  = __DIR__ . '../../../../public_html/preview';
+    public $publicPreviewDirectory  = __DIR__ . '/../../public/preview';
 
-    public $publicUploadDirectory   = __DIR__ . '../../../../public_html/uploads';
+    public $publicUploadDirectory   = __DIR__ . '/../../public/uploads';
 
-    public $publicDocsGenDirectory   = __DIR__ . '../../../../public_html/docs_gen';
+    public $publicDocsGenDirectory   = __DIR__ . '/../../public/docs_gen';
 }

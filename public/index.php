@@ -18,7 +18,7 @@ chdir(__DIR__);
 
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
-$pathsConfig = FCPATH . '../sitanink-webfiles/app/Config/Paths.php';
+$pathsConfig = FCPATH . '../app/Config/Paths.php';
 // ^^^ Change this if you move your application folder
 require realpath($pathsConfig) ?: $pathsConfig;
 
@@ -28,9 +28,6 @@ $paths = new Config\Paths();
 $bootstrap = rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstrap.php';
 // print_r($bootstrap);die();
 $app       = require realpath($bootstrap) ?: $bootstrap;
-// require_once(dirname(__FILE__).'/../modules/web/home/controllers/home_controller.php');
-// require_once(dirname(__FILE__).'/../modules/web/home/views/home_view.php');
-// print_r($app);die();
 /*
  *---------------------------------------------------------------
  * LAUNCH THE APPLICATION
@@ -38,17 +35,6 @@ $app       = require realpath($bootstrap) ?: $bootstrap;
  * Now that everything is setup, it's time to actually fire
  * up the engines and make this app do its thang.
  */
-// try {
-//     $app->run();
-// } catch (MyException $e) {
-//     return response
-// 			->setJSON([
-// 				'status'    => ResponseInterface::HTTP_OK,
-// 				'message'   => $e->getMessage(),
-// 			])
-// 			->setStatusCode(ResponseInterface::HTTP_OK);
-// }
-// throw new ApiAccessErrorException();
 try {
     $app->run();
 } catch (App\Exceptions\ApiAccessErrorException $e) {
@@ -59,9 +45,8 @@ try {
 
     header('Content-Type: application/json');
     if ($e->getStatusCode() > 0) {
-        // header("HTTP/1.1 {$e->getStatusCode()}", true, $e->getStatusCode());
         header(sprintf("HTTP/%s %s %s", $_SERVER['SERVER_PROTOCOL'], $e->getStatusCode(), $e->getReason()), true, $e->getStatusCode());
     }
-    
+
     echo json_encode($response);
 }

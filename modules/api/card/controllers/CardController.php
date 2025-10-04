@@ -147,20 +147,20 @@ class CardController extends BaseController
                 );
             }
         } else {
-            $pubsImagePath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-                'public_html' . DIRECTORY_SEPARATOR .
+            $pubsImagePath = ROOTPATH . DIRECTORY_SEPARATOR .
+                'public' . DIRECTORY_SEPARATOR .
                 'assets' . DIRECTORY_SEPARATOR .
                 'images';
-            $resizePath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-                'public_html' . DIRECTORY_SEPARATOR .
+            $resizePath = ROOTPATH . DIRECTORY_SEPARATOR .
+                'public' . DIRECTORY_SEPARATOR .
                 'resize';
             if ($generateRequest == 'preview') {
-                $workingPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-                    'public_html' . DIRECTORY_SEPARATOR .
+                $workingPath = ROOTPATH . DIRECTORY_SEPARATOR .
+                    'public' . DIRECTORY_SEPARATOR .
                     'preview';
             } else if ($generateRequest == 'save') {
-                $workingPath = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-                    'public_html' . DIRECTORY_SEPARATOR .
+                $workingPath = ROOTPATH . DIRECTORY_SEPARATOR .
+                    'public' . DIRECTORY_SEPARATOR .
                     'kartu';
             } else {
                 throw new ApiAccessErrorException(
@@ -275,13 +275,13 @@ class CardController extends BaseController
         $color = imagecolorallocate($image, 0, 0, 0);
         $colorRed = imagecolorallocate($image, 255, 0, 0);
 
-        $helvetica = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR .
+        $helvetica = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR .
             'assets' . DIRECTORY_SEPARATOR .
             'fonts' . DIRECTORY_SEPARATOR .
             'Helvetica.ttf';
-        $helveticaBold = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR .
+        $helveticaBold = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR .
             'assets' . DIRECTORY_SEPARATOR .
             'fonts' . DIRECTORY_SEPARATOR .
             'Helvetica-Bold.ttf';
@@ -342,13 +342,13 @@ class CardController extends BaseController
 
         $pasFotoResize = $resizePath . '/' .
             time() . '_' . $pekerja->nik . '_' . $pekerja->nama . '_resize.png';
-        $helvetica = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR .
+        $helvetica = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR .
             'assets' . DIRECTORY_SEPARATOR .
             'fonts' . DIRECTORY_SEPARATOR .
             'Helvetica.ttf';
-        $helveticaBold = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR .
+        $helveticaBold = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR .
             'assets' . DIRECTORY_SEPARATOR .
             'fonts' . DIRECTORY_SEPARATOR .
             'Helvetica-Bold.ttf';
@@ -570,13 +570,13 @@ class CardController extends BaseController
         $color = imagecolorallocate($image, 0, 0, 0);
         $colorRed = imagecolorallocate($image, 255, 0, 0);
 
-        $helvetica = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR .
+        $helvetica = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR .
             'assets' . DIRECTORY_SEPARATOR .
             'fonts' . DIRECTORY_SEPARATOR .
             'Helvetica.ttf';
-        $helveticaBold = ROOTPATH . '..' . DIRECTORY_SEPARATOR .
-            'public_html' . DIRECTORY_SEPARATOR .
+        $helveticaBold = ROOTPATH . DIRECTORY_SEPARATOR .
+            'public' . DIRECTORY_SEPARATOR .
             'assets' . DIRECTORY_SEPARATOR .
             'fonts' . DIRECTORY_SEPARATOR .
             'Helvetica-Bold.ttf';
