@@ -10,3 +10,4 @@ Sistem keanggotaan petani di Nusakambangan berbasis web.
 - Docx file processing for generating a document
 - Scan QRCode to see user detail using generated or printed ID
 - Settings page to modify what to show in the ID
+- bitly integration for shortening qrcode url
