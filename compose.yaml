@@ -1,0 +1,25 @@
+services:
+  web:
+    build: .
+    container_name: sitanik-web
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/srv/sitanik
+
+  db:
+    image: mysql:8.0
+    container_name: sitanik-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - sitanik-data:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    container_name: sitanik-adminer
+    ports:
+      - "8080:8080"
+
+volumes:
+  sitanik-data:
